@@ -3,296 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>เลือกแบบประเมินสุขภาพจิต</title>
-    
-    <!-- Google Fonts: Baloo 2 & Sarabun -->
+    <title>แบบประเมิน - โครงการ อสม. ฮีลใจ</title>
+    <!-- Google Fonts: Prompt -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        :root {
-            --sky: #BFE6F5;
-            --sky-deep: #8FCFE8;
-            --mint: #CDEEDB;
-            --surface: #FFFFFF;
-            --ink: #2B3A45;
-            --ink-soft: #5A6B72;
-            --teal: #2E9C8F;
-            --teal-dark: #1F7A70;
-            --sun: #FFC857;
-            --coral: #FF8A65;
-            --lilac: #B39DDB;
-            --line: #E3F1F5;
-            --radius: 28px;
-            --shadow: 0 14px 34px rgba(30, 80, 90, 0.16);
-            --font-scale: 1;
-        }
-
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-        }
-
-        html {
-            font-size: calc(16px * var(--font-scale));
-            scroll-behavior: smooth;
+            box-sizing: border-box;
+            font-family: 'Prompt', sans-serif;
         }
 
         body {
-            font-family: 'Sarabun', sans-serif;
-            background: radial-gradient(circle at 12% 8%, rgba(255, 255, 255, 0.65), transparent 40%), var(--sky);
-            color: var(--ink);
-            min-height: 100vh;
-            padding-bottom: 40px;
+            color: #333;
+            line-height: 1.6;
+            background-color: #f7faf5;
         }
 
-        h1, h2, h3, .font-heading {
-            font-family: 'Baloo 2', 'Sarabun', cursive, sans-serif;
-        }
-
-        /* ---------------- Header & Nav ---------------- */
+        /* ---------------- Header / Navigation Bar ---------------- */
         header {
-            background-color: var(--surface);
+            background-color: #9cb380;
+            color: white;
             padding: 15px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
         }
 
-        .logo {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--teal-dark);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .btn-back {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background-color: var(--mint);
-            color: var(--teal-dark);
-            padding: 8px 18px;
-            border-radius: 20px;
-            text-decoration: none;
+        header .logo {
+            font-size: 1.1rem;
             font-weight: 600;
-            font-size: 0.9rem;
-            transition: all 0.2s;
         }
 
-        .btn-back:hover {
-            background-color: var(--teal);
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
             color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: opacity 0.2s;
         }
 
-        /* ---------------- Main Container ---------------- */
+        nav a:hover, nav a.active {
+            opacity: 0.8;
+            text-decoration: underline;
+            font-weight: 600;
+        }
+
+        /* ---------------- Content Area ---------------- */
         .container {
             max-width: 1000px;
-            margin: 30px auto 0 auto;
+            margin: 40px auto;
             padding: 0 20px;
         }
 
         .page-title {
             text-align: center;
-            margin-bottom: 35px;
-        }
-
-        .page-title h1 {
-            font-size: 2.2rem;
-            color: var(--teal-dark);
-            margin-bottom: 8px;
-        }
-
-        .page-title p {
-            color: var(--ink-soft);
-            font-size: 1rem;
-        }
-
-        /* ---------------- Assessment Grid ---------------- */
-        .assessment-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-        }
-
-        .card {
-            background: var(--surface);
-            border-radius: var(--radius);
-            padding: 30px 25px;
-            box-shadow: var(--shadow);
-            border: 2px solid var(--line);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            transition: transform 0.2s, box-shadow 0.2s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 18px 40px rgba(30, 80, 90, 0.22);
-        }
-
-        .card-icon {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            color: #1e5631;
             font-size: 1.8rem;
-            margin-bottom: 18px;
+            margin-bottom: 30px;
+            font-weight: 700;
         }
 
-        /* Distinct Icon Colors */
-        .icon-1 { background-color: #E8F5E9; color: #2E7D32; }
-        .icon-2 { background-color: #FFF3E0; color: #E65100; }
-        .icon-3 { background-color: #E1F5FE; color: #0288D1; }
-        .icon-4 { background-color: #F3E5F5; color: #7B1FA2; }
-        .icon-5 { background-color: #FFEBEE; color: #C62828; }
-        .icon-6 { background-color: #E0F2F1; color: var(--teal-dark); }
-
-        .card h3 {
-            font-size: 1.15rem;
-            color: var(--ink);
-            margin-bottom: 8px;
-        }
-
-        .card p {
-            font-size: 0.88rem;
-            color: var(--ink-soft);
-            margin-bottom: 20px;
-            line-height: 1.5;
-            flex-grow: 1;
-        }
-
-        .btn-start {
-            width: 100%;
-            background-color: var(--teal);
-            color: white;
-            padding: 10px 0;
-            border-radius: 18px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: background 0.2s;
-            display: inline-block;
-        }
-
-        .btn-start:hover {
-            background-color: var(--teal-dark);
-        }
-
-        /* ---------------- Responsive ---------------- */
+        /* Responsive สำหรับมือถือ */
         @media (max-width: 768px) {
             header {
-                padding: 12px 20px;
+                flex-direction: column;
+                gap: 12px;
+                padding: 15px 20px;
+                text-align: center;
             }
-            .page-title h1 {
-                font-size: 1.7rem;
+
+            nav {
+                justify-content: center;
+                gap: 12px;
             }
-            .assessment-grid {
-                grid-template-columns: 1fr;
-            }
-            .card {
-                padding: 25px 20px;
+
+            nav a {
+                font-size: 0.85rem;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- Navigation Header -->
+    <!-- Header / Navigation Bar (เหมือนหน้า Index) -->
     <header>
-        <div class="logo">
-            <i class="fa-solid fa-heart-pulse"></i> การดูแลสุขภาพจิตผ่านระบบไซเบอร์
-        </div>
-        <a href="index.html" class="btn-back">
-            <i class="fa-solid fa-house"></i> กลับหน้าแรก
-        </a>
+        <div class="logo">MENTAL HEALTH CYBER-CARE</div>
+        <nav>
+            <a href="index.html">หน้าแรก</a>
+            <a href="assessment.html" class="active">แบบประเมิน</a>
+            <a href="index.html#contact">ติดต่อหรือปรึกษา</a>
+        </nav>
     </header>
 
-    <!-- Main Content -->
+    <!-- เนื้อหาหน้าแบบประเมิน -->
     <div class="container">
-        <div class="page-title">
-            <h1>เลือกแบบประเมินสุขภาพจิต</h1>
-            <p>โปรดเลือกแบบประเมินที่ตรงตามความต้องการ เพื่อเริ่มต้นดูแลสุขภาพใจของคุณ</p>
-        </div>
+        <h1 class="page-title">ระบบคัดกรองและประเมินสุขภาพจิต</h1>
+        
+        <!-- ใส่โค้ดคำถามหรือแบบฟอร์มประเมินตรงส่วนนี้ -->
 
-        <div class="assessment-grid">
-            <!-- Card 1 -->
-            <div class="card">
-                <div class="card-icon icon-1">
-                    <i class="fa-regular fa-clipboard"></i>
-                </div>
-                <h3>แบบประเมินคัดกรองสุขภาพจิตเบื้องต้น</h3>
-                <p>แบบประเมินภาวะอารมณ์และความเครียดเบื้องต้น (Screening Tools)</p>
-                <a href="#" class="btn-start" onclick="alert('กำลังเปิดแบบประเมินคัดกรองเบื้องต้น'); return false;">เริ่มทำแบบประเมิน</a>
-            </div>
-
-            <!-- Card 2 -->
-            <div class="card">
-                <div class="card-icon icon-2">
-                    <i class="fa-solid fa-pills"></i>
-                </div>
-                <h3>แบบประเมินอาการเฉพาะโรคทางจิตเวช</h3>
-                <p>แบบคัดกรองภาวะซึมเศร้า วิตกกังวล และความเครียดสะสม (Clinical Rating Scales)</p>
-                <a href="#" class="btn-start" onclick="alert('กำลังเปิดแบบประเมินอาการเฉพาะโรค'); return false;">เริ่มทำแบบประเมิน</a>
-            </div>
-
-            <!-- Card 3 -->
-            <div class="card">
-                <div class="card-icon icon-3">
-                    <i class="fa-solid fa-stethoscope"></i>
-                </div>
-                <h3>แบบทดสอบบุคลิกภาพ</h3>
-                <p>ค้นหาและทำความเข้าใจรูปแบบพฤติกรรมและการรับมือความเครียด (Personality Tests)</p>
-                <a href="#" class="btn-start" onclick="alert('กำลังเปิดแบบทดสอบบุคลิกภาพ'); return false;">เริ่มทำแบบประเมิน</a>
-            </div>
-
-            <!-- Card 4 -->
-            <div class="card">
-                <div class="card-icon icon-4">
-                    <i class="fa-solid fa-brain"></i>
-                </div>
-                <h3>ภาวะปัญญาและประสิทธิภาพสมอง</h3>
-                <p>ประเมินความจำและการรับรู้สำหรับผู้สูงอายุและกลุ่มเสี่ยง (Cognitive Tests)</p>
-                <a href="#" class="btn-start" onclick="alert('กำลังเปิดแบบทดสอบภาวะปัญญา'); return false;">เริ่มทำแบบประเมิน</a>
-            </div>
-
-            <!-- Card 5 -->
-            <div class="card">
-                <div class="card-icon icon-5">
-                    <i class="fa-solid fa-child-reaching"></i>
-                </div>
-                <h3>พฤติกรรมและพัฒนาการเด็ก</h3>
-                <p>แบบประเมินสำหรับผู้ปกครองในการติดตามพัฒนาการลูกหลาน (Behavioral Assessments)</p>
-                <a href="#" class="btn-start" onclick="alert('กำลังเปิดแบบประเมินเด็ก'); return false;">เริ่มทำแบบประเมิน</a>
-            </div>
-
-            <!-- Card 6 -->
-            <div class="card">
-                <div class="card-icon icon-6">
-                    <i class="fa-solid fa-hand-holding-heart"></i>
-                </div>
-                <h3>คุณภาพชีวิตและพลังทางจิตวิทยา</h3>
-                <p>วัดระดับความสุข ดัชนีความเหนื่อยล้า และพลังใจในการดำเนินชีวิต (Well-being Tools)</p>
-                <a href="#" class="btn-start" onclick="alert('กำลังเปิดแบบประเมินคุณภาพชีวิต'); return false;">เริ่มทำแบบประเมิน</a>
-            </div>
-        </div>
     </div>
 
 </body>
