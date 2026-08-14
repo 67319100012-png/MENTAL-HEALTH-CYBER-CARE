@@ -1,200 +1,299 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>เลือกแบบประเมินสุขภาพจิต</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --sky:#BFE6F5;
-    --sky-deep:#8FCFE8;
-    --mint:#CDEEDB;
-    --surface:#FFFFFF;
-    --ink:#2B3A45;
-    --ink-soft:#5A6B72;
-    --teal:#2E9C8F;
-    --teal-deep:#1F7A70;
-    --sun:#FFC857;
-    --coral:#FF8A65;
-    --lilac:#B39DDB;
-    --line:#E3F1F5;
-    --radius:28px;
-    --shadow:0 14px 34px rgba(30,80,90,0.16);
-    --font-scale:1;
-  }
-  *{box-sizing:border-box;}
-  html{font-size:calc(16px * var(--font-scale));}
-  body{
-    margin:0;
-    background:
-      radial-gradient(circle at 12% 8%, rgba(255,255,255,0.55), transparent 40%),
-      radial-gradient(circle at 90% 85%, rgba(255,255,255,0.4), transparent 45%),
-      linear-gradient(180deg, var(--sky) 0%, var(--mint) 100%);
-    font-family:'Sarabun',sans-serif;
-    color:var(--ink);
-    min-height:100vh;
-    padding-bottom:50px;
-  }
-  h1,h2,.display{font-family:'Baloo 2',sans-serif;}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เลือกแบบประเมินสุขภาพจิต</title>
+    
+    <!-- Google Fonts: Baloo 2 & Sarabun -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  .hotline-bar{
-    background:var(--teal-deep); color:#fff; text-align:center;
-    padding:12px 16px; font-size:1rem; font-weight:600;
-  }
-  .hotline-bar b{color:#FFE7A8; font-size:1.1em;}
+    <style>
+        :root {
+            --sky: #BFE6F5;
+            --sky-deep: #8FCFE8;
+            --mint: #CDEEDB;
+            --surface: #FFFFFF;
+            --ink: #2B3A45;
+            --ink-soft: #5A6B72;
+            --teal: #2E9C8F;
+            --teal-dark: #1F7A70;
+            --sun: #FFC857;
+            --coral: #FF8A65;
+            --lilac: #B39DDB;
+            --line: #E3F1F5;
+            --radius: 28px;
+            --shadow: 0 14px 34px rgba(30, 80, 90, 0.16);
+            --font-scale: 1;
+        }
 
-  header.top{max-width:920px;margin:0 auto;padding:18px 24px 10px;text-align:center;}
-  header.top .mascot{font-size:3.4rem;line-height:1;margin-bottom:4px;}
-  header.top h1{font-size:2.1rem;margin:6px 0 10px;color:var(--ink);font-weight:700;}
-  header.top p{font-size:1.15rem;color:var(--ink-soft);max-width:640px;margin:0 auto;line-height:1.8;}
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-  main{max-width:960px;margin:0 auto;padding:20px 20px 10px;}
+        html {
+            font-size: calc(16px * var(--font-scale));
+            scroll-behavior: smooth;
+        }
 
-  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
-  @media (max-width:760px){ .grid{grid-template-columns:repeat(2,1fr);} }
-  @media (max-width:480px){ .grid{grid-template-columns:1fr;} }
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background: radial-gradient(circle at 12% 8%, rgba(255, 255, 255, 0.65), transparent 40%), var(--sky);
+            color: var(--ink);
+            min-height: 100vh;
+            padding-bottom: 40px;
+        }
 
-  a.card-link{ text-decoration:none; color:inherit; display:block; }
+        h1, h2, h3, .font-heading {
+            font-family: 'Baloo 2', 'Sarabun', cursive, sans-serif;
+        }
 
-  .card{
-    background:var(--surface);
-    border-radius:var(--radius);
-    padding:30px 20px 26px;
-    text-align:center;
-    box-shadow:var(--shadow);
-    border:3px solid transparent;
-    transition:transform .2s ease, border-color .2s ease, box-shadow .2s ease;
-    height:100%;
-  }
-  .card:hover{
-    transform:translateY(-6px) scale(1.02);
-    border-color:var(--accent, var(--teal));
-    box-shadow:0 20px 40px rgba(30,80,90,0.22);
-  }
-  .card .emoji-badge{
-    width:96px;height:96px;border-radius:50%;
-    background:var(--accent-soft, #E4F7F1);
-    display:flex;align-items:center;justify-content:center;
-    margin:0 auto 16px;
-    font-size:3rem;
-    box-shadow:inset 0 0 0 4px var(--accent, var(--teal));
-  }
-  .card .code{
-    font-family:'Baloo 2',sans-serif;font-weight:700;font-size:1.3rem;
-    color:var(--ink); margin-bottom:6px;
-  }
-  .card .desc{
-    font-size:1.02rem; color:var(--ink-soft); line-height:1.6; margin-bottom:12px;
-  }
-  .card .tag{
-    display:inline-block; font-size:0.85rem; font-weight:700; color:#fff;
-    background:var(--accent, var(--teal)); border-radius:20px; padding:5px 16px;
-    font-family:'Baloo 2',sans-serif;
-  }
+        /* ---------------- Header & Nav ---------------- */
+        header {
+            background-color: var(--surface);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-  .cta-wrap{margin-top:34px; text-align:center;}
-  .cta-btn{
-    display:inline-flex; align-items:center; gap:12px;
-    background:linear-gradient(135deg, var(--teal-deep), var(--teal));
-    color:#fff; font-family:'Baloo 2',sans-serif; font-weight:700;
-    font-size:1.25rem; padding:18px 38px; border-radius:50px;
-    box-shadow:0 12px 26px rgba(31,122,112,0.35);
-    text-decoration:none; border:none; cursor:pointer;
-  }
-  .cta-btn:hover{ transform:translateY(-2px); box-shadow:0 16px 32px rgba(31,122,112,0.4); }
-  .cta-btn .arrow{font-size:1.4rem;}
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--teal-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-  footer.note{
-    max-width:920px; margin:36px auto 0; padding:0 24px; text-align:center;
-    font-size:0.95rem; color:var(--ink); opacity:.75; line-height:1.8;
-  }
-</style>
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--mint);
+            color: var(--teal-dark);
+            padding: 8px 18px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .btn-back:hover {
+            background-color: var(--teal);
+            color: white;
+        }
+
+        /* ---------------- Main Container ---------------- */
+        .container {
+            max-width: 1000px;
+            margin: 30px auto 0 auto;
+            padding: 0 20px;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .page-title h1 {
+            font-size: 2.2rem;
+            color: var(--teal-dark);
+            margin-bottom: 8px;
+        }
+
+        .page-title p {
+            color: var(--ink-soft);
+            font-size: 1rem;
+        }
+
+        /* ---------------- Assessment Grid ---------------- */
+        .assessment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--surface);
+            border-radius: var(--radius);
+            padding: 30px 25px;
+            box-shadow: var(--shadow);
+            border: 2px solid var(--line);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 40px rgba(30, 80, 90, 0.22);
+        }
+
+        .card-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 18px;
+        }
+
+        /* Distinct Icon Colors */
+        .icon-1 { background-color: #E8F5E9; color: #2E7D32; }
+        .icon-2 { background-color: #FFF3E0; color: #E65100; }
+        .icon-3 { background-color: #E1F5FE; color: #0288D1; }
+        .icon-4 { background-color: #F3E5F5; color: #7B1FA2; }
+        .icon-5 { background-color: #FFEBEE; color: #C62828; }
+        .icon-6 { background-color: #E0F2F1; color: var(--teal-dark); }
+
+        .card h3 {
+            font-size: 1.15rem;
+            color: var(--ink);
+            margin-bottom: 8px;
+        }
+
+        .card p {
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+            margin-bottom: 20px;
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+
+        .btn-start {
+            width: 100%;
+            background-color: var(--teal);
+            color: white;
+            padding: 10px 0;
+            border-radius: 18px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: background 0.2s;
+            display: inline-block;
+        }
+
+        .btn-start:hover {
+            background-color: var(--teal-dark);
+        }
+
+        /* ---------------- Responsive ---------------- */
+        @media (max-width: 768px) {
+            header {
+                padding: 12px 20px;
+            }
+            .page-title h1 {
+                font-size: 1.7rem;
+            }
+            .assessment-grid {
+                grid-template-columns: 1fr;
+            }
+            .card {
+                padding: 25px 20px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<div class="hotline-bar">☎ สายด่วนสุขภาพจิต <b>1323</b> โทรฟรีตลอด 24 ชั่วโมง</div>
+    <!-- Navigation Header -->
+    <header>
+        <div class="logo">
+            <i class="fa-solid fa-heart-pulse"></i> การดูแลสุขภาพจิตผ่านระบบไซเบอร์
+        </div>
+        <a href="index.html" class="btn-back">
+            <i class="fa-solid fa-house"></i> กลับหน้าแรก
+        </a>
+    </header>
 
+    <!-- Main Content -->
+    <div class="container">
+        <div class="page-title">
+            <h1>เลือกแบบประเมินสุขภาพจิต</h1>
+            <p>โปรดเลือกแบบประเมินที่ตรงตามความต้องการ เพื่อเริ่มต้นดูแลสุขภาพใจของคุณ</p>
+        </div>
 
-<header class="top">
-  <div class="mascot">🌱💚</div>
-  <h1>ประเภทแบบประเมินสำหรับคุณ</h1>
-  <p>เลือกหมวดที่ต้องการทำแบบประเมิน แต่ละแบบใช้เวลาไม่นาน อ่านง่าย ทำได้ทุกวัย ผลลัพธ์เป็นการคัดกรองเบื้องต้นเพื่อดูแลสุขภาพใจของคุณและคนที่คุณรัก</p>
-</header>
+        <div class="assessment-grid">
+            <!-- Card 1 -->
+            <div class="card">
+                <div class="card-icon icon-1">
+                    <i class="fa-regular fa-clipboard"></i>
+                </div>
+                <h3>แบบประเมินคัดกรองสุขภาพจิตเบื้องต้น</h3>
+                <p>แบบประเมินภาวะอารมณ์และความเครียดเบื้องต้น (Screening Tools)</p>
+                <a href="#" class="btn-start" onclick="alert('กำลังเปิดแบบประเมินคัดกรองเบื้องต้น'); return false;">เริ่มทำแบบประเมิน</a>
+            </div>
 
-<main>
-  <div class="grid">
+            <!-- Card 2 -->
+            <div class="card">
+                <div class="card-icon icon-2">
+                    <i class="fa-solid fa-pills"></i>
+                </div>
+                <h3>แบบประเมินอาการเฉพาะโรคทางจิตเวช</h3>
+                <p>แบบคัดกรองภาวะซึมเศร้า วิตกกังวล และความเครียดสะสม (Clinical Rating Scales)</p>
+                <a href="#" class="btn-start" onclick="alert('กำลังเปิดแบบประเมินอาการเฉพาะโรค'); return false;">เริ่มทำแบบประเมิน</a>
+            </div>
 
-    <a class="card-link" href="https://6731910001214.wixsite.com/anchalee/our-ministries">
-      <div class="card" style="--accent:#2E9C8F; --accent-soft:#E4F7F1;">
-        <div class="emoji-badge">✅</div>
-        <div class="code">แบบประเมินคัดกรองสุขภาพจิตเบื้องต้น</div>
-        <div class="desc">(Screening Tools)</div>
-        <span class="tag">6 แบบทดสอบ</span>
-      </div>
-    </a>
+            <!-- Card 3 -->
+            <div class="card">
+                <div class="card-icon icon-3">
+                    <i class="fa-solid fa-stethoscope"></i>
+                </div>
+                <h3>แบบทดสอบบุคลิกภาพ</h3>
+                <p>ค้นหาและทำความเข้าใจรูปแบบพฤติกรรมและการรับมือความเครียด (Personality Tests)</p>
+                <a href="#" class="btn-start" onclick="alert('กำลังเปิดแบบทดสอบบุคลิกภาพ'); return false;">เริ่มทำแบบประเมิน</a>
+            </div>
 
-    <a class="card-link" href="https://6731910001214.wixsite.com/anchalee/terms-snd-conditions">
-      <div class="card" style="--accent:#FF8A65; --accent-soft:#FFEDE6;">
-        <div class="emoji-badge">💊</div>
-        <div class="code">แบบประเมินอาการเฉพาะโรคทางจิตเวช</div>
-        <div class="desc">(Clinical Rating Scales)</div>
-        <span class="tag">5 แบบทดสอบ</span>
-      </div>
-    </a>
+            <!-- Card 4 -->
+            <div class="card">
+                <div class="card-icon icon-4">
+                    <i class="fa-solid fa-brain"></i>
+                </div>
+                <h3>ภาวะปัญญาและประสิทธิภาพสมอง</h3>
+                <p>ประเมินความจำและการรับรู้สำหรับผู้สูงอายุและกลุ่มเสี่ยง (Cognitive Tests)</p>
+                <a href="#" class="btn-start" onclick="alert('กำลังเปิดแบบทดสอบภาวะปัญญา'); return false;">เริ่มทำแบบประเมิน</a>
+            </div>
 
-    <a class="card-link" href="https://6731910001214.wixsite.com/anchalee/privacy-policy">
-      <div class="card" style="--accent:#B39DDB; --accent-soft:#F1ECFB;">
-        <div class="emoji-badge">🎭</div>
-        <div class="code">แบบทดสอบบุคลิกภาพ</div>
-        <div class="desc">(Personality Tests)</div>
-        <span class="tag">4 แบบทดสอบ</span>
-      </div>
-    </a>
+            <!-- Card 5 -->
+            <div class="card">
+                <div class="card-icon icon-5">
+                    <i class="fa-solid fa-child-reaching"></i>
+                </div>
+                <h3>พฤติกรรมและพัฒนาการเด็ก</h3>
+                <p>แบบประเมินสำหรับผู้ปกครองในการติดตามพัฒนาการลูกหลาน (Behavioral Assessments)</p>
+                <a href="#" class="btn-start" onclick="alert('กำลังเปิดแบบประเมินเด็ก'); return false;">เริ่มทำแบบประเมิน</a>
+            </div>
 
-    <a class="card-link" href="https://6731910001214.wixsite.com/anchalee/copy-of-5-%E0%B9%81%E0%B8%9A%E0%B8%9A%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B9%80%E0%B8%A1%E0%B8%B4%E0%B8%99%E0%B8%9E%E0%B8%B1%E0%B8%92%E0%B8%99%E0%B8%B2%E0%B8%81%E0%B8%B2%E0%B8%A3">
-      <div class="card" style="--accent:#4FB0E0; --accent-soft:#E7F6FD;">
-        <div class="emoji-badge">🧠</div>
-        <div class="code">แบบทดสอบเชาวน์ปัญญาและประสิทธิภาพสมอง</div>
-        <div class="desc">(Cognitive & Intelligence Tests)</div>
-        <span class="tag">5 แบบทดสอบ</span>
-      </div>
-    </a>
+            <!-- Card 6 -->
+            <div class="card">
+                <div class="card-icon icon-6">
+                    <i class="fa-solid fa-hand-holding-heart"></i>
+                </div>
+                <h3>คุณภาพชีวิตและพลังทางจิตวิทยา</h3>
+                <p>วัดระดับความสุข ดัชนีความเหนื่อยล้า และพลังใจในการดำเนินชีวิต (Well-being Tools)</p>
+                <a href="#" class="btn-start" onclick="alert('กำลังเปิดแบบประเมินคุณภาพชีวิต'); return false;">เริ่มทำแบบประเมิน</a>
+            </div>
+        </div>
+    </div>
 
-    <a class="card-link" href="https://6731910001214.wixsite.com/anchalee/accessibility-statement">
-      <div class="card" style="--accent:#FFC857; --accent-soft:#FFF6E2;">
-        <div class="emoji-badge">🧸</div>
-        <div class="code">แบบประเมินพัฒนาการและพฤติกรรมเด็ก</div>
-        <div class="desc">(Developmental & Behavioral Assessments)</div>
-        <span class="tag">5 แบบทดสอบ</span>
-      </div>
-    </a>
-
-    <a class="card-link" href="https://6731910001214.wixsite.com/anchalee/copy-of-6-%E0%B9%81%E0%B8%9A%E0%B8%9A%E0%B8%97%E0%B8%94%E0%B8%AA%E0%B8%AD%E0%B8%9A%E0%B8%AA%E0%B8%95%E0%B8%B4%E0%B8%9B%E0%B8%B1%E0%B8%8D%E0%B8%8D%E0%B8%B2">
-      <div class="card" style="--accent:#66BB6A; --accent-soft:#EAF7EB;">
-        <div class="emoji-badge">🌈</div>
-        <div class="code">แบบประเมินคุณภาพชีวิตและพลังทางจิตวิทยา</div>
-        <div class="desc">(Psychosocial & Well-being Tools)</div>
-        <span class="tag">5 แบบทดสอบ</span>
-      </div>
-    </a>
-
-    <a class="card-link" href="https://6731910001214.wixsite.com/anchalee/copy-of-6-%E0%B9%81%E0%B8%9A%E0%B8%9A%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B9%80%E0%B8%A1%E0%B8%B4%E0%B8%99%E0%B8%94%E0%B9%89%E0%B8%B2%E0%B8%99%E0%B8%88%E0%B8%B4%E0%B8%95%E0%B8%AA%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%A1">
-      <div class="card" style="--accent:#EC7063; --accent-soft:#FDECEA;">
-        <div class="emoji-badge">💉</div>
-        <div class="code">แบบคัดกรองการใช้สารเสพติด</div>
-        <div class="desc">(Substance Use Screening)</div>
-        <span class="tag">5 แบบทดสอบ</span>
-      </div>
-    </a>
-
-  </div>
-</main>
-
-<footer class="note">
-  โครงการ "อสม. ยีลใจ ต้องใช้ผ่านระบบดิจิทัล" (Mental Health Cyber-Care)<br>
-  แบบประเมินทุกชุดเป็นการคัดกรองเบื้องต้นเท่านั้น ไม่ใช่การวินิจฉัยโรค หากมีข้อสงสัยโปรดปรึกษา อสม. หรือเจ้าหน้าที่สาธารณสุขใกล้บ้าน
-</footer>
 </body>
 </html>
