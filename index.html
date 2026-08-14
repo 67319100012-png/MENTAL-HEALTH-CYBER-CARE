@@ -2,14 +2,659 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
-    <title>เว็บไซต์ของฉัน</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>โครงการ อสม. ฮีลใจ - การดูแลสุขภาพจิตผ่านระบบไซเบอร์</title>
+    <!-- Google Fonts: Prompt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
-        body { font-family: sans-serif; text-align: center; padding-top: 50px; background-color: #f4f4f9; }
-        h1 { color: #333; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Prompt', sans-serif;
+        }
+
+        body {
+            color: #333;
+            line-height: 1.6;
+            background-color: #fff;
+        }
+
+        /* ---------------- Header ---------------- */
+        header {
+            background-color: #9cb380;
+            color: white;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header .logo {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 0.9rem;
+            transition: opacity 0.2s;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        /* ---------------- Hero Section ---------------- */
+        .hero {
+            background-color: #ffffff;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            color: #1e5631;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .hero h2 {
+            color: #1e5631;
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+        }
+
+        .hero-subtitle {
+            max-width: 700px;
+            margin: 0 auto 40px auto;
+            color: #444;
+            font-size: 1rem;
+        }
+
+        .hero-cards {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .hero-card {
+            background-color: #f7faf5;
+            border: 1px solid #e1ebe0;
+            border-radius: 20px;
+            padding: 30px 20px;
+            flex: 1;
+            min-width: 280px;
+            max-width: 330px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        }
+
+        .hero-card-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background-color: #5bb3b1;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px auto;
+            font-size: 1.8rem;
+        }
+
+        .hero-card p {
+            font-size: 0.9rem;
+            color: #444;
+        }
+
+        /* ---------------- Section: สุขภาพจิตคืออะไร? ---------------- */
+        .about-section {
+            background-color: #aed185;
+            padding: 60px 20px;
+        }
+
+        .about-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .about-title {
+            color: #1e5631;
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .about-content {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .about-text-box {
+            background-color: #c5e39d;
+            border-radius: 40px;
+            padding: 40px;
+            flex: 1;
+            min-width: 300px;
+            font-size: 0.95rem;
+            color: #2c441b;
+            line-height: 1.8;
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 280px;
+            text-align: center;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 20px;
+        }
+
+        /* ---------------- Section: Infographics ---------------- */
+        .infographics-section {
+            background-color: #edf0f8;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .info-cards {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            width: 300px;
+            overflow: hidden;
+            border: 1px solid #e0e5f0;
+        }
+
+        .info-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* ---------------- Section: ประเภทแบบประเมิน ---------------- */
+        .assessment-section {
+            background-color: #74cae3;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .assessment-section h2 {
+            color: #2b3a67;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            font-weight: 700;
+        }
+
+        .assessment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            max-width: 1000px;
+            margin: 0 auto 40px auto;
+        }
+
+        .assessment-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .assessment-card i {
+            font-size: 3rem;
+            color: #38b2ac;
+            margin-bottom: 15px;
+        }
+
+        .assessment-card h3 {
+            font-size: 1rem;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .assessment-card p {
+            font-size: 0.8rem;
+            color: #777;
+        }
+
+        .btn-assessment {
+            display: inline-block;
+            background-color: #1e5631;
+            color: white;
+            padding: 12px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: background-color 0.2s;
+        }
+
+        .btn-assessment:hover {
+            background-color: #143d22;
+        }
+
+        /* ---------------- Section: Location & Map ---------------- */
+        .map-section {
+            background-color: #f5f6fa;
+            padding: 50px 20px;
+        }
+
+        .map-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .map-info {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .map-info h3 {
+            font-size: 1.3rem;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .map-info p {
+            margin-bottom: 8px;
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        .map-info i {
+            color: #e63946;
+            width: 20px;
+        }
+
+        .map-embed {
+            flex: 1.5;
+            min-width: 300px;
+            height: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .map-embed iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* ---------------- Footer ---------------- */
+        footer {
+            background-color: #21323b;
+            color: white;
+            padding: 50px 20px 20px 20px;
+        }
+
+        .footer-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            gap: 50px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .footer-left {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .footer-left h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .footer-left h4 {
+            font-size: 0.85rem;
+            color: #43a047;
+            font-weight: 400;
+            margin-bottom: 20px;
+        }
+
+        .helpline-badge {
+            display: inline-block;
+            background-color: #2aa99b;
+            color: white;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+        }
+
+        .footer-left p {
+            font-size: 0.85rem;
+            color: #bbb;
+            margin-bottom: 8px;
+        }
+
+        .social-icons {
+            margin-top: 15px;
+        }
+
+        .social-icons a {
+            color: white;
+            background: #2d3d49;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .social-icons a:hover {
+            background: #2aa99b;
+        }
+
+        .footer-right {
+            flex: 1.2;
+            min-width: 280px;
+        }
+
+        .footer-right h3 {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            flex: 1;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            background-color: #2c3e4a;
+            border: 1px solid #3d5262;
+            padding: 10px 15px;
+            border-radius: 6px;
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .form-group input::placeholder, .form-group textarea::placeholder {
+            color: #8898a5;
+        }
+
+        .btn-submit {
+            background-color: #2aa99b;
+            color: white;
+            border: none;
+            padding: 8px 30px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.2s;
+        }
+
+        .btn-submit:hover {
+            background-color: #228b80;
+        }
+
+        .footer-bottom {
+            max-width: 1100px;
+            margin: 0 auto;
+            border-top: 1px solid #2d3d49;
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: #778895;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .footer-bottom a {
+            color: #778895;
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 10px;
+            }
+            nav a {
+                margin: 0 10px;
+            }
+            .form-row {
+                flex-direction: column;
+            }
+        }
     </style>
 </head>
 <body>
-    <h1>🎉 ยินดีต้อนรับสู่เว็บไซต์ของฉันบน GitHub!</h1>
-    <p>นี่คือเว็บไซต์แรกที่รันด้วย GitHub Pages</p>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">การดูแลสุขภาพจิตผ่านระบบไซเบอร์</div>
+        <nav>
+            <a href="#home">หน้าแรก</a>
+            <a href="#assessment">แบบประเมิน</a>
+            <a href="#contact">ติดต่อหรือปรึกษา</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1>โครงการ " อสม. ฮีลใจต้องใช้ผ่านระบบดิจิทัล"</h1>
+        <h2>(MENTAL HEALTH CYBER-CARE)</h2>
+        <p class="hero-subtitle">
+            สุขภาพใจของคนในชุมชนโดยนำเทคโนโลยีมาช่วยให้อสม. เข้าถึงและให้คำปรึกษาแก่กลุ่มเป้าหมายไปถึงทั่วถึงสามารถตรวจสอบได้
+        </p>
+
+        <div class="hero-cards">
+            <div class="hero-card">
+                <div class="hero-card-icon">
+                    <i class="fa-solid fa-user-group"></i>
+                </div>
+                <p>อสม. ติดตามสุขภาพจิตของผู้สูงอายุ ผู้ป่วย และกลุ่มเปราะบางได้อย่างต่อเนื่อง</p>
+            </div>
+            <div class="hero-card">
+                <div class="hero-card-icon">
+                    <i class="fa-solid fa-mobile-screen-button"></i>
+                </div>
+                <p>สะดวกผ่านดิจิทัล ประเมินและรับคำปรึกษาได้ทันทีผ่านระบบออนไลน์ ลดข้อจำกัดเรื่องการเดินทาง</p>
+            </div>
+            <div class="hero-card">
+                <div class="hero-card-icon">
+                    <i class="fa-solid fa-hands-holding-child"></i>
+                </div>
+                <p>สร้างความผ่อนคลาย ส่งเสริมกิจกรรมดูแลใจ ฝึกสติ และปรับอารมณ์ใหม่ พร้อมใช้ชีวิตอย่างมีความสุข</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: สุขภาพจิตคืออะไร? -->
+    <section class="about-section">
+        <div class="about-container">
+            <h2 class="about-title">สุขภาพจิตคืออะไร?</h2>
+            <div class="about-content">
+                <div class="about-text-box">
+                    สุขภาพจิตภาวะความเป็นผู้นำความเป็นอยู่ที่ ดีในด้านจิตใจโดยแต่ละคนสามารถอาศัยความ สามารถพิเศษของตนชาติได้อย่างมี ประสิทธิภาพสามารถดำเนินการได้อย่างมี ประสิทธิภาพสามารถช่วยเหลือสังคมได้ สุขภาพจิตที่ดีไม่ได้หมายถึงการเฝ้าระวังเลย แต่แสดงถึงการให้ความสำคัญกับปัญหาที่ แตกต่างกันได้อย่างเหมาะสม
+                </div>
+                <div class="about-image">
+                    <img src="https://via.placeholder.com/400x300/e0e0e0/555555?text=อสม.+ดูแลผู้สูงอายุ" alt="อสม. ดูแลผู้สูงอายุ">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Infographics Gallery -->
+    <section class="infographics-section">
+        <div class="info-cards">
+            <div class="info-card">
+                <img src="https://via.placeholder.com/300x500/e8f4f8/333333?text=สัญญาณเตือนที่ควรสังเกต" alt="สัญญาณเตือนที่ควรสังเกต">
+            </div>
+            <div class="info-card">
+                <img src="https://via.placeholder.com/300x500/eef2ff/333333?text=กลุ่มโรคทางสุขภาพจิตที่พบบ่อย" alt="กลุ่มโรคทางสุขภาพจิตที่พบบ่อย">
+            </div>
+            <div class="info-card">
+                <img src="https://via.placeholder.com/300x500/f0fdf4/333333?text=การดูแลสุขภาพจิตเบื้องต้น" alt="การดูแลสุขภาพจิตเบื้องต้น">
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: ประเภทแบบประเมินสำหรับคุณ -->
+    <section class="assessment-section" id="assessment">
+        <h2>ประเภทแบบประเมินสำหรับคุณ</h2>
+        <div class="assessment-grid">
+            <div class="assessment-card">
+                <i class="fa-regular fa-clipboard"></i>
+                <h3>แบบประเมินคัดกรองสุขภาพจิตเบื้องต้น</h3>
+                <p>(Screening Tools)</p>
+            </div>
+            <div class="assessment-card">
+                <i class="fa-solid fa-pills"></i>
+                <h3>แบบประเมินอาการเฉพาะโรคทางจิตเวช</h3>
+                <p>(Clinical Rating Scales)</p>
+            </div>
+            <div class="assessment-card">
+                <i class="fa-solid fa-stethoscope"></i>
+                <h3>แบบทดสอบบุคลิกภาพ</h3>
+                <p>(Personality Tests)</p>
+            </div>
+            <div class="assessment-card">
+                <i class="fa-solid fa-heart-pulse"></i>
+                <h3>แบบทดสอบภาวะปัญญาและประสิทธิภาพสมอง</h3>
+                <p>(Cognitive & Intelligence Tests)</p>
+            </div>
+            <div class="assessment-card">
+                <i class="fa-solid fa-syringe"></i>
+                <h3>แบบประเมินพัฒนาการและพฤติกรรมเด็ก</h3>
+                <p>(Developmental & Behavioral Assessments)</p>
+            </div>
+            <div class="assessment-card">
+                <i class="fa-solid fa-truck-medical"></i>
+                <h3>แบบประเมินคุณภาพชีวิตและพลังทางจิตวิทยา</h3>
+                <p>(Psychosocial & Well-being Tools)</p>
+            </div>
+        </div>
+        <a href="#" class="btn-assessment">เริ่มทำแบบประเมิน <i class="fa-solid fa-chevron-right"></i></a>
+    </section>
+
+    <!-- Section: Map / Location -->
+    <section class="map-section" id="contact">
+        <div class="map-container">
+            <div class="map-info">
+                <h3>สาธารณสุขอำเภออุทัย</h3>
+                <p><i class="fa-solid fa-location-dot"></i> 15 หมู่ 5 ตำบลอุทัย อำเภออุทัย จังหวัดพระนครศรีอยุธยา 13210</p>
+                <p><i class="fa-solid fa-phone"></i> โทรศัพท์: 035-711-469</p>
+                <p><i class="fa-solid fa-print"></i> โทรสาร: 035-711-252</p>
+            </div>
+            <div class="map-embed">
+                <!-- Google Maps Embed centered at Uthai District Office -->
+                <iframe src="https://maps.google.com/maps?q=14.364401,100.668581&hl=th&z=15&output=embed" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-left">
+                <h3>โครงการ อสม. ฮีลใจ</h3>
+                <h4>ต้องใช้ผ่านระบบดิจิทัล (Mental Health Cyber-Care)</h4>
+                
+                <div class="helpline-badge">
+                    <i class="fa-solid fa-phone"></i> สายด่วนสุขภาพจิต 1323 (ฟรี ตลอด 24 ชม.)
+                </div>
+
+                <p><strong>ติดต่อหน่วยงาน:</strong></p>
+                <p>โทร. [ระบุเบอร์โทรหน่วยงาน]</p>
+                <p>info@example.com</p>
+                <br>
+                <p><strong>ที่อยู่:</strong></p>
+                <p>[ระบุชื่อ รพ.สต. / หน่วยงาน]</p>
+                <p>[ระบุที่อยู่ ตำบล อำเภอ จังหวัด รหัสไปรษณีย์]</p>
+
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-right">
+                <h3>ส่งคำถามหรือข้อเสนอแนะถึงเรา</h3>
+                <form action="#" method="POST">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="text" placeholder="ชื่อจริง *" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" placeholder="นามสกุล *" required>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 15px;">
+                        <input type="email" placeholder="อีเมล *" required>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 15px;">
+                        <textarea rows="4" placeholder="พิมพ์ข้อความของคุณที่นี่..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">ส่ง</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div>
+                <a href="#">ข้อกำหนดและเงื่อนไข</a> | <a href="#">นโยบายความเป็นส่วนตัว</a>
+            </div>
+            <div>
+                ©2026 โครงการ อสม. ฮีลใจ ต้องใช้ผ่านระบบดิจิทัล
+            </div>
+        </div>
+    </footer>
+
 </body>
 </html>
