@@ -7,29 +7,37 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!-- Font Awesome Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 <style>
   :root {
     --brand-dark: #0f172a;
-    --brand-navy: #1e293b;
-    --primary-grad: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
-    --primary-hover: linear-gradient(135deg, #0369a1 0%, #1d4ed8 100%);
-    --surface-grad: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
-    --bg-grad: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 40%, #e0f2fe 100%);
+    --sky-dark: #0284c7;
+    --sky-main: #38bdf8;
+    --sky-soft: #7dd3fc;
+    --sky-light: #e0f2fe;
+    --sky-bg: #f0f9ff;
     
-    --text-main: #0f172a;
-    --text-muted: #475569;
-    --border: #cbd5e1;
-    --border-light: #e2e8f0;
+    --primary-grad: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+    --primary-hover: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+    --surface-grad: linear-gradient(180deg, #ffffff 0%, #f0f9ff 100%);
+    --bg-grad: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #bae6fd 100%);
     
-    --success: #059669;
-    --warning: #d97706;
-    --danger: #dc2626;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --border: #bae6fd;
+    --border-light: #e0f2fe;
     
-    --radius-lg: 20px;
-    --radius-md: 14px;
-    --radius-sm: 10px;
-    --shadow-sm: 0 4px 6px -1px rgba(15, 23, 42, 0.05);
-    --shadow-md: 0 20px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --radius-sm: 12px;
+    --shadow-sm: 0 4px 12px rgba(56, 189, 248, 0.08);
+    --shadow-md: 0 16px 28px -6px rgba(14, 165, 233, 0.12), 0 6px 12px -4px rgba(14, 165, 233, 0.06);
   }
 
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -49,81 +57,100 @@
 
   /* Hotline Bar */
   .hotline-bar {
-    background: var(--brand-dark);
-    color: #94a3b8;
+    background: #0284c7;
+    color: #f0f9ff;
     text-align: center;
     padding: 8px 16px;
-    font-size: 12.5px;
+    font-size: 13px;
     font-weight: 500;
     letter-spacing: 0.3px;
   }
-  .hotline-bar b { color: #38bdf8; font-weight: 700; }
+  .hotline-bar b { color: #fff; font-weight: 700; text-decoration: underline; }
 
-  /* Navigation Bar */
-  .navbar {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: rgba(255, 255, 255, 0.85);
+  /* Header & Navbar สไตล์ Glassmorphism */
+  header.nav-header {
+    background: rgba(255, 255, 255, 0.88);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+    border-bottom: 1px solid rgba(186, 230, 253, 0.6);
+    padding: 12px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
     box-shadow: var(--shadow-sm);
   }
-  .nav-container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 12px 20px;
+
+  header.nav-header .logo {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-  }
-  .nav-brand {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    gap: 12px;
+    font-family: 'Kanit', sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--sky-dark);
     text-decoration: none;
-    color: var(--brand-dark);
   }
-  .nav-logo {
-    width: 36px;
-    height: 36px;
+
+  header.nav-header .logo .badge {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
     background: var(--primary-grad);
     color: #fff;
-    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 700;
-    font-size: 16px;
-    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+    font-size: 1.1rem;
+    box-shadow: 0 4px 10px rgba(56, 189, 248, 0.4);
   }
-  .nav-title { font-weight: 700; font-size: 16px; letter-spacing: 0.2px; }
-  .nav-subtitle { font-size: 11px; color: var(--text-muted); display: block; }
 
-  /* Back Button in Nav */
+  header.nav-header .logo small {
+    display: block;
+    font-family: 'Sarabun', sans-serif;
+    font-weight: 400;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+  }
+
+  /* ปุ่มย้อนกลับดีไซน์น่ารัก */
   .btn-nav-back {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
     background: #ffffff;
-    border: 1px solid var(--border);
-    color: var(--text-main);
-    padding: 7px 16px;
-    border-radius: 20px;
-    font-size: 13px;
+    border: 1.5px solid #7dd3fc;
+    color: #0284c7;
+    padding: 8px 18px;
+    border-radius: 30px;
+    font-family: 'Sarabun', sans-serif;
+    font-size: 13.5px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s ease;
-    box-shadow: var(--shadow-sm);
-  }
-  .btn-nav-back:hover {
-    background: #f8fafc;
-    border-color: #0284c7;
-    color: #0284c7;
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 2px 8px rgba(56, 189, 248, 0.15);
   }
 
-  /* Header Section */
+  .btn-nav-back i {
+    font-size: 14px;
+    transition: transform 0.2s ease;
+  }
+
+  .btn-nav-back:hover {
+    background: #e0f2fe;
+    border-color: #0284c7;
+    color: #0369a1;
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 4px 12px rgba(56, 189, 248, 0.25);
+  }
+
+  .btn-nav-back:hover i {
+    transform: translateX(-3px);
+  }
+
+  /* Header Hero Section */
   header.hero {
     max-width: 900px;
     margin: 0 auto;
@@ -131,22 +158,24 @@
     text-align: center;
   }
   .hero-badge {
-    display: inline-block;
-    padding: 4px 14px;
-    background: rgba(2, 132, 199, 0.1);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 16px;
+    background: #e0f2fe;
     color: #0284c7;
     border-radius: 20px;
     font-size: 12px;
     font-weight: 700;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
     margin-bottom: 12px;
-    border: 1px solid rgba(2, 132, 199, 0.2);
+    border: 1px solid #bae6fd;
   }
   header.hero h1 {
     font-size: clamp(26px, 4vw, 36px);
     margin: 0 0 12px;
     color: var(--brand-dark);
-    line-height: 1.2;
+    line-height: 1.25;
   }
   header.hero p {
     font-size: 15px;
@@ -172,10 +201,10 @@
     margin-top: 10px;
   }
   .card {
-    background: var(--surface-grad);
+    background: #ffffff;
     border-radius: var(--radius-lg);
     padding: 24px;
-    border: 1px solid var(--border-light);
+    border: 1.5px solid var(--border-light);
     box-shadow: var(--shadow-md);
     cursor: pointer;
     transition: all 0.25s ease;
@@ -188,31 +217,29 @@
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0;
-    height: 4px;
+    height: 5px;
     background: var(--primary-grad);
     opacity: 0;
     transition: opacity 0.25s ease;
   }
   .card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(2, 132, 199, 0.3);
-    box-shadow: 0 20px 30px -10px rgba(15, 23, 42, 0.12);
+    transform: translateY(-5px);
+    border-color: #7dd3fc;
+    box-shadow: 0 20px 30px -10px rgba(56, 189, 248, 0.25);
   }
   .card:hover::before { opacity: 1; }
   .card .icon {
-    width: 48px;
-    height: 48px;
+    width: 52px;
+    height: 52px;
     border-radius: var(--radius-md);
     background: var(--primary-grad);
     color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Kanit', sans-serif;
-    font-weight: 700;
-    font-size: 15px;
+    font-size: 20px;
     margin-bottom: 16px;
-    box-shadow: 0 6px 12px rgba(2, 132, 199, 0.25);
+    box-shadow: 0 6px 14px rgba(56, 189, 248, 0.35);
   }
   .card .code { font-size: 19px; font-weight: 700; margin-bottom: 6px; color: var(--brand-dark); }
   .card .desc { font-size: 13.5px; color: var(--text-muted); line-height: 1.5; margin-bottom: 20px; flex: 1; }
@@ -221,20 +248,23 @@
     font-size: 12px;
     font-weight: 600;
     color: #0284c7;
-    background: rgba(2, 132, 199, 0.08);
+    background: #e0f2fe;
     border-radius: 20px;
     padding: 4px 12px;
   }
 
   /* Panel Component */
   .panel {
-    background: var(--surface-grad);
+    background: #ffffff;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-md);
-    border: 1px solid var(--border-light);
+    border: 1.5px solid var(--border-light);
     padding: 32px;
   }
-  @media (max-width: 600px) { .panel { padding: 20px 16px; } }
+  @media (max-width: 600px) { 
+    .panel { padding: 20px 16px; } 
+    header.nav-header { flex-direction: column; gap: 10px; padding: 12px 4%; }
+  }
 
   .panel-header-actions {
     display: flex;
@@ -250,9 +280,9 @@
 
   /* Progress Bar */
   .progress-wrap {
-    background: #e2e8f0;
+    background: #e0f2fe;
     border-radius: 10px;
-    height: 8px;
+    height: 10px;
     overflow: hidden;
     margin-bottom: 28px;
   }
@@ -264,7 +294,7 @@
   }
 
   /* Questions */
-  .question { padding: 20px 0; border-bottom: 1px dashed var(--border-light); }
+  .question { padding: 20px 0; border-bottom: 1px dashed var(--border); }
   .question:last-child { border-bottom: none; }
   .question .qnum { font-size: 13px; font-weight: 700; color: #0284c7; margin-bottom: 6px; }
   .question .qtext { font-size: 16px; font-weight: 600; line-height: 1.5; margin-bottom: 14px; color: var(--brand-dark); }
@@ -279,20 +309,21 @@
     cursor: pointer;
     font-size: 14.5px;
     background: #fff;
-    transition: all 0.15s ease;
+    transition: all 0.2s ease;
     user-select: none;
     min-height: 48px;
   }
-  .opt:hover { border-color: #0284c7; background: #f0f9ff; }
+  .opt:hover { border-color: #38bdf8; background: #f0f9ff; }
   .opt input { accent-color: #0284c7; width: 18px; height: 18px; flex-shrink: 0; }
   .opt.selected {
     border-color: #0284c7;
     background: linear-gradient(90deg, #f0f9ff 0%, #e0f2fe 100%);
     font-weight: 600;
     color: #0369a1;
+    box-shadow: 0 2px 8px rgba(56, 189, 248, 0.15);
   }
 
-  /* Primary Button with Gradient */
+  /* Primary Button */
   .btn-primary {
     background: var(--primary-grad);
     color: #fff;
@@ -303,31 +334,39 @@
     font-size: 15px;
     font-weight: 700;
     cursor: pointer;
-    box-shadow: 0 4px 15px rgba(2, 132, 199, 0.3);
+    box-shadow: 0 6px 18px rgba(56, 189, 248, 0.35);
     transition: all 0.2s ease;
     width: 100%;
     max-width: 320px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
   }
   .btn-primary:hover {
     background: var(--primary-hover);
-    transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(2, 132, 199, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(56, 189, 248, 0.45);
   }
   .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; transform: none; box-shadow: none; }
 
   .btn-secondary {
     background: #fff;
-    border: 1.5px solid var(--border);
-    color: var(--brand-dark);
+    border: 1.5px solid #7dd3fc;
+    color: #0284c7;
     padding: 12px 24px;
     border-radius: 30px;
     font-family: 'Sarabun', sans-serif;
     font-size: 14.5px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.15s ease;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
   }
-  .btn-secondary:hover { background: #f8fafc; border-color: var(--brand-dark); }
+  .btn-secondary:hover { background: #f0f9ff; border-color: #0284c7; color: #0369a1; }
 
   .submit-row { margin-top: 30px; text-align: center; }
   .hint { text-align: center; font-size: 13px; color: var(--text-muted); margin-top: 10px; }
@@ -355,37 +394,37 @@
     box-shadow: var(--shadow-sm);
   }
   .advice-box {
-    background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
-    border: 1px solid var(--border-light);
+    background: #f0f9ff;
+    border: 1.5px solid var(--border);
     border-radius: var(--radius-md);
     padding: 22px;
     font-size: 15px;
     line-height: 1.7;
     margin: 24px 0;
   }
-  .advice-box b { color: var(--brand-dark); }
+  .advice-box b { color: var(--sky-dark); }
 
   /* Email Box */
   .email-box {
     background: #f8fafc;
-    border: 1px solid var(--border-light);
+    border: 1.5px solid var(--border-light);
     border-radius: var(--radius-md);
     padding: 20px;
     margin-top: 24px;
   }
-  .email-box label { display: block; font-size: 13.5px; font-weight: 700; margin-bottom: 10px; }
+  .email-box label { display: block; font-size: 13.5px; font-weight: 700; margin-bottom: 10px; color: var(--brand-dark); }
   .email-row { display: flex; gap: 10px; flex-wrap: wrap; }
   .email-row input {
     flex: 1;
     min-width: 220px;
     padding: 12px 16px;
     border-radius: var(--radius-sm);
-    border: 1px solid var(--border);
+    border: 1.5px solid var(--border);
     font-family: inherit;
     font-size: 14px;
     outline: none;
   }
-  .email-row input:focus { border-color: #0284c7; box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15); }
+  .email-row input:focus { border-color: #0284c7; box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25); }
 
   .result-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 28px; }
 
@@ -402,26 +441,23 @@
 </head>
 <body>
 
-<div class="hotline-bar">สายด่วนสุขภาพจิต <b>1323</b> ให้บริการฟรีตลอด 24 ชั่วโมง</div>
+<div class="hotline-bar"><i class="fa-solid fa-headset"></i> สายด่วนสุขภาพจิต <b>1323</b> ให้บริการฟรีตลอด 24 ชั่วโมง</div>
 
 <!-- Sticky Navbar -->
-<nav class="navbar">
-  <div class="nav-container">
-    <a href="#" class="nav-brand" onclick="showGrid(); return false;">
-      <div class="nav-logo">M</div>
-      <div>
-        <span class="nav-title font-title">MentalCare</span>
-        <span class="nav-subtitle">Cyber-Care Assessment</span>
-      </div>
-    </a>
+<header class="nav-header">
+  <a href="#" class="logo" onclick="showGrid(); return false;">
+    <span class="badge"><i class="fa-solid fa-heart-pulse"></i></span>
+    <span>MENTAL HEALTH CYBER-CARE<small>โครงการ อสม. ฮีลใจ &bull; Cyber-Care Assessment</small></span>
+  </a>
+  <nav>
     <button class="btn-nav-back" id="navBackBtn" style="display:none;" onclick="showGrid()">
-      ← ย้อนกลับ
+      <i class="fa-solid fa-cloud-arrow-left"></i> ย้อนกลับหน้าแรก
     </button>
-  </div>
-</nav>
+  </nav>
+</header>
 
 <header class="hero" id="heroHeader">
-  <span class="hero-badge">CLINICAL SELF-ASSESSMENT</span>
+  <span class="hero-badge"><i class="fa-solid fa-sparkles"></i> CLINICAL SELF-ASSESSMENT</span>
   <h1>แบบทดสอบประเมินสุขภาพจิตและบุคลิกภาพ</h1>
   <p>สำรวจบุคลิกภาพ ความเห็นคุณค่าในตนเอง ความฉลาดทางอารมณ์ และความสามารถในการปรับตัว เพื่อความเข้าใจตนเองและการพัฒนาอย่างยั่งยืน</p>
 </header>
@@ -433,14 +469,18 @@
   <!-- Quiz View Section -->
   <section id="view-quiz" class="panel" style="display:none;">
     <div class="panel-header-actions">
-      <button class="btn-nav-back" onclick="showGrid()">← ย้อนกลับไปหน้าเลือกแบบทดสอบ</button>
+      <button class="btn-nav-back" onclick="showGrid()">
+        <i class="fa-solid fa-face-smile-wink"></i> ย้อนกลับไปหน้าเลือกแบบทดสอบ
+      </button>
     </div>
     <h2 class="quiz-title" id="quizTitle"></h2>
     <p class="quiz-sub" id="quizSub"></p>
     <div class="progress-wrap"><div class="progress-fill" id="progressFill"></div></div>
     <div id="questionList"></div>
     <div class="submit-row">
-      <button class="btn-primary" id="submitBtn" disabled onclick="submitQuiz()">ดูผลการประเมิน</button>
+      <button class="btn-primary" id="submitBtn" disabled onclick="submitQuiz()">
+        <i class="fa-solid fa-paper-plane"></i> ดูผลการประเมิน
+      </button>
       <div class="hint" id="progressHint"></div>
     </div>
   </section>
@@ -448,7 +488,9 @@
   <!-- Result View Section -->
   <section id="view-result" class="panel" style="display:none;">
     <div class="panel-header-actions">
-      <button class="btn-nav-back" onclick="showGrid()">← ย้อนกลับไปหน้าเลือกแบบทดสอบ</button>
+      <button class="btn-nav-back" onclick="showGrid()">
+        <i class="fa-solid fa-house-heart"></i> ย้อนกลับไปหน้าเลือกแบบทดสอบ
+      </button>
     </div>
     <div class="result-head">
       <div class="hero-badge" id="resultCode"></div>
@@ -461,23 +503,23 @@
     <div class="advice-box" id="resultAdvice"></div>
     
     <div class="email-box">
-      <label for="emailTo">ส่งผลประเมินเข้าสู่อีเมล</label>
+      <label for="emailTo"><i class="fa-solid fa-envelope-open-text"></i> ส่งผลประเมินเข้าสู่อีเมล</label>
       <div class="email-row">
         <input type="email" id="emailTo" value="67319100012@Aitc.ac.th">
-        <button class="btn-secondary" onclick="emailResult()">✉ ส่งผลทางอีเมล</button>
+        <button class="btn-secondary" onclick="emailResult()"><i class="fa-solid fa-paper-plane"></i> ส่งผลทางอีเมล</button>
       </div>
       <div class="hint">ระบบจะเตรียมข้อมูลเพื่อส่งผ่าน Gmail ในแท็บใหม่ให้อัตโนมัติ</div>
     </div>
 
     <div class="result-actions">
-      <button class="btn-secondary" onclick="openAssessment(currentId)">ทำแบบทดสอบนี้อีกครั้ง</button>
-      <button class="btn-primary" onclick="showGrid()">เลือกแบบทดสอบอื่น</button>
+      <button class="btn-secondary" onclick="openAssessment(currentId)"><i class="fa-solid fa-rotate-left"></i> ทำแบบทดสอบนี้อีกครั้ง</button>
+      <button class="btn-primary" onclick="showGrid()"><i class="fa-solid fa-grid-2"></i> เลือกแบบทดสอบอื่น</button>
     </div>
   </section>
 </main>
 
 <footer class="note">
-  แบบทดสอบนี้เป็นเครื่องมือสำรวจตนเองเบื้องต้นเพื่อสร้างความเข้าใจตนเองเท่านั้น ไม่ใช่การวินิจฉัยทางจิตวิทยาคลินิกโดยตรง หากต้องการการประเมินที่แม่นยำ โปรดปรึกษาผู้เชี่ยวชาญหรือนักจิตวิทยา
+  <i class="fa-solid fa-circle-info"></i> แบบทดสอบนี้เป็นเครื่องมือสำรวจตนเองเบื้องต้นเพื่อสร้างความเข้าใจตนเองเท่านั้น ไม่ใช่การวินิจฉัยทางจิตวิทยาคลินิกโดยตรง หากต้องการการประเมินที่แม่นยำ โปรดปรึกษาผู้เชี่ยวชาญหรือนักจิตวิทยา
 </footer>
 
 <script>
@@ -536,13 +578,13 @@ const MBTI_DESC = {
 
 const ASSESSMENTS = {
   mbti:{
-    code:'MBTI', title:'MBTI Personality', full:'แบบทดสอบบุคลิกภาพเบื้องต้น',
+    code:'MBTI', title:'MBTI Personality', full:'แบบทดสอบบุคลิกภาพเบื้องต้น', icon:'fa-puzzle-piece',
     sub:'เลือกข้อความที่ตรงกับความเป็นตัวคุณมากกว่าในแต่ละคู่',
     type:'dichotomy',
     pairs: mbtiPairs
   },
   selfesteem:{
-    code:'Self-Esteem', title:'Self-Esteem Scale', full:'แบบประเมินการเห็นคุณค่าในตนเอง',
+    code:'Self-Esteem', title:'Self-Esteem Scale', full:'แบบประเมินการเห็นคุณค่าในตนเอง', icon:'fa-face-smile-beam',
     sub:'ประเมินความรู้สึกและการเห็นคุณค่าในตนเองตามความเป็นจริง',
     type:'sum',
     customQuestions:[
@@ -567,7 +609,7 @@ const ASSESSMENTS = {
     ]
   },
   eq:{
-    code:'EQ Test', title:'Emotional Intelligence', full:'แบบประเมินความฉลาดทางอารมณ์',
+    code:'EQ Test', title:'Emotional Intelligence', full:'แบบประเมินความฉลาดทางอารมณ์', icon:'fa-brain',
     sub:'ประเมินการรับรู้ ควบคุมอารมณ์ และการเข้าใจผู้อื่น',
     type:'sum',
     options:scale4,
@@ -598,7 +640,7 @@ const ASSESSMENTS = {
     ]
   },
   resilience:{
-    code:'Resilience', title:'Resilience Scale (RQ)', full:'แบบประเมินการฟื้นตัวและปรับตัว',
+    code:'Resilience', title:'Resilience Scale (RQ)', full:'แบบประเมินการฟื้นตัวและปรับตัว', icon:'fa-seedling',
     sub:'ประเมินความสามารถในการรับมือและฟื้นตัวจากความยากลำบาก',
     type:'sum',
     options:scale4,
@@ -661,12 +703,12 @@ function initGrid(){
     card.className = 'card';
     card.onclick = ()=>openAssessment(id);
     card.innerHTML = `
-      <div class="icon">${a.code.substring(0,3)}</div>
+      <div class="icon"><i class="fa-solid ${a.icon || 'fa-heart'}"></i></div>
       <div class="code font-title">${a.title}</div>
       <div class="desc">${a.full}</div>
       <div class="card-footer">
         <span class="qcount">${qcount} ข้อประเมิน</span>
-        <span style="font-size:12px; color:#0284c7; font-weight:700;">เริ่มทำ →</span>
+        <span style="font-size:13px; color:#0284c7; font-weight:700;">เริ่มทำ <i class="fa-solid fa-chevron-right"></i></span>
       </div>
     `;
     grid.appendChild(card);
@@ -809,7 +851,7 @@ function renderMbtiResult(a){
     barsHtml += `
       <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px; font-weight:700; font-size:14px;">
         <span style="width:20px; color:#0284c7; text-align:center;">${letterA}</span>
-        <div style="flex:1; height:10px; background:#e2e8f0; border-radius:10px; overflow:hidden;">
+        <div style="flex:1; height:10px; background:#e0f2fe; border-radius:10px; overflow:hidden;">
           <div style="height:100%; width:${pctA}%; background:var(--primary-grad);"></div>
         </div>
         <span style="width:20px; color:#0284c7; text-align:center;">${letterB}</span>
