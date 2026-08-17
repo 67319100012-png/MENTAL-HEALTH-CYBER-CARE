@@ -3,117 +3,454 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>แบบทดสอบบุคลิกภาพ</title>
+<title>แบบทดสอบบุคลิกภาพ - Mental Health Cyber-Care</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --bg-sage:#AFC4A2;
-    --bg-sage-deep:#8FAA82;
-    --surface:#FBFAF5;
-    --surface-alt:#F1EEE3;
-    --ink:#2B3A2E;
-    --ink-soft:#5B6B5A;
-    --teal:#357B72;
-    --teal-deep:#245A53;
-    --gold:#B98A2E;
-    --coral:#C85A3F;
-    --coral-soft:#F3DCD3;
-    --line:#D9DFCE;
-    --radius:18px;
-    --shadow:0 10px 30px rgba(40,58,42,0.14);
+  :root {
+    --primary: #2563eb;
+    --primary-hover: #1d4ed8;
+    --primary-light: #eff6ff;
+    --bg-main: #f8fafc;
+    --surface: #ffffff;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --border: #e2e8f0;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --radius-sm: 12px;
+    --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.04);
+    --shadow-md: 0 12px 24px -4px rgba(15, 23, 42, 0.06);
   }
-  *{box-sizing:border-box;}
-  body{
-    margin:0;
-    background:linear-gradient(180deg,var(--bg-sage) 0%,var(--bg-sage-deep) 100%);
-    font-family:'Sarabun',sans-serif;
-    color:var(--ink);
-    min-height:100vh;
-    padding-bottom:40px;
+
+  * {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
   }
-  h1,h2,h3,.display{font-family:'Kanit',sans-serif;}
 
-  .hotline-bar{
-    background:var(--teal-deep);
-    color:#fff;
-    text-align:center;
-    padding:9px 16px;
-    font-size:14px;
+  body {
+    margin: 0;
+    background-color: var(--bg-main);
+    background-image: radial-gradient(at 50% 0%, #e0e7ff 0px, transparent 50%),
+                      radial-gradient(at 100% 100%, #e0f2fe 0px, transparent 50%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: 'Sarabun', sans-serif;
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
   }
-  .hotline-bar b{color:#F4D8A8;}
 
-  header.top{max-width:920px;margin:0 auto;padding:36px 24px 18px;text-align:center;}
-  header.top .eyebrow{font-size:13px;letter-spacing:2px;color:var(--teal-deep);font-weight:600;margin-bottom:8px;}
-  header.top h1{font-size:28px;margin:0 0 10px;color:var(--ink);}
-  header.top p{font-size:15px;color:var(--ink-soft);max-width:560px;margin:0 auto;line-height:1.7;}
-
-  main{max-width:920px;margin:0 auto;padding:10px 20px 20px;}
-
-  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:22px;}
-  @media (max-width:560px){ .grid{grid-template-columns:1fr;} }
-
-  .card{
-    background:var(--surface);border-radius:var(--radius);padding:24px 20px;text-align:center;
-    box-shadow:var(--shadow);cursor:pointer;border:1px solid transparent;
-    transition:transform .18s ease, border-color .18s ease;
+  /* Hotline Bar */
+  .hotline-bar {
+    background: #1e293b;
+    color: #94a3b8;
+    text-align: center;
+    padding: 10px 16px;
+    font-size: 13px;
+    font-weight: 500;
   }
-  .card:hover{transform:translateY(-4px);border-color:var(--teal);}
-  .card .icon{
-    width:56px;height:56px;border-radius:50%;background:var(--teal);color:#fff;
-    display:flex;align-items:center;justify-content:center;margin:0 auto 14px;
-    font-family:'Kanit',sans-serif;font-weight:600;font-size:14px;
+  .hotline-bar b {
+    color: #38bdf8;
+    font-weight: 700;
   }
-  .card .code{font-family:'Kanit',sans-serif;font-weight:600;font-size:17px;margin-bottom:4px;}
-  .card .desc{font-size:12.5px;color:var(--ink-soft);line-height:1.5;margin-bottom:12px;}
-  .card .qcount{display:inline-block;font-size:11.5px;color:var(--teal-deep);background:#E4EFE0;border-radius:20px;padding:3px 10px;}
 
-  .panel{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px 26px;margin-top:20px;}
-  .quiz-title{font-size:22px;margin:0 0 4px;}
-  .quiz-sub{font-size:13.5px;color:var(--ink-soft);margin:0 0 18px;line-height:1.6;}
+  /* Header */
+  header.top {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 32px 20px 16px;
+    text-align: center;
+  }
+  .badge-tag {
+    display: inline-block;
+    padding: 6px 16px;
+    background: var(--primary-light);
+    color: var(--primary);
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+  header.top h1 {
+    font-family: 'Plus Jakarta Sans', 'Sarabun', sans-serif;
+    font-size: clamp(24px, 5vw, 34px);
+    font-weight: 700;
+    margin: 0 0 12px;
+    color: var(--text-main);
+    line-height: 1.2;
+  }
+  header.top p {
+    font-size: 15px;
+    color: var(--text-muted);
+    max-width: 580px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
 
-  .progress-wrap{background:var(--surface-alt);border-radius:20px;height:8px;overflow:hidden;margin-bottom:24px;}
-  .progress-fill{background:var(--teal);height:100%;width:0%;transition:width .25s ease;}
+  main {
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 12px 20px 40px;
+    flex: 1;
+  }
 
-  .question{border-top:1px solid var(--line);padding:18px 0;}
-  .question:first-of-type{border-top:none;}
-  .question .qnum{font-family:'Kanit',sans-serif;font-size:12.5px;color:var(--teal-deep);font-weight:600;margin-bottom:6px;}
-  .question .qtext{font-size:15.5px;line-height:1.6;margin-bottom:12px;}
-  .options{display:flex;flex-direction:column;gap:8px;}
-  .opt{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;font-size:14px;transition:border-color .15s, background .15s;}
-  .opt:hover{border-color:var(--teal);}
-  .opt input{accent-color:var(--teal);width:16px;height:16px;flex:none;}
-  .opt.selected{border-color:var(--teal);background:#EAF3E9;font-weight:600;}
+  /* Navigation & Back Button */
+  .nav-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  .btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    padding: 10px 18px;
+    border-radius: 30px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.2s ease;
+  }
+  .btn-back:hover {
+    background: #f1f5f9;
+    transform: translateX(-2px);
+  }
 
-  .submit-row{margin-top:22px;text-align:center;}
-  .btn-primary{background:var(--teal-deep);color:#fff;border:none;padding:13px 30px;border-radius:30px;font-family:'Sarabun',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:background .15s, opacity .15s;}
-  .btn-primary:hover{background:var(--teal);}
-  .btn-primary:disabled{opacity:.4;cursor:not-allowed;}
-  .btn-ghost{background:none;border:1.5px solid var(--teal-deep);color:var(--teal-deep);padding:11px 26px;border-radius:30px;font-family:'Sarabun',sans-serif;font-size:14.5px;font-weight:600;cursor:pointer;}
-  .hint{text-align:center;font-size:12.5px;color:var(--ink-soft);margin-top:10px;}
+  /* Grid View */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 16px;
+  }
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: var(--primary);
+    box-shadow: var(--shadow-md);
+  }
+  .card .icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: var(--primary-light);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 16px;
+  }
+  .card .code {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--text-main);
+  }
+  .card .desc {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-bottom: 20px;
+    flex: 1;
+  }
+  .card .qcount {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--primary);
+    background: var(--primary-light);
+    border-radius: 20px;
+    padding: 4px 12px;
+  }
 
-  .result-head{text-align:center;margin-bottom:6px;}
-  .score-big{font-family:'Kanit',sans-serif;font-size:44px;font-weight:700;text-align:center;margin:2px 0 0;}
-  .score-label{text-align:center;font-size:13px;color:var(--ink-soft);margin-bottom:18px;}
-  .level-badge{display:block;width:fit-content;margin:0 auto 20px;padding:7px 18px;border-radius:30px;font-family:'Kanit',sans-serif;font-weight:600;font-size:14.5px;color:#fff;}
-  .advice-box{background:var(--surface-alt);border-radius:14px;padding:18px 20px;font-size:14.5px;line-height:1.75;margin-bottom:14px;}
-  .advice-box b{color:var(--teal-deep);}
+  /* Panel Sections */
+  .panel {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border);
+    padding: 32px 28px;
+  }
+  @media (max-width: 600px) {
+    .panel { padding: 22px 18px; }
+  }
 
-  .dim-bars{margin:18px 0;}
-  .dim-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;font-size:13px;}
-  .dim-row .letter{width:18px;font-weight:700;font-family:'Kanit',sans-serif;color:var(--teal-deep);text-align:center;}
-  .dim-row .bar-track{flex:1;height:10px;background:var(--surface-alt);border-radius:10px;overflow:hidden;}
-  .dim-row .bar-fill{height:100%;background:var(--teal);}
+  .quiz-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0 0 6px;
+  }
+  .quiz-sub {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin: 0 0 24px;
+    line-height: 1.6;
+  }
 
-  .email-box{background:var(--surface-alt);border-radius:14px;padding:16px 18px;margin-bottom:6px;}
-  .email-box label{display:block;font-size:13px;font-weight:600;color:var(--teal-deep);margin-bottom:8px;}
-  .email-row{display:flex;gap:10px;flex-wrap:wrap;}
-  .email-row input{flex:1;min-width:220px;padding:10px 14px;border-radius:10px;border:1px solid var(--line);font-family:'Sarabun',sans-serif;font-size:14px;background:#fff;}
-  .email-row input:focus{outline:2px solid var(--teal);border-color:var(--teal);}
-  .email-row .btn-ghost{white-space:nowrap;}
+  /* Progress Bar */
+  .progress-wrap {
+    background: #f1f5f9;
+    border-radius: 10px;
+    height: 8px;
+    overflow: hidden;
+    margin-bottom: 28px;
+  }
+  .progress-fill {
+    background: var(--primary);
+    height: 100%;
+    width: 0%;
+    transition: width 0.3s ease;
+  }
 
-  .result-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:20px;}
-  footer.note{max-width:920px;margin:26px auto 0;padding:0 24px;text-align:center;font-size:12px;color:var(--ink);opacity:.75;line-height:1.7;}
+  /* Question & Options */
+  .question {
+    padding: 20px 0;
+    border-bottom: 1px dashed var(--border);
+  }
+  .question:last-child { border-bottom: none; }
+  .question .qnum {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 6px;
+  }
+  .question .qtext {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-bottom: 14px;
+  }
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .opt {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    cursor: pointer;
+    font-size: 14.5px;
+    background: var(--surface);
+    transition: all 0.15s ease;
+    user-select: none;
+    min-height: 48px; /* Mobile Friendly Touch Target */
+  }
+  .opt:hover {
+    border-color: #cbd5e1;
+    background: #f8fafc;
+  }
+  .opt input {
+    accent-color: var(--primary);
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+  .opt.selected {
+    border-color: var(--primary);
+    background: var(--primary-light);
+    font-weight: 600;
+    color: var(--primary-hover);
+  }
+
+  /* Buttons & Actions */
+  .submit-row {
+    margin-top: 30px;
+    text-align: center;
+  }
+  .btn-primary {
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    padding: 14px 36px;
+    border-radius: 30px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+    transition: all 0.2s ease;
+    width: 100%;
+    max-width: 300px;
+  }
+  .btn-primary:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+  }
+  .btn-primary:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+  .btn-secondary {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    color: var(--text-main);
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-family: inherit;
+    font-size: 14.5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .btn-secondary:hover {
+    background: #f1f5f9;
+  }
+  .hint {
+    text-align: center;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 10px;
+  }
+
+  /* Results Section */
+  .result-head { text-align: center; margin-bottom: 12px; }
+  .score-big {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 52px;
+    font-weight: 800;
+    text-align: center;
+    line-height: 1;
+    margin: 10px 0 4px;
+  }
+  .score-label {
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+  }
+  .level-badge {
+    display: inline-block;
+    padding: 8px 22px;
+    border-radius: 30px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    box-shadow: var(--shadow-sm);
+  }
+  .advice-box {
+    background: #f8fafc;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 20px 22px;
+    font-size: 15px;
+    line-height: 1.7;
+    margin: 24px 0 20px;
+  }
+  .advice-box b { color: var(--text-main); }
+
+  /* MBTI Bars */
+  .dim-bars { margin: 24px 0; }
+  .dim-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .dim-row .letter {
+    width: 24px;
+    color: var(--primary);
+    text-align: center;
+  }
+  .dim-row .bar-track {
+    flex: 1;
+    height: 12px;
+    background: #e2e8f0;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .dim-row .bar-fill {
+    height: 100%;
+    background: var(--primary);
+    border-radius: 10px;
+  }
+
+  /* Email Box */
+  .email-box {
+    background: #f1f5f9;
+    border-radius: var(--radius-md);
+    padding: 20px;
+    margin-top: 24px;
+  }
+  .email-box label {
+    display: block;
+    font-size: 13.5px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .email-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .email-row input {
+    flex: 1;
+    min-width: 200px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+  }
+  .email-row input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+  }
+  .email-row .btn-secondary { white-space: nowrap; }
+
+  .result-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 28px;
+  }
+
+  footer.note {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 0 20px;
+    text-align: center;
+    font-size: 12.5px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
 </style>
 </head>
 <body>
@@ -121,15 +458,20 @@
 <div class="hotline-bar">สายด่วนสุขภาพจิต <b>1323</b> ให้บริการฟรีตลอด 24 ชั่วโมง</div>
 
 <header class="top">
-  <div class="eyebrow">MENTAL HEALTH CYBER-CARE</div>
-  <h1>แบบทดสอบบุคลิกภาพ (Personality Tests)</h1>
-  <p>เลือกแบบทดสอบที่ต้องการทำ เพื่อสำรวจบุคลิกภาพ ความเห็นคุณค่าในตนเอง ความฉลาดทางอารมณ์ และความสามารถในการปรับตัว ผลลัพธ์เป็นการสำรวจเบื้องต้นเพื่อความเข้าใจตนเอง ไม่ใช่เครื่องมือวินิจฉัยทางจิตวิทยา</p>
+  <span class="badge-tag">MENTAL HEALTH CYBER-CARE</span>
+  <h1>แบบทดสอบบุคลิกภาพ</h1>
+  <p>สำรวจบุคลิกภาพ ความเห็นคุณค่าในตนเอง ความฉลาดทางอารมณ์ และการปรับตัวเบื้องต้นเพื่อทำความเข้าใจตนเองให้ดียิ่งขึ้น</p>
 </header>
 
 <main>
+  <!-- Grid Menu -->
   <section id="view-grid" class="grid"></section>
 
+  <!-- Quiz View -->
   <section id="view-quiz" class="panel" style="display:none;">
+    <div class="nav-header">
+      <button class="btn-back" onclick="showGrid()">← ย้อนกลับ</button>
+    </div>
     <h2 class="quiz-title" id="quizTitle"></h2>
     <p class="quiz-sub" id="quizSub"></p>
     <div class="progress-wrap"><div class="progress-fill" id="progressFill"></div></div>
@@ -140,9 +482,13 @@
     </div>
   </section>
 
+  <!-- Result View -->
   <section id="view-result" class="panel" style="display:none;">
+    <div class="nav-header">
+      <button class="btn-back" onclick="showGrid()">← กลับหน้าหลัก</button>
+    </div>
     <div class="result-head">
-      <div class="eyebrow" id="resultCode" style="color:var(--teal-deep);font-size:12.5px;letter-spacing:1.5px;font-weight:600;"></div>
+      <div class="badge-tag" id="resultCode"></div>
       <h2 class="quiz-title" id="resultTitle" style="margin-top:4px;"></h2>
     </div>
     <div class="score-big" id="resultScore"></div>
@@ -150,23 +496,25 @@
     <div id="resultBadgeWrap" style="text-align:center;"></div>
     <div id="dimBarsWrap"></div>
     <div class="advice-box" id="resultAdvice"></div>
+    
     <div class="email-box">
-      <label for="emailTo">ส่งผลไปที่อีเมล</label>
+      <label for="emailTo">ส่งผลการทดสอบไปที่อีเมล</label>
       <div class="email-row">
         <input type="email" id="emailTo" value="67319100012@Aitc.ac.th">
-        <button class="btn-ghost" onclick="emailResult()">✉ ส่งผลทางอีเมล</button>
+        <button class="btn-secondary" onclick="emailResult()">✉ ส่งผลทางอีเมล</button>
       </div>
-      <div class="hint">จะเปิดหน้าเขียนอีเมลของ Gmail ในแท็บใหม่ พร้อมกรอกผลให้อัตโนมัติ ท่านเพียงกดส่ง (ต้องเข้าสู่ระบบ Gmail ไว้ก่อน)</div>
+      <div class="hint">ระบบจะเปิดหน้าแต่งอีเมลของ Gmail พร้อมกรอกข้อมูลให้อัตโนมัติ</div>
     </div>
+
     <div class="result-actions">
-      <button class="btn-ghost" onclick="openAssessment(currentId)">ทำแบบทดสอบนี้อีกครั้ง</button>
+      <button class="btn-secondary" onclick="openAssessment(currentId)">ทำแบบทดสอบนี้อีกครั้ง</button>
       <button class="btn-primary" onclick="showGrid()">เลือกแบบทดสอบอื่น</button>
     </div>
   </section>
 </main>
 
 <footer class="note">
-  แบบทดสอบนี้เป็นเครื่องมือสำรวจตนเองเบื้องต้นเพื่อความเข้าใจบุคลิกภาพของตนเองเท่านั้น ไม่ใช่แบบทดสอบทางจิตวิทยาที่ได้มาตรฐานทางคลินิกอย่างสมบูรณ์ และไม่สามารถใช้แทนการประเมินโดยนักจิตวิทยาได้ หากต้องการทราบผลที่แม่นยำยิ่งขึ้น โปรดปรึกษาผู้เชี่ยวชาญ
+  แบบทดสอบนี้เป็นเครื่องมือสำรวจตนเองเบื้องต้นเพื่อความเข้าใจตนเองเท่านั้น ไม่ใช่แบบทดสอบทางจิตวิทยาคลินิก และไม่สามารถใช้แทนการวินิจฉัยโดยแพทย์หรือนักจิตวิทยาได้
 </footer>
 
 <script>
@@ -177,7 +525,6 @@ const scale4 = [
   {label:'เป็นประจำ', score:3}
 ];
 
-// ---- Rosenberg-style self-esteem items (reverse-scored items already flipped) ----
 const seAgree4 = (reverse)=> reverse ? [
   {label:'เห็นด้วยอย่างยิ่ง', score:0},
   {label:'เห็นด้วย', score:1},
@@ -226,14 +573,14 @@ const MBTI_DESC = {
 
 const ASSESSMENTS = {
   mbti:{
-    code:'MBTI', title:'MBTI', full:'แบบทดสอบบุคลิกภาพเบื้องต้น',
-    sub:'เลือกข้อความที่ตรงกับตัวท่านมากกว่าในแต่ละคู่ ใช้เวลาไม่ถึง 5 นาที (แบบเบื้องต้น ไม่ใช่แบบทดสอบ MBTI ฉบับเต็ม)',
+    code:'MBTI', title:'MBTI Personality', full:'แบบทดสอบบุคลิกภาพเบื้องต้น',
+    sub:'เลือกข้อความที่ตรงกับความเป็นตัวคุณมากกว่าในแต่ละข้อ',
     type:'dichotomy',
     pairs: mbtiPairs
   },
   selfesteem:{
-    code:'SE', title:'Self-Esteem', full:'แบบประเมินการเห็นคุณค่าในตนเอง',
-    sub:'ให้คะแนนความเห็นด้วยกับข้อความต่อไปนี้ ตามความรู้สึกที่แท้จริงของท่าน',
+    code:'Self-Esteem', title:'Self-Esteem', full:'แบบประเมินการเห็นคุณค่าในตนเอง',
+    sub:'ประเมินความรู้สึกเกี่ยวกับตัวคุณเองตามความเป็นจริง',
     type:'sum',
     customQuestions:[
       {text:'โดยรวมแล้ว ฉันรู้สึกพึงพอใจในตัวเอง', options:seAgree4(false)},
@@ -248,17 +595,17 @@ const ASSESSMENTS = {
       {text:'ฉันมีทัศนคติที่ดีต่อตัวเอง', options:seAgree4(false)}
     ],
     bands:[
-      {min:0,max:14,label:'เห็นคุณค่าในตนเองต่ำ',color:'var(--coral)',
-        advice:'ผลบ่งชี้ว่าอาจมองเห็นคุณค่าในตนเองค่อนข้างต่ำ ลองเริ่มจากการจดบันทึกสิ่งเล็ก ๆ ที่ทำได้ดีในแต่ละวัน และพูดคุยกับคนที่ไว้ใจ หากรู้สึกไม่ดีต่อเนื่องเป็นเวลานาน ควรปรึกษาเจ้าหน้าที่สาธารณสุขหรือผู้เชี่ยวชาญ'},
-      {min:15,max:25,label:'เห็นคุณค่าในตนเองระดับปกติ',color:'var(--gold)',
-        advice:'ระดับการเห็นคุณค่าในตนเองอยู่ในเกณฑ์ปกติ ยังสามารถพัฒนาต่อได้ด้วยการฝึกพูดกับตัวเองในเชิงบวกและตั้งเป้าหมายที่ทำได้จริง'},
-      {min:26,max:30,label:'เห็นคุณค่าในตนเองสูง',color:'var(--teal)',
+      {min:0,max:14,label:'เห็นคุณค่าในตนเองต่ำ',color:'var(--danger)',
+        advice:'ผลบ่งชี้ว่าอาจมองเห็นคุณค่าในตนเองค่อนข้างต่ำ ลองเริ่มจากการจดบันทึกสิ่งเล็ก ๆ ที่ทำได้ดีในแต่ละวัน และพูดคุยกับคนที่ไว้ใจ หากรู้สึกไม่ดีต่อเนื่องเป็นเวลานาน ควรปรึกษาผู้เชี่ยวชาญ'},
+      {min:15,max:25,label:'เห็นคุณค่าในตนเองระดับปกติ',color:'var(--warning)',
+        advice:'ระดับการเห็นคุณค่าในตนเองอยู่ในเกณฑ์ปกติ สามารถพัฒนาต่อได้ด้วยการฝึกพูดกับตัวเองในเชิงบวกและตั้งเป้าหมายที่ทำได้จริง'},
+      {min:26,max:30,label:'เห็นคุณค่าในตนเองสูง',color:'var(--success)',
         advice:'มีความมั่นใจและเห็นคุณค่าในตนเองอยู่ในระดับดี รักษาความสมดุลนี้ไว้ และเป็นกำลังใจให้คนรอบข้างต่อไปได้'}
     ]
   },
   eq:{
-    code:'EQ', title:'EQ', full:'แบบประเมินความฉลาดทางอารมณ์',
-    sub:'ประเมิน 5 ด้าน ได้แก่ การรู้จักอารมณ์ตนเอง การควบคุมอารมณ์ ความเข้าใจผู้อื่น ทักษะสังคม และแรงจูงใจ',
+    code:'EQ Test', title:'Emotional Intelligence', full:'แบบประเมินความฉลาดทางอารมณ์',
+    sub:'ประเมินการรับรู้ ควบคุมอารมณ์ และการเข้าใจผู้อื่น',
     type:'sum',
     options:scale4,
     questions:[
@@ -279,17 +626,17 @@ const ASSESSMENTS = {
       'ฉันมองหาโอกาสเรียนรู้สิ่งใหม่อยู่เสมอ'
     ],
     bands:[
-      {min:0,max:15,label:'ควรพัฒนาเพิ่มเติม',color:'var(--coral)',
+      {min:0,max:15,label:'ควรพัฒนาเพิ่มเติม',color:'var(--danger)',
         advice:'มีโอกาสพัฒนาความฉลาดทางอารมณ์เพิ่มเติม ลองเริ่มจากการฝึกสังเกตอารมณ์ตัวเองในแต่ละวัน และฝึกรับฟังผู้อื่นอย่างตั้งใจมากขึ้น'},
-      {min:16,max:30,label:'อยู่ในระดับปานกลาง',color:'var(--gold)',
-        advice:'มีความฉลาดทางอารมณ์ในระดับปานกลาง สามารถพัฒนาต่อได้ด้วยการฝึกควบคุมอารมณ์ในสถานการณ์กดดัน และฝึกเข้าใจมุมมองของผู้อื่นให้มากขึ้น'},
-      {min:31,max:45,label:'อยู่ในระดับดี',color:'var(--teal)',
-        advice:'มีความฉลาดทางอารมณ์ในระดับดี ทั้งการรู้เท่าทันตนเองและการเข้าใจผู้อื่น รักษาจุดแข็งนี้ไว้และเป็นแบบอย่างที่ดีให้คนรอบข้างได้'}
+      {min:16,max:30,label:'อยู่ในระดับปานกลาง',color:'var(--warning)',
+        advice:'มีความฉลาดทางอารมณ์ในระดับปานกลาง สามารถพัฒนาต่อได้ด้วยการฝึกควบคุมอารมณ์ในสถานการณ์กดดัน'},
+      {min:31,max:45,label:'อยู่ในระดับดี',color:'var(--success)',
+        advice:'มีความฉลาดทางอารมณ์ในระดับดี ทั้งการรู้เท่าทันตนเองและการเข้าใจผู้อื่น รักษาจุดแข็งนี้ไว้'}
     ]
   },
   resilience:{
-    code:'RQ', title:'Resilience', full:'แบบประเมินความสามารถในการปรับตัว',
-    sub:'ประเมินความสามารถในการรับมือและฟื้นตัวจากความยากลำบากหรือการเปลี่ยนแปลง',
+    code:'Resilience', title:'Resilience (RQ)', full:'แบบประเมินการฟื้นตัวและปรับตัว',
+    sub:'ประเมินความสามารถในการรับมือและฟื้นตัวจากความยากลำบาก',
     type:'sum',
     options:scale4,
     questions:[
@@ -305,12 +652,12 @@ const ASSESSMENTS = {
       'ฉันมองโลกในแง่ดีแม้เจอสถานการณ์ที่ยากลำบาก'
     ],
     bands:[
-      {min:0,max:10,label:'ความสามารถในการปรับตัวต่ำ',color:'var(--coral)',
-        advice:'ผลบ่งชี้ว่าอาจรับมือกับความเปลี่ยนแปลงหรือความยากลำบากได้ยากในตอนนี้ ลองเริ่มจากการหาคนที่ไว้ใจพูดคุยด้วย และแบ่งปัญหาใหญ่เป็นขั้นตอนเล็ก ๆ ที่จัดการได้ทีละส่วน'},
-      {min:11,max:20,label:'ความสามารถในการปรับตัวปานกลาง',color:'var(--gold)',
-        advice:'มีความสามารถในการปรับตัวอยู่ในระดับปานกลาง ลองฝึกมองปัญหาเป็นโอกาสเรียนรู้ และสร้างเครือข่ายคนที่ไว้ใจได้ให้แน่นแฟ้นขึ้น'},
-      {min:21,max:30,label:'ความสามารถในการปรับตัวสูง',color:'var(--teal)',
-        advice:'มีความสามารถในการฟื้นตัวและปรับตัวอยู่ในระดับดี รักษาความเข้มแข็งนี้ไว้ และสามารถเป็นแรงสนับสนุนให้คนรอบข้างในยามยากได้เช่นกัน'}
+      {min:0,max:10,label:'ความสามารถในการปรับตัวต่ำ',color:'var(--danger)',
+        advice:'อาจรับมือกับความเปลี่ยนแปลงได้ยากในตอนนี้ ลองเริ่มจากการพูดคุยกับคนที่ไว้ใจ และแบ่งปัญหาใหญ่เป็นขั้นตอนเล็ก ๆ ที่จัดการได้'},
+      {min:11,max:20,label:'ความสามารถในการปรับตัวปานกลาง',color:'var(--warning)',
+        advice:'มีความสามารถในการปรับตัวอยู่ในระดับปานกลาง ลองฝึกมองปัญหาเป็นโอกาสเรียนรู้'},
+      {min:21,max:30,label:'ความสามารถในการปรับตัวสูง',color:'var(--success)',
+        advice:'มีความสามารถในการฟื้นตัวและปรับตัวอยู่ในระดับดี รักษาความเข้มแข็งนี้ไว้'}
     ]
   }
 };
@@ -334,7 +681,7 @@ function emailResult(){
 ${resultLabel}
 ${levelLabel ? 'รายละเอียด: '+levelLabel : ''}
 
-หมายเหตุ: ผลนี้เป็นการสำรวจตนเองเบื้องต้นเพื่อความเข้าใจตนเองเท่านั้น ไม่ใช่แบบทดสอบทางจิตวิทยาที่ได้มาตรฐานทางคลินิกอย่างสมบูรณ์
+หมายเหตุ: ผลนี้เป็นการสำรวจตนเองเบื้องต้นเท่านั้น
 สายด่วนสุขภาพจิต 1323 (ฟรี ตลอด 24 ชม.)`;
 
   const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
@@ -351,7 +698,7 @@ function initGrid(){
     card.className = 'card';
     card.onclick = ()=>openAssessment(id);
     card.innerHTML = `
-      <div class="icon">${a.code}</div>
+      <div class="icon">${a.code.substring(0,3)}</div>
       <div class="code">${a.title}</div>
       <div class="desc">${a.full}</div>
       <div class="qcount">${qcount} ข้อ</div>
@@ -364,13 +711,13 @@ function showGrid(){
   document.getElementById('view-grid').style.display = 'grid';
   document.getElementById('view-quiz').style.display = 'none';
   document.getElementById('view-result').style.display = 'none';
-  window.scrollTo({top:0,behavior:'smooth'});
+  window.scrollTo({top:0, behavior:'smooth'});
 }
 
 function openAssessment(id){
   currentId = id;
   const a = ASSESSMENTS[id];
-  document.getElementById('quizTitle').textContent = `${a.title} — ${a.full}`;
+  document.getElementById('quizTitle').textContent = `${a.full}`;
   document.getElementById('quizSub').textContent = a.sub;
 
   const list = document.getElementById('questionList');
@@ -423,7 +770,7 @@ function openAssessment(id){
   document.getElementById('view-grid').style.display = 'none';
   document.getElementById('view-result').style.display = 'none';
   document.getElementById('view-quiz').style.display = 'block';
-  window.scrollTo({top:0,behavior:'smooth'});
+  window.scrollTo({top:0, behavior:'smooth'});
 }
 
 function selectOpt(i,j,score){
@@ -469,7 +816,7 @@ function submitQuiz(){
 
   document.getElementById('view-quiz').style.display = 'none';
   document.getElementById('view-result').style.display = 'block';
-  window.scrollTo({top:0,behavior:'smooth'});
+  window.scrollTo({top:0, behavior:'smooth'});
 }
 
 function renderMbtiResult(a){
@@ -477,7 +824,7 @@ function renderMbtiResult(a){
   const tally = {EI:[0,0], SN:[0,0], TF:[0,0], JP:[0,0]};
 
   a.pairs.forEach((p,i)=>{
-    const val = currentAnswers[i]; // 1 = chose "a" statement, 0 = chose "b" statement
+    const val = currentAnswers[i];
     if(val === 1) tally[p.dim][0]++; else tally[p.dim][1]++;
   });
 
@@ -501,8 +848,8 @@ function renderMbtiResult(a){
   document.getElementById('resultCode').textContent = a.code;
   document.getElementById('resultTitle').textContent = a.full;
   document.getElementById('resultScore').textContent = typeCode;
-  document.getElementById('resultScore').style.color = 'var(--teal-deep)';
-  document.getElementById('resultScoreLabel').textContent = 'ผลบุคลิกภาพเบื้องต้นของท่าน';
+  document.getElementById('resultScore').style.color = 'var(--primary)';
+  document.getElementById('resultScoreLabel').textContent = 'ผลบุคลิกภาพเบื้องต้นของคุณ';
   document.getElementById('resultBadgeWrap').innerHTML = '';
   document.getElementById('dimBarsWrap').innerHTML = `<div class="dim-bars">${barsHtml}</div>`;
   document.getElementById('resultAdvice').innerHTML = `<b>${typeCode}:</b> ${MBTI_DESC[typeCode] || 'ไม่พบคำอธิบายประเภทนี้'}`;
