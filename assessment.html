@@ -3,11 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>เลือกแบบประเมินสุขภาพจิต - อสม. ฮีลใจ</title>
+<title>เลือกแบบประเมินสุขภาพจิต - โครงการ อสม. ฮีลใจ</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Kanit:wght@400;500;600;700;800&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 <style>
   :root{
+    /* Theme Colors From Main System */
+    --forest: #1E4A34;
+    --forest-deep: #123324;
+    --sage: #8FAE86;
+    --sage-soft: #E4EEDD;
+    --marigold: #E8A23C;
+    --marigold-deep: #C8801F;
+    --ink-main: #24301F;
+    
+    /* Card Page Specific Colors */
     --sky:#BFE6F5;
     --sky-deep:#8FCFE8;
     --mint:#CDEEDB;
@@ -23,21 +37,24 @@
     --radius:28px;
     --shadow:0 14px 34px rgba(30,80,90,0.16);
     --font-scale:1;
+
+    --display-font: 'Kanit', sans-serif;
+    --body-font: 'Sarabun', sans-serif;
   }
-  *{box-sizing:border-box;}
+  
+  *{box-sizing:border-box; margin:0; padding:0;}
   html{font-size:calc(16px * var(--font-scale)); scroll-behavior: smooth;}
   body{
-    margin:0;
     background:
       radial-gradient(circle at 12% 8%, rgba(255,255,255,0.55), transparent 40%),
       radial-gradient(circle at 90% 85%, rgba(255,255,255,0.4), transparent 45%),
       linear-gradient(180deg, var(--sky) 0%, var(--mint) 100%);
-    font-family:'Sarabun',sans-serif;
+    font-family: var(--body-font);
     color:var(--ink);
     min-height:100vh;
     padding-bottom:50px;
   }
-  h1,h2,.display{font-family:'Baloo 2',sans-serif;}
+  h1,h2,.display{font-family:'Baloo 2', var(--display-font);}
 
   .hotline-bar{
     background:var(--teal-deep); color:#fff; text-align:center;
@@ -45,63 +62,82 @@
   }
   .hotline-bar b{color:#FFE7A8; font-size:1.1em;}
 
-  /* --- Navbar --- */
-  nav.main-nav {
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(46, 156, 143, 0.15);
-    padding: 12px 24px;
+  /* ---------------- Navbar (from main system) ---------------- */
+  header{
+    background: rgba(251,247,238,0.86);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(30,74,52,0.08);
+    padding: 16px 6%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
     position: sticky;
-    top: 0;
+    top:0;
     z-index: 1000;
-    box-shadow: 0 4px 15px rgba(30,80,90,0.05);
   }
-  .nav-container {
-    max-width: 960px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  nav.main-nav .logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-family: 'Baloo 2', sans-serif;
+  header .logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family: var(--display-font);
     font-weight: 700;
-    font-size: 1.25rem;
-    color: var(--teal-deep);
+    font-size: 1.02rem;
+    color: var(--forest);
     text-decoration: none;
   }
-  nav.main-nav .logo .badge-icon {
-    width: 36px;
-    height: 36px;
+  header .logo .badge{
+    width: 38px; height: 38px;
     border-radius: 50%;
-    background: var(--teal);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.1rem;
-    box-shadow: 0 4px 10px rgba(31, 122, 112, 0.2);
+    background: linear-gradient(150deg, var(--sage), var(--forest));
+    color: #fff;
+    display:flex; align-items:center; justify-content:center;
+    font-size: 1.05rem;
+    box-shadow: 0 4px 10px rgba(30,74,52,0.25);
   }
-  nav.main-nav .nav-links {
-    display: flex;
-    gap: 20px;
-  }
-  nav.main-nav .nav-links a {
-    text-decoration: none;
-    font-weight: 600;
+  header .logo small{
+    display:block;
+    font-family: var(--body-font);
+    font-weight: 400;
+    font-size: 0.68rem;
     color: var(--ink-soft);
-    font-size: 0.95rem;
-    transition: color 0.2s ease;
+    letter-spacing: 0.03em;
   }
-  nav.main-nav .nav-links a:hover,
-  nav.main-nav .nav-links a.active {
-    color: var(--teal-deep);
+  nav{ display:flex; align-items:center; gap: 28px; }
+  nav a{
+    text-decoration:none;
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--ink-main);
+    position: relative;
+    padding-bottom: 3px;
+  }
+  nav a::after{
+    content:"";
+    position:absolute; left:0; bottom:0;
+    width:0; height:2px;
+    background: var(--marigold);
+    transition: width 0.25s ease;
+  }
+  nav a:hover::after{ width:100%; }
+  nav a.nav-cta{
+    background: var(--forest);
+    color: #fff;
+    padding: 9px 20px;
+    border-radius: 30px;
+    font-weight: 600;
+  }
+  nav a.nav-cta::after{ display:none; }
+  nav a.nav-cta:hover{ background: var(--forest-deep); }
+
+  /* Responsive Navbar */
+  @media (max-width: 768px){
+    header{ flex-direction: column; gap: 12px; padding: 14px 6%; }
+    nav{ gap: 14px; flex-wrap: wrap; justify-content:center; }
   }
 
-  header.top{max-width:920px;margin:0 auto;padding:28px 24px 10px;text-align:center;}
+  /* ---------------- Content Styling ---------------- */
+  header.top{max-width:920px;margin:0 auto;padding:30px 24px 10px;text-align:center;}
   header.top .mascot{font-size:3.4rem;line-height:1;margin-bottom:4px;}
   header.top h1{font-size:2.1rem;margin:6px 0 10px;color:var(--ink);font-weight:700;}
   header.top p{font-size:1.15rem;color:var(--ink-soft);max-width:640px;margin:0 auto;line-height:1.8;}
@@ -109,14 +145,8 @@
   main{max-width:960px;margin:0 auto;padding:20px 20px 10px;}
 
   .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
-  @media (max-width:760px){ 
-    .grid{grid-template-columns:repeat(2,1fr);} 
-  }
-  @media (max-width:520px){ 
-    .grid{grid-template-columns:1fr;} 
-    .nav-container { flex-direction: column; gap: 10px; }
-    nav.main-nav .nav-links { gap: 14px; flex-wrap: wrap; justify-content: center; }
-  }
+  @media (max-width:760px){ .grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:480px){ .grid{grid-template-columns:1fr;} }
 
   a.card-link{ text-decoration:none; color:inherit; display:block; }
 
@@ -156,18 +186,6 @@
     font-family:'Baloo 2',sans-serif;
   }
 
-  .cta-wrap{margin-top:34px; text-align:center;}
-  .cta-btn{
-    display:inline-flex; align-items:center; gap:12px;
-    background:linear-gradient(135deg, var(--teal-deep), var(--teal));
-    color:#fff; font-family:'Baloo 2',sans-serif; font-weight:700;
-    font-size:1.25rem; padding:18px 38px; border-radius:50px;
-    box-shadow:0 12px 26px rgba(31,122,112,0.35);
-    text-decoration:none; border:none; cursor:pointer;
-  }
-  .cta-btn:hover{ transform:translateY(-2px); box-shadow:0 16px 32px rgba(31,122,112,0.4); }
-  .cta-btn .arrow{font-size:1.4rem;}
-
   footer.note{
     max-width:920px; margin:36px auto 0; padding:0 24px; text-align:center;
     font-size:0.95rem; color:var(--ink); opacity:.75; line-height:1.8;
@@ -178,21 +196,19 @@
 
 <div class="hotline-bar">☎ สายด่วนสุขภาพจิต <b>1323</b> โทรฟรีตลอด 24 ชั่วโมง</div>
 
-<!-- Navigation Bar -->
-<nav class="main-nav">
-  <div class="nav-container">
-    <a href="#" class="logo">
-      <span class="badge-icon">🌱</span>
-      <span>อสม. ฮีลใจ</span>
-    </a>
-    <div class="nav-links">
-      <a href="#" class="active">หน้าแรก</a>
-      <a href="#">แบบประเมินทั้งหมด</a>
-      <a href="#">เกี่ยวกับโครงการ</a>
-      <a href="#">ปรึกษา อสม.</a>
-    </div>
-  </div>
-</nav>
+<!-- Main System Header Navbar -->
+<header>
+  <a href="index.html" class="logo">
+    <span class="badge"><i class="fa-solid fa-heart-pulse"></i></span>
+    <span>MENTAL HEALTH CYBER-CARE<small>โครงการ อสม. ฮีลใจ</small></span>
+  </a>
+  <nav>
+    <a href="index.html#home">หน้าแรก</a>
+    <a href="index.html#about">สุขภาพจิตคืออะไร</a>
+    <a href="index.html#contact">ติดต่อเรา</a>
+    <a href="assessment.html" class="nav-cta">ทำแบบประเมิน</a>
+  </nav>
+</header>
 
 <header class="top">
   <div class="mascot">🌱💚</div>
