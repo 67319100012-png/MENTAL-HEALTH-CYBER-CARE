@@ -3,723 +3,616 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>โครงการ อสม. ฮีลใจ - การดูแลสุขภาพจิตผ่านระบบไซเบอร์</title>
-    <!-- Google Fonts: Prompt -->
+    <title>โครงการ อสม. ฮีลใจ - การดูแลสุขภาพจิตผ่านระบบดิจิทัล</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700;800&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Prompt', sans-serif;
+        :root{
+            --forest: #1E4A34;
+            --forest-deep: #123324;
+            --sage: #8FAE86;
+            --sage-soft: #E4EEDD;
+            --cream: #FBF7EE;
+            --paper: #F3EEE1;
+            --marigold: #E8A23C;
+            --marigold-deep: #C8801F;
+            --clay: #C1706A;
+            --sky: #6FAEBE;
+            --sky-soft: #DCEEF1;
+            --ink: #24301F;
+            --ink-soft: #55604C;
+
+            --display: 'Kanit', sans-serif;
+            --body: 'Sarabun', sans-serif;
         }
 
-        html {
-            scroll-behavior: smooth;
+        *{ margin:0; padding:0; box-sizing:border-box; }
+        html{ scroll-behavior:smooth; }
+        body{
+            font-family: var(--body);
+            color: var(--ink);
+            background: var(--cream);
+            line-height: 1.7;
+            overflow-x: hidden;
         }
 
-        body {
-            color: #333;
-            line-height: 1.6;
-            background-color: #fff;
-            overflow-x: hidden; /* ป้องกันแถบเลื่อนแนวนอนบนมือถือ */
+        @media (prefers-reduced-motion: reduce){
+            *{ animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+        }
+
+        a{ color: inherit; }
+        img{ max-width: 100%; display:block; }
+
+        .eyebrow{
+            display:inline-flex;
+            align-items:center;
+            gap:8px;
+            font-family: var(--display);
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--marigold-deep);
+        }
+        .eyebrow::before{
+            content:"";
+            width: 20px; height: 2px;
+            background: var(--marigold);
+            display:inline-block;
         }
 
         /* ---------------- Header ---------------- */
-        header {
-            background-color: #9cb380;
-            color: white;
-            padding: 15px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        header{
+            background: rgba(251,247,238,0.86);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(30,74,52,0.08);
+            padding: 16px 6%;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
             position: sticky;
-            top: 0;
+            top:0;
             z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
         }
-
-        header .logo {
-            font-size: 1.1rem;
-            font-weight: 600;
-            display: flex;          /* จัดให้อยู่แนวเดียวกัน */
-            align-items: center;    /* จัดกึ่งกลางแนวตั้ง */
-            gap: 8px;               /* ระยะห่างระหว่างไอคอนกับข้อความ */
-        }
-
-        header .logo i {
-            font-size: 1.25rem;
-            color: #ffffff;         /* สีไอคอน */
-        }
-
-        nav {
-            display: flex;
-            gap: 20px;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: opacity 0.2s;
-        }
-
-        nav a:hover {
-            opacity: 0.8;
-            text-decoration: underline;
-        }
-
-        /* ---------------- Section 1: Hero Section ---------------- */
-        .hero {
-            background-color: #ffffff;
-            padding: 60px 20px;
-            text-align: center;
-        }
-
-        .hero h1 {
-            color: #1e5631;
-            font-size: 2rem;
+        header .logo{
+            display:flex;
+            align-items:center;
+            gap:10px;
+            font-family: var(--display);
             font-weight: 700;
-            margin-bottom: 5px;
-            word-wrap: break-word;
+            font-size: 1.02rem;
+            color: var(--forest);
         }
-
-        .hero h2 {
-            color: #1e5631;
-            font-size: 1.8rem;
-            letter-spacing: 1.5px;
-            margin-bottom: 25px;
-            word-wrap: break-word;
-        }
-
-        .hero-subtitle {
-            max-width: 700px;
-            margin: 0 auto 45px auto;
-            color: #444;
-            font-size: 1rem;
-            line-height: 1.7;
-        }
-
-        .hero-cards {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            flex-wrap: wrap;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .hero-card {
-            background-color: #f7faf5;
-            border: 1px solid #e1ebe0;
-            border-radius: 24px;
-            padding: 35px 25px;
-            flex: 1;
-            min-width: 280px;
-            max-width: 330px;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
-            position: relative;
-        }
-
-        .hero-card-icon {
-            width: 75px;
-            height: 75px;
+        header .logo .badge{
+            width: 38px; height: 38px;
             border-radius: 50%;
-            background-color: #5bb3b1;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 15px auto;
-            font-size: 2rem;
+            background: linear-gradient(150deg, var(--sage), var(--forest));
+            color: #fff;
+            display:flex; align-items:center; justify-content:center;
+            font-size: 1.05rem;
+            box-shadow: 0 4px 10px rgba(30,74,52,0.25);
+        }
+        header .logo small{
+            display:block;
+            font-family: var(--body);
+            font-weight: 400;
+            font-size: 0.68rem;
+            color: var(--ink-soft);
+            letter-spacing: 0.03em;
+        }
+        nav{ display:flex; align-items:center; gap: 28px; }
+        nav a{
+            text-decoration:none;
+            font-size: 0.92rem;
+            font-weight: 500;
+            color: var(--ink);
+            position: relative;
+            padding-bottom: 3px;
+        }
+        nav a::after{
+            content:"";
+            position:absolute; left:0; bottom:0;
+            width:0; height:2px;
+            background: var(--marigold);
+            transition: width 0.25s ease;
+        }
+        nav a:hover::after{ width:100%; }
+        nav a.nav-cta{
+            background: var(--forest);
+            color: #fff;
+            padding: 9px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+        }
+        nav a.nav-cta::after{ display:none; }
+        nav a.nav-cta:hover{ background: var(--forest-deep); }
+
+        /* ---------------- Hero ---------------- */
+        .hero{
+            position: relative;
+            padding: 90px 6% 70px;
+            text-align:center;
+            overflow: hidden;
+        }
+        .hero-blob{
+            position:absolute;
+            border-radius: 50%;
+            filter: blur(2px);
+            opacity: 0.55;
+            z-index: 0;
+        }
+        .hero-blob.b1{ width:340px; height:340px; background: var(--sage-soft); top:-120px; left:-90px; }
+        .hero-blob.b2{ width:260px; height:260px; background: var(--sky-soft); bottom:-90px; right:-60px; }
+        .hero-blob.b3{ width:120px; height:120px; background: rgba(232,162,60,0.18); top:40%; right:8%; }
+
+        .hero-inner{ position: relative; z-index: 1; max-width: 780px; margin: 0 auto; }
+        .hero .eyebrow{ margin-bottom: 18px; justify-content:center; }
+        .hero-inner .eyebrow::before{ display:none; }
+
+        .hero h1{
+            font-family: var(--display);
+            color: var(--forest);
+            font-size: clamp(1.7rem, 4vw, 2.6rem);
+            font-weight: 800;
+            line-height: 1.3;
+            margin-bottom: 10px;
+        }
+        .hero h1 .accent{ color: var(--marigold-deep); }
+        .hero h2{
+            font-family: var(--display);
+            color: var(--sage);
+            font-size: clamp(0.95rem, 2vw, 1.15rem);
+            font-weight: 500;
+            letter-spacing: 0.22em;
+            margin-bottom: 26px;
+        }
+        .hero-subtitle{
+            max-width: 620px;
+            margin: 0 auto 20px;
+            color: var(--ink-soft);
+            font-size: 1.02rem;
         }
 
-        .card-divider {
-            border-bottom: 2px dotted #a8c3a0;
-            margin: 15px auto;
-            width: 80%;
+        .breath-cta{
+            position: relative;
+            display:inline-flex;
+            margin: 28px 0 60px;
+        }
+        .breath-cta::before{
+            content:"";
+            position:absolute;
+            inset: -10px;
+            border-radius: 40px;
+            background: rgba(232,162,60,0.28);
+            animation: breathe 3.2s ease-in-out infinite;
+            z-index: 0;
+        }
+        @keyframes breathe{
+            0%,100%{ transform: scale(0.94); opacity: 0.55; }
+            50%{ transform: scale(1.08); opacity: 0.9; }
+        }
+        .breath-cta a{
+            position: relative;
+            z-index: 1;
+            display:inline-flex;
+            align-items:center;
+            gap:10px;
+            background: var(--forest);
+            color:#fff;
+            text-decoration:none;
+            font-family: var(--display);
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 15px 34px;
+            border-radius: 30px;
+            box-shadow: 0 10px 24px rgba(30,74,52,0.28);
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+        .breath-cta a:hover{ transform: translateY(-2px); background: var(--forest-deep); }
+
+        .hero-cards{
+            display:flex;
+            justify-content:center;
+            gap: 22px;
+            flex-wrap: wrap;
+            max-width: 1080px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-card{
+            background: #fff;
+            border: 1px solid rgba(30,74,52,0.08);
+            border-radius: 22px;
+            padding: 32px 26px;
+            flex: 1;
+            min-width: 260px;
+            max-width: 320px;
+            text-align: left;
+            box-shadow: 0 12px 30px rgba(30,74,52,0.06);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .hero-card:hover{ transform: translateY(-6px); box-shadow: 0 18px 34px rgba(30,74,52,0.12); }
+        .hero-card-icon{
+            width: 54px; height:54px;
+            border-radius: 16px;
+            display:flex; align-items:center; justify-content:center;
+            font-size: 1.35rem;
+            color: #fff;
+            margin-bottom: 18px;
+        }
+        .hero-card:nth-child(1) .hero-card-icon{ background: linear-gradient(150deg,#8FAE86,#1E4A34); }
+        .hero-card:nth-child(2) .hero-card-icon{ background: linear-gradient(150deg,#89C6D1,#3D7E8C); }
+        .hero-card:nth-child(3) .hero-card-icon{ background: linear-gradient(150deg,#F0BE72,#C8801F); }
+        .hero-card strong{ font-family: var(--display); font-size: 1.02rem; color: var(--forest); display:block; margin-bottom: 8px; }
+        .hero-card p{ font-size: 0.9rem; color: var(--ink-soft); }
+
+        /* ---------------- Section divider (lotus scallop) ---------------- */
+        .scallop{
+            width: 100%;
+            height: 46px;
+            display:block;
+        }
+
+        /* ---------------- About Section ---------------- */
+        .about-section{
+            background: var(--forest);
+            padding: 80px 6% 100px;
             position: relative;
         }
-
-        .card-divider i {
-            position: absolute;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #f7faf5;
-            padding: 0 8px;
-            color: #5bb3b1;
-            font-size: 0.8rem;
-        }
-
-        .hero-card p {
-            font-size: 0.92rem;
-            color: #444;
-            line-height: 1.6;
-        }
-
-        /* ---------------- Section 2: สุขภาพจิตคืออะไร? ---------------- */
-        .about-section {
-            background-color: #aed185;
-            padding: 60px 20px;
-        }
-
-        .about-container {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .about-title {
-            color: #1e5631;
-            font-size: 2.2rem;
-            margin-bottom: 30px;
+        .about-container{ max-width: 1080px; margin:0 auto; }
+        .about-section .eyebrow{ color: #F0BE72; }
+        .about-section .eyebrow::before{ background: #F0BE72; }
+        .about-title{
+            font-family: var(--display);
+            color: #fff;
+            font-size: clamp(1.5rem, 3vw, 2.1rem);
             font-weight: 700;
+            margin: 14px 0 36px;
         }
-
-        .about-content {
-            display: flex;
-            gap: 35px;
-            align-items: center;
+        .about-content{
+            display:flex;
+            gap: 40px;
+            align-items:center;
             flex-wrap: wrap;
         }
-
-        .about-text-box {
-            background-color: #c5e39d;
-            border-radius: 40px;
-            padding: 40px;
-            flex: 1;
+        .about-text-box{
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.14);
+            border-radius: 26px;
+            padding: 38px;
+            flex: 1.15;
             min-width: 280px;
-            font-size: 0.95rem;
-            color: #2c441b;
-            line-height: 1.8;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+            font-size: 0.98rem;
+            color: rgba(255,255,255,0.88);
         }
-
-        .about-image {
+        .about-text-box strong{ color: #F0BE72; }
+        .about-image{
             flex: 1;
-            min-width: 280px;
-            text-align: center;
-        }
-
-        .about-image img {
-            width: 100%;
-            max-width: 400px;
-            height: auto;
+            min-width: 260px;
             border-radius: 20px;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            box-shadow: 0 20px 45px rgba(0,0,0,0.35);
         }
+        .about-image img{ width:100%; height:100%; object-fit: cover; }
 
-        /* ---------------- Section 3: Infographics ---------------- */
-        .infographics-section {
-            background-color: #ede8f5;
-            padding: 60px 20px;
-            text-align: center;
+        /* ---------------- Infographics ---------------- */
+        .infographics-section{
+            background: var(--paper);
+            padding: 80px 6%;
+            text-align:center;
         }
-
-        .info-cards {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
+        .infographics-section .eyebrow{ justify-content:center; margin-bottom: 14px; }
+        .infographics-section h2{
+            font-family: var(--display);
+            color: var(--forest);
+            font-size: clamp(1.4rem, 3vw, 1.9rem);
+            margin-bottom: 42px;
+        }
+        .info-cards{
+            display:flex;
+            justify-content:center;
+            gap: 24px;
             flex-wrap: wrap;
-            max-width: 1100px;
+            max-width: 1080px;
             margin: 0 auto;
         }
-
-        .info-card {
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        .info-card{
+            background:#fff;
+            border-radius: 18px;
+            overflow:hidden;
             width: 310px;
             max-width: 100%;
-            overflow: hidden;
-            border: 1px solid #e0e5f0;
-            transition: transform 0.2s;
+            box-shadow: 0 10px 26px rgba(30,74,52,0.08);
+            transition: transform 0.25s ease;
         }
+        .info-card:hover{ transform: translateY(-6px); }
 
-        .info-card:hover {
-            transform: translateY(-5px);
+        /* ---------------- Assessment ---------------- */
+        .assessment-section{
+            background: linear-gradient(180deg, var(--sky) 0%, #5C9FAE 100%);
+            padding: 84px 6%;
+            text-align:center;
         }
-
-        .info-card img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        /* ---------------- Section 4: ประเภทแบบประเมิน ---------------- */
-        .assessment-section {
-            background-color: #70cbf0;
-            padding: 60px 20px;
-            text-align: center;
-        }
-
-        .assessment-section h2 {
-            color: #203a56;
-            font-size: 2.2rem;
-            margin-bottom: 40px;
+        .assessment-section .eyebrow{ color: #F5E2C0; justify-content:center; margin-bottom: 14px; }
+        .assessment-section .eyebrow::before{ background: #F5E2C0; }
+        .assessment-section h2{
+            color: #fff;
+            font-family: var(--display);
+            font-size: clamp(1.5rem, 3vw, 2rem);
             font-weight: 700;
+            margin-bottom: 44px;
         }
-
-        .assessment-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            max-width: 1000px;
-            margin: 0 auto 40px auto;
+        .assessment-grid{
+            display:grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 22px;
+            max-width: 1040px;
+            margin: 0 auto 46px;
         }
-
-        .assessment-card {
-            background: white;
+        .assessment-card{
+            background:#fff;
             border-radius: 18px;
-            padding: 35px 20px;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 180px;
+            padding: 32px 22px;
+            text-align:left;
+            box-shadow: 0 10px 24px rgba(0,0,0,0.1);
+            border-top: 4px solid var(--marigold);
+            display:flex;
+            flex-direction:column;
+            gap: 12px;
+            transition: transform 0.2s ease;
         }
+        .assessment-card:nth-child(2){ border-top-color: var(--clay); }
+        .assessment-card:nth-child(3){ border-top-color: var(--sage); }
+        .assessment-card:nth-child(4){ border-top-color: var(--sky); }
+        .assessment-card:nth-child(5){ border-top-color: var(--marigold-deep); }
+        .assessment-card:nth-child(6){ border-top-color: var(--forest); }
+        .assessment-card:hover{ transform: translateY(-5px); }
+        .assessment-card i{ font-size: 1.7rem; color: var(--forest); }
+        .assessment-card h3{ font-family: var(--display); font-size: 0.98rem; color: var(--ink); font-weight: 600; }
+        .assessment-card p{ font-size: 0.82rem; color: var(--ink-soft); }
 
-        .assessment-card i {
-            font-size: 3.2rem;
-            color: #2fa8a1;
-            margin-bottom: 15px;
-        }
-
-        .assessment-card h3 {
-            font-size: 1rem;
-            color: #222;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-
-        .assessment-card p {
-            font-size: 0.82rem;
-            color: #666;
-        }
-
-        .btn-assessment {
-            display: inline-block;
-            background-color: #1b522a;
-            color: white;
-            padding: 14px 40px;
+        .btn-assessment{
+            display:inline-flex;
+            align-items:center;
+            gap: 10px;
+            background:#fff;
+            color: var(--forest);
+            padding: 15px 40px;
             border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: background-color 0.2s, transform 0.2s;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            text-decoration:none;
+            font-family: var(--display);
+            font-weight: 700;
+            font-size: 1.05rem;
+            box-shadow: 0 12px 26px rgba(0,0,0,0.18);
+            transition: transform 0.2s ease, background 0.2s ease;
         }
+        .btn-assessment:hover{ transform: scale(1.04); background: var(--marigold); color:#fff; }
 
-        .btn-assessment:hover {
-            background-color: #123b1d;
-            transform: scale(1.03);
-        }
-
-        /* ---------------- Section 5: Location & Map ---------------- */
-        .map-section {
-            background-color: #ede8f5;
-            padding: 60px 20px;
-        }
-
-        .map-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: flex;
-            gap: 30px;
+        /* ---------------- Map Section ---------------- */
+        .map-section{ background: var(--paper); padding: 84px 6%; }
+        .map-container{
+            max-width: 1080px;
+            margin:0 auto;
+            display:flex;
+            gap: 34px;
             flex-wrap: wrap;
-            align-items: center;
+            align-items:stretch;
         }
-
-        .map-info {
-            flex: 1;
-            min-width: 280px;
+        .map-info{
+            flex:1;
+            min-width: 260px;
+            background: #fff;
+            border-radius: 22px;
+            padding: 36px;
+            box-shadow: 0 10px 26px rgba(30,74,52,0.06);
         }
-
-        .map-info h3 {
-            font-size: 1.4rem;
-            color: #333;
-            margin-bottom: 18px;
+        .map-info .eyebrow{ margin-bottom: 12px; }
+        .map-info h3{
+            font-family: var(--display);
+            font-size: 1.3rem;
+            color: var(--forest);
+            margin-bottom: 20px;
             font-weight: 700;
         }
-
-        .map-info p {
-            margin-bottom: 10px;
-            color: #444;
-            font-size: 0.95rem;
+        .map-row{ display:flex; gap: 12px; margin-bottom: 14px; align-items:flex-start; }
+        .map-row i{
+            width: 34px; height: 34px; border-radius: 10px;
+            background: var(--sage-soft); color: var(--forest);
+            display:flex; align-items:center; justify-content:center;
+            flex-shrink: 0;
         }
+        .map-row p{ color: var(--ink-soft); font-size: 0.94rem; }
 
-        .map-info i {
-            color: #e63946;
-            width: 22px;
-        }
-
-        .map-embed {
-            flex: 1.5;
+        .map-embed{
+            flex: 1.4;
             min-width: 280px;
-            height: 320px;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            background-color: #ddd;
+            border-radius: 22px;
+            overflow:hidden;
+            box-shadow: 0 10px 26px rgba(30,74,52,0.1);
+            background: #ddd;
         }
-
-        .map-embed iframe {
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
+        .map-embed iframe{ width:100%; height:100%; border:0; min-height: 320px; }
 
         /* ---------------- Footer ---------------- */
-        footer {
-            background-color: #212f38;
-            color: white;
-            padding: 50px 20px 20px 20px;
+        footer{
+            background: var(--forest-deep);
+            color: #fff;
+            padding: 64px 6% 24px;
         }
-
-        .footer-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: flex;
-            gap: 50px;
+        .footer-container{
+            max-width: 1080px;
+            margin:0 auto 44px;
+            display:flex;
+            gap: 56px;
             flex-wrap: wrap;
-            margin-bottom: 40px;
         }
-
-        .footer-left {
-            flex: 1;
-            min-width: 280px;
-        }
-
-        .footer-left h3 {
-            font-size: 1.25rem;
-            margin-bottom: 4px;
+        .footer-left{ flex:1; min-width: 270px; }
+        .footer-left h3{ font-family: var(--display); font-size: 1.25rem; font-weight: 700; margin-bottom: 4px; }
+        .footer-left h4{ font-size: 0.86rem; color: var(--sage); font-weight: 400; margin-bottom: 22px; }
+        .helpline-badge{
+            display:inline-flex;
+            align-items:center;
+            gap: 9px;
+            background: var(--marigold);
+            color: var(--forest-deep);
+            padding: 10px 20px;
+            border-radius: 30px;
             font-weight: 600;
+            font-size: 0.86rem;
+            margin-bottom: 26px;
         }
-
-        .footer-left h4 {
-            font-size: 0.88rem;
-            color: #3eb489;
-            font-weight: 400;
-            margin-bottom: 20px;
+        .footer-left p{ font-size: 0.87rem; color: rgba(255,255,255,0.7); margin-bottom: 6px; }
+        .social-icons{ margin-top: 20px; display:flex; gap: 10px; }
+        .social-icons a{
+            width: 38px; height:38px; border-radius: 50%;
+            background: rgba(255,255,255,0.08);
+            display:flex; align-items:center; justify-content:center;
+            text-decoration:none; color:#fff;
+            transition: background 0.2s ease;
         }
+        .social-icons a:hover{ background: var(--marigold); color: var(--forest-deep); }
 
-        .helpline-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background-color: #2fa8a1;
-            color: white;
-            padding: 8px 18px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            margin-bottom: 25px;
-        }
-
-        .footer-left p {
-            font-size: 0.85rem;
-            color: #bbb;
-            margin-bottom: 6px;
-        }
-
-        .social-icons {
-            margin-top: 20px;
-        }
-
-        .social-icons a {
-            color: white;
-            background: #2b3a45;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            transition: background 0.2s;
-        }
-
-        .social-icons a:hover {
-            background: #2fa8a1;
-        }
-
-        .footer-right {
-            flex: 1.2;
-            min-width: 280px;
-        }
-
-        .footer-right h3 {
-            font-size: 1.15rem;
-            margin-bottom: 20px;
-            font-weight: 600;
-        }
-
-        .form-row {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-
-        .form-group {
-            flex: 1;
-        }
-
-        .form-group input, .form-group textarea {
-            width: 100%;
-            background-color: #2b3a45;
-            border: 1px solid #3b4e5c;
+        .footer-right{ flex: 1.2; min-width: 280px; }
+        .footer-right h3{ font-family: var(--display); font-size: 1.12rem; margin-bottom: 20px; font-weight: 600; }
+        .form-row{ display:flex; gap: 14px; margin-bottom: 14px; }
+        .form-group{ flex:1; }
+        .form-group input, .form-group textarea{
+            width:100%;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.16);
             padding: 12px 15px;
-            border-radius: 6px;
-            color: white;
+            border-radius: 10px;
+            color:#fff;
+            font-family: var(--body);
             font-size: 0.9rem;
-            outline: none;
+            outline:none;
+            transition: border-color 0.2s ease;
         }
+        .form-group input::placeholder, .form-group textarea::placeholder{ color: rgba(255,255,255,0.45); }
+        .form-group input:focus, .form-group textarea:focus{ border-color: var(--marigold); }
 
-        .form-group input:focus, .form-group textarea:focus {
-            border-color: #2fa8a1;
+        .btn-submit{
+            background: var(--marigold);
+            color: var(--forest-deep);
+            border:none;
+            padding: 12px 34px;
+            border-radius: 30px;
+            cursor:pointer;
+            font-family: var(--display);
+            font-size: 0.92rem;
+            font-weight: 700;
+            transition: background 0.2s ease, transform 0.2s ease;
         }
+        .btn-submit:hover{ background: #fff; transform: translateY(-1px); }
 
-        .form-group input::placeholder, .form-group textarea::placeholder {
-            color: #8898a5;
-        }
-
-        .btn-submit {
-            background-color: #2fa8a1;
-            color: white;
-            border: none;
-            padding: 10px 35px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 0.95rem;
-            font-weight: 500;
-            transition: background 0.2s;
-            width: 100%;
-            max-width: 150px;
-        }
-
-        .btn-submit:hover {
-            background-color: #228b84;
-        }
-
-        .footer-bottom {
-            max-width: 1100px;
-            margin: 0 auto;
-            border-top: 1px solid #2d3d49;
+        .footer-bottom{
+            max-width: 1080px;
+            margin:0 auto;
+            border-top: 1px solid rgba(255,255,255,0.12);
             padding-top: 20px;
-            display: flex;
-            justify-content: space-between;
+            display:flex;
+            justify-content:space-between;
             font-size: 0.78rem;
-            color: #778895;
+            color: rgba(255,255,255,0.5);
             flex-wrap: wrap;
             gap: 10px;
         }
+        .footer-bottom a{ color: rgba(255,255,255,0.5); text-decoration:none; }
+        .footer-bottom a:hover{ color: var(--marigold); }
 
-        .footer-bottom a {
-            color: #778895;
-            text-decoration: none;
+        /* focus visibility */
+        a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{
+            outline: 2px solid var(--marigold);
+            outline-offset: 3px;
         }
 
-        .footer-bottom a:hover {
-            color: #2fa8a1;
-        }
-
-        /* ===================================================
-           📲 MOBILE & TABLET RESPONSIVE STYLES (สำหรับมือถือ)
-           =================================================== */
-        @media (max-width: 768px) {
-            /* Header */
-            header {
-                flex-direction: column;
-                gap: 12px;
-                padding: 15px 20px;
-                text-align: center;
-            }
-
-            nav {
-                justify-content: center;
-                gap: 12px;
-            }
-
-            nav a {
-                font-size: 0.85rem;
-            }
-
-            /* Section Padding */
-            .hero, .about-section, .infographics-section, .assessment-section, .map-section {
-                padding: 40px 15px;
-            }
-
-            /* Hero Typography */
-            .hero h1 {
-                font-size: 1.5rem;
-            }
-
-            .hero h2 {
-                font-size: 1.2rem;
-                letter-spacing: 1px;
-            }
-
-            .hero-subtitle {
-                font-size: 0.9rem;
-                margin-bottom: 30px;
-            }
-
-            /* Card Widths on Mobile */
-            .hero-card {
-                min-width: 100%;
-                max-width: 100%;
-                padding: 25px 20px;
-            }
-
-            /* About Section Mobile */
-            .about-title {
-                font-size: 1.6rem;
-                text-align: center;
-            }
-
-            .about-text-box {
-                padding: 25px 20px;
-                border-radius: 24px;
-                font-size: 0.9rem;
-            }
-
-            /* Infographics Mobile */
-            .info-card {
-                width: 100%;
-            }
-
-            /* Assessment Grid Mobile */
-            .assessment-section h2 {
-                font-size: 1.6rem;
-                margin-bottom: 30px;
-            }
-
-            .assessment-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-
-            .assessment-card {
-                padding: 25px 15px;
-                min-height: auto;
-            }
-
-            .btn-assessment {
-                width: 100%;
-                max-width: 300px;
-                padding: 12px 20px;
-                font-size: 1rem;
-            }
-
-            /* Map Section Mobile */
-            .map-container {
-                flex-direction: column;
-                gap: 20px;
-            }
-
-            .map-info {
-                text-align: center;
-            }
-
-            .map-embed {
-                width: 100%;
-                height: 250px;
-            }
-
-            /* Footer Mobile */
-            footer {
-                padding: 40px 15px 20px 15px;
-            }
-
-            .footer-container {
-                flex-direction: column;
-                gap: 30px;
-            }
-
-            .form-row {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            .btn-submit {
-                width: 100%;
-                max-width: 100%;
-            }
-
-            .footer-bottom {
-                flex-direction: column;
-                text-align: center;
-                gap: 12px;
-            }
+        /* ---------------- Responsive ---------------- */
+        @media (max-width: 768px){
+            header{ flex-direction: column; gap: 12px; padding: 14px 6%; }
+            nav{ gap: 14px; flex-wrap: wrap; justify-content:center; }
+            .hero{ padding: 60px 6% 50px; }
+            .hero-cards{ gap: 16px; }
+            .hero-card{ min-width: 100%; max-width: 100%; }
+            .about-section, .infographics-section, .assessment-section, .map-section{ padding: 56px 6%; }
+            .about-content{ flex-direction: column; }
+            .assessment-grid{ grid-template-columns: 1fr; }
+            .map-container{ flex-direction: column; }
+            .map-embed{ min-height: 240px; }
+            .footer-container{ flex-direction: column; gap: 34px; }
+            .form-row{ flex-direction: column; gap: 14px; }
+            .footer-bottom{ flex-direction: column; text-align:center; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Header -->
     <header>
         <div class="logo">
-            <i class="fa-solid fa-heart-pulse"></i> MENTAL HEALTH CYBER-CARE
+            <span class="badge"><i class="fa-solid fa-heart-pulse"></i></span>
+            <span>MENTAL HEALTH CYBER-CARE<small>โครงการ อสม. ฮีลใจ</small></span>
         </div>
         <nav>
             <a href="#home">หน้าแรก</a>
-            <a href="assessment.html">แบบประเมิน</a>
-            <a href="#contact">ติดต่อหรือปรึกษา</a>
+            <a href="#about">สุขภาพจิตคืออะไร</a>
+            <a href="#contact">ติดต่อเรา</a>
+            <a href="assessment.html" class="nav-cta">ทำแบบประเมิน</a>
         </nav>
     </header>
 
-    <!-- Section 1: Hero Section -->
+    <!-- Hero -->
     <section class="hero" id="home">
-        <h1>โครงการ "อสม. ฮีลใจ ดูแลสุขภาพจิตผ่านระบบดิจิทัล"</h1>
-        <h2>(MENTAL HEALTH CYBER-CARE)</h2>
-        <p class="hero-subtitle">
-            ส่งเสริมสุขภาพใจของคนในชุมชน โดยนำเทคโนโลยีมาช่วยให้ อสม.<br>
-            เข้าถึงและให้คำปรึกษาแก่กลุ่มเป้าหมายได้อย่างทั่วถึงและติดตามผลได้อย่างมีประสิทธิภาพ
-        </p>
+        <div class="hero-blob b1"></div>
+        <div class="hero-blob b2"></div>
+        <div class="hero-blob b3"></div>
+
+        <div class="hero-inner">
+            <span class="eyebrow">อำเภออุทัย · พระนครศรีอยุธยา</span>
+            <h1>โครงการ "อสม. <span class="accent">ฮีลใจ</span>"<br>ดูแลสุขภาพจิตผ่านระบบดิจิทัล</h1>
+            <h2>MENTAL HEALTH CYBER-CARE</h2>
+            <p class="hero-subtitle">
+                ส่งเสริมสุขภาพใจของคนในชุมชน โดยนำเทคโนโลยีมาช่วยให้ อสม.
+                เข้าถึงและให้คำปรึกษาแก่กลุ่มเป้าหมายได้อย่างทั่วถึง และติดตามผลได้อย่างมีประสิทธิภาพ
+            </p>
+            <div class="breath-cta">
+                <a href="assessment.html">เริ่มดูแลใจวันนี้ <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </div>
 
         <div class="hero-cards">
-            <!-- Card 1 -->
             <div class="hero-card">
-                <div class="hero-card-icon">
-                    <i class="fa-solid fa-user-group"></i>
-                </div>
-                <div class="card-divider"><i class="fa-solid fa-heart"></i></div>
-                <p><strong>อสม. ติดตามสุขภาพจิต</strong><br>ของผู้สูงอายุ ผู้ป่วย และกลุ่มเปราะบางได้อย่างต่อเนื่อง</p>
+                <div class="hero-card-icon"><i class="fa-solid fa-user-group"></i></div>
+                <strong>อสม. ติดตามอย่างต่อเนื่อง</strong>
+                <p>ดูแลสุขภาพจิตของผู้สูงอายุ ผู้ป่วย และกลุ่มเปราะบางในชุมชนได้อย่างสม่ำเสมอ</p>
             </div>
-            <!-- Card 2 -->
             <div class="hero-card">
-                <div class="hero-card-icon">
-                    <i class="fa-solid fa-mobile-screen-button"></i>
-                </div>
-                <div class="card-divider"><i class="fa-solid fa-heart"></i></div>
-                <p><strong>สะดวกผ่านดิจิทัล:</strong><br>ประเมินและรับคำปรึกษาได้ทันทีผ่านระบบออนไลน์ ลดข้อจำกัดเรื่องการเดินทาง</p>
+                <div class="hero-card-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                <strong>สะดวกผ่านดิจิทัล</strong>
+                <p>ประเมินและรับคำปรึกษาได้ทันทีผ่านระบบออนไลน์ ลดข้อจำกัดเรื่องการเดินทาง</p>
             </div>
-            <!-- Card 3 -->
             <div class="hero-card">
-                <div class="hero-card-icon">
-                    <i class="fa-solid fa-hands-holding-child"></i>
-                </div>
-                <div class="card-divider"><i class="fa-solid fa-heart"></i></div>
-                <p><strong>สร้างความผ่อนคลาย:</strong><br>ส่งเสริมกิจกรรมดูแลใจ ฝึกสติ และปรับอารมณ์ใหม่ พร้อมใช้ชีวิตอย่างมีความสุข</p>
+                <div class="hero-card-icon"><i class="fa-solid fa-hands-holding-child"></i></div>
+                <strong>สร้างความผ่อนคลาย</strong>
+                <p>ส่งเสริมกิจกรรมดูแลใจ ฝึกสติ และปรับอารมณ์ใหม่ พร้อมใช้ชีวิตอย่างมีความสุข</p>
             </div>
         </div>
     </section>
 
-    <!-- Section 2: สุขภาพจิตคืออะไร? -->
-    <section class="about-section">
+    <!-- About -->
+    <section class="about-section" id="about">
         <div class="about-container">
+            <span class="eyebrow">ทำความเข้าใจ</span>
             <h2 class="about-title">สุขภาพจิตคืออะไร?</h2>
             <div class="about-content">
                 <div class="about-text-box">
-                    <strong>สุขภาพจิต (Mental Health)</strong> คือ ภาวะความเป็นอยู่ที่ดีในด้านจิตใจ ซึ่งช่วยให้บุคคลสามารถรับรู้และใช้ศักยภาพของตนเองได้อย่างเต็มที่ สามารถจัดการกับความเครียดในชีวิตประจำวัน ทำงานได้อย่างมีประสิทธิภาพ และร่วมเป็นส่วนหนึ่งในการช่วยเหลือสังคม สุขภาพจิตที่ดีไม่ได้หมายถึงการไม่มีโรคทางจิตเวชเท่านั้น แต่ยังรวมถึงการมีอารมณ์ สติ และความพร้อมในการเผชิญหน้ากับความท้าทายต่างๆ อย่างเหมาะสม
+                    <strong>สุขภาพจิต (Mental Health)</strong> คือ ภาวะความเป็นอยู่ที่ดีในด้านจิตใจ ซึ่งช่วยให้บุคคลสามารถรับรู้และใช้ศักยภาพของตนเองได้อย่างเต็มที่
+                    สามารถจัดการกับความเครียดในชีวิตประจำวัน ทำงานได้อย่างมีประสิทธิภาพ และร่วมเป็นส่วนหนึ่งในการช่วยเหลือสังคม
+                    สุขภาพจิตที่ดีไม่ได้หมายถึงการไม่มีโรคทางจิตเวชเท่านั้น แต่ยังรวมถึงการมีอารมณ์ สติ และความพร้อมในการเผชิญหน้ากับความท้าทายต่างๆ อย่างเหมาะสม
                 </div>
                 <div class="about-image">
                     <img src="about-image.jpg" alt="อสม. ดูแลผู้สูงอายุ">
@@ -728,23 +621,20 @@
         </div>
     </section>
 
-    <!-- Section 3: Infographics Gallery -->
+    <!-- Infographics -->
     <section class="infographics-section">
+        <span class="eyebrow">สื่อความรู้</span>
+        <h2>สื่อความรู้เกี่ยวกับสุขภาพจิต</h2>
         <div class="info-cards">
-            <div class="info-card">
-                <img src="poster-1.png" alt="สัญญาณเตือนที่ควรสังเกต">
-            </div>
-            <div class="info-card">
-                <img src="poster-2.png" alt="กลุ่มโรคทางสุขภาพจิตที่พบบ่อย">
-            </div>
-            <div class="info-card">
-                <img src="poster-3.png" alt="การดูแลสุขภาพจิตเบื้องต้น">
-            </div>
+            <div class="info-card"><img src="poster-1.png" alt="สัญญาณเตือนที่ควรสังเกต"></div>
+            <div class="info-card"><img src="poster-2.png" alt="กลุ่มโรคทางสุขภาพจิตที่พบบ่อย"></div>
+            <div class="info-card"><img src="poster-3.png" alt="การดูแลสุขภาพจิตเบื้องต้น"></div>
         </div>
     </section>
 
-    <!-- Section 4: ประเภทแบบประเมินสำหรับคุณ -->
+    <!-- Assessment -->
     <section class="assessment-section" id="assessment">
+        <span class="eyebrow">แบบประเมิน</span>
         <h2>ประเภทแบบประเมินสำหรับคุณ</h2>
         <div class="assessment-grid">
             <div class="assessment-card">
@@ -763,33 +653,33 @@
                 <p>(Personality Tests)</p>
             </div>
             <div class="assessment-card">
-                <i class="fa-solid fa-heart-pulse"></i>
+                <i class="fa-solid fa-brain"></i>
                 <h3>แบบทดสอบภาวะปัญญาและประสิทธิภาพสมอง</h3>
                 <p>(Cognitive & Intelligence Tests)</p>
             </div>
             <div class="assessment-card">
-                <i class="fa-solid fa-syringe"></i>
+                <i class="fa-solid fa-child-reaching"></i>
                 <h3>แบบประเมินพัฒนาการและพฤติกรรมเด็ก</h3>
                 <p>(Developmental & Behavioral Assessments)</p>
             </div>
             <div class="assessment-card">
-                <i class="fa-solid fa-truck-medical"></i>
+                <i class="fa-solid fa-seedling"></i>
                 <h3>แบบประเมินคุณภาพชีวิตและพลังทางจิตวิทยา</h3>
                 <p>(Psychosocial & Well-being Tools)</p>
             </div>
         </div>
-        <!-- แก้ไขให้ลิงก์ไปหน้า assessment.html -->
         <a href="assessment.html" class="btn-assessment">เริ่มทำแบบประเมิน <i class="fa-solid fa-chevron-right"></i></a>
     </section>
 
-    <!-- Section 5: Location / Map -->
+    <!-- Map -->
     <section class="map-section" id="contact">
         <div class="map-container">
             <div class="map-info">
+                <span class="eyebrow">ที่ตั้งหน่วยงาน</span>
                 <h3>สาธารณสุขอำเภออุทัย</h3>
-                <p><i class="fa-solid fa-location-dot"></i> 15 หมู่ 5 ตำบลอุทัย อำเภออุทัย จังหวัดพระนครศรีอยุธยา 13210</p>
-                <p><i class="fa-solid fa-phone"></i> โทรศัพท์: 035-711-469</p>
-                <p><i class="fa-solid fa-print"></i> โทรสาร: 035-711-252</p>
+                <div class="map-row"><i class="fa-solid fa-location-dot"></i><p>15 หมู่ 5 ตำบลอุทัย อำเภออุทัย จังหวัดพระนครศรีอยุธยา 13210</p></div>
+                <div class="map-row"><i class="fa-solid fa-phone"></i><p>โทรศัพท์: 035-711-469</p></div>
+                <div class="map-row"><i class="fa-solid fa-print"></i><p>โทรสาร: 035-711-252</p></div>
             </div>
             <div class="map-embed">
                 <iframe src="https://maps.google.com/maps?q=14.364401,100.668581&hl=th&z=15&output=embed" allowfullscreen="" loading="lazy"></iframe>
@@ -803,10 +693,8 @@
             <div class="footer-left">
                 <h3>โครงการ อสม. ฮีลใจ</h3>
                 <h4>ผ่านระบบดิจิทัล (Mental Health Cyber-Care)</h4>
-                
-                <div class="helpline-badge">
-                    <i class="fa-solid fa-phone"></i> สายด่วนสุขภาพจิต 1323 (ฟรี ตลอด 24 ชม.)
-                </div>
+
+                <div class="helpline-badge"><i class="fa-solid fa-phone"></i> สายด่วนสุขภาพจิต 1323 (ฟรี ตลอด 24 ชม.)</div>
 
                 <p><strong>ติดต่อหน่วยงาน:</strong></p>
                 <p>โทร. 035-711-469</p>
@@ -825,31 +713,23 @@
                 <h3>ส่งคำถามหรือข้อเสนอแนะถึงเรา</h3>
                 <form action="#" method="POST">
                     <div class="form-row">
-                        <div class="form-group">
-                            <input type="text" placeholder="ชื่อจริง *" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" placeholder="นามสกุล *" required>
-                        </div>
+                        <div class="form-group"><input type="text" placeholder="ชื่อจริง *" required></div>
+                        <div class="form-group"><input type="text" placeholder="นามสกุล *" required></div>
                     </div>
-                    <div class="form-group" style="margin-bottom: 15px;">
+                    <div class="form-group" style="margin-bottom:15px;">
                         <input type="email" placeholder="อีเมล *" required>
                     </div>
-                    <div class="form-group" style="margin-bottom: 15px;">
+                    <div class="form-group" style="margin-bottom:15px;">
                         <textarea rows="4" placeholder="พิมพ์ข้อความของคุณที่นี่..."></textarea>
                     </div>
-                    <button type="submit" class="btn-submit">ส่ง</button>
+                    <button type="submit" class="btn-submit">ส่งข้อความ</button>
                 </form>
             </div>
         </div>
 
         <div class="footer-bottom">
-            <div>
-                <a href="#">ข้อกำหนดและเงื่อนไข</a> | <a href="#">นโยบายความเป็นส่วนตัว</a>
-            </div>
-            <div>
-                ©2026 โครงการ อสม. ฮีลใจ ผ่านระบบดิจิทัล
-            </div>
+            <div><a href="#">ข้อกำหนดและเงื่อนไข</a> | <a href="#">นโยบายความเป็นส่วนตัว</a></div>
+            <div>©2026 โครงการ อสม. ฮีลใจ ผ่านระบบดิจิทัล</div>
         </div>
     </footer>
 
