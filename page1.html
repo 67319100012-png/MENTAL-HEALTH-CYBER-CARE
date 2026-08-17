@@ -3,9 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>แบบคัดกรองสุขภาพจิตเบื้องต้น</title>
+<title>แบบคัดกรองสุขภาพจิตเบื้องต้น - โครงการ อสม. ฮีลใจ</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 <style>
   :root{
     --bg-sage:#AFC4A2;
@@ -22,6 +24,11 @@
     --line:#D9DFCE;
     --radius:18px;
     --shadow:0 10px 30px rgba(40,58,42,0.14);
+
+    --forest: #1E4A34;
+    --forest-deep: #123324;
+    --sage: #8FAE86;
+    --marigold: #E8A23C;
   }
   *{box-sizing:border-box;}
   body{
@@ -34,29 +41,104 @@
   }
   h1,h2,h3,.display{font-family:'Kanit',sans-serif;}
 
-  /* ---- Hotline banner ---- */
-  .hotline-bar{
-    background:var(--teal-deep);
-    color:#fff;
-    text-align:center;
-    padding:9px 16px;
-    font-size:14px;
-    letter-spacing:.2px;
+  /* ---- Main System Navigation ---- */
+  header.nav-header{
+    background: rgba(251,247,238,0.92);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(30,74,52,0.1);
+    padding: 14px 6%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position: sticky;
+    top:0;
+    z-index: 1000;
   }
-  .hotline-bar b{color:#F4D8A8;}
+  header.nav-header .logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family: 'Kanit', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--forest);
+    text-decoration: none;
+  }
+  header.nav-header .logo .badge{
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(150deg, var(--sage), var(--forest));
+    color: #fff;
+    display:flex; align-items:center; justify-content:center;
+    font-size: 1rem;
+  }
+  header.nav-header .logo small{
+    display:block;
+    font-family: 'Sarabun', sans-serif;
+    font-weight: 400;
+    font-size: 0.65rem;
+    color: var(--ink-soft);
+  }
+  nav{ display:flex; align-items:center; gap: 20px; }
+  nav a{
+    text-decoration:none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  nav a.nav-cta{
+    background: var(--forest);
+    color: #fff;
+    padding: 8px 18px;
+    border-radius: 30px;
+    font-weight: 600;
+  }
 
+  @media (max-width: 768px){
+    header.nav-header{ flex-direction: column; gap: 10px; padding: 12px 5%; }
+    nav{ gap: 12px; flex-wrap: wrap; justify-content:center; }
+  }
+
+  /* ---- Page Top Header ---- */
   header.top{
     max-width:920px;
     margin:0 auto;
-    padding:36px 24px 18px;
+    padding:28px 24px 16px;
     text-align:center;
   }
+
+  /* Main Back Button Styles */
+  .btn-back-category{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--surface);
+    color: var(--teal-deep);
+    border: 1.5px solid var(--teal);
+    padding: 8px 18px;
+    border-radius: 25px;
+    font-family: 'Sarabun', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    transition: all 0.2s ease;
+  }
+  .btn-back-category:hover{
+    background: var(--teal-deep);
+    color: #ffffff;
+    border-color: var(--teal-deep);
+    transform: translateY(-2px);
+  }
+
   header.top .eyebrow{
     font-size:13px;
     letter-spacing:2px;
     color:var(--teal-deep);
     font-weight:600;
-    margin-bottom:8px;
+    margin-bottom:6px;
   }
   header.top h1{
     font-size:28px;
@@ -78,7 +160,7 @@
     display:grid;
     grid-template-columns:repeat(3,1fr);
     gap:18px;
-    margin-top:22px;
+    margin-top:10px;
   }
   @media (max-width:720px){ .grid{grid-template-columns:repeat(2,1fr);} }
   @media (max-width:460px){ .grid{grid-template-columns:1fr;} }
@@ -133,14 +215,6 @@
     box-shadow:var(--shadow);
     padding:28px 26px;
     margin-top:20px;
-  }
-  .back-link{
-    display:inline-flex;align-items:center;gap:6px;
-    background:none;border:none;cursor:pointer;
-    color:var(--teal-deep);
-    font-family:'Sarabun',sans-serif;
-    font-size:14px;font-weight:600;
-    margin-bottom:14px;padding:0;
   }
   .quiz-title{font-size:22px;margin:0 0 4px;}
   .quiz-sub{font-size:13.5px;color:var(--ink-soft);margin:0 0 18px;line-height:1.6;}
@@ -225,7 +299,6 @@
 
   /* ---- Results view ---- */
   .result-head{text-align:center;margin-bottom:6px;}
-  .gauge-wrap{display:flex;justify-content:center;margin:8px 0 6px;}
   .score-big{
     font-family:'Kanit',sans-serif;
     font-size:44px;
@@ -299,7 +372,6 @@
     background:#fff;
   }
   .email-row input:focus{outline:2px solid var(--teal);border-color:var(--teal);}
-  .email-row .btn-ghost{white-space:nowrap;}
 
   .result-actions{
     display:flex;
@@ -322,9 +394,25 @@
 </head>
 <body>
 
-<div class="hotline-bar">สายด่วนสุขภาพจิต <b>1323</b> ให้บริการฟรีตลอด 24 ชั่วโมง — หากรู้สึกไม่ปลอดภัย โทรได้ทันที</div>
+<header class="nav-header">
+  <a href="index.html" class="logo">
+    <span class="badge"><i class="fa-solid fa-heart-pulse"></i></span>
+    <span>MENTAL HEALTH CYBER-CARE<small>โครงการ อสม. ฮีลใจ</small></span>
+  </a>
+  <nav>
+    <a href="index.html#home">หน้าแรก</a>
+    <a href="index.html#about">สุขภาพจิตคืออะไร</a>
+    <a href="index.html#contact">ติดต่อเรา</a>
+    <a href="assessment.html" class="nav-cta">เลือกแบบประเมิน</a>
+  </nav>
+</header>
 
 <header class="top">
+  <!-- ปุ่มย้อนกลับไปหน้าเลือกประเภทแบบประเมินหลัก -->
+  <a href="assessment.html" class="btn-back-category">
+    <i class="fa-solid fa-arrow-left"></i> ย้อนกลับหน้าเลือกประเภทแบบประเมิน
+  </a>
+
   <div class="eyebrow">MENTAL HEALTH CYBER-CARE</div>
   <h1>แบบคัดกรองทั่วไป (Screening Tools)</h1>
   <p>เลือกแบบประเมินที่ต้องการทำ แต่ละแบบใช้เวลาไม่กี่นาที ผลที่ได้เป็นการคัดกรองเบื้องต้นเท่านั้น ไม่ใช่การวินิจฉัยโรค</p>
@@ -334,7 +422,7 @@
   <section id="view-grid" class="grid"></section>
 
   <section id="view-quiz" class="panel" style="display:none;">
-    <button class="btn-ghost" onclick="showGrid()" style="margin-bottom:16px;">← ย้อนกลับ</button>
+    <button class="btn-ghost" onclick="showGrid()" style="margin-bottom:16px;">← เลือกแบบประเมินอื่นในหมวดนี้</button>
     <h2 class="quiz-title" id="quizTitle"></h2>
     <p class="quiz-sub" id="quizSub"></p>
     <div class="progress-wrap"><div class="progress-fill" id="progressFill"></div></div>
@@ -346,7 +434,7 @@
   </section>
 
   <section id="view-result" class="panel" style="display:none;">
-    <button class="btn-ghost" onclick="showGrid()" style="margin-bottom:16px;">← ย้อนกลับ</button>
+    <button class="btn-ghost" onclick="showGrid()" style="margin-bottom:16px;">← เลือกแบบประเมินอื่นในหมวดนี้</button>
     <div class="result-head">
       <div class="eyebrow" id="resultCode" style="color:var(--teal-deep);font-size:12.5px;letter-spacing:1.5px;font-weight:600;"></div>
       <h2 class="quiz-title" id="resultTitle" style="margin-top:4px;"></h2>
@@ -369,7 +457,8 @@
     </div>
     <div class="result-actions">
       <button class="btn-ghost" onclick="openAssessment(currentId)">ทำแบบประเมินนี้อีกครั้ง</button>
-      <button class="btn-primary" onclick="showGrid()">เลือกแบบประเมินอื่น</button>
+      <button class="btn-primary" onclick="showGrid()">เลือกแบบประเมินอื่นในหมวดนี้</button>
+      <a href="assessment.html" class="btn-ghost" style="text-decoration:none;">ไปหน้าเลือกประเภทแบบประเมินหลัก</a>
     </div>
   </section>
 </main>
@@ -524,7 +613,7 @@ const ASSESSMENTS = {
     sub:'แบบคัดกรองการดื่มเครื่องดื่มแอลกอฮอล์ตามมาตรฐานองค์การอนามัยโลก (ดัดแปลงเป็นภาษาไทย)',
     scaleType:'perQuestion',
     perQuestionOptions:[
-      auditFreq, // reuse label set for Q1 (overridden below via customQ)
+      auditFreq,
     ],
     customQuestions:[
       {text:'ท่านดื่มเครื่องดื่มแอลกอฮอล์บ่อยเพียงใด', options:[
@@ -657,7 +746,6 @@ function submitQuiz(){
 
   document.getElementById('resultAdvice').innerHTML = `<b>คำแนะนำ:</b> ${band.advice}`;
 
-  // Special check: 9Q question 9 (self-harm item) triggers crisis box even if total score is moderate
   let forceCrisis = band.crisis;
   if(currentId === '9q' && currentAnswers[8] > 0){ forceCrisis = true; }
 
