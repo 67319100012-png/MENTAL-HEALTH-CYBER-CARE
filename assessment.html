@@ -7,7 +7,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Kanit:wght@400;500;600;700;800&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Kanit:wght@400;500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
@@ -23,19 +23,14 @@
     
     /* Card Page Specific Colors */
     --sky:#BFE6F5;
-    --sky-deep:#8FCFE8;
     --mint:#CDEEDB;
     --surface:#FFFFFF;
-    --ink:#2B3A45;
-    --ink-soft:#5A6B72;
+    --ink:#1A2B27;
+    --ink-soft:#4B615B;
     --teal:#2E9C8F;
-    --teal-deep:#1F7A70;
-    --sun:#FFC857;
-    --coral:#FF8A65;
-    --lilac:#B39DDB;
     --line:#E3F1F5;
-    --radius:28px;
-    --shadow:0 14px 34px rgba(30,80,90,0.16);
+    --radius:24px;
+    --shadow:0 12px 28px rgba(30,80,90,0.12);
     --font-scale:1;
 
     --display-font: 'Kanit', sans-serif;
@@ -54,16 +49,9 @@
     min-height:100vh;
     padding-bottom:50px;
   }
-  h1,h2,.display{font-family:'Baloo 2', var(--display-font);}
-
-  .hotline-bar{
-    background:var(--teal-deep); color:#fff; text-align:center;
-    padding:10px 16px; font-size:0.95rem; font-weight:600;
-  }
-  .hotline-bar b{color:#FFE7A8; font-size:1.1em;}
 
   /* ---------------- Navbar (from main system) ---------------- */
-  header{
+  header.nav-header{
     background: rgba(251,247,238,0.86);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -76,7 +64,7 @@
     top:0;
     z-index: 1000;
   }
-  header .logo{
+  header.nav-header .logo{
     display:flex;
     align-items:center;
     gap:10px;
@@ -86,7 +74,7 @@
     color: var(--forest);
     text-decoration: none;
   }
-  header .logo .badge{
+  header.nav-header .logo .badge{
     width: 38px; height: 38px;
     border-radius: 50%;
     background: linear-gradient(150deg, var(--sage), var(--forest));
@@ -95,7 +83,7 @@
     font-size: 1.05rem;
     box-shadow: 0 4px 10px rgba(30,74,52,0.25);
   }
-  header .logo small{
+  header.nav-header .logo small{
     display:block;
     font-family: var(--body-font);
     font-weight: 400;
@@ -132,71 +120,137 @@
 
   /* Responsive Navbar */
   @media (max-width: 768px){
-    header{ flex-direction: column; gap: 12px; padding: 14px 6%; }
+    header.nav-header{ flex-direction: column; gap: 12px; padding: 14px 6%; }
     nav{ gap: 14px; flex-wrap: wrap; justify-content:center; }
   }
 
   /* ---------------- Content Styling ---------------- */
-  header.top{max-width:920px;margin:0 auto;padding:30px 24px 10px;text-align:center;}
-  header.top .mascot{font-size:3.4rem;line-height:1;margin-bottom:4px;}
-  header.top h1{font-size:2.1rem;margin:6px 0 10px;color:var(--ink);font-weight:700;}
-  header.top p{font-size:1.15rem;color:var(--ink-soft);max-width:640px;margin:0 auto;line-height:1.8;}
+  header.top{
+    max-width:920px;
+    margin:0 auto;
+    padding:40px 24px 16px;
+    text-align:center;
+  }
+  header.top .mascot{
+    font-size:3.2rem;
+    line-height:1;
+    margin-bottom:8px;
+  }
+  header.top h1{
+    font-family: var(--display-font);
+    font-size:2.1rem;
+    font-weight:700;
+    margin-bottom:10px;
+    color:var(--forest-deep);
+  }
+  header.top p{
+    font-family: var(--body-font);
+    font-size:1.05rem;
+    color:var(--ink-soft);
+    max-width:640px;
+    margin:0 auto;
+    line-height:1.7;
+  }
 
-  main{max-width:960px;margin:0 auto;padding:20px 20px 10px;}
+  main{
+    max-width:1040px;
+    margin:0 auto;
+    padding:20px 20px 10px;
+  }
 
-  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
-  @media (max-width:760px){ .grid{grid-template-columns:repeat(2,1fr);} }
-  @media (max-width:480px){ .grid{grid-template-columns:1fr;} }
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:24px;
+  }
+  @media (max-width:860px){ .grid{grid-template-columns:repeat(2, 1fr);} }
+  @media (max-width:520px){ .grid{grid-template-columns:1fr;} }
 
-  a.card-link{ text-decoration:none; color:inherit; display:block; }
+  a.card-link{
+    text-decoration:none;
+    color:inherit;
+    display:block;
+    height:100%;
+  }
 
+  /* Optimized Card Typography & Flex Layout */
   .card{
     background:var(--surface);
     border-radius:var(--radius);
-    padding:30px 20px 26px;
+    padding:28px 20px;
     text-align:center;
     box-shadow:var(--shadow);
-    border:3px solid transparent;
-    transition:transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+    border:2px solid transparent;
+    transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease;
     height:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
   }
   .card:hover{
-    transform:translateY(-6px) scale(1.02);
+    transform:translateY(-6px);
     border-color:var(--accent, var(--teal));
-    box-shadow:0 20px 40px rgba(30,80,90,0.22);
+    box-shadow:0 18px 36px rgba(30,80,90,0.18);
   }
   .card .emoji-badge{
-    width:96px;height:96px;border-radius:50%;
+    width:80px;
+    height:80px;
+    border-radius:50%;
     background:var(--accent-soft, #E4F7F1);
-    display:flex;align-items:center;justify-content:center;
-    margin:0 auto 16px;
-    font-size:3rem;
-    box-shadow:inset 0 0 0 4px var(--accent, var(--teal));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:18px;
+    font-size:2.5rem;
+    box-shadow:inset 0 0 0 3px var(--accent, var(--teal));
+    flex-shrink: 0;
   }
   .card .code{
-    font-family:'Baloo 2',sans-serif;font-weight:700;font-size:1.3rem;
-    color:var(--ink); margin-bottom:6px;
+    font-family:var(--display-font);
+    font-weight:600;
+    font-size:1.15rem;
+    line-height:1.45;
+    color:var(--ink);
+    margin-bottom:6px;
+    letter-spacing: -0.01em;
   }
   .card .desc{
-    font-size:1.02rem; color:var(--ink-soft); line-height:1.6; margin-bottom:12px;
+    font-family:var(--body-font);
+    font-size:0.88rem;
+    font-weight:400;
+    color:var(--ink-soft);
+    line-height:1.5;
+    margin-bottom:20px;
   }
   .card .tag{
-    display:inline-block; font-size:0.85rem; font-weight:700; color:#fff;
-    background:var(--accent, var(--teal)); border-radius:20px; padding:5px 16px;
-    font-family:'Baloo 2',sans-serif;
+    margin-top:auto; /* Push tag to bottom evenly */
+    display:inline-block;
+    font-family:var(--body-font);
+    font-size:0.85rem;
+    font-weight:600;
+    color:#fff;
+    background:var(--accent, var(--teal));
+    border-radius:20px;
+    padding:5px 16px;
+    letter-spacing:0.02em;
   }
 
   footer.note{
-    max-width:920px; margin:36px auto 0; padding:0 24px; text-align:center;
-    font-size:0.95rem; color:var(--ink); opacity:.75; line-height:1.8;
+    max-width:920px;
+    margin:40px auto 0;
+    padding:0 24px;
+    text-align:center;
+    font-family:var(--body-font);
+    font-size:0.9rem;
+    color:var(--ink-soft);
+    line-height:1.7;
   }
 </style>
 </head>
 <body>
 
-
 <!-- Main System Header Navbar -->
-<header>
+<header class="nav-header">
   <a href="index.html" class="logo">
     <span class="badge"><i class="fa-solid fa-heart-pulse"></i></span>
     <span>MENTAL HEALTH CYBER-CARE<small>โครงการ อสม. ฮีลใจ</small></span>
@@ -212,7 +266,7 @@
 <header class="top">
   <div class="mascot">🌱💚</div>
   <h1>ประเภทแบบประเมินสำหรับคุณ</h1>
-  <p>เลือกหมวดที่ต้องการทำแบบประเมิน แต่ละแบบใช้เวลาไม่นาน อ่านง่าย ทำได้ทุกวัย ผลลัพธ์เป็นการคัดกรองเบื้องต้นเพื่อดูแลสุขภาพใจของคุณและคนที่คุณรัก</p>
+  <p>เลือกหมวดหมู่ที่ต้องการประเมิน ใช้เวลาไม่นาน อ่านง่าย ทำได้ทุกวัย ผลลัพธ์เป็นการคัดกรองเบื้องต้นเพื่อดูแลสุขภาพใจของคุณและคนที่คุณรัก</p>
 </header>
 
 <main>
@@ -222,61 +276,61 @@
       <div class="card" style="--accent:#2E9C8F; --accent-soft:#E4F7F1;">
         <div class="emoji-badge">✅</div>
         <div class="code">แบบประเมินคัดกรองสุขภาพจิตเบื้องต้น</div>
-        <div class="desc">(Screening Tools)</div>
+        <div class="desc">Screening Tools</div>
         <span class="tag">6 แบบทดสอบ</span>
       </div>
     </a>
 
     <a class="card-link" href="clinical-rating-scales.html">
-      <div class="card" style="--accent:#FF8A65; --accent-soft:#FFEDE6;">
+      <div class="card" style="--accent:#E06D53; --accent-soft:#FDF0EC;">
         <div class="emoji-badge">💊</div>
         <div class="code">แบบประเมินอาการเฉพาะโรคทางจิตเวช</div>
-        <div class="desc">(Clinical Rating Scales)</div>
+        <div class="desc">Clinical Rating Scales</div>
         <span class="tag">5 แบบทดสอบ</span>
       </div>
     </a>
 
     <a class="card-link" href="personality-tests.html">
-      <div class="card" style="--accent:#B39DDB; --accent-soft:#F1ECFB;">
+      <div class="card" style="--accent:#8E66BB; --accent-soft:#F2ECF9;">
         <div class="emoji-badge">🎭</div>
         <div class="code">แบบทดสอบบุคลิกภาพ</div>
-        <div class="desc">(Personality Tests)</div>
+        <div class="desc">Personality Tests</div>
         <span class="tag">4 แบบทดสอบ</span>
       </div>
     </a>
 
     <a class="card-link" href="cognitive-intelligence-tests.html">
-      <div class="card" style="--accent:#4FB0E0; --accent-soft:#E7F6FD;">
+      <div class="card" style="--accent:#328BB8; --accent-soft:#EBF5FA;">
         <div class="emoji-badge">🧠</div>
         <div class="code">แบบทดสอบเชาวน์ปัญญาและประสิทธิภาพสมอง</div>
-        <div class="desc">(Cognitive & Intelligence Tests)</div>
+        <div class="desc">Cognitive & Intelligence Tests</div>
         <span class="tag">5 แบบทดสอบ</span>
       </div>
     </a>
 
     <a class="card-link" href="developmental-behavioral.html">
-      <div class="card" style="--accent:#FFC857; --accent-soft:#FFF6E2;">
+      <div class="card" style="--accent:#D99216; --accent-soft:#FAF2E3;">
         <div class="emoji-badge">🧸</div>
         <div class="code">แบบประเมินพัฒนาการและพฤติกรรมเด็ก</div>
-        <div class="desc">(Developmental & Behavioral Assessments)</div>
+        <div class="desc">Developmental & Behavioral Assessments</div>
         <span class="tag">5 แบบทดสอบ</span>
       </div>
     </a>
 
     <a class="card-link" href="psychosocial-wellbeing.html">
-      <div class="card" style="--accent:#66BB6A; --accent-soft:#EAF7EB;">
+      <div class="card" style="--accent:#4CAF50; --accent-soft:#EDF7ED;">
         <div class="emoji-badge">🌈</div>
         <div class="code">แบบประเมินคุณภาพชีวิตและพลังทางจิตวิทยา</div>
-        <div class="desc">(Psychosocial & Well-being Tools)</div>
+        <div class="desc">Psychosocial & Well-being Tools</div>
         <span class="tag">5 แบบทดสอบ</span>
       </div>
     </a>
 
     <a class="card-link" href="substance-use-screening.html">
-      <div class="card" style="--accent:#EC7063; --accent-soft:#FDECEA;">
+      <div class="card" style="--accent:#D35400; --accent-soft:#FBEFE8;">
         <div class="emoji-badge">💉</div>
         <div class="code">แบบคัดกรองการใช้สารเสพติด</div>
-        <div class="desc">(Substance Use Screening)</div>
+        <div class="desc">Substance Use Screening</div>
         <span class="tag">5 แบบทดสอบ</span>
       </div>
     </a>
