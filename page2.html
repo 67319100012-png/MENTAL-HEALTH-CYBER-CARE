@@ -864,17 +864,21 @@ function renderMbtiResult(a){
   document.getElementById('resultScoreLabel').textContent = 'ผลการวิเคราะห์บุคลิกภาพเบื้องต้น';
   document.getElementById('resultBadgeWrap').innerHTML = '';
   document.getElementById('dimBarsWrap').innerHTML = `<div style="margin:20px 0;">${barsHtml}</div>`;
-  document.getElementById('resultAdvice').innerHTML = `<b>${typeCode}:</b> ${MBTI_DESC[typeCode] || 'ไม่พบคำอธิบายประเภทนี้'}`;
+  document.getElementById('resultAdvice').innerHTML = `<b>${typeCode}:</b> ${MBTI_DESC[typeCode]}`;
 
-  const now2 = new Date();
+  const now1 = new Date();
   lastResult = {
-    code:a.code, full:a.full, resultValue:typeCode, resultLabel:'ประเภทบุคลิกภาพ: '+typeCode,
-    levelLabel: MBTI_DESC[typeCode] || '', dateStr: now2.toLocaleDateString('th-TH',{year:'numeric',month:'long',day:'numeric'})
+    code: a.code,
+    full: a.full,
+    resultValue: typeCode,
+    resultLabel: 'ผลประเมิน: ' + typeCode,
+    levelLabel: MBTI_DESC[typeCode],
+    dateStr: now1.toLocaleDateString('th-TH', {year:'numeric', month:'long', day:'numeric'})
   };
 }
 
-initGrid();
-showGrid();
+// เริ่มต้นแสดงการ์ดแบบทดสอบเมื่อเปิดเว็บ
+document.addEventListener('DOMContentLoaded', initGrid);
 </script>
 </body>
 </html>
