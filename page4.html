@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>แบบประเมินพัฒนาการและพฤติกรรม</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-sage:#AFC4A2; --bg-sage-deep:#8FAA82;
+    --surface:#FBFAF5; --surface-alt:#F1EEE3;
+    --ink:#2B3A2E; --ink-soft:#5B6B5A;
+    --teal:#357B72; --teal-deep:#245A53;
+    --gold:#B98A2E; --coral:#C85A3F; --coral-soft:#F3DCD3;
+    --line:#D9DFCE; --radius:18px; --shadow:0 10px 30px rgba(40,58,42,0.14);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:linear-gradient(180deg,var(--bg-sage) 0%,var(--bg-sage-deep) 100%);font-family:'Sarabun',sans-serif;color:var(--ink);min-height:100vh;padding-bottom:40px;}
+  h1,h2,h3,.display{font-family:'Kanit',sans-serif;}
+
+  .hotline-bar{background:var(--teal-deep);color:#fff;text-align:center;padding:9px 16px;font-size:14px;}
+  .hotline-bar b{color:#F4D8A8;}
+
+  header.top{max-width:920px;margin:0 auto;padding:36px 24px 18px;text-align:center;}
+  header.top .eyebrow{font-size:13px;letter-spacing:2px;color:var(--teal-deep);font-weight:600;margin-bottom:8px;}
+  header.top h1{font-size:26px;margin:0 0 10px;}
+  header.top p{font-size:15px;color:var(--ink-soft);max-width:620px;margin:0 auto;line-height:1.7;}
+
+  main{max-width:920px;margin:0 auto;padding:10px 20px 20px;}
+
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px;}
+  @media (max-width:720px){ .grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:460px){ .grid{grid-template-columns:1fr;} }
+
+  .card{background:var(--surface);border-radius:var(--radius);padding:22px 18px;text-align:center;box-shadow:var(--shadow);cursor:pointer;border:1px solid transparent;transition:transform .18s ease, border-color .18s ease;}
+  .card:hover{transform:translateY(-4px);border-color:var(--teal);}
+  .card .icon{width:56px;height:56px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-family:'Kanit',sans-serif;font-weight:600;font-size:12px;}
+  .card .code{font-family:'Kanit',sans-serif;font-weight:600;font-size:16px;margin-bottom:4px;}
+  .card .desc{font-size:12.5px;color:var(--ink-soft);line-height:1.5;margin-bottom:12px;}
+  .card .qcount{display:inline-block;font-size:11.5px;color:var(--teal-deep);background:#E4EFE0;border-radius:20px;padding:3px 10px;}
+
+  .panel{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px 26px;margin-top:20px;}
+  .back-link{display:inline-flex;align-items:center;gap:6px;background:none;border:none;cursor:pointer;color:var(--teal-deep);font-family:'Sarabun',sans-serif;font-size:14px;font-weight:600;margin-bottom:14px;padding:0;}
+  .quiz-title{font-size:22px;margin:0 0 4px;}
+  .quiz-sub{font-size:13.5px;color:var(--ink-soft);margin:0 0 18px;line-height:1.6;}
+
+  .age-select{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;}
+  .age-chip{
+    border:1.5px solid var(--line);border-radius:20px;padding:9px 18px;
+    font-size:14px;cursor:pointer;background:#fff;font-family:'Sarabun',sans-serif;font-weight:600;
+    transition:border-color .15s, background .15s, color .15s;
+  }
+  .age-chip:hover{border-color:var(--teal);}
+  .age-chip.selected{background:var(--teal-deep);border-color:var(--teal-deep);color:#fff;}
+
+  .domain-heading{
+    font-family:'Kanit',sans-serif;font-size:14px;font-weight:600;color:var(--teal-deep);
+    margin:20px 0 6px;padding-top:14px;border-top:1px solid var(--line);
+  }
+  .domain-heading:first-child{border-top:none;padding-top:0;margin-top:0;}
+
+  .progress-wrap{background:var(--surface-alt);border-radius:20px;height:8px;overflow:hidden;margin-bottom:24px;}
+  .progress-fill{background:var(--teal);height:100%;width:0%;transition:width .25s ease;}
+
+  .question{padding:12px 0;}
+  .question .qtext{font-size:15px;line-height:1.6;margin-bottom:10px;}
+  .options{display:flex;gap:8px;flex-wrap:wrap;}
+  .opt{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:12px;padding:9px 16px;cursor:pointer;font-size:13.5px;transition:border-color .15s, background .15s;flex:1;min-width:130px;justify-content:center;}
+  .opt:hover{border-color:var(--teal);}
+  .opt input{accent-color:var(--teal);width:15px;height:15px;flex:none;}
+  .opt.selected{border-color:var(--teal);background:#EAF3E9;font-weight:600;}
+
+  .submit-row{margin-top:22px;text-align:center;}
+  .btn-primary{background:var(--teal-deep);color:#fff;border:none;padding:13px 30px;border-radius:30px;font-family:'Sarabun',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:background .15s, opacity .15s;}
+  .btn-primary:hover{background:var(--teal);}
+  .btn-primary:disabled{opacity:.4;cursor:not-allowed;}
+  .btn-ghost{background:none;border:1.5px solid var(--teal-deep);color:var(--teal-deep);padding:11px 26px;border-radius:30px;font-family:'Sarabun',sans-serif;font-size:14.5px;font-weight:600;cursor:pointer;}
+  .hint{text-align:center;font-size:12.5px;color:var(--ink-soft);margin-top:10px;}
+
+  .result-head{text-align:center;margin-bottom:6px;}
+  .score-big{font-family:'Kanit',sans-serif;font-size:40px;font-weight:700;text-align:center;margin:2px 0 0;}
+  .score-label{text-align:center;font-size:13px;color:var(--ink-soft);margin-bottom:18px;}
+  .level-badge{display:block;width:fit-content;margin:0 auto 20px;padding:7px 18px;border-radius:30px;font-family:'Kanit',sans-serif;font-weight:600;font-size:14.5px;color:#fff;}
+  .advice-box{background:var(--surface-alt);border-radius:14px;padding:18px 20px;font-size:14.5px;line-height:1.75;margin-bottom:14px;}
+  .advice-box b{color:var(--teal-deep);}
+  .crisis-box{background:var(--coral-soft);border:1.5px solid var(--coral);border-radius:14px;padding:18px 20px;font-size:14.5px;line-height:1.75;margin-bottom:18px;}
+  .crisis-box .title{font-family:'Kanit',sans-serif;font-weight:600;color:var(--coral);margin-bottom:6px;font-size:15px;}
+
+  .domain-results{margin:16px 0;}
+  .domain-result-row{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-radius:10px;background:var(--surface-alt);margin-bottom:8px;font-size:14px;}
+  .domain-result-row .tag{font-size:12px;font-weight:700;font-family:'Kanit',sans-serif;padding:3px 12px;border-radius:20px;color:#fff;}
+
+  .email-box{background:var(--surface-alt);border-radius:14px;padding:16px 18px;margin-bottom:6px;}
+  .email-box label{display:block;font-size:13px;font-weight:600;color:var(--teal-deep);margin-bottom:8px;}
+  .email-row{display:flex;gap:10px;flex-wrap:wrap;}
+  .email-row input{flex:1;min-width:220px;padding:10px 14px;border-radius:10px;border:1px solid var(--line);font-family:'Sarabun',sans-serif;font-size:14px;background:#fff;}
+  .email-row input:focus{outline:2px solid var(--teal);border-color:var(--teal);}
+  .email-row .btn-ghost{white-space:nowrap;}
+
+  .result-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:20px;}
+  footer.note{max-width:920px;margin:26px auto 0;padding:0 24px;text-align:center;font-size:12px;color:var(--ink);opacity:.75;line-height:1.7;}
+</style>
+</head>
+<body>
+
+<div class="hotline-bar">สายด่วนสุขภาพจิต <b>1323</b> ให้บริการฟรีตลอด 24 ชั่วโมง</div>
+
+<header class="top">
+  <div class="eyebrow">MENTAL HEALTH CYBER-CARE</div>
+  <h1>แบบประเมินพัฒนาการและพฤติกรรม</h1>
+  <p>Developmental & Behavioral Assessments — สำหรับผู้ปกครองหรือ อสม. ใช้ประเมินพัฒนาการและพฤติกรรมของเด็ก ผลลัพธ์เป็นการคัดกรองเบื้องต้น หากพบความเสี่ยงควรพาไปพบกุมารแพทย์หรือคลินิกพัฒนาการเด็กเพื่อประเมินอย่างละเอียด</p>
+</header>
+
+<main>
+  <section id="view-grid" class="grid"></section>
+
+  <section id="view-quiz" class="panel" style="display:none;">
+    <button class="btn-ghost" onclick="showGrid()" style="margin-bottom:16px;">← ย้อนกลับ</button>
+    <h2 class="quiz-title" id="quizTitle"></h2>
+    <p class="quiz-sub" id="quizSub"></p>
+
+    <div id="ageSelectWrap" style="display:none;">
+      <div class="domain-heading" style="border-top:none;margin-top:0;">เลือกช่วงอายุของเด็ก</div>
+      <div class="age-select" id="ageSelect"></div>
+    </div>
+
+    <div class="progress-wrap"><div class="progress-fill" id="progressFill"></div></div>
+    <div id="questionList"></div>
+    <div class="submit-row">
+      <button class="btn-primary" id="submitBtn" disabled onclick="submitQuiz()">ดูผลการประเมิน</button>
+      <div class="hint" id="progressHint"></div>
+    </div>
+  </section>
+
+  <section id="view-result" class="panel" style="display:none;">
+    <button class="btn-ghost" onclick="showGrid()" style="margin-bottom:16px;">← ย้อนกลับ</button>
+    <div class="result-head">
+      <div class="eyebrow" id="resultCode" style="color:var(--teal-deep);font-size:12.5px;letter-spacing:1.5px;font-weight:600;"></div>
+      <h2 class="quiz-title" id="resultTitle" style="margin-top:4px;"></h2>
+    </div>
+    <div class="score-big" id="resultScore"></div>
+    <div class="score-label" id="resultScoreLabel"></div>
+    <div id="resultBadgeWrap" style="text-align:center;"></div>
+    <div id="domainResultsWrap"></div>
+    <div class="advice-box" id="resultAdvice"></div>
+    <div class="crisis-box" id="resultCrisis" style="display:none;">
+      <div class="title">⚠ ควรได้รับการประเมินโดยผู้เชี่ยวชาญโดยเร็ว</div>
+      ผลคัดกรองบ่งชี้ความเสี่ยงสูง แนะนำให้พาเด็กไปพบกุมารแพทย์หรือคลินิกพัฒนาการเด็กเพื่อรับการประเมินอย่างละเอียดโดยเร็วที่สุด
+    </div>
+    <div class="email-box">
+      <label for="emailTo">ส่งผลไปที่อีเมล</label>
+      <div class="email-row">
+        <input type="email" id="emailTo" value="67319100012@Aitc.ac.th">
+        <button class="btn-ghost" onclick="emailResult()">✉ ส่งผลทางอีเมล</button>
+      </div>
+      <div class="hint">จะเปิดหน้าเขียนอีเมลของ Gmail ในแท็บใหม่ พร้อมกรอกผลให้อัตโนมัติ ท่านเพียงกดส่ง (ต้องเข้าสู่ระบบ Gmail ไว้ก่อน)</div>
+    </div>
+    <div class="result-actions">
+      <button class="btn-ghost" onclick="openAssessment(currentId)">ทำแบบประเมินนี้อีกครั้ง</button>
+      <button class="btn-primary" onclick="showGrid()">เลือกแบบประเมินอื่น</button>
+    </div>
+  </section>
+</main>
+
+<footer class="note">
+  แบบประเมินนี้ดัดแปลงจากเครื่องมือคัดกรองพัฒนาการและพฤติกรรมเด็กที่ใช้ทั่วไปในระบบสาธารณสุข เป็นฉบับย่อเพื่อการคัดกรองเบื้องต้นเท่านั้น ไม่ใช่การวินิจฉัยและไม่ทดแทนการตรวจประเมินโดยกุมารแพทย์หรือนักพัฒนาการเด็ก
+</footer>
+
+<script>
+const yesNoPass = [ {label:'ผ่าน', score:1}, {label:'ยังไม่ผ่าน', score:0} ];
+const scale4 = [
+  {label:'ไม่ค่อยพบ', score:0}, {label:'บางครั้ง', score:1},
+  {label:'บ่อยครั้ง', score:2}, {label:'เกือบตลอดเวลา', score:3}
+];
+const sdq3 = (reverse)=> reverse ? [
+  {label:'ไม่จริง', score:2}, {label:'ค่อนข้างจริง', score:1}, {label:'จริงแน่นอน', score:0}
+] : [
+  {label:'ไม่จริง', score:0}, {label:'ค่อนข้างจริง', score:1}, {label:'จริงแน่นอน', score:2}
+];
+const yn = (yesScore)=> yesScore===1 ? [{label:'ใช่',score:1},{label:'ไม่ใช่',score:0}] : [{label:'ใช่',score:0},{label:'ไม่ใช่',score:1}];
+
+const DOMAINS = ['กล้ามเนื้อมัดใหญ่','กล้ามเนื้อมัดเล็ก','การเข้าใจภาษา','การใช้ภาษา','การช่วยเหลือตนเอง/สังคม'];
+
+const DSPM_ITEMS = {
+  9:['นั่งได้เองมั่นคงโดยไม่ต้องพยุง','หยิบของชิ้นเล็กด้วยนิ้วหัวแม่มือและนิ้วชี้','หันมองเมื่อถูกเรียกชื่อ','ส่งเสียงอ้อแอ้เป็นพยางค์ซ้ำ เช่น "มามา" "บาบา"','เล่นจ๊ะเอ๋หรือโบกมือบ๊ายบายได้'],
+  18:['เดินได้เองอย่างมั่นคง','ต่อบล็อกไม้ซ้อนกันได้ 2–3 ชิ้น','ทำตามคำสั่งง่าย ๆ ได้ เช่น "หยิบลูกบอลมาให้หน่อย"','พูดคำที่มีความหมายได้อย่างน้อย 3–5 คำ','ใช้ช้อนตักอาหารกินเองได้บ้าง'],
+  30:['วิ่งได้คล่องและกระโดดสองขาพร้อมกันได้','ขีดเขียนเป็นเส้นวงกลมได้','เข้าใจคำสั่ง 2 ขั้นตอน เช่น "หยิบรองเท้าแล้วเอามาให้แม่"','พูดเป็นประโยคสั้น ๆ 2–3 คำได้','บอกความต้องการเมื่อปวดปัสสาวะหรืออุจจาระ'],
+  42:['กระโดดขาเดียวได้','วาดรูปวงกลมตามแบบได้','เข้าใจคำถามเกี่ยวกับการใช้งานของสิ่งของ เช่น "ถ้วยใช้ทำอะไร"','เล่าเรื่องสั้น ๆ ให้คนอื่นเข้าใจได้','เล่นร่วมกับเด็กคนอื่นแบบผลัดกันเล่น'],
+  60:['กระโดดขาเดียวสลับขาต่อเนื่องได้','วาดรูปคนที่มีส่วนต่าง ๆ อย่างน้อย 3 ส่วนได้','เข้าใจและตอบคำถาม "ทำไม" ได้อย่างสมเหตุสมผล','เล่าเรื่องราวต่อเนื่องเป็นลำดับเหตุการณ์ได้','แต่งตัวเองได้เกือบสมบูรณ์ เช่น ติดกระดุม ใส่รองเท้า']
+};
+
+const DENVER_ITEMS = {
+  12:['ยืนเกาะยืนได้เอง / เดินโดยจับมือพยุงได้','หยิบของชิ้นเล็กด้วยปลายนิ้ว / ถือถ้วยดื่มเองได้','หันหาเสียงเรียกชื่อ / เข้าใจคำว่า "ไม่"','พูดคำที่มีความหมาย 1 คำ / เลียนเสียงพูดของผู้ใหญ่','เล่นจ๊ะเอ๋ / ดื่มน้ำจากถ้วยโดยมีคนช่วยประคอง'],
+  24:['วิ่งได้ / เตะลูกบอลได้','ต่อบล็อก 4–6 ชิ้น / พลิกหน้าหนังสือทีละหน้า','ชี้อวัยวะร่างกายได้อย่างน้อย 3 ส่วน / ทำตามคำสั่ง 2 ขั้นตอนได้','พูดคำต่อกัน 2 คำ / มีคำศัพท์อย่างน้อย 50 คำ','ล้างและเช็ดมือเองได้บ้าง / เริ่มเล่นสมมติง่าย ๆ'],
+  48:['กระโดดขาเดียวได้ / รับลูกบอลด้วยมือทั้งสองข้างได้','วาดรูปกากบาทตามแบบได้ / ตัดกระดาษตามเส้นตรงด้วยกรรไกรได้','เข้าใจคำบุพบท เช่น "ข้างบน" "ข้างใต้" / ตอบคำถามเปรียบเทียบง่าย ๆ ได้','เล่าเรื่องเป็นประโยคต่อเนื่องได้ / ใช้คำถาม "ทำไม" "อย่างไร"','แต่งตัวได้เองบางส่วน / เล่นร่วมกับเพื่อนแบบมีกติกาง่าย ๆ']
+};
+
+const SDQ_ITEMS = [
+  {text:'มักบ่นว่าปวดหัว ปวดท้อง หรือไม่สบายบ่อย ๆ', rev:false, sub:'E'},
+  {text:'มีความกังวลใจหลายเรื่อง ดูเหมือนกังวลอยู่เสมอ', rev:false, sub:'E'},
+  {text:'ไม่มีความสุข ท้อแท้ หรือร้องไห้บ่อย', rev:false, sub:'E'},
+  {text:'ประหม่าหรือกลัวง่ายในสถานการณ์ใหม่ ๆ ขาดความมั่นใจ', rev:false, sub:'E'},
+  {text:'มีความกลัวหลายอย่าง ตกใจง่าย', rev:false, sub:'E'},
+  {text:'มักโมโหและอารมณ์ร้อน', rev:false, sub:'C'},
+  {text:'โดยทั่วไปเชื่อฟัง มักทำตามที่ผู้ใหญ่ขอ', rev:true, sub:'C'},
+  {text:'ทะเลาะวิวาทหรือรังแกเด็กคนอื่นบ่อย', rev:false, sub:'C'},
+  {text:'ชอบโกหกหรือขี้โกง', rev:false, sub:'C'},
+  {text:'เคยขโมยของที่บ้าน โรงเรียน หรือที่อื่น', rev:false, sub:'C'},
+  {text:'อยู่ไม่นิ่ง ซุกซนมาก อยู่นิ่งนาน ๆ ไม่ได้', rev:false, sub:'H'},
+  {text:'ใจลอย สมาธิสั้น วอกแวกง่าย', rev:false, sub:'H'},
+  {text:'คิดก่อนทำ ไม่ค่อยหุนหันพลันแล่น', rev:true, sub:'H'},
+  {text:'ทำงานที่ได้รับมอบหมายจนสำเร็จ มีสมาธิจดจ่อได้ดี', rev:true, sub:'H'},
+  {text:'รอคอยได้ดี ไม่ใจร้อน', rev:true, sub:'H'},
+  {text:'ค่อนข้างชอบอยู่คนเดียว มักเล่นคนเดียวมากกว่า', rev:false, sub:'P'},
+  {text:'มีเพื่อนสนิทอย่างน้อยหนึ่งคน', rev:true, sub:'P'},
+  {text:'เด็กคนอื่นชอบแกล้งหรือรังแกเขา', rev:false, sub:'P'},
+  {text:'เข้ากับผู้ใหญ่ได้ดีกว่าเด็กวัยเดียวกัน', rev:false, sub:'P'},
+  {text:'เด็กคนอื่นชอบเล่นด้วย เป็นที่ยอมรับในกลุ่มเพื่อน', rev:true, sub:'P'},
+  {text:'เอาใจใส่ความรู้สึกของผู้อื่น', rev:false, sub:'Pro'},
+  {text:'แบ่งปันสิ่งของกับเด็กคนอื่น เช่น ขนม ของเล่น', rev:false, sub:'Pro'},
+  {text:'ช่วยเหลือเมื่อมีคนเจ็บ อารมณ์เสีย หรือไม่สบายใจ', rev:false, sub:'Pro'},
+  {text:'มีน้ำใจกับเด็กที่อายุน้อยกว่า', rev:false, sub:'Pro'},
+  {text:'อาสาช่วยเหลือผู้อื่น เช่น ผู้ปกครอง ครู หรือเด็กคนอื่น', rev:false, sub:'Pro'}
+];
+
+const MCHAT_ITEMS = [
+  {text:'เมื่อท่านชี้ไปที่สิ่งของในห้อง ลูกของท่านมองตามที่ท่านชี้หรือไม่', riskYes:false},
+  {text:'ท่านเคยสงสัยหรือไม่ว่าลูกของท่านอาจมีปัญหาการได้ยิน', riskYes:true},
+  {text:'ลูกของท่านเล่นสมมติหรือไม่ เช่น แกล้งชงชาให้ตุ๊กตากิน', riskYes:false},
+  {text:'ลูกของท่านชอบปีนป่ายสิ่งของหรือไม่ เช่น เฟอร์นิเจอร์ บันได', riskYes:false},
+  {text:'ลูกของท่านทำท่าทางซ้ำ ๆ ผิดปกติด้วยนิ้วมือใกล้ดวงตาหรือไม่', riskYes:true},
+  {text:'ลูกของท่านชี้นิ้วเพื่อขอสิ่งของหรือขอความช่วยเหลือหรือไม่', riskYes:false},
+  {text:'ลูกของท่านชี้นิ้วเพื่อแสดงความสนใจในสิ่งที่น่าสนใจหรือไม่ เช่น เครื่องบินบนฟ้า', riskYes:false, critical:true},
+  {text:'ลูกของท่านสนใจเด็กคนอื่นหรือไม่', riskYes:false},
+  {text:'ลูกของท่านนำสิ่งของมาให้ท่านดูหรือไม่', riskYes:false, critical:true},
+  {text:'ลูกของท่านสบตากับท่านนานกว่า 1–2 วินาทีหรือไม่', riskYes:false},
+  {text:'ลูกของท่านไวต่อเสียงมากเกินไปหรือไม่ เช่น ปิดหูเมื่อได้ยินเสียง', riskYes:true},
+  {text:'ลูกของท่านยิ้มตอบเมื่อท่านยิ้มให้หรือมองหน้าท่านหรือไม่', riskYes:false},
+  {text:'ลูกของท่านเลียนแบบท่าทางของท่านหรือไม่ เช่น ทำหน้าตลก', riskYes:false, critical:true},
+  {text:'ลูกของท่านหันมามองเมื่อท่านเรียกชื่อหรือไม่', riskYes:false, critical:true},
+  {text:'เมื่อท่านชี้ไปที่ของเล่น ลูกของท่านมองไปที่ของเล่นนั้นหรือไม่', riskYes:false, critical:true},
+  {text:'ลูกของท่านเดินได้เองหรือไม่', riskYes:false},
+  {text:'ลูกของท่านมองไปที่สิ่งที่ท่านกำลังมองอยู่หรือไม่', riskYes:false},
+  {text:'ลูกของท่านทำท่าทางซ้ำ ๆ ผิดปกติกับนิ้วมือใกล้ใบหน้าตนเองหรือไม่', riskYes:true},
+  {text:'ลูกของท่านพยายามดึงความสนใจให้ท่านมาดูสิ่งที่เขาทำอยู่หรือไม่', riskYes:false},
+  {text:'ท่านเคยสงสัยหรือไม่ว่าลูกของท่านอาจมีปัญหาด้านการมองเห็น', riskYes:true}
+];
+
+const ASSESSMENTS = {
+  dspm:{
+    code:'DSPM', title:'DSPM', full:'ประเมินพัฒนาการเด็กตามวัย',
+    sub:'เลือกช่วงอายุของเด็ก แล้วประเมินพัฒนาการ 5 ด้าน ตามรายการข้างล่างนี้',
+    type:'milestone', ages:[9,18,30,42,60], itemsSet:DSPM_ITEMS, itemsPerDomain:1
+  },
+  denver:{
+    code:'Denver II', title:'Denver II', full:'ประเมินพัฒนาการเด็กแบบละเอียด',
+    sub:'แบบประเมินพัฒนาการฉบับย่อ ดัดแปลงจาก Denver II ครอบคลุม 5 ด้าน ในแต่ละช่วงอายุมี 2 ข้อย่อยต่อด้าน',
+    type:'milestone', ages:[12,24,48], itemsSet:DENVER_ITEMS, itemsPerDomain:1
+  },
+  sdq:{
+    code:'SDQ', title:'SDQ', full:'จุดแข็งจุดอ่อนด้านพฤติกรรม',
+    sub:'สำหรับผู้ปกครองหรือครูประเมินพฤติกรรมเด็ก/วัยรุ่นในช่วง 6 เดือนที่ผ่านมา',
+    type:'sdq'
+  },
+  adhd:{
+    code:'ADHD', title:'ADHD Screening', full:'คัดกรองภาวะสมาธิสั้น',
+    sub:'ประเมินความถี่ของพฤติกรรมในช่วง 6 เดือนที่ผ่านมา (สำหรับผู้ปกครอง/ครู)',
+    type:'sum', options:scale4,
+    questions:[
+      'ไม่สามารถจดจ่อกับรายละเอียดหรือทำผิดพลาดจากความไม่รอบคอบ',
+      'มีปัญหาในการรักษาสมาธิขณะทำงานหรือเล่น',
+      'ดูเหมือนไม่ฟังเวลาพูดด้วยโดยตรง',
+      'ทำตามคำสั่งหรือทำงานที่ได้รับมอบหมายไม่สำเร็จ',
+      'มีปัญหาในการจัดระเบียบงานหรือกิจกรรม',
+      'หลีกเลี่ยงงานที่ต้องใช้ความคิดต่อเนื่อง',
+      'ทำของใช้ส่วนตัวหรืออุปกรณ์การเรียนหายบ่อย',
+      'วอกแวกง่ายจากสิ่งเร้าภายนอก',
+      'ขี้ลืมในกิจวัตรประจำวัน',
+      'ขยับมือหรือเท้าไม่หยุด หรือนั่งไม่นิ่งบนเก้าอี้',
+      'ลุกจากที่นั่งในสถานการณ์ที่ควรนั่งอยู่กับที่',
+      'วิ่งหรือปีนป่ายในสถานการณ์ที่ไม่เหมาะสม',
+      'เล่นหรือทำกิจกรรมอย่างเงียบ ๆ ได้ยาก',
+      'ดูเหมือน "ตัวติดเครื่องยนต์" เคลื่อนไหวอยู่ตลอดเวลา',
+      'พูดมากเกินไป',
+      'พูดโพล่งคำตอบก่อนที่คำถามจะจบ',
+      'รอคอยตามลำดับได้ยาก',
+      'ขัดจังหวะหรือแทรกแซงผู้อื่นบ่อย'
+    ],
+    bands:[
+      {min:0,max:18,label:'ไม่พบความเสี่ยงชัดเจน',color:'var(--teal)',
+        advice:'พฤติกรรมโดยรวมอยู่ในเกณฑ์ปกติ ยังคงสังเกตพฤติกรรมอย่างต่อเนื่อง'},
+      {min:19,max:31,label:'มีความเสี่ยงระดับเล็กน้อยถึงปานกลาง',color:'var(--gold)',
+        advice:'พบพฤติกรรมบางอย่างที่อาจเข้าเกณฑ์สมาธิสั้น ควรสังเกตอาการต่อเนื่องอย่างน้อย 6 เดือนในหลายสถานการณ์ (บ้าน/โรงเรียน) และปรึกษาครูหรือเจ้าหน้าที่สาธารณสุข'},
+      {min:32,max:54,label:'มีความเสี่ยงสูง',color:'var(--coral)',
+        advice:'พบพฤติกรรมที่เข้าเกณฑ์ความเสี่ยงสูงต่อภาวะสมาธิสั้น ควรพาไปพบกุมารแพทย์หรือจิตแพทย์เด็กเพื่อรับการประเมินอย่างละเอียด'}
+    ]
+  },
+  mchat:{
+    code:'M-CHAT', title:'M-CHAT', full:'ประเมินภาวะออทิสติก',
+    sub:'สำหรับผู้ปกครองเด็กอายุ 16–30 เดือน ดัดแปลงจาก M-CHAT-R เพื่อคัดกรองความเสี่ยงภาวะออทิสติกสเปกตรัมเบื้องต้น',
+    type:'mchat'
+  }
+};
+
+let currentId = null;
+let currentAnswers = [];
+let currentDomainMap = [];
+let currentAgeSelected = null;
+let lastResult = null;
+
+function initGrid(){
+  const grid = document.getElementById('view-grid');
+  grid.innerHTML = '';
+  Object.keys(ASSESSMENTS).forEach(id=>{
+    const a = ASSESSMENTS[id];
+    let qcount;
+    if(a.type==='milestone') qcount = a.ages.length*5 + ' ข้อ (ตามช่วงอายุ)';
+    else if(a.type==='sdq') qcount = SDQ_ITEMS.length+' ข้อ';
+    else if(a.type==='mchat') qcount = MCHAT_ITEMS.length+' ข้อ';
+    else qcount = a.questions.length+' ข้อ';
+
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.onclick = ()=>openAssessment(id);
+    card.innerHTML = `
+      <div class="icon">${a.code.length>7? a.code.slice(0,6):a.code}</div>
+      <div class="code">${a.title}</div>
+      <div class="desc">${a.full}</div>
+      <div class="qcount">${qcount}</div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function showGrid(){
+  document.getElementById('view-grid').style.display = 'grid';
+  document.getElementById('view-quiz').style.display = 'none';
+  document.getElementById('view-result').style.display = 'none';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function openAssessment(id){
+  currentId = id;
+  const a = ASSESSMENTS[id];
+  document.getElementById('quizTitle').textContent = `${a.title} — ${a.full}`;
+  document.getElementById('quizSub').textContent = a.sub;
+  document.getElementById('questionList').innerHTML = '';
+  document.getElementById('ageSelectWrap').style.display = 'none';
+  document.getElementById('submitBtn').disabled = true;
+  document.getElementById('progressFill').style.width = '0%';
+  document.getElementById('progressHint').textContent = '';
+
+  if(a.type === 'milestone'){
+    currentAgeSelected = null;
+    const ageWrap = document.getElementById('ageSelectWrap');
+    const ageSel = document.getElementById('ageSelect');
+    ageSel.innerHTML = '';
+    a.ages.forEach(age=>{
+      const chip = document.createElement('div');
+      chip.className = 'age-chip';
+      chip.textContent = age+' เดือน';
+      chip.onclick = ()=>selectAge(age);
+      chip.id = 'agechip-'+age;
+      ageSel.appendChild(chip);
+    });
+    ageWrap.style.display = 'block';
+  } else if(a.type === 'sdq'){
+    renderSimpleList(SDQ_ITEMS.map(it=>({text:it.text, options:sdq3(it.rev)})));
+  } else if(a.type === 'mchat'){
+    renderSimpleList(MCHAT_ITEMS.map(it=>({text:it.text, options:yn(it.riskYes?1:0)})));
+  } else {
+    renderSimpleList(a.questions.map(t=>({text:t, options:a.options})));
+  }
+
+  document.getElementById('view-grid').style.display = 'none';
+  document.getElementById('view-result').style.display = 'none';
+  document.getElementById('view-quiz').style.display = 'block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function selectAge(age){
+  currentAgeSelected = age;
+  document.querySelectorAll('.age-chip').forEach(c=>c.classList.remove('selected'));
+  document.getElementById('agechip-'+age).classList.add('selected');
+
+  const a = ASSESSMENTS[currentId];
+  const items = a.itemsSet[age];
+  currentDomainMap = [];
+  const qs = items.map((text,i)=>{ currentDomainMap.push(i); return {text:`[${DOMAINS[i]}] ${text}`, options:yesNoPass}; });
+  renderSimpleList(qs);
+}
+
+function renderSimpleList(qs){
+  currentAnswers = new Array(qs.length).fill(null);
+  const list = document.getElementById('questionList');
+  list.innerHTML = '';
+  qs.forEach((q,i)=>{
+    const block = document.createElement('div');
+    block.className = 'question';
+    let optsHtml = '';
+    q.options.forEach((opt,j)=>{
+      optsHtml += `
+        <label class="opt" id="opt-${i}-${j}">
+          <input type="radio" name="q${i}" value="${opt.score}" onchange="selectOpt(${i},${j},${opt.score})">
+          ${opt.label}
+        </label>`;
+    });
+    block.innerHTML = `<div class="qtext">${i+1}. ${q.text}</div><div class="options">${optsHtml}</div>`;
+    list.appendChild(block);
+  });
+  updateProgress();
+}
+
+function selectOpt(i,j,score){
+  currentAnswers[i] = score;
+  document.querySelectorAll(`[id^="opt-${i}-"]`).forEach(el=>el.classList.remove('selected'));
+  document.getElementById(`opt-${i}-${j}`).classList.add('selected');
+  updateProgress();
+}
+
+function updateProgress(){
+  const total = currentAnswers.length;
+  if(total===0){ document.getElementById('submitBtn').disabled = true; return; }
+  const answered = currentAnswers.filter(v=>v!==null).length;
+  const pct = Math.round((answered/total)*100);
+  document.getElementById('progressFill').style.width = pct+'%';
+  document.getElementById('progressHint').textContent = `ตอบแล้ว ${answered} จาก ${total} ข้อ`;
+  document.getElementById('submitBtn').disabled = answered < total;
+}
+
+function submitQuiz(){
+  const a = ASSESSMENTS[currentId];
+  document.getElementById('domainResultsWrap').innerHTML = '';
+  document.getElementById('resultCrisis').style.display = 'none';
+
+  if(a.type === 'milestone'){
+    renderMilestoneResult(a);
+  } else if(a.type === 'sdq'){
+    renderSdqResult(a);
+  } else if(a.type === 'mchat'){
+    renderMchatResult(a);
+  } else {
+    const score = currentAnswers.reduce((s,v)=>s+v,0);
+    const band = a.bands.find(b=>score>=b.min && score<=b.max) || a.bands[a.bands.length-1];
+    document.getElementById('resultCode').textContent = a.code;
+    document.getElementById('resultTitle').textContent = a.full;
+    document.getElementById('resultScore').textContent = score;
+    document.getElementById('resultScore').style.color = band.color;
+    document.getElementById('resultScoreLabel').textContent = 'คะแนนรวม';
+    document.getElementById('resultBadgeWrap').innerHTML = `<span class="level-badge" style="background:${band.color}">${band.label}</span>`;
+
+    let extra = '';
+    if(currentId === 'adhd'){
+      const inattn = currentAnswers.slice(0,9).reduce((s,v)=>s+v,0);
+      const hyper = currentAnswers.slice(9,18).reduce((s,v)=>s+v,0);
+      extra = `<br><br><b>แยกตามกลุ่มอาการ:</b> ขาดสมาธิ ${inattn}/27 · อยู่ไม่นิ่ง/หุนหันพลันแล่น ${hyper}/27`;
+    }
+    document.getElementById('resultAdvice').innerHTML = `<b>คำแนะนำ:</b> ${band.advice}${extra}`;
+    lastResult = {code:a.code, full:a.full, score:score, levelLabel:band.label,
+      dateStr:new Date().toLocaleDateString('th-TH',{year:'numeric',month:'long',day:'numeric'})};
+  }
+
+  document.getElementById('view-quiz').style.display = 'none';
+  document.getElementById('view-result').style.display = 'block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function renderMilestoneResult(a){
+  const failedDomains = [];
+  const passedDomains = [];
+  currentAnswers.forEach((val,i)=>{
+    const domainName = DOMAINS[currentDomainMap[i]];
+    if(val === 1) passedDomains.push(domainName); else failedDomains.push(domainName);
+  });
+  const uniqueFailed = [...new Set(failedDomains)];
+  const totalItems = currentAnswers.length;
+  const passedCount = currentAnswers.filter(v=>v===1).length;
+
+  document.getElementById('resultCode').textContent = a.code;
+  document.getElementById('resultTitle').textContent = `${a.full} (อายุ ${currentAgeSelected} เดือน)`;
+  document.getElementById('resultScore').textContent = `${passedCount}/${totalItems}`;
+  document.getElementById('resultScore').style.color = uniqueFailed.length===0 ? 'var(--teal)' : 'var(--coral)';
+  document.getElementById('resultScoreLabel').textContent = 'จำนวนข้อที่ผ่านตามวัย';
+
+  let badgeColor = uniqueFailed.length===0 ? 'var(--teal)' : (uniqueFailed.length<=2 ? 'var(--gold)' : 'var(--coral)');
+  let badgeLabel = uniqueFailed.length===0 ? 'พัฒนาการสมวัย' : `ควรกระตุ้นพัฒนาการ ${uniqueFailed.length} ด้าน`;
+  document.getElementById('resultBadgeWrap').innerHTML = `<span class="level-badge" style="background:${badgeColor}">${badgeLabel}</span>`;
+
+  let rowsHtml = '';
+  DOMAINS.forEach(d=>{
+    const relatedAnswers = currentAnswers.filter((v,i)=>DOMAINS[currentDomainMap[i]]===d);
+    if(relatedAnswers.length===0) return;
+    const allPass = relatedAnswers.every(v=>v===1);
+    rowsHtml += `<div class="domain-result-row"><span>${d}</span><span class="tag" style="background:${allPass?'var(--teal)':'var(--coral)'}">${allPass?'ผ่าน':'ควรติดตาม'}</span></div>`;
+  });
+  document.getElementById('domainResultsWrap').innerHTML = `<div class="domain-results">${rowsHtml}</div>`;
+
+  const advice = uniqueFailed.length===0
+    ? 'พัฒนาการของเด็กอยู่ในเกณฑ์สมวัยครบทุกด้าน ควรส่งเสริมพัฒนาการต่อเนื่องด้วยการเล่นและพูดคุยกับเด็กสม่ำเสมอ'
+    : `พบด้านที่ควรได้รับการกระตุ้นเพิ่มเติม ได้แก่ ${uniqueFailed.join(', ')} แนะนำให้ อสม./ผู้ปกครองกระตุ้นพัฒนาการด้านดังกล่าวอย่างสม่ำเสมอ และนัดติดตามซ้ำใน 1 เดือน หากยังไม่ผ่านควรส่งพบกุมารแพทย์`;
+  document.getElementById('resultAdvice').innerHTML = `<b>คำแนะนำ:</b> ${advice}`;
+
+  lastResult = {code:a.code, full:`${a.full} (อายุ ${currentAgeSelected} เดือน)`, score:`${passedCount}/${totalItems}`,
+    levelLabel:badgeLabel, dateStr:new Date().toLocaleDateString('th-TH',{year:'numeric',month:'long',day:'numeric'})};
+}
+
+function renderSdqResult(a){
+  let difficultiesTotal = 0, prosocialTotal = 0;
+  const subTotals = {E:0,C:0,H:0,P:0};
+  SDQ_ITEMS.forEach((item,i)=>{
+    const val = currentAnswers[i];
+    if(item.sub === 'Pro'){ prosocialTotal += val; }
+    else { difficultiesTotal += val; subTotals[item.sub] += val; }
+  });
+
+  let band;
+  if(difficultiesTotal <= 13) band = {label:'อยู่ในเกณฑ์ปกติ', color:'var(--teal)'};
+  else if(difficultiesTotal <= 16) band = {label:'อยู่ในเกณฑ์ก้ำกึ่ง', color:'var(--gold)'};
+  else band = {label:'อยู่ในเกณฑ์ผิดปกติ ควรติดตาม', color:'var(--coral)'};
+
+  document.getElementById('resultCode').textContent = a.code;
+  document.getElementById('resultTitle').textContent = a.full;
+  document.getElementById('resultScore').textContent = difficultiesTotal;
+  document.getElementById('resultScore').style.color = band.color;
+  document.getElementById('resultScoreLabel').textContent = 'คะแนนความยากลำบากโดยรวม (Total Difficulties, เต็ม 40)';
+  document.getElementById('resultBadgeWrap').innerHTML = `<span class="level-badge" style="background:${band.color}">${band.label}</span>`;
+
+  document.getElementById('resultAdvice').innerHTML = `<b>คำแนะนำ:</b> คะแนนแยกตามด้าน — อารมณ์ ${subTotals.E}/10 · ความประพฤติ ${subTotals.C}/10 · สมาธิสั้น/อยู่ไม่นิ่ง ${subTotals.H}/10 · ปัญหาเพื่อน ${subTotals.P}/10 · พฤติกรรมทางบวก (Prosocial) ${prosocialTotal}/10<br><br>
+    ${difficultiesTotal>16 ? 'คะแนนโดยรวมเข้าเกณฑ์ที่ควรปรึกษาเจ้าหน้าที่สาธารณสุขหรือนักจิตวิทยาเพื่อประเมินเพิ่มเติม' : 'ควรสังเกตพฤติกรรมอย่างต่อเนื่องและให้กำลังใจในด้านที่เด็กทำได้ดี'}`;
+
+  lastResult = {code:a.code, full:a.full, score:difficultiesTotal, levelLabel:band.label,
+    dateStr:new Date().toLocaleDateString('th-TH',{year:'numeric',month:'long',day:'numeric'})};
+}
+
+function renderMchatResult(a){
+  let riskScore = 0;
+  let criticalHit = false;
+  MCHAT_ITEMS.forEach((item,i)=>{
+    if(currentAnswers[i] === 1){ riskScore++; if(item.critical) criticalHit = true; }
+  });
+
+  let band;
+  if(riskScore <= 2) band = {label:'ความเสี่ยงต่ำ', color:'var(--teal)'};
+  else if(riskScore <= 7) band = {label:'ความเสี่ยงปานกลาง', color:'var(--gold)'};
+  else band = {label:'ความเสี่ยงสูง', color:'var(--coral)'};
+
+  document.getElementById('resultCode').textContent = a.code;
+  document.getElementById('resultTitle').textContent = a.full;
+  document.getElementById('resultScore').textContent = riskScore;
+  document.getElementById('resultScore').style.color = band.color;
+  document.getElementById('resultScoreLabel').textContent = 'คะแนนความเสี่ยงรวม (เต็ม 20)';
+  document.getElementById('resultBadgeWrap').innerHTML = `<span class="level-badge" style="background:${band.color}">${band.label}</span>`;
+
+  let advice = '';
+  if(riskScore <= 2){
+    advice = 'ความเสี่ยงต่ำต่อภาวะออทิสติกสเปกตรัมในขณะนี้ ยังคงสังเกตพัฒนาการต่อเนื่อง';
+  } else if(riskScore <= 7){
+    advice = 'มีความเสี่ยงระดับปานกลาง แนะนำให้เจ้าหน้าที่สาธารณสุขสัมภาษณ์เพิ่มเติมตามข้อที่ตอบเสี่ยง (M-CHAT-R Follow-Up) ก่อนตัดสินใจส่งต่อ';
+  } else {
+    advice = 'มีความเสี่ยงสูง ควรส่งต่อพบกุมารแพทย์หรือคลินิกพัฒนาการเด็กเพื่อประเมินอย่างละเอียดโดยเร็ว โดยไม่จำเป็นต้องรอสัมภาษณ์เพิ่มเติมก่อน';
+  }
+  if(criticalHit && riskScore <= 7){
+    advice += ' (พบคำตอบเสี่ยงในข้อคำถามสำคัญ ควรให้ความสำคัญเป็นพิเศษแม้คะแนนรวมจะไม่สูงมาก)';
+  }
+  document.getElementById('resultAdvice').innerHTML = `<b>คำแนะนำ:</b> ${advice}`;
+  document.getElementById('resultCrisis').style.display = riskScore>=8 ? 'block' : 'none';
+
+  lastResult = {code:a.code, full:a.full, score:riskScore, levelLabel:band.label,
+    dateStr:new Date().toLocaleDateString('th-TH',{year:'numeric',month:'long',day:'numeric'})};
+}
+
+function emailResult(){
+  if(!lastResult) return;
+  const to = document.getElementById('emailTo').value.trim();
+  if(!to){ alert('กรุณากรอกอีเมลผู้รับ'); return; }
+
+  const {code, full, score, levelLabel, dateStr} = lastResult;
+  const subject = `ผลแบบประเมิน ${code} — ${full}`;
+  const body =
+`ผลแบบประเมินพัฒนาการและพฤติกรรม (Mental Health Cyber-Care)
+
+แบบประเมิน: ${code} (${full})
+วันที่ทำแบบประเมิน: ${dateStr}
+คะแนน/ผลประเมิน: ${score}
+ระดับผล: ${levelLabel}
+
+หมายเหตุ: ผลนี้เป็นการคัดกรองเบื้องต้นเท่านั้น ไม่ใช่การวินิจฉัยโรค ควรใช้ร่วมกับดุลยพินิจของแพทย์หรือเจ้าหน้าที่สาธารณสุข
+สายด่วนสุขภาพจิต 1323 (ฟรี ตลอด 24 ชม.)`;
+
+  const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  window.open(gmailUrl, '_blank');
+}
+
+initGrid();
+showGrid();
+</script>
+</body>
+</html>
