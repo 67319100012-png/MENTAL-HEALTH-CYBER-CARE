@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>แบบประเมินด้านจิตสังคมและความเป็นอยู่ที่ดี</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-sage:#AFC4A2; --bg-sage-deep:#8FAA82;
+    --surface:#FBFAF5; --surface-alt:#F1EEE3;
+    --ink:#2B3A2E; --ink-soft:#5B6B5A;
+    --teal:#357B72; --teal-deep:#245A53;
+    --gold:#B98A2E; --coral:#C85A3F; --coral-soft:#F3DCD3;
+    --line:#D9DFCE; --radius:18px; --shadow:0 10px 30px rgba(40,58,42,0.14);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:linear-gradient(180deg,var(--bg-sage) 0%,var(--bg-sage-deep) 100%);font-family:'Sarabun',sans-serif;color:var(--ink);min-height:100vh;padding-bottom:40px;}
+  h1,h2,h3,.display{font-family:'Kanit',sans-serif;}
+
+  .hotline-bar{background:var(--teal-deep);color:#fff;text-align:center;padding:9px 16px;font-size:14px;}
+  .hotline-bar b{color:#F4D8A8;}
+
+  header.top{max-width:920px;margin:0 auto;padding:36px 24px 18px;text-align:center;}
+  header.top .eyebrow{font-size:13px;letter-spacing:2px;color:var(--teal-deep);font-weight:600;margin-bottom:8px;}
+  header.top h1{font-size:24px;margin:0 0 10px;}
+  header.top p{font-size:15px;color:var(--ink-soft);max-width:640px;margin:0 auto;line-height:1.7;}
+
+  main{max-width:920px;margin:0 auto;padding:10px 20px 20px;}
+
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px;}
+  @media (max-width:720px){ .grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:460px){ .grid{grid-template-columns:1fr;} }
+
+  .card{background:var(--surface);border-radius:var(--radius);padding:22px 18px;text-align:center;box-shadow:var(--shadow);cursor:pointer;border:1px solid transparent;transition:transform .18s ease, border-color .18s ease;}
+  .card:hover{transform:translateY(-4px);border-color:var(--teal);}
+  .card .icon{width:56px;height:56px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-family:'Kanit',sans-serif;font-weight:600;font-size:12px;}
+  .card .code{font-family:'Kanit',sans-serif;font-weight:600;font-size:16px;margin-bottom:4px;}
+  .card .desc{font-size:12.5px;color:var(--ink-soft);line-height:1.5;margin-bottom:12px;}
+  .card .qcount{display:inline-block;font-size:11.5px;color:var(--teal-deep);background:#E4EFE0;border-radius:20px;padding:3px 10px;}
+
+  .panel{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px 26px;margin-top:20px;}
+  .btn-ghost-back{background:none;border:1.5px solid var(--teal-deep);color:var(--teal-deep);padding:9px 22px;border-radius:30px;font-family:'Sarabun',sans-serif;font-size:14px;font-weight:600;cursor:pointer;margin-bottom:16px;}
+  .quiz-title{font-size:22px;margin:0 0 4px;}
+  .quiz-sub{font-size:13.5px;color:var(--ink-soft);margin:0 0 18px;line-height:1.6;}
+  .staff-banner{background:#EFE6CF;border:1px solid var(--gold);border-radius:12px;padding:12px 16px;font-size:13px;line-height:1.7;color:#5c470f;margin-bottom:18px;}
+
+  .progress-wrap{background:var(--surface-alt);border-radius:20px;height:8px;overflow:hidden;margin-bottom:24px;}
+  .progress-fill{background:var(--teal);height:100%;width:0%;transition:width .25s ease;}
+
+  .domain-heading{font-family:'Kanit',sans-serif;font-size:13px;font-weight:600;color:var(--teal-deep);margin:20px 0 6px;padding-top:14px;border-top:1px solid var(--line);}
+  .domain-heading:first-child{border-top:none;padding-top:0;margin-top:0;}
+
+  .question{padding:14px 0;border-top:1px solid var(--line);}
+  .question:first-of-type{border-top:none;}
+  .question .qtext{font-size:15px;line-height:1.6;margin-bottom:10px;}
+  .options{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;font-size:14px;transition:border-color .15s, background .15s;}
+  .opt:hover{border-color:var(--teal);}
+  .opt input{accent-color:var(--teal);width:16px;height:16px;flex:none;}
+  .opt.selected{border-color:var(--teal);background:#EAF3E9;font-weight:600;}
+
+  .submit-row{margin-top:22px;text-align:center;}
+  .btn-primary{background:var(--teal-deep);color:#fff;border:none;padding:13px 30px;border-radius:30px;font-family:'Sarabun',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:background .15s, opacity .15s;}
+  .btn-primary:hover{background:var(--teal);}
+  .btn-primary:disabled{opacity:.4;cursor:not-allowed;}
+  .btn-ghost{background:none;border:1.5px solid var(--teal-deep);color:var(--teal-deep);padding:11px 26px;border-radius:30px;font-family:'Sarabun',sans-serif;font-size:14.5px;font-weight:600;cursor:pointer;}
+  .hint{text-align:center;font-size:12.5px;color:var(--ink-soft);margin-top:10px;}
+
+  .result-head{text-align:center;margin-bottom:6px;}
+  .score-big{font-family:'Kanit',sans-serif;font-size:44px;font-weight:700;text-align:center;margin:2px 0 0;}
+  .score-label{text-align:center;font-size:13px;color:var(--ink-soft);margin-bottom:18px;}
+  .level-badge{display:block;width:fit-content;margin:0 auto 20px;padding:7px 18px;border-radius:30px;font-family:'Kanit',sans-serif;font-weight:600;font-size:14.5px;color:#fff;}
+  .advice-box{background:var(--surface-alt);border-radius:14px;padding:18px 20px;font-size:14.5px;line-height:1.75;margin-bottom:14px;}
+  .advice-box b{color:var(--teal-deep);}
+
+  .dim-bars{margin:18px 0;}
+  .dim-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;font-size:13px;}
+  .dim-row .dname{width:110px;flex:none;color:var(--ink-soft);}
+  .dim-row .bar-track{flex:1;height:10px;background:var(--surface-alt);border-radius:10px;overflow:hidden;}
+  .dim-row .bar-fill{height:100%;background:var(--teal);}
+  .dim-row .dval{width:38px;flex:none;text-align:right;font-weight:600;font-family:'Kanit',sans-serif;}
+
+  .email-box{background:var(--surface-alt);border-radius:14px;padding:16px 18px;margin-bottom:6px;}
+  .email-box label{display:block;font-size:13px;font-weight:600;color:var(--teal-deep);margin-bottom:8px;}
+  .email-row{display:flex;gap:10px;flex-wrap:wrap;}
+  .email-row input{flex:1;min-width:220px;padding:10px 14px;border-radius:10px;border:1px solid var(--line);font-family:'Sarabun',sans-serif;font-size:14px;background:#fff;}
+  .email-row input:focus{outline:2px solid var(--teal);border-color:var(--teal);}
+  .email-row .btn-ghost{white-space:nowrap;}
+
+  .result-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:20px;}
+  footer.note{max-width:920px;margin:26px auto 0;padding:0 24px;text-align:center;font-size:12px;color:var(--ink);opacity:.75;line-height:1.7;}
+</style>
+</head>
+<body>
+
+<div class="hotline-bar">สายด่วนสุขภาพจิต <b>1323</b> ให้บริการฟรีตลอด 24 ชั่วโมง</div>
+
+<header class="top">
+  <div class="eyebrow">MENTAL HEALTH CYBER-CARE</div>
+  <h1>แบบประเมินด้านจิตสังคมและความเป็นอยู่ที่ดี</h1>
+  <p>Psychosocial & Well-being Tests — ประเมินคุณภาพชีวิต ความสุข สัมพันธภาพในครอบครัว ภาวะหมดไฟ และการสนับสนุนทางสังคม ผลลัพธ์ใช้เพื่อความเข้าใจตนเองและวางแผนดูแลสุขภาพใจเบื้องต้น</p>
+</header>
+
+<main>
+  <section id="view-grid" class="grid"></section>
+
+  <section id="view-quiz" class="panel" style="display:none;">
+    <button class="btn-ghost-back" onclick="showGrid()">← ย้อนกลับ</button>
+    <h2 class="quiz-title" id="quizTitle"></h2>
+    <p class="quiz-sub" id="quizSub"></p>
+    <div id="quizNote" class="staff-banner" style="display:none;"></div>
+    <div class="progress-wrap"><div class="progress-fill" id="progressFill"></div></div>
+    <div id="questionList"></div>
+    <div class="submit-row">
+      <button class="btn-primary" id="submitBtn" disabled onclick="submitQuiz()">ดูผลการประเมิน</button>
+      <div class="hint" id="progressHint"></div>
+    </div>
+  </section>
+
+  <section id="view-result" class="panel" style="display:none;">
+    <button class="btn-ghost-back" onclick="showGrid()">← ย้อนกลับ</button>
+    <div class="result-head">
+      <div class="eyebrow" id="resultCode" style="color:var(--teal-deep);font-size:12.5px;letter-spacing:1.5px;font-weight:600;"></div>
+      <h2 class="quiz-title" id="resultTitle" style="margin-top:4px;"></h2>
+    </div>
+    <div class="score-big" id="resultScore"></div>
+    <div class="score-label" id="resultScoreLabel"></div>
+    <div id="resultBadgeWrap" style="text-align:center;"></div>
+    <div id="dimBarsWrap"></div>
+    <div class="advice-box" id="resultAdvice"></div>
+    <div class="email-box">
+      <label for="emailTo">ส่งผลไปที่อีเมล</label>
+      <div class="email-row">
+        <input type="email" id="emailTo" value="67319100012@Aitc.ac.th">
+        <button class="btn-ghost" onclick="emailResult()">✉ ส่งผลทางอีเมล</button>
+      </div>
+      <div class="hint">จะเปิดหน้าเขียนอีเมลของ Gmail ในแท็บใหม่ พร้อมกรอกผลให้อัตโนมัติ ท่านเพียงกดส่ง (ต้องเข้าสู่ระบบ Gmail ไว้ก่อน)</div>
+    </div>
+    <div class="result-actions">
+      <button class="btn-ghost" onclick="openAssessment(currentId)">ทำแบบประเมินนี้อีกครั้ง</button>
+      <button class="btn-primary" onclick="showGrid()">เลือกแบบประเมินอื่น</button>
+    </div>
+  </section>
+</main>
+
+<footer class="note">
+  แบบประเมินนี้ดัดแปลงจากเครื่องมือมาตรฐานที่ใช้ทั่วไปด้านจิตสังคมและความเป็นอยู่ที่ดี เพื่อการคัดกรองเบื้องต้นเท่านั้น ไม่ใช่การวินิจฉัยและไม่ทดแทนการประเมินโดยผู้เชี่ยวชาญ
+</footer>
+
+<script>
+const scale5 = [
+  {label:'น้อยที่สุด', score:1}, {label:'ค่อนข้างน้อย', score:2}, {label:'ปานกลาง', score:3},
+  {label:'ค่อนข้างมาก', score:4}, {label:'มากที่สุด', score:5}
+];
+const scale4freq = [
+  {label:'ไม่เคยเลย', score:0}, {label:'นาน ๆ ครั้ง', score:1}, {label:'บ่อยครั้ง', score:2}, {label:'เป็นประจำ', score:3}
+];
+const scale3agree = [ {label:'แทบไม่เคย', score:0}, {label:'บางครั้ง', score:1}, {label:'เกือบทุกครั้ง', score:2} ];
+const burnoutScale = (reverse)=> reverse ? [
+  {label:'ไม่เคยเลย', score:3}, {label:'นาน ๆ ครั้ง', score:2}, {label:'บ่อยครั้ง', score:1}, {label:'เกือบทุกวัน', score:0}
+] : [
+  {label:'ไม่เคยเลย', score:0}, {label:'นาน ๆ ครั้ง', score:1}, {label:'บ่อยครั้ง', score:2}, {label:'เกือบทุกวัน', score:3}
+];
+const agree4 = [
+  {label:'ไม่เห็นด้วยเลย', score:0}, {label:'ไม่ค่อยเห็นด้วย', score:1}, {label:'ค่อนข้างเห็นด้วย', score:2}, {label:'เห็นด้วยอย่างยิ่ง', score:3}
+];
+
+const WHOQOL_ITEMS = [
+  {text:'ท่านให้คะแนนคุณภาพชีวิตโดยรวมของท่านอย่างไร', domain:'ทั่วไป', rev:false},
+  {text:'ท่านพึงพอใจกับสุขภาพของตนเองมากน้อยเพียงใด', domain:'ทั่วไป', rev:false},
+  {text:'ความเจ็บปวดทางร่างกายรบกวนการใช้ชีวิตประจำวันของท่านมากน้อยเพียงใด', domain:'ร่างกาย', rev:true},
+  {text:'ท่านต้องพึ่งพาการรักษาทางการแพทย์เพื่อดำเนินชีวิตประจำวันมากน้อยเพียงใด', domain:'ร่างกาย', rev:true},
+  {text:'ท่านมีพลังงานเพียงพอสำหรับการดำเนินชีวิตประจำวันมากน้อยเพียงใด', domain:'ร่างกาย', rev:false},
+  {text:'ท่านสามารถเคลื่อนไหวร่างกายได้คล่องแคล่วมากน้อยเพียงใด', domain:'ร่างกาย', rev:false},
+  {text:'ท่านพึงพอใจกับการนอนหลับของตนเองมากน้อยเพียงใด', domain:'ร่างกาย', rev:false},
+  {text:'ท่านสามารถทำกิจวัตรประจำวันได้ดีมากน้อยเพียงใด', domain:'ร่างกาย', rev:false},
+  {text:'ท่านมีความสามารถในการทำงานได้ดีมากน้อยเพียงใด', domain:'ร่างกาย', rev:false},
+  {text:'ท่านรู้สึกเพลิดเพลินกับชีวิตมากน้อยเพียงใด', domain:'จิตใจ', rev:false},
+  {text:'ท่านรู้สึกว่าชีวิตมีความหมายมากน้อยเพียงใด', domain:'จิตใจ', rev:false},
+  {text:'ท่านมีสมาธิในการทำสิ่งต่าง ๆ ได้ดีมากน้อยเพียงใด', domain:'จิตใจ', rev:false},
+  {text:'ท่านยอมรับรูปร่างหน้าตาของตนเองได้มากน้อยเพียงใด', domain:'จิตใจ', rev:false},
+  {text:'ท่านพึงพอใจในตัวเองมากน้อยเพียงใด', domain:'จิตใจ', rev:false},
+  {text:'ท่านมีความรู้สึกทางลบ เช่น เศร้า สิ้นหวัง วิตกกังวล บ่อยเพียงใด', domain:'จิตใจ', rev:true},
+  {text:'ท่านพึงพอใจกับความสัมพันธ์ส่วนตัวของท่านมากน้อยเพียงใด', domain:'สังคม', rev:false},
+  {text:'ท่านพึงพอใจกับชีวิตคู่หรือความสัมพันธ์ใกล้ชิดมากน้อยเพียงใด', domain:'สังคม', rev:false},
+  {text:'ท่านได้รับการสนับสนุนจากเพื่อนมากน้อยเพียงใด', domain:'สังคม', rev:false},
+  {text:'ท่านรู้สึกปลอดภัยในชีวิตประจำวันมากน้อยเพียงใด', domain:'สิ่งแวดล้อม', rev:false},
+  {text:'สภาพแวดล้อมทางกายภาพรอบตัวท่าน (อากาศ เสียง) เอื้อต่อสุขภาพมากน้อยเพียงใด', domain:'สิ่งแวดล้อม', rev:false},
+  {text:'ท่านมีเงินเพียงพอสำหรับความต้องการพื้นฐานมากน้อยเพียงใด', domain:'สิ่งแวดล้อม', rev:false},
+  {text:'ท่านสามารถเข้าถึงข้อมูลข่าวสารที่ต้องการในชีวิตประจำวันได้มากน้อยเพียงใด', domain:'สิ่งแวดล้อม', rev:false},
+  {text:'ท่านมีโอกาสทำกิจกรรมนันทนาการหรือผ่อนคลายมากน้อยเพียงใด', domain:'สิ่งแวดล้อม', rev:false},
+  {text:'สภาพที่อยู่อาศัยของท่านเอื้อต่อการดำรงชีวิตมากน้อยเพียงใด', domain:'สิ่งแวดล้อม', rev:false},
+  {text:'ท่านสามารถเข้าถึงบริการสาธารณสุขเมื่อจำเป็นได้มากน้อยเพียงใด', domain:'สิ่งแวดล้อม', rev:false},
+  {text:'ท่านพึงพอใจกับการเดินทาง/คมนาคมในพื้นที่ของท่านมากน้อยเพียงใด', domain:'สิ่งแวดล้อม', rev:false}
+];
+
+const HAPPY_ITEMS = [
+  {label:'Happy Body', text:'ท่านรู้สึกว่าร่างกายของท่านแข็งแรงเพียงพอสำหรับการดำเนินชีวิตประจำวัน'},
+  {label:'Happy Relax', text:'ท่านมีเวลาพักผ่อนคลายเครียดเพียงพอในแต่ละวัน'},
+  {label:'Happy Heart', text:'ท่านรู้สึกมีน้ำใจ เอื้อเฟื้อต่อผู้อื่น'},
+  {label:'Happy Soul', text:'ท่านรู้สึกมีที่ยึดเหนี่ยวทางใจ เช่น ศาสนาหรือหลักคิดในการดำเนินชีวิต'},
+  {label:'Happy Family', text:'ท่านรู้สึกอบอุ่นและได้รับการสนับสนุนจากครอบครัว'},
+  {label:'Happy Society', text:'ท่านรู้สึกเป็นส่วนหนึ่งของชุมชนหรือสังคมรอบตัว'},
+  {label:'Happy Brain', text:'ท่านมีโอกาสเรียนรู้สิ่งใหม่และพัฒนาตนเองอยู่เสมอ'},
+  {label:'Happy Money', text:'ท่านรู้สึกมั่นคงทางการเงินเพียงพอสำหรับการดำรงชีวิต'},
+  {label:'Happy Work', text:'ท่านพึงพอใจกับงานหรือกิจกรรมหลักที่ทำอยู่ในปัจจุบัน'}
+];
+
+const APGAR_ITEMS = [
+  'ฉันพึงพอใจที่สามารถขอความช่วยเหลือจากครอบครัวได้เมื่อมีปัญหา',
+  'ฉันพึงพอใจกับวิธีที่ครอบครัวพูดคุยและแบ่งปันปัญหาร่วมกัน',
+  'ฉันพึงพอใจที่ครอบครัวยอมรับและสนับสนุนความต้องการหรือกิจกรรมใหม่ ๆ ของฉัน',
+  'ฉันพึงพอใจกับวิธีที่ครอบครัวแสดงความรักและตอบสนองต่ออารมณ์ของฉัน เช่น ความโกรธ ความเศร้า ความรัก',
+  'ฉันพึงพอใจกับเวลาที่ฉันและครอบครัวใช้ร่วมกัน'
+];
+
+const BURNOUT_ITEMS = [
+  {text:'รู้สึกหมดแรงทางอารมณ์จากการทำงาน', rev:false},
+  {text:'รู้สึกเหนื่อยล้าตั้งแต่ตื่นนอนเมื่อต้องไปทำงาน', rev:false},
+  {text:'รู้สึกว่าตัวเองใช้พลังงานจนหมดไปกับงาน', rev:false},
+  {text:'รู้สึกกดดันหรือเครียดจากภาระงานที่มากเกินไป', rev:false},
+  {text:'รู้สึกเฉยชาหรือไม่แยแสต่อเพื่อนร่วมงานหรือผู้รับบริการมากขึ้น', rev:false},
+  {text:'รู้สึกความกระตือรือร้นในการทำงานลดลงอย่างชัดเจน', rev:false},
+  {text:'รู้สึกเบื่อหน่ายกับงานที่ทำอยู่', rev:false},
+  {text:'มองงานที่ทำเป็นเพียงภาระ ไม่มีความหมายเหมือนก่อน', rev:false},
+  {text:'รู้สึกว่าตนเองทำงานได้อย่างมีประสิทธิภาพ', rev:true},
+  {text:'รู้สึกภูมิใจในผลงานของตนเอง', rev:true},
+  {text:'รู้สึกว่าตนเองสามารถช่วยเหลือผู้อื่นได้ดีผ่านงานที่ทำ', rev:true},
+  {text:'รู้สึกมีพลังงานและแรงจูงใจในการทำงาน', rev:true}
+];
+
+const SOCSUP_ITEMS = [
+  {text:'ครอบครัวของฉันพยายามช่วยเหลือฉันอย่างแท้จริง', sub:'ครอบครัว'},
+  {text:'ฉันได้รับความช่วยเหลือทางอารมณ์และการสนับสนุนจากครอบครัวเมื่อต้องการ', sub:'ครอบครัว'},
+  {text:'ฉันสามารถพูดคุยเกี่ยวกับปัญหาของฉันกับครอบครัวได้', sub:'ครอบครัว'},
+  {text:'ครอบครัวของฉันเต็มใจช่วยฉันตัดสินใจ', sub:'ครอบครัว'},
+  {text:'เพื่อนของฉันพยายามช่วยเหลือฉันอย่างแท้จริง', sub:'เพื่อน'},
+  {text:'ฉันสามารถพึ่งพาเพื่อนได้เมื่อมีเรื่องไม่ดีเกิดขึ้น', sub:'เพื่อน'},
+  {text:'ฉันมีเพื่อนที่สามารถแบ่งปันความสุขและความทุกข์ได้', sub:'เพื่อน'},
+  {text:'ฉันสามารถพูดคุยเรื่องปัญหาของฉันกับเพื่อนได้', sub:'เพื่อน'},
+  {text:'มีบุคคลพิเศษที่อยู่เคียงข้างฉันเมื่อฉันต้องการ', sub:'บุคคลใกล้ชิด'},
+  {text:'มีบุคคลพิเศษที่ฉันสามารถแบ่งปันความสุขและความทุกข์ได้อย่างแท้จริง', sub:'บุคคลใกล้ชิด'},
+  {text:'มีบุคคลที่ใส่ใจความรู้สึกของฉัน', sub:'บุคคลใกล้ชิด'},
+  {text:'ฉันมีคนที่ช่วยเหลือฉันได้เมื่อมีปัญหา', sub:'บุคคลใกล้ชิด'}
+];
+
+const ASSESSMENTS = {
+  whoqol:{
+    code:'WHOQOL-BREF', title:'WHOQOL-BREF', full:'แบบประเมินคุณภาพชีวิต',
+    sub:'ประเมินคุณภาพชีวิตใน 4 ด้าน ได้แก่ ร่างกาย จิตใจ สังคม และสิ่งแวดล้อม (ดัดแปลงจากเครื่องมือขององค์การอนามัยโลก)',
+    type:'whoqol'
+  },
+  happy:{
+    code:'Happinometer', title:'Happinometer', full:'แบบประเมินความสุข',
+    sub:'ประเมินความสุข 9 มิติ ตามกรอบแนวคิด "ความสุข" ที่ใช้ในระบบสาธารณสุขไทย',
+    type:'sum', options:scale4freq,
+    questions: HAPPY_ITEMS.map(h=>`[${h.label}] ${h.text}`),
+    bands:[
+      {min:0,max:9,label:'ควรดูแลเพิ่มเติม',color:'var(--coral)',advice:'คะแนนความสุขโดยรวมค่อนข้างต่ำ ลองเลือกมิติที่คะแนนต่ำที่สุดมาดูแลก่อน และปรึกษา อสม. หรือคนใกล้ชิดหากต้องการคำแนะนำ'},
+      {min:10,max:18,label:'ระดับปานกลาง',color:'var(--gold)',advice:'มีความสุขในระดับปานกลาง ลองสำรวจว่ามิติใดยังต่ำอยู่และหาวิธีดูแลเพิ่มเติมในด้านนั้น'},
+      {min:19,max:27,label:'ระดับดี',color:'var(--teal)',advice:'มีความสุขโดยรวมอยู่ในระดับดี รักษาสมดุลในแต่ละด้านนี้ต่อไป'}
+    ]
+  },
+  apgar:{
+    code:'APGAR', title:'Family APGAR', full:'แบบประเมินสัมพันธภาพในครอบครัว',
+    sub:'ประเมินความพึงพอใจต่อสัมพันธภาพในครอบครัวใน 5 ด้าน',
+    type:'sum', options:scale3agree,
+    questions: APGAR_ITEMS,
+    bands:[
+      {min:0,max:3,label:'ครอบครัวมีปัญหาสัมพันธภาพสูง',color:'var(--coral)',advice:'ผลบ่งชี้ว่าสัมพันธภาพในครอบครัวอาจมีปัญหาค่อนข้างมาก แนะนำให้ปรึกษา อสม. หรือนักสังคมสงเคราะห์เพื่อหาแนวทางเสริมสร้างความสัมพันธ์'},
+      {min:4,max:6,label:'สัมพันธภาพระดับปานกลาง',color:'var(--gold)',advice:'สัมพันธภาพในครอบครัวอยู่ในระดับปานกลาง ลองหาเวลาพูดคุยและทำกิจกรรมร่วมกันมากขึ้น'},
+      {min:7,max:10,label:'สัมพันธภาพดี',color:'var(--teal)',advice:'สัมพันธภาพในครอบครัวอยู่ในเกณฑ์ดี รักษาความสัมพันธ์ที่ดีนี้ต่อไป'}
+    ]
+  },
+  burnout:{
+    code:'Burnout', title:'Burnout', full:'แบบประเมินภาวะหมดไฟ',
+    sub:'แบบคัดกรองภาวะหมดไฟในการทำงานฉบับดัดแปลง ครอบคลุมความอ่อนล้าทางอารมณ์ ทัศนคติต่องาน และความรู้สึกประสบความสำเร็จ (ไม่ใช่ Maslach Burnout Inventory ฉบับลิขสิทธิ์)',
+    type:'custom', items: BURNOUT_ITEMS.map(it=>({text:it.text, options:burnoutScale(it.rev)})),
+    bands:[
+      {min:0,max:12,label:'ความเสี่ยงต่ำ',color:'var(--teal)',advice:'ยังไม่พบสัญญาณของภาวะหมดไฟที่ชัดเจน ดูแลสมดุลชีวิตและการทำงานต่อไป'},
+      {min:13,max:24,label:'ความเสี่ยงปานกลาง',color:'var(--gold)',advice:'เริ่มมีสัญญาณของภาวะหมดไฟ ควรหาวิธีลดภาระงาน พักผ่อนให้เพียงพอ และพูดคุยกับหัวหน้างานหรือเพื่อนร่วมงาน'},
+      {min:25,max:36,label:'ความเสี่ยงสูง',color:'var(--coral)',advice:'มีความเสี่ยงสูงต่อภาวะหมดไฟในการทำงาน ควรปรับสมดุลชีวิตการทำงานอย่างจริงจัง และปรึกษาเจ้าหน้าที่สาธารณสุขหรือผู้เชี่ยวชาญด้านสุขภาพจิต'}
+    ]
+  },
+  socsupport:{
+    code:'Social Support', title:'Social Support', full:'แบบประเมินการสนับสนุนทางสังคม',
+    sub:'ประเมินการรับรู้การสนับสนุนทางสังคมจาก 3 แหล่ง ได้แก่ ครอบครัว เพื่อน และบุคคลใกล้ชิด',
+    type:'sum', options:agree4,
+    questions: SOCSUP_ITEMS.map(it=>it.text),
+    bands:[
+      {min:0,max:12,label:'ได้รับการสนับสนุนต่ำ',color:'var(--coral)',advice:'รู้สึกได้รับการสนับสนุนทางสังคมค่อนข้างน้อย ลองเริ่มเปิดใจพูดคุยกับคนใกล้ชิด หรือเข้าร่วมกิจกรรมชุมชนเพื่อสร้างเครือข่ายสนับสนุน'},
+      {min:13,max:24,label:'ได้รับการสนับสนุนปานกลาง',color:'var(--gold)',advice:'มีการสนับสนุนทางสังคมอยู่ในระดับปานกลาง ลองเสริมสร้างความสัมพันธ์ในด้านที่ยังขาดอยู่'},
+      {min:25,max:36,label:'ได้รับการสนับสนุนดี',color:'var(--teal)',advice:'มีเครือข่ายการสนับสนุนทางสังคมที่ดี รักษาความสัมพันธ์เหล่านี้ไว้และเป็นแรงสนับสนุนให้ผู้อื่นได้เช่นกัน'}
+    ]
+  }
+};
+
+let currentId = null;
+let currentAnswers = [];
+let lastResult = null;
+
+function initGrid(){
+  const grid = document.getElementById('view-grid');
+  grid.innerHTML = '';
+  Object.keys(ASSESSMENTS).forEach(id=>{
+    const a = ASSESSMENTS[id];
+    let qcount;
+    if(a.type==='whoqol') qcount = WHOQOL_ITEMS.length+' ข้อ';
+    else if(a.type==='custom') qcount = a.items.length+' ข้อ';
+    else qcount = a.questions.length+' ข้อ';
+
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.onclick = ()=>openAssessment(id);
+    card.innerHTML = `
+      <div class="icon">${a.code.slice(0,6)}</div>
+      <div class="code">${a.title}</div>
+      <div class="desc">${a.full}</div>
+      <div class="qcount">${qcount}</div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function showGrid(){
+  document.getElementById('view-grid').style.display = 'grid';
+  document.getElementById('view-quiz').style.display = 'none';
+  document.getElementById('view-result').style.display = 'none';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function openAssessment(id){
+  currentId = id;
+  const a = ASSESSMENTS[id];
+  document.getElementById('quizTitle').textContent = `${a.title} — ${a.full}`;
+  document.getElementById('quizSub').textContent = a.sub;
+  document.getElementById('quizNote').style.display = 'none';
+
+  const list = document.getElementById('questionList');
+  list.innerHTML = '';
+
+  let qs;
+  if(a.type === 'whoqol'){
+    qs = WHOQOL_ITEMS.map(it=>({text:it.text, options:scale5}));
+  } else if(a.type === 'custom'){
+    qs = a.items;
+  } else {
+    qs = a.questions.map(t=>({text:t, options:a.options}));
+  }
+
+  currentAnswers = new Array(qs.length).fill(null);
+  qs.forEach((q,i)=>{
+    const block = document.createElement('div');
+    block.className = 'question';
+    let optsHtml = '';
+    q.options.forEach((opt,j)=>{
+      optsHtml += `<label class="opt" id="opt-${i}-${j}"><input type="radio" name="q${i}" value="${opt.score}" onchange="selectOpt(${i},${j},${opt.score})">${opt.label}</label>`;
+    });
+    block.innerHTML = `<div class="qtext">${i+1}. ${q.text}</div><div class="options">${optsHtml}</div>`;
+    list.appendChild(block);
+  });
+
+  updateProgress();
+  document.getElementById('view-grid').style.display = 'none';
+  document.getElementById('view-result').style.display = 'none';
+  document.getElementById('view-quiz').style.display = 'block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function selectOpt(i,j,score){
+  currentAnswers[i] = score;
+  document.querySelectorAll(`[id^="opt-${i}-"]`).forEach(el=>el.classList.remove('selected'));
+  document.getElementById(`opt-${i}-${j}`).classList.add('selected');
+  updateProgress();
+}
+
+function updateProgress(){
+  const total = currentAnswers.length;
+  const answered = currentAnswers.filter(v=>v!==null).length;
+  const pct = total? Math.round((answered/total)*100) : 0;
+  document.getElementById('progressFill').style.width = pct+'%';
+  document.getElementById('progressHint').textContent = `ตอบแล้ว ${answered} จาก ${total} ข้อ`;
+  document.getElementById('submitBtn').disabled = answered < total;
+}
+
+function submitQuiz(){
+  const a = ASSESSMENTS[currentId];
+  document.getElementById('dimBarsWrap').innerHTML = '';
+
+  if(a.type === 'whoqol'){
+    renderWhoqolResult(a);
+  } else if(currentId === 'socsupport'){
+    renderSocSupportResult(a);
+  } else {
+    const score = currentAnswers.reduce((s,v)=>s+v,0);
+    const band = a.bands.find(b=>score>=b.min && score<=b.max) || a.bands[a.bands.length-1];
+    document.getElementById('resultCode').textContent = a.code;
+    document.getElementById('resultTitle').textContent = a.full;
+    document.getElementById('resultScore').textContent = score;
+    document.getElementById('resultScore').style.color = band.color;
+    document.getElementById('resultScoreLabel').textContent = 'คะแนนรวม';
+    document.getElementById('resultBadgeWrap').innerHTML = `<span class="level-badge" style="background:${band.color}">${band.label}</span>`;
+    document.getElementById('resultAdvice').innerHTML = `<b>คำแนะนำ:</b> ${band.advice}`;
+    lastResult = {code:a.code, full:a.full, score:score, levelLabel:band.label,
+      dateStr:new Date().toLocaleDateString('th-TH',{year:'numeric',month:'long',day:'numeric'})};
+  }
+
+  document.getElementById('view-quiz').style.display = 'none';
+  document.getElementById('view-result').style.display = 'block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function renderWhoqolResult(a){
+  const domainTotals = {};
+  const domainCounts = {};
+  WHOQOL_ITEMS.forEach((it,i)=>{
+    const raw = currentAnswers[i];
+    const val = it.rev ? (6-raw) : raw;
+    domainTotals[it.domain] = (domainTotals[it.domain]||0) + val;
+    domainCounts[it.domain] = (domainCounts[it.domain]||0) + 1;
+  });
+  const domainOrder = ['ทั่วไป','ร่างกาย','จิตใจ','สังคม','สิ่งแวดล้อม'];
+  let overallSum = 0, overallCount = 0;
+  let barsHtml = '';
+  domainOrder.forEach(d=>{
+    if(!domainTotals[d]) return;
+    const avg = domainTotals[d]/domainCounts[d]; // 1-5
+    const pct = Math.round((avg/5)*100);
+    overallSum += domainTotals[d]; overallCount += domainCounts[d];
+    barsHtml += `<div class="dim-row"><span class="dname">${d}</span><div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div><span class="dval">${pct}</span></div>`;
+  });
+  const overallPct = Math.round((overallSum/overallCount/5)*100);
+
+  let band;
+  if(overallPct < 50) band = {label:'ควรปรับปรุงคุณภาพชีวิต',color:'var(--coral)'};
+  else if(overallPct < 70) band = {label:'คุณภาพชีวิตระดับปานกลาง',color:'var(--gold)'};
+  else band = {label:'คุณภาพชีวิตระดับดี',color:'var(--teal)'};
+
+  document.getElementById('resultCode').textContent = a.code;
+  document.getElementById('resultTitle').textContent = a.full;
+  document.getElementById('resultScore').textContent = overallPct;
+  document.getElementById('resultScore').style.color = band.color;
+  document.getElementById('resultScoreLabel').textContent = 'คะแนนคุณภาพชีวิตโดยรวม (เต็ม 100)';
+  document.getElementById('resultBadgeWrap').innerHTML = `<span class="level-badge" style="background:${band.color}">${band.label}</span>`;
+  document.getElementById('dimBarsWrap').innerHTML = `<div class="dim-bars">${barsHtml}</div>`;
+  document.getElementById('resultAdvice').innerHTML = `<b>คำแนะนำ:</b> พิจารณาแถบคะแนนแต่ละด้านด้านบน ด้านที่มีคะแนนต่ำสุดคือด้านที่ควรให้ความสำคัญเป็นพิเศษก่อน หากคุณภาพชีวิตโดยรวมอยู่ในระดับต่ำต่อเนื่อง ควรปรึกษา อสม. หรือเจ้าหน้าที่สาธารณสุขในพื้นที่`;
+
+  lastResult = {code:a.code, full:a.full, score:overallPct+'/100', levelLabel:band.label,
+    dateStr:new Date().toLocaleDateString('th-TH',{year:'numeric',month:'long',day:'numeric'})};
+}
+
+function renderSocSupportResult(a){
+  const subTotals = {'ครอบครัว':0,'เพื่อน':0,'บุคคลใกล้ชิด':0};
+  SOCSUP_ITEMS.forEach((it,i)=>{ subTotals[it.sub] += currentAnswers[i]; });
+  const total = currentAnswers.reduce((s,v)=>s+v,0);
+  const band = a.bands.find(b=>total>=b.min && total<=b.max) || a.bands[a.bands.length-1];
+
+  document.getElementById('resultCode').textContent = a.code;
+  document.getElementById('resultTitle').textContent = a.full;
+  document.getElementById('resultScore').textContent = total;
+  document.getElementById('resultScore').style.color = band.color;
+  document.getElementById('resultScoreLabel').textContent = 'คะแนนรวม';
+  document.getElementById('resultBadgeWrap').innerHTML = `<span class="level-badge" style="background:${band.color}">${band.label}</span>`;
+
+  let barsHtml = '';
+  Object.keys(subTotals).forEach(k=>{
+    const pct = Math.round((subTotals[k]/12)*100);
+    barsHtml += `<div class="dim-row"><span class="dname">${k}</span><div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div><span class="dval">${subTotals[k]}/12</span></div>`;
+  });
+  document.getElementById('dimBarsWrap').innerHTML = `<div class="dim-bars">${barsHtml}</div>`;
+  document.getElementById('resultAdvice').innerHTML = `<b>คำแนะนำ:</b> ${band.advice}`;
+
+  lastResult = {code:a.code, full:a.full, score:total, levelLabel:band.label,
+    dateStr:new Date().toLocaleDateString('th-TH',{year:'numeric',month:'long',day:'numeric'})};
+}
+
+function emailResult(){
+  if(!lastResult) return;
+  const to = document.getElementById('emailTo').value.trim();
+  if(!to){ alert('กรุณากรอกอีเมลผู้รับ'); return; }
+  const {code, full, score, levelLabel, dateStr} = lastResult;
+  const subject = `ผลแบบประเมิน ${code} — ${full}`;
+  const body =
+`ผลแบบประเมินด้านจิตสังคมและความเป็นอยู่ที่ดี (Mental Health Cyber-Care)
+
+แบบประเมิน: ${code} (${full})
+วันที่ทำแบบประเมิน: ${dateStr}
+ผลคะแนน: ${score}
+ระดับผล: ${levelLabel}
+
+หมายเหตุ: ผลนี้เป็นการคัดกรองเบื้องต้นเท่านั้น ไม่ใช่การวินิจฉัยโรค
+สายด่วนสุขภาพจิต 1323 (ฟรี ตลอด 24 ชม.)`;
+  const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  window.open(gmailUrl, '_blank');
+}
+
+initGrid();
+showGrid();
+</script>
+</body>
+</html>
