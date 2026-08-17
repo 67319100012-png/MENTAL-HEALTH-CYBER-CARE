@@ -69,10 +69,10 @@
 
   /* Header & Navbar สไตล์ Glassmorphism */
   header.nav-header {
-    background: rgba(255, 255, 255, 0.88);
+    background: rgba(255, 255, 255, 0.92);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(186, 230, 253, 0.6);
+    border-bottom: 1px solid rgba(186, 230, 253, 0.8);
     padding: 12px 6%;
     display: flex;
     justify-content: space-between;
@@ -95,15 +95,15 @@
   }
 
   header.nav-header .logo .badge {
-    width: 40px;
-    height: 40px;
+    width: 42px;
+    height: 42px;
     border-radius: 50%;
     background: var(--primary-grad);
     color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     box-shadow: 0 4px 10px rgba(56, 189, 248, 0.4);
   }
 
@@ -115,7 +115,47 @@
     color: var(--text-muted);
   }
 
-  /* ปุ่มย้อนกลับดีไซน์น่ารัก */
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /* ปุ่มย้อนกลับไปหน้าก่อนหน้า (Link ไปยังหน้าหลัก) */
+  .btn-nav-prev {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--primary-grad);
+    color: #ffffff;
+    padding: 8px 18px;
+    border-radius: 30px;
+    font-family: 'Sarabun', sans-serif;
+    font-size: 13.5px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3);
+  }
+
+  .btn-nav-prev i {
+    font-size: 13px;
+    transition: transform 0.2s ease;
+  }
+
+  .btn-nav-prev:hover {
+    background: var(--primary-hover);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(56, 189, 248, 0.45);
+  }
+
+  .btn-nav-prev:hover i {
+    transform: translateX(-3px);
+  }
+
+  /* ปุ่มย้อนกลับดีไซน์น่ารักสำหรับเปลี่ยนในหน้าแบบทดสอบ */
   .btn-nav-back {
     display: inline-flex;
     align-items: center;
@@ -263,7 +303,8 @@
   }
   @media (max-width: 600px) { 
     .panel { padding: 20px 16px; } 
-    header.nav-header { flex-direction: column; gap: 10px; padding: 12px 4%; }
+    header.nav-header { flex-direction: column; gap: 12px; padding: 12px 4%; text-align: center; }
+    .nav-actions { width: 100%; justify-content: center; }
   }
 
   .panel-header-actions {
@@ -445,15 +486,19 @@
 
 <!-- Sticky Navbar -->
 <header class="nav-header">
-  <a href="#" class="logo" onclick="showGrid(); return false;">
+  <a href="assessment.html" class="logo">
     <span class="badge"><i class="fa-solid fa-heart-pulse"></i></span>
     <span>MENTAL HEALTH CYBER-CARE<small>โครงการ อสม. ฮีลใจ &bull; Cyber-Care Assessment</small></span>
   </a>
-  <nav>
+  <div class="nav-actions">
+    <!-- ปุ่มย้อนกลับไปหน้าก่อนหน้า (Link ย้อนกลับ หรือใช้อ้างอิง assessment.html) -->
+    <a href="assessment.html" class="btn-nav-prev">
+      <i class="fa-solid fa-arrow-left"></i> ย้อนกลับหน้าหลัก
+    </a>
     <button class="btn-nav-back" id="navBackBtn" style="display:none;" onclick="showGrid()">
-      <i class="fa-solid fa-cloud-arrow-left"></i> ย้อนกลับหน้าแรก
+      <i class="fa-solid fa-grip"></i> เลือกแบบทดสอบ
     </button>
-  </nav>
+  </div>
 </header>
 
 <header class="hero" id="heroHeader">
@@ -513,7 +558,7 @@
 
     <div class="result-actions">
       <button class="btn-secondary" onclick="openAssessment(currentId)"><i class="fa-solid fa-rotate-left"></i> ทำแบบทดสอบนี้อีกครั้ง</button>
-      <button class="btn-primary" onclick="showGrid()"><i class="fa-solid fa-grid-2"></i> เลือกแบบทดสอบอื่น</button>
+      <button class="btn-primary" onclick="showGrid()"><i class="fa-solid fa-grip"></i> เลือกแบบทดสอบอื่น</button>
     </div>
   </section>
 </main>
@@ -864,21 +909,22 @@ function renderMbtiResult(a){
   document.getElementById('resultScoreLabel').textContent = 'ผลการวิเคราะห์บุคลิกภาพเบื้องต้น';
   document.getElementById('resultBadgeWrap').innerHTML = '';
   document.getElementById('dimBarsWrap').innerHTML = `<div style="margin:20px 0;">${barsHtml}</div>`;
-  document.getElementById('resultAdvice').innerHTML = `<b>${typeCode}:</b> ${MBTI_DESC[typeCode]}`;
+  document.getElementById('resultAdvice').innerHTML = `<b>${typeCode}:</b> ${MBTI_DESC[typeCode] || 'เป็นผู้มีความสามารถเฉพาะตัวและปรับตัวได้ดี'}`;
 
   const now1 = new Date();
   lastResult = {
     code: a.code,
     full: a.full,
     resultValue: typeCode,
-    resultLabel: 'ผลประเมิน: ' + typeCode,
-    levelLabel: MBTI_DESC[typeCode],
+    resultLabel: 'ประเภทบุคลิกภาพ: ' + typeCode,
+    levelLabel: MBTI_DESC[typeCode] || '',
     dateStr: now1.toLocaleDateString('th-TH', {year:'numeric', month:'long', day:'numeric'})
   };
 }
 
-// เริ่มต้นแสดงการ์ดแบบทดสอบเมื่อเปิดเว็บ
+// เริ่มต้นโหลด Grid เมื่อเปิดหน้าเว็บ
 document.addEventListener('DOMContentLoaded', initGrid);
 </script>
+
 </body>
 </html>
