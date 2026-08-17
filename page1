@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>แบบคัดกรองสุขภาพจิตเบื้องต้น</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-sage:#AFC4A2;
+    --bg-sage-deep:#8FAA82;
+    --surface:#FBFAF5;
+    --surface-alt:#F1EEE3;
+    --ink:#2B3A2E;
+    --ink-soft:#5B6B5A;
+    --teal:#357B72;
+    --teal-deep:#245A53;
+    --gold:#B98A2E;
+    --coral:#C85A3F;
+    --coral-soft:#F3DCD3;
+    --line:#D9DFCE;
+    --radius:18px;
+    --shadow:0 10px 30px rgba(40,58,42,0.14);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:linear-gradient(180deg,var(--bg-sage) 0%,var(--bg-sage-deep) 100%);
+    font-family:'Sarabun',sans-serif;
+    color:var(--ink);
+    min-height:100vh;
+    padding-bottom:40px;
+  }
+  h1,h2,h3,.display{font-family:'Kanit',sans-serif;}
+
+  /* ---- Hotline banner ---- */
+  .hotline-bar{
+    background:var(--teal-deep);
+    color:#fff;
+    text-align:center;
+    padding:9px 16px;
+    font-size:14px;
+    letter-spacing:.2px;
+  }
+  .hotline-bar b{color:#F4D8A8;}
+
+  header.top{
+    max-width:920px;
+    margin:0 auto;
+    padding:36px 24px 18px;
+    text-align:center;
+  }
+  header.top .eyebrow{
+    font-size:13px;
+    letter-spacing:2px;
+    color:var(--teal-deep);
+    font-weight:600;
+    margin-bottom:8px;
+  }
+  header.top h1{
+    font-size:28px;
+    margin:0 0 10px;
+    color:var(--ink);
+  }
+  header.top p{
+    font-size:15px;
+    color:var(--ink-soft);
+    max-width:560px;
+    margin:0 auto;
+    line-height:1.7;
+  }
+
+  main{max-width:920px;margin:0 auto;padding:10px 20px 20px;}
+
+  /* ---- Grid of assessment cards ---- */
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+    margin-top:22px;
+  }
+  @media (max-width:720px){ .grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:460px){ .grid{grid-template-columns:1fr;} }
+
+  .card{
+    background:var(--surface);
+    border-radius:var(--radius);
+    padding:22px 18px;
+    text-align:center;
+    box-shadow:var(--shadow);
+    cursor:pointer;
+    border:1px solid transparent;
+    transition:transform .18s ease, border-color .18s ease;
+  }
+  .card:hover{transform:translateY(-4px);border-color:var(--teal);}
+  .card .icon{
+    width:56px;height:56px;border-radius:50%;
+    background:var(--teal);
+    color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    margin:0 auto 14px;
+    font-family:'Kanit',sans-serif;
+    font-weight:600;
+    font-size:17px;
+  }
+  .card .code{
+    font-family:'Kanit',sans-serif;
+    font-weight:600;
+    font-size:16px;
+    color:var(--ink);
+    margin-bottom:4px;
+  }
+  .card .desc{
+    font-size:12.5px;
+    color:var(--ink-soft);
+    line-height:1.5;
+    margin-bottom:12px;
+  }
+  .card .qcount{
+    display:inline-block;
+    font-size:11.5px;
+    color:var(--teal-deep);
+    background:#E4EFE0;
+    border-radius:20px;
+    padding:3px 10px;
+  }
+
+  /* ---- Quiz view ---- */
+  .panel{
+    background:var(--surface);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    padding:28px 26px;
+    margin-top:20px;
+  }
+  .back-link{
+    display:inline-flex;align-items:center;gap:6px;
+    background:none;border:none;cursor:pointer;
+    color:var(--teal-deep);
+    font-family:'Sarabun',sans-serif;
+    font-size:14px;font-weight:600;
+    margin-bottom:14px;padding:0;
+  }
+  .quiz-title{font-size:22px;margin:0 0 4px;}
+  .quiz-sub{font-size:13.5px;color:var(--ink-soft);margin:0 0 18px;line-height:1.6;}
+
+  .progress-wrap{
+    background:var(--surface-alt);
+    border-radius:20px;
+    height:8px;
+    overflow:hidden;
+    margin-bottom:24px;
+  }
+  .progress-fill{
+    background:var(--teal);
+    height:100%;
+    width:0%;
+    transition:width .25s ease;
+  }
+
+  .question{
+    border-top:1px solid var(--line);
+    padding:18px 0;
+  }
+  .question:first-of-type{border-top:none;}
+  .question .qnum{
+    font-family:'Kanit',sans-serif;
+    font-size:12.5px;
+    color:var(--teal-deep);
+    font-weight:600;
+    margin-bottom:6px;
+  }
+  .question .qtext{
+    font-size:15.5px;
+    line-height:1.6;
+    margin-bottom:12px;
+  }
+  .options{display:flex;flex-direction:column;gap:8px;}
+  .opt{
+    display:flex;align-items:center;gap:10px;
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:10px 14px;
+    cursor:pointer;
+    font-size:14px;
+    transition:border-color .15s, background .15s;
+  }
+  .opt:hover{border-color:var(--teal);}
+  .opt input{accent-color:var(--teal);width:16px;height:16px;flex:none;}
+  .opt.selected{border-color:var(--teal);background:#EAF3E9;font-weight:600;}
+
+  .submit-row{margin-top:22px;text-align:center;}
+  .btn-primary{
+    background:var(--teal-deep);
+    color:#fff;
+    border:none;
+    padding:13px 30px;
+    border-radius:30px;
+    font-family:'Sarabun',sans-serif;
+    font-size:15px;
+    font-weight:700;
+    cursor:pointer;
+    transition:background .15s, opacity .15s;
+  }
+  .btn-primary:hover{background:var(--teal);}
+  .btn-primary:disabled{opacity:.4;cursor:not-allowed;}
+  .btn-ghost{
+    background:none;
+    border:1.5px solid var(--teal-deep);
+    color:var(--teal-deep);
+    padding:11px 26px;
+    border-radius:30px;
+    font-family:'Sarabun',sans-serif;
+    font-size:14.5px;
+    font-weight:600;
+    cursor:pointer;
+  }
+  .hint{
+    text-align:center;
+    font-size:12.5px;
+    color:var(--ink-soft);
+    margin-top:10px;
+  }
+
+  /* ---- Results view ---- */
+  .result-head{text-align:center;margin-bottom:6px;}
+  .gauge-wrap{display:flex;justify-content:center;margin:8px 0 6px;}
+  .score-big{
+    font-family:'Kanit',sans-serif;
+    font-size:44px;
+    font-weight:700;
+    text-align:center;
+    margin:2px 0 0;
+  }
+  .score-label{text-align:center;font-size:13px;color:var(--ink-soft);margin-bottom:18px;}
+  .level-badge{
+    display:block;
+    width:fit-content;
+    margin:0 auto 20px;
+    padding:7px 18px;
+    border-radius:30px;
+    font-family:'Kanit',sans-serif;
+    font-weight:600;
+    font-size:14.5px;
+    color:#fff;
+  }
+  .advice-box{
+    background:var(--surface-alt);
+    border-radius:14px;
+    padding:18px 20px;
+    font-size:14.5px;
+    line-height:1.75;
+    margin-bottom:14px;
+  }
+  .advice-box b{color:var(--teal-deep);}
+  .crisis-box{
+    background:var(--coral-soft);
+    border:1.5px solid var(--coral);
+    border-radius:14px;
+    padding:18px 20px;
+    font-size:14.5px;
+    line-height:1.75;
+    margin-bottom:18px;
+  }
+  .crisis-box .title{
+    font-family:'Kanit',sans-serif;
+    font-weight:600;
+    color:var(--coral);
+    margin-bottom:6px;
+    font-size:15px;
+  }
+  .email-box{
+    background:var(--surface-alt);
+    border-radius:14px;
+    padding:16px 18px;
+    margin-bottom:6px;
+  }
+  .email-box label{
+    display:block;
+    font-size:13px;
+    font-weight:600;
+    color:var(--teal-deep);
+    margin-bottom:8px;
+  }
+  .email-row{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+  .email-row input{
+    flex:1;
+    min-width:220px;
+    padding:10px 14px;
+    border-radius:10px;
+    border:1px solid var(--line);
+    font-family:'Sarabun',sans-serif;
+    font-size:14px;
+    background:#fff;
+  }
+  .email-row input:focus{outline:2px solid var(--teal);border-color:var(--teal);}
+  .email-row .btn-ghost{white-space:nowrap;}
+
+  .result-actions{
+    display:flex;
+    gap:12px;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin-top:20px;
+  }
+  footer.note{
+    max-width:920px;
+    margin:26px auto 0;
+    padding:0 24px;
+    text-align:center;
+    font-size:12px;
+    color:var(--ink);
+    opacity:.75;
+    line-height:1.7;
+  }
+</style>
+</head>
+<body>
+
+<div class="hotline-bar">สายด่วนสุขภาพจิต <b>1323</b> ให้บริการฟรีตลอด 24 ชั่วโมง — หากรู้สึกไม่ปลอดภัย โทรได้ทันที</div>
+
+<header class="top">
+  <div class="eyebrow">MENTAL HEALTH CYBER-CARE</div>
+  <h1>แบบคัดกรองทั่วไป (Screening Tools)</h1>
+  <p>เลือกแบบประเมินที่ต้องการทำ แต่ละแบบใช้เวลาไม่กี่นาที ผลที่ได้เป็นการคัดกรองเบื้องต้นเท่านั้น ไม่ใช่การวินิจฉัยโรค</p>
+</header>
+
+<main>
+  <section id="view-grid" class="grid"></section>
+
+  <section id="view-quiz" class="panel" style="display:none;">
+    <button class="btn-ghost" onclick="showGrid()" style="margin-bottom:16px;">← ย้อนกลับ</button>
+    <h2 class="quiz-title" id="quizTitle"></h2>
+    <p class="quiz-sub" id="quizSub"></p>
+    <div class="progress-wrap"><div class="progress-fill" id="progressFill"></div></div>
+    <div id="questionList"></div>
+    <div class="submit-row">
+      <button class="btn-primary" id="submitBtn" disabled onclick="submitQuiz()">ดูผลการประเมิน</button>
+      <div class="hint" id="progressHint"></div>
+    </div>
+  </section>
+
+  <section id="view-result" class="panel" style="display:none;">
+    <button class="btn-ghost" onclick="showGrid()" style="margin-bottom:16px;">← ย้อนกลับ</button>
+    <div class="result-head">
+      <div class="eyebrow" id="resultCode" style="color:var(--teal-deep);font-size:12.5px;letter-spacing:1.5px;font-weight:600;"></div>
+      <h2 class="quiz-title" id="resultTitle" style="margin-top:4px;"></h2>
+    </div>
+    <div class="score-big" id="resultScore"></div>
+    <div class="score-label" id="resultScoreLabel"></div>
+    <div id="resultBadgeWrap" style="text-align:center;"></div>
+    <div class="advice-box" id="resultAdvice"></div>
+    <div class="crisis-box" id="resultCrisis" style="display:none;">
+      <div class="title">⚠ หากมีความคิดทำร้ายตนเองหรือไม่ปลอดภัย</div>
+      โปรดติดต่อ อสม. หรือเจ้าหน้าที่สาธารณสุขในพื้นที่โดยทันที หรือโทรสายด่วนสุขภาพจิต <b>1323</b> (ฟรี ตลอด 24 ชั่วโมง) หรือไปโรงพยาบาลที่ใกล้ที่สุด อย่าปล่อยให้ตนเองอยู่ตามลำพัง
+    </div>
+    <div class="email-box">
+      <label for="emailTo">ส่งผลไปที่อีเมล</label>
+      <div class="email-row">
+        <input type="email" id="emailTo" value="67319100012@Aitc.ac.th">
+        <button class="btn-ghost" onclick="emailResult()">✉ ส่งผลทางอีเมล</button>
+      </div>
+      <div class="hint">จะเปิดหน้าเขียนอีเมลของ Gmail ในแท็บใหม่ พร้อมกรอกผลให้อัตโนมัติ ท่านเพียงกดส่ง (ต้องเข้าสู่ระบบ Gmail ไว้ก่อน)</div>
+    </div>
+    <div class="result-actions">
+      <button class="btn-ghost" onclick="openAssessment(currentId)">ทำแบบประเมินนี้อีกครั้ง</button>
+      <button class="btn-primary" onclick="showGrid()">เลือกแบบประเมินอื่น</button>
+    </div>
+  </section>
+</main>
+
+<footer class="note">
+  แบบประเมินนี้ดัดแปลงจากเครื่องมือคัดกรองมาตรฐานที่ใช้ในระบบสาธารณสุขไทย ผลลัพธ์เป็นเพียงการคัดกรองเบื้องต้น ไม่สามารถใช้แทนการวินิจฉัยของแพทย์หรือผู้เชี่ยวชาญได้ หากมีข้อสงสัยเกี่ยวกับผลประเมิน โปรดปรึกษา อสม. หรือเจ้าหน้าที่สาธารณสุขใกล้บ้าน
+</footer>
+
+<script>
+const scale4 = [
+  {label:'ไม่มีเลย', score:0},
+  {label:'เป็นบางวัน (1–7 วัน)', score:1},
+  {label:'เป็นบ่อย (มากกว่า 7 วัน)', score:2},
+  {label:'เป็นทุกวัน', score:3}
+];
+const yesNo = [
+  {label:'ไม่มี', score:0},
+  {label:'มี', score:1}
+];
+const freq5 = [
+  {label:'ไม่เคยเลย', score:0},
+  {label:'เป็นบางครั้ง', score:1},
+  {label:'เป็นบ่อยครั้ง', score:2},
+  {label:'เป็นประจำ', score:3}
+];
+
+const auditFreq = [
+  {label:'ไม่เคย', score:0},
+  {label:'น้อยกว่าเดือนละครั้ง', score:1},
+  {label:'เดือนละครั้ง', score:2},
+  {label:'สัปดาห์ละครั้ง', score:3},
+  {label:'ทุกวันหรือเกือบทุกวัน', score:4}
+];
+const auditConcern = [
+  {label:'ไม่เคย', score:0},
+  {label:'เคย แต่ไม่ใช่ในปีที่ผ่านมา', score:2},
+  {label:'เคยในปีที่ผ่านมา', score:4}
+];
+
+const ASSESSMENTS = {
+  '2q':{
+    code:'2Q', title:'2Q', full:'คัดกรองภาวะซึมเศร้าเบื้องต้น',
+    sub:'คำถาม 2 ข้อสำหรับคัดกรองความเสี่ยงภาวะซึมเศร้าในช่วง 2 สัปดาห์ที่ผ่านมา',
+    scaleType:'yesno',
+    options:yesNo,
+    questions:[
+      'ใน 2 สัปดาห์ที่ผ่านมารวมวันนี้ ท่านรู้สึกหดหู่ เศร้า หรือท้อแท้สิ้นหวังหรือไม่',
+      'ใน 2 สัปดาห์ที่ผ่านมารวมวันนี้ ท่านรู้สึกเบื่อ ทำอะไรก็ไม่เพลิดเพลินหรือไม่'
+    ],
+    bands:[
+      {min:0,max:0,label:'ไม่มีภาวะซึมเศร้า',color:'var(--teal)',crisis:false,
+        advice:'ผลการคัดกรองไม่พบสัญญาณของภาวะซึมเศร้าในขณะนี้ หากในอนาคตรู้สึกเศร้าหรือเบื่อหน่ายต่อเนื่อง สามารถกลับมาทำแบบประเมินนี้ใหม่ได้เสมอ'},
+      {min:1,max:2,label:'มีความเสี่ยง ควรประเมินต่อ',color:'var(--gold)',crisis:false,
+        advice:'พบสัญญาณที่อาจเกี่ยวข้องกับภาวะซึมเศร้า แนะนำให้ทำแบบประเมิน <b>9Q</b> ต่อ เพื่อประเมินความรุนแรงอย่างละเอียดขึ้น และปรึกษา อสม. หรือเจ้าหน้าที่สาธารณสุขในพื้นที่'}
+    ]
+  },
+  '9q':{
+    code:'9Q', title:'9Q', full:'ประเมินความรุนแรงของโรคซึมเศร้า',
+    sub:'ประเมินความถี่ของอาการต่าง ๆ ในช่วง 2 สัปดาห์ที่ผ่านมา (ดัดแปลงจาก PHQ-9 ฉบับภาษาไทย)',
+    scaleType:'uniform', options:scale4,
+    questions:[
+      'เบื่อ ไม่สนใจอยากทำอะไร',
+      'ไม่สบายใจ ซึมเศร้า ท้อแท้',
+      'หลับยาก หลับไม่ทน หรือหลับมากไป',
+      'เหนื่อยง่าย หรือไม่ค่อยมีแรง',
+      'เบื่ออาหาร หรือกินมากเกินไป',
+      'รู้สึกไม่ดีกับตัวเอง คิดว่าล้มเหลว หรือทำให้ตนเอง/ครอบครัวผิดหวัง',
+      'สมาธิไม่ดีเวลาทำอะไร เช่น ดูโทรทัศน์ ฟังวิทยุ หรืองานที่ต้องใช้สมาธิ',
+      'พูดหรือทำอะไรช้าจนคนอื่นสังเกตเห็น หรือกระสับกระส่ายอยู่ไม่นิ่งกว่าปกติ',
+      'คิดทำร้ายตนเอง หรือคิดว่าตายไปเสียดีกว่า'
+    ],
+    special9: true,
+    bands:[
+      {min:0,max:6,label:'ไม่มีภาวะซึมเศร้า / น้อยมาก',color:'var(--teal)',crisis:false,
+        advice:'คะแนนอยู่ในเกณฑ์ปกติ ดูแลสุขภาพใจต่อเนื่อง เช่น พักผ่อนให้พอ ออกกำลังกาย และพูดคุยกับคนใกล้ชิดเมื่อรู้สึกไม่สบายใจ'},
+      {min:7,max:12,label:'ซึมเศร้าระดับน้อย',color:'var(--gold)',crisis:false,
+        advice:'มีอาการซึมเศร้าระดับเล็กน้อย แนะนำให้ปรึกษา อสม. หรือเจ้าหน้าที่สาธารณสุข เพื่อติดตามอาการและรับคำแนะนำการดูแลตนเอง'},
+      {min:13,max:18,label:'ซึมเศร้าระดับปานกลาง',color:'var(--coral)',crisis:false,
+        advice:'มีอาการซึมเศร้าระดับปานกลาง ควรพบเจ้าหน้าที่สาธารณสุขหรือแพทย์เพื่อรับการประเมินและวางแผนดูแลอย่างเหมาะสมโดยเร็ว'},
+      {min:19,max:27,label:'ซึมเศร้าระดับรุนแรง',color:'var(--coral)',crisis:true,
+        advice:'มีอาการซึมเศร้าระดับรุนแรง ควรพบแพทย์หรือเจ้าหน้าที่สาธารณสุขโดยเร็วที่สุด ไม่ควรปล่อยไว้'}
+    ]
+  },
+  '8q':{
+    code:'8Q', title:'8Q', full:'ประเมินความเสี่ยงการฆ่าตัวตาย',
+    sub:'ใช้ประเมินต่อเนื่องเมื่อพบความเสี่ยงจากแบบคัดกรองอื่น ควรทำร่วมกับการพูดคุยกับ อสม. หรือเจ้าหน้าที่สาธารณสุข ไม่แนะนำให้ทำตามลำพังหากรู้สึกไม่ปลอดภัย — โทร 1323 ได้ทันที',
+    scaleType:'yesno', options:yesNo,
+    questions:[
+      'ในช่วง 1 เดือนที่ผ่านมา ท่านคิดอยากตาย หรือคิดว่าถ้าตายไปคงจะดีหรือไม่',
+      'ในช่วง 1 เดือนที่ผ่านมา ท่านอยากทำร้ายตนเองหรือไม่',
+      'ในช่วง 1 เดือนที่ผ่านมา ท่านคิดเกี่ยวกับการฆ่าตัวตายหรือไม่',
+      'ในช่วง 1 เดือนที่ผ่านมา ท่านมีแผนการที่จะฆ่าตัวตายหรือไม่',
+      'ในช่วง 1 เดือนที่ผ่านมา ท่านได้เตรียมการใด ๆ เพื่อทำร้ายตนเองให้ถึงแก่ชีวิตหรือไม่',
+      'ในช่วง 1 เดือนที่ผ่านมา ท่านได้ลงมือทำร้ายตนเองแต่ไม่ถึงแก่ชีวิตหรือไม่',
+      'ตลอดชีวิตที่ผ่านมา ท่านเคยพยายามฆ่าตัวตายมาก่อนหรือไม่'
+    ],
+    bands:[
+      {min:0,max:0,label:'ไม่พบความเสี่ยง',color:'var(--teal)',crisis:false,
+        advice:'ผลคัดกรองไม่พบความเสี่ยงในขณะนี้ หากในอนาคตมีความคิดอยากทำร้ายตนเองเกิดขึ้น ให้บอกคนใกล้ชิดหรือโทร 1323 ทันที'},
+      {min:1,max:8,label:'มีความเสี่ยง ต้องได้รับการดูแลทันที',color:'var(--coral)',crisis:true,
+        advice:'ผลคัดกรองพบความเสี่ยงต่อการทำร้ายตนเอง <b>ห้ามปล่อยให้อยู่ตามลำพัง</b> ผู้ประเมิน (อสม./เจ้าหน้าที่) ควรอยู่เป็นเพื่อนและพาไปพบแพทย์หรือติดต่อทีมสุขภาพจิตทันที'}
+    ]
+  },
+  'st5':{
+    code:'ST-5', title:'ST-5', full:'แบบประเมินความเครียด',
+    sub:'ประเมินระดับความเครียดในช่วง 2–4 สัปดาห์ที่ผ่านมา',
+    scaleType:'uniform', options:freq5,
+    questions:[
+      'มีปัญหาการนอน เช่น นอนไม่หลับ หรือนอนมากเกินไป',
+      'มีสมาธิน้อยลง',
+      'รู้สึกหงุดหงิด หรือกระวนกระวายใจ',
+      'รู้สึกเบื่อหน่าย เซ็ง',
+      'ไม่อยากพบปะผู้คน'
+    ],
+    bands:[
+      {min:0,max:4,label:'ความเครียดต่ำ',color:'var(--teal)',crisis:false,
+        advice:'ระดับความเครียดอยู่ในเกณฑ์ปกติ รักษาสมดุลชีวิตต่อไป เช่น พักผ่อนเพียงพอและมีเวลาให้ตนเอง'},
+      {min:5,max:7,label:'ความเครียดปานกลาง',color:'var(--gold)',crisis:false,
+        advice:'มีความเครียดระดับปานกลาง ลองหาวิธีผ่อนคลาย เช่น ออกกำลังกาย พูดคุยกับคนใกล้ชิด หรือทำกิจกรรมที่ชอบ หากไม่ดีขึ้นควรปรึกษา อสม.'},
+      {min:8,max:9,label:'ความเครียดสูง',color:'var(--coral)',crisis:false,
+        advice:'มีความเครียดระดับสูง แนะนำให้ปรึกษาเจ้าหน้าที่สาธารณสุขเพื่อหาสาเหตุและวิธีจัดการที่เหมาะสม'},
+      {min:10,max:15,label:'ความเครียดรุนแรง',color:'var(--coral)',crisis:false,
+        advice:'มีความเครียดระดับรุนแรง ควรพบเจ้าหน้าที่สาธารณสุขหรือแพทย์เพื่อรับการดูแลโดยเร็ว'}
+    ]
+  },
+  'gad7':{
+    code:'GAD-7', title:'GAD-7', full:'คัดกรองโรควิตกกังวล',
+    sub:'ประเมินความถี่ของอาการวิตกกังวลในช่วง 2 สัปดาห์ที่ผ่านมา',
+    scaleType:'uniform', options:scale4,
+    questions:[
+      'รู้สึกกังวล ประหม่า หรือตึงเครียด',
+      'ไม่สามารถหยุดหรือควบคุมความกังวลได้',
+      'กังวลมากเกินไปในหลายเรื่อง',
+      'ยากที่จะผ่อนคลาย',
+      'กระสับกระส่ายจนอยู่ไม่นิ่ง',
+      'หงุดหงิดง่าย หรือรำคาญง่ายกว่าปกติ',
+      'รู้สึกกลัวเหมือนจะมีเรื่องเลวร้ายเกิดขึ้น'
+    ],
+    bands:[
+      {min:0,max:4,label:'วิตกกังวลน้อยมาก',color:'var(--teal)',crisis:false,
+        advice:'ระดับความวิตกกังวลอยู่ในเกณฑ์ปกติ'},
+      {min:5,max:9,label:'วิตกกังวลระดับน้อย',color:'var(--gold)',crisis:false,
+        advice:'มีอาการวิตกกังวลระดับเล็กน้อย ลองฝึกเทคนิคผ่อนคลาย เช่น การหายใจลึก ๆ และสังเกตอาการต่อเนื่อง'},
+      {min:10,max:14,label:'วิตกกังวลระดับปานกลาง',color:'var(--coral)',crisis:false,
+        advice:'มีอาการวิตกกังวลระดับปานกลาง แนะนำให้ปรึกษาเจ้าหน้าที่สาธารณสุขเพื่อรับคำแนะนำเพิ่มเติม'},
+      {min:15,max:21,label:'วิตกกังวลระดับรุนแรง',color:'var(--coral)',crisis:false,
+        advice:'มีอาการวิตกกังวลระดับรุนแรง ควรพบแพทย์หรือผู้เชี่ยวชาญด้านสุขภาพจิตโดยเร็ว'}
+    ]
+  },
+  'audit':{
+    code:'AUDIT', title:'AUDIT', full:'คัดกรองปัญหาการดื่มแอลกอฮอล์',
+    sub:'แบบคัดกรองการดื่มเครื่องดื่มแอลกอฮอล์ตามมาตรฐานองค์การอนามัยโลก (ดัดแปลงเป็นภาษาไทย)',
+    scaleType:'perQuestion',
+    perQuestionOptions:[
+      auditFreq, // reuse label set for Q1 (overridden below via customQ)
+    ],
+    customQuestions:[
+      {text:'ท่านดื่มเครื่องดื่มแอลกอฮอล์บ่อยเพียงใด', options:[
+        {label:'ไม่ดื่มเลย',score:0},{label:'เดือนละครั้งหรือน้อยกว่า',score:1},
+        {label:'2–4 ครั้งต่อเดือน',score:2},{label:'2–3 ครั้งต่อสัปดาห์',score:3},
+        {label:'4 ครั้งขึ้นไปต่อสัปดาห์',score:4}]},
+      {text:'เมื่อดื่ม ท่านดื่มปริมาณเท่าไรโดยเฉลี่ยต่อวัน', options:[
+        {label:'1–2 ดื่มมาตรฐาน',score:0},{label:'3–4 ดื่มมาตรฐาน',score:1},
+        {label:'5–6 ดื่มมาตรฐาน',score:2},{label:'7–9 ดื่มมาตรฐาน',score:3},
+        {label:'10 ดื่มมาตรฐานขึ้นไป',score:4}]},
+      {text:'บ่อยเพียงใดที่ท่านดื่มมากกว่า 6 ดื่มมาตรฐานในคราวเดียว', options:auditFreq},
+      {text:'บ่อยเพียงใดในปีที่ผ่านมาที่ท่านพบว่าหยุดดื่มไม่ได้เมื่อเริ่มดื่มแล้ว', options:auditFreq},
+      {text:'บ่อยเพียงใดในปีที่ผ่านมาที่การดื่มทำให้ท่านทำสิ่งที่ควรทำตามปกติไม่ได้', options:auditFreq},
+      {text:'บ่อยเพียงใดในปีที่ผ่านมาที่ท่านต้องดื่มตอนเช้าเพื่อให้รู้สึกดีขึ้นหลังดื่มหนัก', options:auditFreq},
+      {text:'บ่อยเพียงใดในปีที่ผ่านมาที่ท่านรู้สึกผิดหรือเสียใจหลังจากดื่ม', options:auditFreq},
+      {text:'บ่อยเพียงใดในปีที่ผ่านมาที่ท่านจำไม่ได้ว่าเกิดอะไรขึ้นบ้างในคืนที่ดื่ม', options:auditFreq},
+      {text:'ท่านหรือคนอื่นเคยได้รับบาดเจ็บจากการดื่มของท่านหรือไม่', options:auditConcern},
+      {text:'เคยมีญาติ เพื่อน หรือแพทย์ แสดงความกังวลเกี่ยวกับการดื่มของท่าน หรือแนะนำให้ลดการดื่มหรือไม่', options:auditConcern}
+    ],
+    bands:[
+      {min:0,max:7,label:'ความเสี่ยงต่ำ',color:'var(--teal)',crisis:false,
+        advice:'รูปแบบการดื่มอยู่ในความเสี่ยงต่ำ ควรรักษาระดับนี้ต่อไปและดื่มอย่างมีสติ'},
+      {min:8,max:15,label:'ดื่มแบบเสี่ยง',color:'var(--gold)',crisis:false,
+        advice:'มีรูปแบบการดื่มที่เริ่มเสี่ยงต่อสุขภาพ ควรลดปริมาณและความถี่ในการดื่ม และปรึกษา อสม. หากต้องการคำแนะนำ'},
+      {min:16,max:19,label:'ดื่มแบบอันตราย',color:'var(--coral)',crisis:false,
+        advice:'รูปแบบการดื่มเริ่มส่งผลเสียต่อสุขภาพและชีวิตประจำวัน ควรปรึกษาเจ้าหน้าที่สาธารณสุขเพื่อวางแผนลดหรือเลิกดื่ม'},
+      {min:20,max:40,label:'อาจมีภาวะติดสุรา',color:'var(--coral)',crisis:false,
+        advice:'ผลคัดกรองบ่งชี้ความเสี่ยงสูงต่อภาวะติดสุรา ควรพบแพทย์เพื่อรับการประเมินและการดูแลรักษาอย่างเหมาะสมโดยเร็ว'}
+    ]
+  }
+};
+
+let currentId = null;
+let currentAnswers = [];
+
+function initGrid(){
+  const grid = document.getElementById('view-grid');
+  grid.innerHTML = '';
+  Object.keys(ASSESSMENTS).forEach(id=>{
+    const a = ASSESSMENTS[id];
+    const qcount = a.customQuestions ? a.customQuestions.length : a.questions.length;
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.onclick = ()=>openAssessment(id);
+    card.innerHTML = `
+      <div class="icon">${a.code.replace('-','')}</div>
+      <div class="code">${a.title}</div>
+      <div class="desc">${a.full}</div>
+      <div class="qcount">${qcount} ข้อ</div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function showGrid(){
+  document.getElementById('view-grid').style.display = 'grid';
+  document.getElementById('view-quiz').style.display = 'none';
+  document.getElementById('view-result').style.display = 'none';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function openAssessment(id){
+  currentId = id;
+  const a = ASSESSMENTS[id];
+  const qs = a.customQuestions
+    ? a.customQuestions
+    : a.questions.map(t=>({text:t, options:a.options}));
+  currentAnswers = new Array(qs.length).fill(null);
+
+  document.getElementById('quizTitle').textContent = `${a.title} — ${a.full}`;
+  document.getElementById('quizSub').textContent = a.sub;
+
+  const list = document.getElementById('questionList');
+  list.innerHTML = '';
+  qs.forEach((q,i)=>{
+    const block = document.createElement('div');
+    block.className = 'question';
+    let optsHtml = '';
+    q.options.forEach((opt,j)=>{
+      optsHtml += `
+        <label class="opt" id="opt-${i}-${j}">
+          <input type="radio" name="q${i}" value="${opt.score}" onchange="selectOpt(${i},${j},${opt.score})">
+          ${opt.label}
+        </label>`;
+    });
+    block.innerHTML = `
+      <div class="qnum">ข้อที่ ${i+1} จาก ${qs.length}</div>
+      <div class="qtext">${q.text}</div>
+      <div class="options">${optsHtml}</div>
+    `;
+    list.appendChild(block);
+  });
+
+  updateProgress();
+  document.getElementById('view-grid').style.display = 'none';
+  document.getElementById('view-result').style.display = 'none';
+  document.getElementById('view-quiz').style.display = 'block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function selectOpt(i,j,score){
+  currentAnswers[i] = score;
+  document.querySelectorAll(`[id^="opt-${i}-"]`).forEach(el=>el.classList.remove('selected'));
+  document.getElementById(`opt-${i}-${j}`).classList.add('selected');
+  updateProgress();
+}
+
+function updateProgress(){
+  const total = currentAnswers.length;
+  const answered = currentAnswers.filter(v=>v!==null).length;
+  const pct = Math.round((answered/total)*100);
+  document.getElementById('progressFill').style.width = pct+'%';
+  document.getElementById('progressHint').textContent = `ตอบแล้ว ${answered} จาก ${total} ข้อ`;
+  document.getElementById('submitBtn').disabled = answered < total;
+}
+
+function submitQuiz(){
+  const a = ASSESSMENTS[currentId];
+  const score = currentAnswers.reduce((s,v)=>s+v,0);
+  const band = a.bands.find(b=>score>=b.min && score<=b.max) || a.bands[a.bands.length-1];
+
+  document.getElementById('resultCode').textContent = a.code;
+  document.getElementById('resultTitle').textContent = a.full;
+  document.getElementById('resultScore').textContent = score;
+  document.getElementById('resultScore').style.color = band.color;
+  document.getElementById('resultScoreLabel').textContent = 'คะแนนรวม';
+
+  document.getElementById('resultBadgeWrap').innerHTML =
+    `<span class="level-badge" style="background:${band.color}">${band.label}</span>`;
+
+  document.getElementById('resultAdvice').innerHTML = `<b>คำแนะนำ:</b> ${band.advice}`;
+
+  // Special check: 9Q question 9 (self-harm item) triggers crisis box even if total score is moderate
+  let forceCrisis = band.crisis;
+  if(currentId === '9q' && currentAnswers[8] > 0){ forceCrisis = true; }
+
+  document.getElementById('resultCrisis').style.display = forceCrisis ? 'block' : 'none';
+
+  const now = new Date();
+  lastResult = {
+    code:a.code, full:a.full, score:score, levelLabel:band.label,
+    dateStr: now.toLocaleDateString('th-TH', {year:'numeric',month:'long',day:'numeric'})
+  };
+
+  document.getElementById('view-quiz').style.display = 'none';
+  document.getElementById('view-result').style.display = 'block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+let lastResult = null;
+
+function emailResult(){
+  if(!lastResult) return;
+  const to = document.getElementById('emailTo').value.trim();
+  if(!to){ alert('กรุณากรอกอีเมลผู้รับ'); return; }
+
+  const {code, full, score, levelLabel, dateStr} = lastResult;
+  const subject = `ผลแบบประเมิน ${code} — ${full}`;
+  const body =
+`ผลแบบคัดกรองสุขภาพจิต (Mental Health Cyber-Care)
+
+แบบประเมิน: ${code} (${full})
+วันที่ทำแบบประเมิน: ${dateStr}
+คะแนนรวม: ${score}
+ระดับผล: ${levelLabel}
+
+หมายเหตุ: ผลนี้เป็นการคัดกรองเบื้องต้นเท่านั้น ไม่ใช่การวินิจฉัยโรค หากมีข้อสงสัยโปรดปรึกษา อสม. หรือเจ้าหน้าที่สาธารณสุขในพื้นที่
+สายด่วนสุขภาพจิต 1323 (ฟรี ตลอด 24 ชม.)`;
+
+  const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  window.open(gmailUrl, '_blank');
+}
+
+initGrid();
+showGrid();
+</script>
+</body>
+</html>
