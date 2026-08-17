@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>แบบประเมินทางคลินิก</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-sage:#AFC4A2; --bg-sage-deep:#8FAA82;
+    --surface:#FBFAF5; --surface-alt:#F1EEE3;
+    --ink:#2B3A2E; --ink-soft:#5B6B5A;
+    --teal:#357B72; --teal-deep:#245A53;
+    --gold:#B98A2E; --coral:#C85A3F; --coral-soft:#F3DCD3;
+    --line:#D9DFCE; --radius:18px; --shadow:0 10px 30px rgba(40,58,42,0.14);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:linear-gradient(180deg,var(--bg-sage) 0%,var(--bg-sage-deep) 100%);font-family:'Sarabun',sans-serif;color:var(--ink);min-height:100vh;padding-bottom:40px;}
+  h1,h2,h3,.display{font-family:'Kanit',sans-serif;}
+
+  .hotline-bar{background:var(--teal-deep);color:#fff;text-align:center;padding:9px 16px;font-size:14px;}
+  .hotline-bar b{color:#F4D8A8;}
+
+  header.top{max-width:920px;margin:0 auto;padding:36px 24px 18px;text-align:center;}
+  header.top .eyebrow{font-size:13px;letter-spacing:2px;color:var(--teal-deep);font-weight:600;margin-bottom:8px;}
+  header.top h1{font-size:28px;margin:0 0 10px;}
+  header.top p{font-size:15px;color:var(--ink-soft);max-width:620px;margin:0 auto;line-height:1.7;}
+
+  .staff-notice{
+    max-width:620px;margin:14px auto 0;background:#EFE6CF;border:1px solid var(--gold);
+    border-radius:12px;padding:12px 16px;font-size:13px;line-height:1.7;color:#5c470f;text-align:left;
+  }
+  .staff-notice b{color:var(--gold);}
+
+  main{max-width:920px;margin:0 auto;padding:10px 20px 20px;}
+
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px;}
+  @media (max-width:720px){ .grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:460px){ .grid{grid-template-columns:1fr;} }
+
+  .card{background:var(--surface);border-radius:var(--radius);padding:22px 18px;text-align:center;box-shadow:var(--shadow);cursor:pointer;border:1px solid transparent;transition:transform .18s ease, border-color .18s ease;position:relative;}
+  .card:hover{transform:translateY(-4px);border-color:var(--teal);}
+  .card .icon{width:56px;height:56px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-family:'Kanit',sans-serif;font-weight:600;font-size:13px;}
+  .card .code{font-family:'Kanit',sans-serif;font-weight:600;font-size:16px;margin-bottom:4px;}
+  .card .desc{font-size:12.5px;color:var(--ink-soft);line-height:1.5;margin-bottom:12px;}
+  .card .qcount{display:inline-block;font-size:11.5px;color:var(--teal-deep);background:#E4EFE0;border-radius:20px;padding:3px 10px;}
+  .card .staff-tag{
+    position:absolute;top:10px;right:10px;
+    background:var(--gold);color:#fff;font-size:10px;font-weight:700;
+    padding:3px 8px;border-radius:20px;font-family:'Kanit',sans-serif;
+  }
+
+  .panel{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px 26px;margin-top:20px;}
+  .quiz-title{font-size:22px;margin:0 0 4px;}
+  .quiz-sub{font-size:13.5px;color:var(--ink-soft);margin:0 0 14px;line-height:1.6;}
+
+  .quiz-staff-banner{
+    background:#EFE6CF;border:1px solid var(--gold);border-radius:12px;
+    padding:12px 16px;font-size:13px;line-height:1.7;color:#5c470f;margin-bottom:18px;
+  }
+
+  .progress-wrap{background:var(--surface-alt);border-radius:20px;height:8px;overflow:hidden;margin-bottom:24px;}
+  .progress-fill{background:var(--teal);height:100%;width:0%;transition:width .25s ease;}
+
+  .question{border-top:1px solid var(--line);padding:18px 0;}
+  .question:first-of-type{border-top:none;}
+  .question .qnum{font-family:'Kanit',sans-serif;font-size:12.5px;color:var(--teal-deep);font-weight:600;margin-bottom:6px;}
+  .question .qtext{font-size:15.5px;line-height:1.6;margin-bottom:12px;}
+  .options{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;font-size:14px;transition:border-color .15s, background .15s;}
+  .opt:hover{border-color:var(--teal);}
+  .opt input{accent-color:var(--teal);width:16px;height:16px;flex:none;}
+  .opt.selected{border-color:var(--teal);background:#EAF3E9;font-weight:600;}
+
+  .submit-row{margin-top:22px;text-align:center;}
+  .btn-primary{background:var(--teal-deep);color:#fff;border:none;padding:13px 30px;border-radius:30px;font-family:'Sarabun',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:background .15s, opacity .15s;}
+  .btn-primary:hover{background:var(--teal);}
+  .btn-primary:disabled{opacity:.4;cursor:not-allowed;}
+  .btn-ghost{background:none;border:1.5px solid var(--teal-deep);color:var(--teal-deep);padding:11px 26px;border-radius:30px;font-family:'Sarabun',sans-serif;font-size:14.5px;font-weight:600;cursor:pointer;}
+  .hint{text-align:center;font-size:12.5px;color:var(--ink-soft);margin-top:10px;}
+
+  .result-head{text-align:center;margin-bottom:6px;}
+  .score-big{font-family:'Kanit',sans-serif;font-size:44px;font-weight:700;text-align:center;margin:2px 0 0;}
+  .score-label{text-align:center;font-size:13px;color:var(--ink-soft);margin-bottom:18px;}
+  .level-badge{display:block;width:fit-content;margin:0 auto 20px;padding:7px 18px;border-radius:30px;font-family:'Kanit',sans-serif;font-weight:600;font-size:14.5px;color:#fff;}
+  .advice-box{background:var(--surface-alt);border-radius:14px;padding:18px 20px;font-size:14.5px;line-height:1.75;margin-bottom:14px;}
+  .advice-box b{color:var(--teal-deep);}
+  .crisis-box{background:var(--coral-soft);border:1.5px solid var(--coral);border-radius:14px;padding:18px 20px;font-size:14.5px;line-height:1.75;margin-bottom:18px;}
+  .crisis-box .title{font-family:'Kanit',sans-serif;font-weight:600;color:var(--coral);margin-bottom:6px;font-size:15px;}
+
+  .email-box{background:var(--surface-alt);border-radius:14px;padding:16px 18px;margin-bottom:6px;}
+  .email-box label{display:block;font-size:13px;font-weight:600;color:var(--teal-deep);margin-bottom:8px;}
+  .email-row{display:flex;gap:10px;flex-wrap:wrap;}
+  .email-row input{flex:1;min-width:220px;padding:10px 14px;border-radius:10px;border:1px solid var(--line);font-family:'Sarabun',sans-serif;font-size:14px;background:#fff;}
+  .email-row input:focus{outline:2px solid var(--teal);border-color:var(--teal);}
+  .email-row .btn-ghost{white-space:nowrap;}
+
+  .result-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:20px;}
+  footer.note{max-width:920px;margin:26px auto 0;padding:0 24px;text-align:center;font-size:12px;color:var(--ink);opacity:.75;line-height:1.7;}
+</style>
+</head>
+<body>
+
+<div class="hotline-bar">สายด่วนสุขภาพจิต <b>1323</b> ให้บริการฟรีตลอด 24 ชั่วโมง — หากรู้สึกไม่ปลอดภัย โทรได้ทันที</div>
+
+<header class="top">
+  <div class="eyebrow">MENTAL HEALTH CYBER-CARE</div>
+  <h1>แบบประเมินทางคลินิก (Clinical Rating Scales)</h1>
+  <p>เครื่องมือประเมินระดับความรุนแรงของอาการทางจิตเวชตามมาตรฐานสากล ใช้ประกอบการดูแลร่วมกับ อสม./เจ้าหน้าที่สาธารณสุข ไม่ใช่การวินิจฉัยและไม่ทดแทนการพบแพทย์</p>
+  <div class="staff-notice">
+    <b>⚠ สำคัญ:</b> แบบประเมิน HAM-D, BPRS และ Y-BOCS เป็นเครื่องมือที่ออกแบบให้ <b>เจ้าหน้าที่สาธารณสุขหรือ อสม. ที่ผ่านการอบรม</b> เป็นผู้บันทึกคะแนนจากการสัมภาษณ์และสังเกตอาการของผู้รับบริการ ไม่ใช่แบบที่ผู้รับบริการทำด้วยตนเองตามลำพัง
+  </div>
+</header>
+
+<main>
+  <section id="view-grid" class="grid"></section>
+
+  <section id="view-quiz" class="panel" style="display:none;">
+    <h2 class="quiz-title" id="quizTitle"></h2>
+    <p class="quiz-sub" id="quizSub"></p>
+    <div id="quizStaffBanner" class="quiz-staff-banner" style="display:none;">
+      ผู้ประเมิน: กรุณาให้เจ้าหน้าที่สาธารณสุขหรือ อสม. เป็นผู้บันทึกคะแนนจากการสัมภาษณ์/สังเกตอาการผู้รับบริการโดยตรง
+    </div>
+    <div class="progress-wrap"><div class="progress-fill" id="progressFill"></div></div>
+    <div id="questionList"></div>
+    <div class="submit-row">
+      <button class="btn-primary" id="submitBtn" disabled onclick="submitQuiz()">ดูผลการประเมิน</button>
+      <div class="hint" id="progressHint"></div>
+    </div>
+  </section>
+
+  <section id="view-result" class="panel" style="display:none;">
+    <div class="result-head">
+      <div class="eyebrow" id="resultCode" style="color:var(--teal-deep);font-size:12.5px;letter-spacing:1.5px;font-weight:600;"></div>
+      <h2 class="quiz-title" id="resultTitle" style="margin-top:4px;"></h2>
+    </div>
+    <div class="score-big" id="resultScore"></div>
+    <div class="score-label" id="resultScoreLabel"></div>
+    <div id="resultBadgeWrap" style="text-align:center;"></div>
+    <div class="advice-box" id="resultAdvice"></div>
+    <div class="crisis-box" id="resultCrisis" style="display:none;">
+      <div class="title">⚠ หากพบความเสี่ยงต่อการทำร้ายตนเอง</div>
+      โปรดอยู่เป็นเพื่อนผู้รับบริการ ห้ามปล่อยให้อยู่ตามลำพัง และติดต่อทีมสุขภาพจิตหรือโทรสายด่วน <b>1323</b> ทันที หรือพาไปโรงพยาบาลที่ใกล้ที่สุด
+    </div>
+    <div class="email-box">
+      <label for="emailTo">ส่งผลไปที่อีเมล</label>
+      <div class="email-row">
+        <input type="email" id="emailTo" value="67319100012@Aitc.ac.th">
+        <button class="btn-ghost" onclick="emailResult()">✉ ส่งผลทางอีเมล</button>
+      </div>
+      <div class="hint">จะเปิดหน้าเขียนอีเมลของ Gmail ในแท็บใหม่ พร้อมกรอกผลให้อัตโนมัติ ท่านเพียงกดส่ง (ต้องเข้าสู่ระบบ Gmail ไว้ก่อน)</div>
+    </div>
+    <div class="result-actions">
+      <button class="btn-ghost" onclick="openAssessment(currentId)">ทำแบบประเมินนี้อีกครั้ง</button>
+      <button class="btn-primary" onclick="showGrid()">เลือกแบบประเมินอื่น</button>
+    </div>
+  </section>
+</main>
+
+<footer class="note">
+  แบบประเมินเหล่านี้ดัดแปลงจากเครื่องมือมาตรฐานสากลที่ใช้ทางจิตเวช เพื่อวัตถุประสงค์ในการคัดกรองและติดตามอาการเบื้องต้นเท่านั้น ผลคะแนนไม่ใช่การวินิจฉัยโรค และต้องใช้ร่วมกับดุลยพินิจของแพทย์หรือเจ้าหน้าที่สาธารณสุขเสมอ
+</footer>
+
+<script>
+const scale4 = [
+  {label:'ไม่มีเลย', score:0},
+  {label:'เป็นบางวัน (1–7 วัน)', score:1},
+  {label:'เป็นบ่อย (มากกว่า 7 วัน)', score:2},
+  {label:'เป็นทุกวัน', score:3}
+];
+const scale5 = [
+  {label:'ไม่มีเลย', score:0},
+  {label:'เล็กน้อย', score:1},
+  {label:'ปานกลาง', score:2},
+  {label:'ค่อนข้างมาก', score:3},
+  {label:'รุนแรงมาก', score:4}
+];
+const scale5b = [
+  {label:'ไม่มีเลย', score:0},
+  {label:'เล็กน้อย', score:1},
+  {label:'ปานกลาง', score:2},
+  {label:'ค่อนข้างมาก', score:3},
+  {label:'มากที่สุด', score:4}
+];
+
+const ASSESSMENTS = {
+  'phq9':{
+    code:'PHQ-9', title:'PHQ-9', full:'ประเมินโรคซึมเศร้าทางคลินิก',
+    sub:'ประเมินความถี่ของอาการในช่วง 2 สัปดาห์ที่ผ่านมา ใช้ยืนยันความรุนแรงของภาวะซึมเศร้าตามมาตรฐานสากล',
+    staffOnly:false, options:scale4,
+    questions:[
+      'เบื่อ ไม่สนใจอยากทำอะไร',
+      'ไม่สบายใจ ซึมเศร้า ท้อแท้',
+      'หลับยาก หลับไม่ทน หรือหลับมากไป',
+      'เหนื่อยง่าย หรือไม่ค่อยมีแรง',
+      'เบื่ออาหาร หรือกินมากเกินไป',
+      'รู้สึกไม่ดีกับตัวเอง คิดว่าล้มเหลว หรือทำให้ตนเอง/ครอบครัวผิดหวัง',
+      'สมาธิไม่ดีเวลาทำอะไร เช่น ดูโทรทัศน์ ฟังวิทยุ หรืองานที่ต้องใช้สมาธิ',
+      'พูดหรือทำอะไรช้าจนคนอื่นสังเกตเห็น หรือกระสับกระส่ายอยู่ไม่นิ่งกว่าปกติ',
+      'คิดทำร้ายตนเอง หรือคิดว่าตายไปเสียดีกว่า'
+    ],
+    selfHarmIndex:8,
+    bands:[
+      {min:0,max:4,label:'น้อยมาก / ปกติ',color:'var(--teal)',
+        advice:'คะแนนอยู่ในเกณฑ์ปกติ ไม่พบสัญญาณของภาวะซึมเศร้าที่มีนัยสำคัญในขณะนี้'},
+      {min:5,max:9,label:'ซึมเศร้าระดับน้อย',color:'var(--gold)',
+        advice:'มีอาการซึมเศร้าระดับเล็กน้อย ควรติดตามอาการต่อเนื่องและให้คำแนะนำการดูแลตนเอง'},
+      {min:10,max:14,label:'ซึมเศร้าระดับปานกลาง',color:'var(--coral)',
+        advice:'มีอาการซึมเศร้าระดับปานกลาง ควรส่งต่อพบเจ้าหน้าที่สาธารณสุขหรือแพทย์เพื่อประเมินเพิ่มเติม'},
+      {min:15,max:19,label:'ซึมเศร้าระดับค่อนข้างรุนแรง',color:'var(--coral)',
+        advice:'มีอาการซึมเศร้าระดับค่อนข้างรุนแรง ควรพบแพทย์เพื่อวางแผนการรักษาโดยเร็ว'},
+      {min:20,max:27,label:'ซึมเศร้าระดับรุนแรง',color:'var(--coral)',
+        advice:'มีอาการซึมเศร้าระดับรุนแรง ควรพบแพทย์โดยเร็วที่สุด ไม่ควรปล่อยไว้'}
+    ]
+  },
+  'hamd':{
+    code:'HAM-D', title:'HAM-D', full:'ประเมินภาวะซึมเศร้า (Hamilton)',
+    sub:'แบบประเมินความรุนแรงของภาวะซึมเศร้าฉบับย่อ ดัดแปลงจาก Hamilton Depression Rating Scale (17 ข้อ)',
+    staffOnly:true, options:scale5,
+    questions:[
+      'อารมณ์ซึมเศร้า (เศร้า สิ้นหวัง รู้สึกไร้ค่า)',
+      'ความรู้สึกผิดหรือโทษตัวเอง',
+      'ความคิดอยากทำร้ายตนเองหรือฆ่าตัวตาย',
+      'นอนหลับยาก (เริ่มต้นการนอน)',
+      'นอนหลับไม่สนิท ตื่นกลางดึกบ่อย',
+      'ตื่นเช้ากว่าปกติและนอนต่อไม่ได้',
+      'การทำงานและกิจกรรมต่าง ๆ ลดลง',
+      'ความเชื่องช้าทางความคิดและการเคลื่อนไหว',
+      'ความกระวนกระวาย ไม่สงบ',
+      'ความวิตกกังวลด้านจิตใจ',
+      'ความวิตกกังวลที่แสดงออกทางร่างกาย เช่น ใจสั่น ปวดหัว',
+      'อาการทางระบบทางเดินอาหาร เช่น เบื่ออาหาร',
+      'อาการทางร่างกายทั่วไป เช่น อ่อนเพลีย ปวดเมื่อยตามตัว',
+      'ความสนใจทางเพศลดลง',
+      'ความกังวลเกี่ยวกับสุขภาพร่างกายตนเองมากเกินจริง',
+      'น้ำหนักตัวลดลง',
+      'การรับรู้และยอมรับว่าตนเองกำลังป่วย'
+    ],
+    selfHarmIndex:2,
+    bands:[
+      {min:0,max:10,label:'ปกติ / หายจากภาวะซึมเศร้า',color:'var(--teal)',
+        advice:'คะแนนรวมอยู่ในเกณฑ์ปกติ'},
+      {min:11,max:20,label:'ซึมเศร้าระดับเล็กน้อย',color:'var(--gold)',
+        advice:'มีอาการซึมเศร้าระดับเล็กน้อย ควรติดตามอาการอย่างต่อเนื่อง'},
+      {min:21,max:34,label:'ซึมเศร้าระดับปานกลาง',color:'var(--coral)',
+        advice:'มีอาการซึมเศร้าระดับปานกลาง ควรส่งต่อพบแพทย์เพื่อพิจารณาการรักษา'},
+      {min:35,max:50,label:'ซึมเศร้าระดับรุนแรง',color:'var(--coral)',
+        advice:'มีอาการซึมเศร้าระดับรุนแรง ควรพบจิตแพทย์โดยเร็วที่สุด'},
+      {min:51,max:68,label:'ซึมเศร้าระดับรุนแรงมาก',color:'var(--coral)',
+        advice:'มีอาการซึมเศร้าระดับรุนแรงมาก ต้องได้รับการดูแลจากจิตแพทย์อย่างเร่งด่วน'}
+    ]
+  },
+  'bprs':{
+    code:'BPRS', title:'BPRS', full:'ประเมินอาการทางจิตเวชทั่วไป',
+    sub:'แบบประเมินความรุนแรงของอาการทางจิตเวชทั่วไปฉบับย่อ ดัดแปลงจาก Brief Psychiatric Rating Scale (18 ข้อ)',
+    staffOnly:true, options:scale5,
+    questions:[
+      'ความกังวลเกี่ยวกับสุขภาพร่างกายของตนเอง',
+      'ความวิตกกังวล',
+      'อารมณ์เศร้าหรือหดหู่',
+      'ความคิดหรือพฤติกรรมทำร้ายตนเอง',
+      'ความรู้สึกผิด',
+      'ความเป็นปรปักษ์หรือก้าวร้าว',
+      'ความคิดหวาดระแวงหรือไม่ไว้ใจผู้อื่น',
+      'ความคิดหรือคำพูดที่ผิดปกติไปจากความเป็นจริง',
+      'พฤติกรรมหรือท่าทางที่แปลกไปจากปกติ',
+      'การแสดงออกทางอารมณ์ที่ลดลงหรือราบเรียบผิดปกติ',
+      'ความตื่นตัวหรือกระวนกระวายผิดปกติ',
+      'ความเชื่องช้าทางความคิดและการเคลื่อนไหว',
+      'ความสับสนเกี่ยวกับเวลา สถานที่ หรือบุคคล',
+      'ปัญหาด้านความจำ',
+      'การรับรู้สิ่งที่ผู้อื่นไม่รับรู้ เช่น การได้ยินหรือมองเห็นสิ่งผิดปกติ',
+      'ความคิดหรือคำพูดที่วกวน ไม่ปะติดปะต่อ',
+      'อารมณ์ที่แปรปรวนขึ้นลงรวดเร็ว',
+      'ความไม่ร่วมมือในการสัมภาษณ์หรือรับการประเมิน'
+    ],
+    selfHarmIndex:3,
+    bands:[
+      {min:0,max:18,label:'อาการน้อยมาก',color:'var(--teal)',
+        advice:'คะแนนรวมอยู่ในเกณฑ์ต่ำ ไม่พบอาการทางจิตเวชที่มีนัยสำคัญ'},
+      {min:19,max:31,label:'อาการระดับเล็กน้อย',color:'var(--gold)',
+        advice:'พบอาการทางจิตเวชระดับเล็กน้อย ควรติดตามอาการอย่างต่อเนื่องและปรึกษาแพทย์หากอาการไม่ดีขึ้น'},
+      {min:32,max:45,label:'อาการระดับปานกลาง',color:'var(--coral)',
+        advice:'พบอาการทางจิตเวชระดับปานกลาง ควรส่งต่อพบจิตแพทย์เพื่อประเมินและวางแผนการรักษา'},
+      {min:46,max:72,label:'อาการระดับรุนแรง',color:'var(--coral)',
+        advice:'พบอาการทางจิตเวชระดับรุนแรง ควรพบจิตแพทย์โดยเร็วที่สุด'}
+    ]
+  },
+  'ybocs':{
+    code:'Y-BOCS', title:'Y-BOCS', full:'ประเมินโรคย้ำคิดย้ำทำ (OCD)',
+    sub:'แบบประเมินความรุนแรงของอาการย้ำคิดย้ำทำ ดัดแปลงจาก Yale-Brown Obsessive Compulsive Scale (10 ข้อ)',
+    staffOnly:true, options:scale5,
+    questions:[
+      'เวลาที่ใช้ไปกับความคิดย้ำคิดในแต่ละวัน',
+      'ความคิดย้ำคิดรบกวนการทำกิจกรรมหรือความสัมพันธ์มากเพียงใด',
+      'ความทุกข์ใจหรือวิตกกังวลจากความคิดย้ำคิดมากเพียงใด',
+      'ความพยายามต่อต้านหรือหยุดความคิดย้ำคิด',
+      'ความสามารถในการควบคุมความคิดย้ำคิด',
+      'เวลาที่ใช้ไปกับพฤติกรรมย้ำทำในแต่ละวัน',
+      'พฤติกรรมย้ำทำรบกวนการทำกิจกรรมหรือความสัมพันธ์มากเพียงใด',
+      'ความวิตกกังวลที่เกิดขึ้นหากไม่ได้ทำพฤติกรรมย้ำทำ',
+      'ความพยายามต่อต้านพฤติกรรมย้ำทำ',
+      'ความสามารถในการควบคุมพฤติกรรมย้ำทำ'
+    ],
+    bands:[
+      {min:0,max:7,label:'น้อยมาก / ไม่มีนัยสำคัญ',color:'var(--teal)',
+        advice:'คะแนนรวมอยู่ในเกณฑ์ต่ำ ไม่พบอาการย้ำคิดย้ำทำที่มีนัยสำคัญ'},
+      {min:8,max:15,label:'ระดับเล็กน้อย',color:'var(--gold)',
+        advice:'มีอาการย้ำคิดย้ำทำระดับเล็กน้อย ควรติดตามอาการต่อเนื่อง'},
+      {min:16,max:23,label:'ระดับปานกลาง',color:'var(--coral)',
+        advice:'มีอาการย้ำคิดย้ำทำระดับปานกลาง ควรส่งต่อพบจิตแพทย์เพื่อประเมินเพิ่มเติม'},
+      {min:24,max:31,label:'ระดับรุนแรง',color:'var(--coral)',
+        advice:'มีอาการย้ำคิดย้ำทำระดับรุนแรง ควรพบจิตแพทย์เพื่อวางแผนการรักษาโดยเร็ว'},
+      {min:32,max:40,label:'ระดับรุนแรงมาก',color:'var(--coral)',
+        advice:'มีอาการย้ำคิดย้ำทำระดับรุนแรงมาก ควรได้รับการดูแลจากจิตแพทย์อย่างเร่งด่วน'}
+    ]
+  },
+  'pcl':{
+    code:'PCL', title:'PTSD Checklist', full:'ประเมินภาวะเครียดหลังเหตุการณ์สะเทือนขวัญ',
+    sub:'ประเมินอาการในช่วง 1 เดือนที่ผ่านมา อันเนื่องมาจากเหตุการณ์ที่กระทบกระเทือนจิตใจอย่างรุนแรง (ดัดแปลงจาก PCL-5)',
+    staffOnly:false, options:scale5b,
+    questions:[
+      'ความทรงจำเกี่ยวกับเหตุการณ์ที่ผุดขึ้นมาเองซ้ำ ๆ โดยไม่ตั้งใจ',
+      'ฝันร้ายเกี่ยวกับเหตุการณ์นั้นซ้ำ ๆ',
+      'รู้สึกเหมือนเหตุการณ์นั้นกำลังเกิดขึ้นอีกครั้ง',
+      'รู้สึกทุกข์ใจอย่างมากเมื่อมีสิ่งเตือนความจำถึงเหตุการณ์นั้น',
+      'มีปฏิกิริยาทางร่างกาย เช่น ใจสั่น เหงื่อออก เมื่อถูกเตือนความจำ',
+      'พยายามหลีกเลี่ยงความทรงจำ ความคิด หรือความรู้สึกเกี่ยวกับเหตุการณ์',
+      'พยายามหลีกเลี่ยงคน สถานที่ หรือกิจกรรมที่ทำให้นึกถึงเหตุการณ์',
+      'จำรายละเอียดสำคัญของเหตุการณ์ไม่ได้',
+      'มีความเชื่อทางลบต่อตนเอง ผู้อื่น หรือโลกอย่างรุนแรง',
+      'โทษตัวเองหรือผู้อื่นเกี่ยวกับสาเหตุหรือผลของเหตุการณ์',
+      'มีอารมณ์ทางลบต่อเนื่อง เช่น กลัว โกรธ รู้สึกผิด ละอายใจ',
+      'หมดความสนใจในกิจกรรมที่เคยชอบ',
+      'รู้สึกห่างเหินหรือแยกตัวจากผู้อื่น',
+      'ไม่สามารถรู้สึกทางบวก เช่น ความสุข ความพึงพอใจ ความรัก',
+      'หงุดหงิดง่ายหรือแสดงความก้าวร้าวโดยไม่ตั้งใจ',
+      'ทำพฤติกรรมเสี่ยงหรือทำร้ายตนเองโดยไม่ระวัง',
+      'ระแวดระวังตัวหรือคอยเฝ้าระวังอันตรายตลอดเวลา',
+      'ตกใจง่ายผิดปกติ',
+      'มีปัญหาสมาธิ',
+      'มีปัญหาการนอนหลับ'
+    ],
+    selfHarmIndex:15,
+    bands:[
+      {min:0,max:20,label:'ระดับอาการต่ำ',color:'var(--teal)',
+        advice:'ระดับอาการโดยรวมต่ำ ยังคงดูแลสุขภาพใจต่อเนื่องและสังเกตอาการหากมีสิ่งกระตุ้น'},
+      {min:21,max:32,label:'ระดับอาการปานกลาง',color:'var(--gold)',
+        advice:'มีอาการในระดับปานกลาง ควรติดตามอาการต่อเนื่องและปรึกษาเจ้าหน้าที่สาธารณสุขหากอาการไม่ดีขึ้น'},
+      {min:33,max:50,label:'ระดับอาการสูง (เข้าเกณฑ์ควรพบผู้เชี่ยวชาญ)',color:'var(--coral)',
+        advice:'คะแนนเข้าเกณฑ์ที่บ่งชี้ความเป็นไปได้ของภาวะ PTSD ควรพบนักจิตวิทยาหรือจิตแพทย์เพื่อประเมินเพิ่มเติม'},
+      {min:51,max:80,label:'ระดับอาการสูงมาก',color:'var(--coral)',
+        advice:'มีอาการรุนแรงในหลายด้าน ควรพบจิตแพทย์โดยเร็วที่สุดเพื่อรับการดูแลอย่างเหมาะสม'}
+    ]
+  }
+};
+
+let currentId = null;
+let currentAnswers = [];
+let lastResult = null;
+
+function initGrid(){
+  const grid = document.getElementById('view-grid');
+  grid.innerHTML = '';
+  Object.keys(ASSESSMENTS).forEach(id=>{
+    const a = ASSESSMENTS[id];
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.onclick = ()=>openAssessment(id);
+    card.innerHTML = `
+      ${a.staffOnly ? '<div class="staff-tag">สำหรับเจ้าหน้าที่</div>' : ''}
+      <div class="icon">${a.code.replace('-','')}</div>
+      <div class="code">${a.title}</div>
+      <div class="desc">${a.full}</div>
+      <div class="qcount">${a.questions.length} ข้อ</div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function showGrid(){
+  document.getElementById('view-grid').style.display = 'grid';
+  document.getElementById('view-quiz').style.display = 'none';
+  document.getElementById('view-result').style.display = 'none';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function openAssessment(id){
+  currentId = id;
+  const a = ASSESSMENTS[id];
+  currentAnswers = new Array(a.questions.length).fill(null);
+
+  document.getElementById('quizTitle').textContent = `${a.title} — ${a.full}`;
+  document.getElementById('quizSub').textContent = a.sub;
+  document.getElementById('quizStaffBanner').style.display = a.staffOnly ? 'block' : 'none';
+
+  const list = document.getElementById('questionList');
+  list.innerHTML = '';
+  a.questions.forEach((text,i)=>{
+    const block = document.createElement('div');
+    block.className = 'question';
+    let optsHtml = '';
+    a.options.forEach((opt,j)=>{
+      optsHtml += `
+        <label class="opt" id="opt-${i}-${j}">
+          <input type="radio" name="q${i}" value="${opt.score}" onchange="selectOpt(${i},${j},${opt.score})">
+          ${opt.label}
+        </label>`;
+    });
+    block.innerHTML = `
+      <div class="qnum">ข้อที่ ${i+1} จาก ${a.questions.length}</div>
+      <div class="qtext">${text}</div>
+      <div class="options">${optsHtml}</div>
+    `;
+    list.appendChild(block);
+  });
+
+  updateProgress();
+  document.getElementById('view-grid').style.display = 'none';
+  document.getElementById('view-result').style.display = 'none';
+  document.getElementById('view-quiz').style.display = 'block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function selectOpt(i,j,score){
+  currentAnswers[i] = score;
+  document.querySelectorAll(`[id^="opt-${i}-"]`).forEach(el=>el.classList.remove('selected'));
+  document.getElementById(`opt-${i}-${j}`).classList.add('selected');
+  updateProgress();
+}
+
+function updateProgress(){
+  const total = currentAnswers.length;
+  const answered = currentAnswers.filter(v=>v!==null).length;
+  const pct = Math.round((answered/total)*100);
+  document.getElementById('progressFill').style.width = pct+'%';
+  document.getElementById('progressHint').textContent = `ตอบแล้ว ${answered} จาก ${total} ข้อ`;
+  document.getElementById('submitBtn').disabled = answered < total;
+}
+
+function submitQuiz(){
+  const a = ASSESSMENTS[currentId];
+  const score = currentAnswers.reduce((s,v)=>s+v,0);
+  const band = a.bands.find(b=>score>=b.min && score<=b.max) || a.bands[a.bands.length-1];
+
+  document.getElementById('resultCode').textContent = a.code;
+  document.getElementById('resultTitle').textContent = a.full;
+  document.getElementById('resultScore').textContent = score;
+  document.getElementById('resultScore').style.color = band.color;
+  document.getElementById('resultScoreLabel').textContent = 'คะแนนรวม';
+  document.getElementById('resultBadgeWrap').innerHTML = `<span class="level-badge" style="background:${band.color}">${band.label}</span>`;
+  document.getElementById('resultAdvice').innerHTML = `<b>คำแนะนำ:</b> ${band.advice}`;
+
+  let forceCrisis = false;
+  if(typeof a.selfHarmIndex === 'number' && currentAnswers[a.selfHarmIndex] > 0){ forceCrisis = true; }
+  document.getElementById('resultCrisis').style.display = forceCrisis ? 'block' : 'none';
+
+  const now = new Date();
+  lastResult = {
+    code:a.code, full:a.full, score:score, levelLabel:band.label,
+    dateStr: now.toLocaleDateString('th-TH', {year:'numeric',month:'long',day:'numeric'})
+  };
+
+  document.getElementById('view-quiz').style.display = 'none';
+  document.getElementById('view-result').style.display = 'block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function emailResult(){
+  if(!lastResult) return;
+  const to = document.getElementById('emailTo').value.trim();
+  if(!to){ alert('กรุณากรอกอีเมลผู้รับ'); return; }
+
+  const {code, full, score, levelLabel, dateStr} = lastResult;
+  const subject = `ผลแบบประเมิน ${code} — ${full}`;
+  const body =
+`ผลแบบประเมินทางคลินิก (Mental Health Cyber-Care)
+
+แบบประเมิน: ${code} (${full})
+วันที่ทำแบบประเมิน: ${dateStr}
+คะแนนรวม: ${score}
+ระดับผล: ${levelLabel}
+
+หมายเหตุ: ผลนี้เป็นการคัดกรองเบื้องต้นเท่านั้น ไม่ใช่การวินิจฉัยโรค ควรใช้ร่วมกับดุลยพินิจของแพทย์หรือเจ้าหน้าที่สาธารณสุข
+สายด่วนสุขภาพจิต 1323 (ฟรี ตลอด 24 ชม.)`;
+
+  const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  window.open(gmailUrl, '_blank');
+}
+
+initGrid();
+showGrid();
+</script>
+</body>
+</html>
