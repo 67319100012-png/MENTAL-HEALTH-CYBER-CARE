@@ -6,7 +6,7 @@
 <title>แบบทดสอบบุคลิกภาพ - Mental Health Cyber-Care</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <!-- Font Awesome Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -21,13 +21,12 @@
     
     --primary-grad: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
     --primary-hover: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
-    --surface-grad: linear-gradient(180deg, #ffffff 0%, #f0f9ff 100%);
-    --bg-grad: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #bae6fd 100%);
+    --accent-grad: linear-gradient(135deg, #818cf8 0%, #38bdf8 100%);
     
     --text-main: #1e293b;
     --text-muted: #64748b;
     --border: #bae6fd;
-    --border-light: #e0f2fe;
+    --border-light: rgba(224, 242, 254, 0.8);
     
     --success: #10b981;
     --warning: #f59e0b;
@@ -36,44 +35,74 @@
     --radius-lg: 24px;
     --radius-md: 16px;
     --radius-sm: 12px;
-    --shadow-sm: 0 4px 12px rgba(56, 189, 248, 0.08);
-    --shadow-md: 0 16px 28px -6px rgba(14, 165, 233, 0.12), 0 6px 12px -4px rgba(14, 165, 233, 0.06);
+    --shadow-sm: 0 4px 14px rgba(56, 189, 248, 0.1);
+    --shadow-md: 0 16px 32px -6px rgba(14, 165, 233, 0.15), 0 6px 12px -4px rgba(14, 165, 233, 0.08);
+    --shadow-hover: 0 22px 40px -10px rgba(56, 189, 248, 0.35);
   }
 
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
   body {
     margin: 0;
-    background: var(--bg-grad);
-    background-attachment: fixed;
+    background: #f0f9ff;
     font-family: 'Sarabun', sans-serif;
     color: var(--text-main);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Animated Floating Background Blobs */
+  .bg-blob {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: -1;
+    opacity: 0.6;
+    animation: floatBlob 18s infinite alternate ease-in-out;
+  }
+  .blob-1 {
+    width: 400px;
+    height: 400px;
+    background: #bae6fd;
+    top: -100px;
+    left: -100px;
+  }
+  .blob-2 {
+    width: 450px;
+    height: 450px;
+    background: #e0f2fe;
+    bottom: -150px;
+    right: -100px;
+    animation-delay: -6s;
+  }
+  .blob-3 {
+    width: 300px;
+    height: 300px;
+    background: #c7d2fe;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation-delay: -12s;
+  }
+
+  @keyframes floatBlob {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(60px, 40px) scale(1.15); }
+    100% { transform: translate(-40px, 80px) scale(0.9); }
   }
 
   h1, h2, h3, .font-title { font-family: 'Kanit', sans-serif; }
 
-  /* Hotline Bar */
-  .hotline-bar {
-    background: #0284c7;
-    color: #f0f9ff;
-    text-align: center;
-    padding: 8px 16px;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 0.3px;
-  }
-  .hotline-bar b { color: #fff; font-weight: 700; text-decoration: underline; }
-
-  /* Header & Navbar สไตล์ Glassmorphism */
+  /* Glassmorphic Navbar */
   header.nav-header {
-    background: rgba(255, 255, 255, 0.92);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(186, 230, 253, 0.8);
-    padding: 12px 6%;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(186, 230, 253, 0.6);
+    padding: 14px 6%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -81,6 +110,7 @@
     top: 0;
     z-index: 1000;
     box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
   }
 
   header.nav-header .logo {
@@ -89,22 +119,32 @@
     gap: 12px;
     font-family: 'Kanit', sans-serif;
     font-weight: 700;
-    font-size: 1.05rem;
+    font-size: 1.1rem;
     color: var(--sky-dark);
     text-decoration: none;
+    transition: transform 0.3s ease;
+  }
+  header.nav-header .logo:hover {
+    transform: scale(1.02);
   }
 
   header.nav-header .logo .badge {
-    width: 42px;
-    height: 42px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     background: var(--primary-grad);
     color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.15rem;
-    box-shadow: 0 4px 10px rgba(56, 189, 248, 0.4);
+    font-size: 1.2rem;
+    box-shadow: 0 4px 12px rgba(56, 189, 248, 0.4);
+    animation: pulseIcon 3s infinite ease-in-out;
+  }
+
+  @keyframes pulseIcon {
+    0%, 100% { transform: scale(1); box-shadow: 0 4px 12px rgba(56, 189, 248, 0.4); }
+    50% { transform: scale(1.08); box-shadow: 0 8px 20px rgba(56, 189, 248, 0.6); }
   }
 
   header.nav-header .logo small {
@@ -118,109 +158,105 @@
   .nav-actions {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
   }
 
-  /* ปุ่มย้อนกลับไปหน้าก่อนหน้า (Link ไปยังหน้าหลัก) */
+  /* Dynamic Interactive Buttons */
   .btn-nav-prev {
     display: inline-flex;
     align-items: center;
     gap: 8px;
     background: var(--primary-grad);
     color: #ffffff;
-    padding: 8px 18px;
+    padding: 10px 20px;
     border-radius: 30px;
     font-family: 'Sarabun', sans-serif;
-    font-size: 13.5px;
+    font-size: 14px;
     font-weight: 600;
     text-decoration: none;
     cursor: pointer;
-    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-    box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 4px 14px rgba(56, 189, 248, 0.35);
   }
-
   .btn-nav-prev i {
     font-size: 13px;
-    transition: transform 0.2s ease;
+    transition: transform 0.3s ease;
   }
-
   .btn-nav-prev:hover {
     background: var(--primary-hover);
-    color: #ffffff;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(56, 189, 248, 0.45);
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 20px rgba(56, 189, 248, 0.5);
   }
-
   .btn-nav-prev:hover i {
-    transform: translateX(-3px);
+    transform: translateX(-4px);
   }
 
-  /* ปุ่มย้อนกลับดีไซน์น่ารักสำหรับเปลี่ยนในหน้าแบบทดสอบ */
   .btn-nav-back {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.9);
     border: 1.5px solid #7dd3fc;
     color: #0284c7;
-    padding: 8px 18px;
+    padding: 9px 18px;
     border-radius: 30px;
     font-family: 'Sarabun', sans-serif;
     font-size: 13.5px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-    box-shadow: 0 2px 8px rgba(56, 189, 248, 0.15);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 2px 10px rgba(56, 189, 248, 0.15);
   }
-
   .btn-nav-back i {
-    font-size: 14px;
-    transition: transform 0.2s ease;
+    transition: transform 0.3s ease;
   }
-
   .btn-nav-back:hover {
     background: #e0f2fe;
     border-color: #0284c7;
     color: #0369a1;
     transform: translateY(-2px) scale(1.03);
-    box-shadow: 0 4px 12px rgba(56, 189, 248, 0.25);
+    box-shadow: 0 6px 16px rgba(56, 189, 248, 0.25);
   }
-
   .btn-nav-back:hover i {
-    transform: translateX(-3px);
+    transform: rotate(-15deg) scale(1.15);
   }
 
-  /* Header Hero Section */
+  /* Animated Hero Section */
   header.hero {
     max-width: 900px;
     margin: 0 auto;
-    padding: 36px 20px 20px;
+    padding: 40px 20px 20px;
     text-align: center;
+    animation: fadeInUp 0.8s ease-out;
   }
   .hero-badge {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 6px 16px;
-    background: #e0f2fe;
+    padding: 6px 18px;
+    background: rgba(224, 242, 254, 0.9);
     color: #0284c7;
     border-radius: 20px;
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 0.5px;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
     border: 1px solid #bae6fd;
+    box-shadow: 0 2px 8px rgba(56, 189, 248, 0.15);
   }
   header.hero h1 {
-    font-size: clamp(26px, 4vw, 36px);
-    margin: 0 0 12px;
+    font-size: clamp(28px, 4.5vw, 40px);
+    margin: 0 0 14px;
     color: var(--brand-dark);
     line-height: 1.25;
+    background: linear-gradient(135deg, #0f172a 0%, #0369a1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
   header.hero p {
-    font-size: 15px;
+    font-size: 15.5px;
     color: var(--text-muted);
-    max-width: 620px;
+    max-width: 640px;
     margin: 0 auto;
     line-height: 1.6;
   }
@@ -229,81 +265,113 @@
     max-width: 900px;
     width: 100%;
     margin: 0 auto;
-    padding: 10px 20px 40px;
+    padding: 10px 20px 50px;
     flex: 1;
   }
 
-  /* Grid View */
+  /* Animated Views Transistions */
+  .view-container {
+    animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Interactive Cards Grid */
   .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
+    gap: 22px;
     margin-top: 10px;
   }
   .card {
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
     border-radius: var(--radius-lg);
-    padding: 24px;
+    padding: 26px;
     border: 1.5px solid var(--border-light);
     box-shadow: var(--shadow-md);
     cursor: pointer;
-    transition: all 0.25s ease;
+    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
     display: flex;
     flex-direction: column;
     position: relative;
     overflow: hidden;
   }
-  .card::before {
+  .card::after {
     content: '';
     position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 5px;
-    background: var(--primary-grad);
-    opacity: 0;
-    transition: opacity 0.25s ease;
+    top: 0; left: 0; right: 0; bottom: 0;
+    border-radius: var(--radius-lg);
+    border: 2px solid transparent;
+    transition: border-color 0.3s ease;
   }
   .card:hover {
-    transform: translateY(-5px);
-    border-color: #7dd3fc;
-    box-shadow: 0 20px 30px -10px rgba(56, 189, 248, 0.25);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: var(--shadow-hover);
+    background: rgba(255, 255, 255, 0.95);
   }
-  .card:hover::before { opacity: 1; }
+  .card:hover::after {
+    border-color: #38bdf8;
+  }
+  
   .card .icon {
-    width: 52px;
-    height: 52px;
+    width: 56px;
+    height: 56px;
     border-radius: var(--radius-md);
     background: var(--primary-grad);
     color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 20px;
-    margin-bottom: 16px;
-    box-shadow: 0 6px 14px rgba(56, 189, 248, 0.35);
+    font-size: 22px;
+    margin-bottom: 18px;
+    box-shadow: 0 8px 16px rgba(56, 189, 248, 0.35);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
-  .card .code { font-size: 19px; font-weight: 700; margin-bottom: 6px; color: var(--brand-dark); }
-  .card .desc { font-size: 13.5px; color: var(--text-muted); line-height: 1.5; margin-bottom: 20px; flex: 1; }
+  .card:hover .icon {
+    transform: scale(1.12) rotate(6deg);
+  }
+
+  .card .code { font-size: 20px; font-weight: 700; margin-bottom: 6px; color: var(--brand-dark); }
+  .card .desc { font-size: 14px; color: var(--text-muted); line-height: 1.55; margin-bottom: 22px; flex: 1; }
   .card .card-footer { display: flex; align-items: center; justify-content: space-between; }
   .card .qcount {
-    font-size: 12px;
+    font-size: 12.5px;
     font-weight: 600;
     color: #0284c7;
     background: #e0f2fe;
     border-radius: 20px;
-    padding: 4px 12px;
+    padding: 5px 14px;
+  }
+  .card .btn-start-text {
+    font-size: 13.5px;
+    color: #0284c7;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: gap 0.2s ease;
+  }
+  .card:hover .btn-start-text {
+    gap: 8px;
+    color: #0369a1;
   }
 
-  /* Panel Component */
+  /* Glass Panel Components */
   .panel {
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(16px);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-md);
     border: 1.5px solid var(--border-light);
-    padding: 32px;
+    padding: 36px;
   }
   @media (max-width: 600px) { 
-    .panel { padding: 20px 16px; } 
-    header.nav-header { flex-direction: column; gap: 12px; padding: 12px 4%; text-align: center; }
+    .panel { padding: 22px 18px; } 
+    header.nav-header { flex-direction: column; gap: 14px; padding: 14px 4%; text-align: center; }
     .nav-actions { width: 100%; justify-content: center; }
   }
 
@@ -311,170 +379,217 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 20px;
-    padding-bottom: 14px;
+    margin-bottom: 22px;
+    padding-bottom: 16px;
     border-bottom: 1px solid var(--border-light);
   }
 
-  .quiz-title { font-size: 22px; margin: 0 0 6px; color: var(--brand-dark); }
-  .quiz-sub { font-size: 14px; color: var(--text-muted); margin: 0 0 24px; line-height: 1.6; }
+  .quiz-title { font-size: 24px; margin: 0 0 6px; color: var(--brand-dark); }
+  .quiz-sub { font-size: 14.5px; color: var(--text-muted); margin: 0 0 24px; line-height: 1.6; }
 
-  /* Progress Bar */
+  /* Animated Progress Bar */
   .progress-wrap {
     background: #e0f2fe;
-    border-radius: 10px;
-    height: 10px;
+    border-radius: 12px;
+    height: 12px;
     overflow: hidden;
-    margin-bottom: 28px;
+    margin-bottom: 30px;
+    position: relative;
   }
   .progress-fill {
     background: var(--primary-grad);
     height: 100%;
     width: 0%;
-    transition: width 0.3s ease;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    border-radius: 12px;
+  }
+  .progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+    animation: shimmer 2s infinite;
   }
 
-  /* Questions */
-  .question { padding: 20px 0; border-bottom: 1px dashed var(--border); }
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  /* Interactive Animated Options */
+  .question { padding: 22px 0; border-bottom: 1px dashed var(--border); animation: fadeInUp 0.4s ease; }
   .question:last-child { border-bottom: none; }
-  .question .qnum { font-size: 13px; font-weight: 700; color: #0284c7; margin-bottom: 6px; }
-  .question .qtext { font-size: 16px; font-weight: 600; line-height: 1.5; margin-bottom: 14px; color: var(--brand-dark); }
-  .options { display: flex; flex-direction: column; gap: 10px; }
+  .question .qnum { font-size: 13.5px; font-weight: 700; color: #0284c7; margin-bottom: 8px; }
+  .question .qtext { font-size: 16.5px; font-weight: 600; line-height: 1.55; margin-bottom: 16px; color: var(--brand-dark); }
+  .options { display: flex; flex-direction: column; gap: 12px; }
+  
   .opt {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
     border: 1.5px solid var(--border-light);
     border-radius: var(--radius-md);
-    padding: 14px 16px;
+    padding: 15px 18px;
     cursor: pointer;
-    font-size: 14.5px;
-    background: #fff;
-    transition: all 0.2s ease;
+    font-size: 15px;
+    background: rgba(255, 255, 255, 0.8);
+    transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
     user-select: none;
-    min-height: 48px;
+    min-height: 52px;
+    position: relative;
   }
-  .opt:hover { border-color: #38bdf8; background: #f0f9ff; }
-  .opt input { accent-color: #0284c7; width: 18px; height: 18px; flex-shrink: 0; }
+  .opt:hover {
+    border-color: #38bdf8;
+    background: #f0f9ff;
+    transform: translateX(4px);
+  }
+  .opt input { accent-color: #0284c7; width: 19px; height: 19px; flex-shrink: 0; }
   .opt.selected {
     border-color: #0284c7;
     background: linear-gradient(90deg, #f0f9ff 0%, #e0f2fe 100%);
     font-weight: 600;
     color: #0369a1;
-    box-shadow: 0 2px 8px rgba(56, 189, 248, 0.15);
+    transform: translateX(6px);
+    box-shadow: 0 4px 14px rgba(56, 189, 248, 0.2);
   }
 
-  /* Primary Button */
+  /* Animated Action Buttons */
   .btn-primary {
     background: var(--primary-grad);
     color: #fff;
     border: none;
-    padding: 14px 36px;
+    padding: 15px 38px;
     border-radius: 30px;
     font-family: 'Sarabun', sans-serif;
-    font-size: 15px;
+    font-size: 15.5px;
     font-weight: 700;
     cursor: pointer;
-    box-shadow: 0 6px 18px rgba(56, 189, 248, 0.35);
-    transition: all 0.2s ease;
+    box-shadow: 0 6px 20px rgba(56, 189, 248, 0.4);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     width: 100%;
     max-width: 320px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 10px;
   }
-  .btn-primary:hover {
+  .btn-primary:hover:not(:disabled) {
     background: var(--primary-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 22px rgba(56, 189, 248, 0.45);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 25px rgba(56, 189, 248, 0.5);
   }
-  .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; transform: none; box-shadow: none; }
+  .btn-primary:disabled { opacity: 0.45; cursor: not-allowed; transform: none; box-shadow: none; }
 
   .btn-secondary {
     background: #fff;
     border: 1.5px solid #7dd3fc;
     color: #0284c7;
-    padding: 12px 24px;
+    padding: 13px 26px;
     border-radius: 30px;
     font-family: 'Sarabun', sans-serif;
     font-size: 14.5px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.25s ease;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
   }
-  .btn-secondary:hover { background: #f0f9ff; border-color: #0284c7; color: #0369a1; }
+  .btn-secondary:hover { 
+    background: #f0f9ff; 
+    border-color: #0284c7; 
+    color: #0369a1;
+    transform: translateY(-2px);
+  }
 
-  .submit-row { margin-top: 30px; text-align: center; }
-  .hint { text-align: center; font-size: 13px; color: var(--text-muted); margin-top: 10px; }
+  .submit-row { margin-top: 32px; text-align: center; }
+  .hint { text-align: center; font-size: 13.5px; color: var(--text-muted); margin-top: 12px; }
 
-  /* Results */
-  .result-head { text-align: center; margin-bottom: 12px; }
+  /* Animated Results View */
+  .result-head { text-align: center; margin-bottom: 16px; }
   .score-big {
-    font-size: 56px;
+    font-size: 64px;
     font-weight: 700;
     text-align: center;
     line-height: 1;
-    margin: 10px 0 4px;
+    margin: 12px 0 6px;
     background: var(--primary-grad);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    animation: popScore 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
-  .score-label { text-align: center; font-size: 14px; color: var(--text-muted); margin-bottom: 20px; }
+
+  @keyframes popScore {
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  .score-label { text-align: center; font-size: 14.5px; color: var(--text-muted); margin-bottom: 22px; }
   .level-badge {
     display: inline-block;
-    padding: 8px 24px;
+    padding: 8px 26px;
     border-radius: 30px;
-    font-size: 15px;
+    font-size: 15.5px;
     font-weight: 700;
     color: #fff;
     box-shadow: var(--shadow-sm);
+    animation: zoomIn 0.5s ease;
   }
+
+  @keyframes zoomIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+
   .advice-box {
-    background: #f0f9ff;
+    background: rgba(240, 249, 255, 0.9);
     border: 1.5px solid var(--border);
     border-radius: var(--radius-md);
-    padding: 22px;
-    font-size: 15px;
-    line-height: 1.7;
-    margin: 24px 0;
+    padding: 24px;
+    font-size: 15.5px;
+    line-height: 1.75;
+    margin: 26px 0;
+    box-shadow: inset 0 2px 6px rgba(56, 189, 248, 0.05);
   }
   .advice-box b { color: var(--sky-dark); }
 
-  /* Email Box */
+  /* Email Section */
   .email-box {
-    background: #f8fafc;
+    background: rgba(248, 250, 252, 0.8);
     border: 1.5px solid var(--border-light);
     border-radius: var(--radius-md);
-    padding: 20px;
-    margin-top: 24px;
+    padding: 22px;
+    margin-top: 26px;
   }
-  .email-box label { display: block; font-size: 13.5px; font-weight: 700; margin-bottom: 10px; color: var(--brand-dark); }
-  .email-row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .email-box label { display: block; font-size: 14px; font-weight: 700; margin-bottom: 12px; color: var(--brand-dark); }
+  .email-row { display: flex; gap: 12px; flex-wrap: wrap; }
   .email-row input {
     flex: 1;
-    min-width: 220px;
-    padding: 12px 16px;
+    min-width: 240px;
+    padding: 13px 18px;
     border-radius: var(--radius-sm);
     border: 1.5px solid var(--border);
     font-family: inherit;
-    font-size: 14px;
+    font-size: 14.5px;
     outline: none;
+    transition: all 0.25s ease;
   }
-  .email-row input:focus { border-color: #0284c7; box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25); }
+  .email-row input:focus { 
+    border-color: #0284c7; 
+    box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.25); 
+    background: #fff;
+  }
 
-  .result-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 28px; }
+  .result-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 32px; }
 
   footer.note {
     max-width: 900px;
-    margin: 20px auto;
+    margin: 24px auto 30px;
     padding: 0 20px;
     text-align: center;
-    font-size: 12.5px;
+    font-size: 13px;
     color: var(--text-muted);
     line-height: 1.6;
   }
@@ -482,16 +597,19 @@
 </head>
 <body>
 
-<div class="hotline-bar"><i class="fa-solid fa-headset"></i> สายด่วนสุขภาพจิต <b>1323</b> ให้บริการฟรีตลอด 24 ชั่วโมง</div>
+<!-- Animated Background Blobs -->
+<div class="bg-blob blob-1"></div>
+<div class="bg-blob blob-2"></div>
+<div class="bg-blob blob-3"></div>
 
-<!-- Sticky Navbar -->
+<!-- Sticky Glassmorphic Navbar -->
 <header class="nav-header">
   <a href="assessment.html" class="logo">
     <span class="badge"><i class="fa-solid fa-heart-pulse"></i></span>
     <span>MENTAL HEALTH CYBER-CARE<small>โครงการ อสม. ฮีลใจ &bull; Cyber-Care Assessment</small></span>
   </a>
   <div class="nav-actions">
-    <!-- ปุ่มย้อนกลับไปหน้าก่อนหน้า (Link ย้อนกลับ หรือใช้อ้างอิง assessment.html) -->
+    <!-- ปุ่มย้อนกลับหน้าหลัก -->
     <a href="assessment.html" class="btn-nav-prev">
       <i class="fa-solid fa-arrow-left"></i> ย้อนกลับหน้าหลัก
     </a>
@@ -509,10 +627,10 @@
 
 <main>
   <!-- Grid Menu Section -->
-  <section id="view-grid" class="grid"></section>
+  <section id="view-grid" class="grid view-container"></section>
 
   <!-- Quiz View Section -->
-  <section id="view-quiz" class="panel" style="display:none;">
+  <section id="view-quiz" class="panel view-container" style="display:none;">
     <div class="panel-header-actions">
       <button class="btn-nav-back" onclick="showGrid()">
         <i class="fa-solid fa-face-smile-wink"></i> ย้อนกลับไปหน้าเลือกแบบทดสอบ
@@ -531,7 +649,7 @@
   </section>
 
   <!-- Result View Section -->
-  <section id="view-result" class="panel" style="display:none;">
+  <section id="view-result" class="panel view-container" style="display:none;">
     <div class="panel-header-actions">
       <button class="btn-nav-back" onclick="showGrid()">
         <i class="fa-solid fa-house-heart"></i> ย้อนกลับไปหน้าเลือกแบบทดสอบ
@@ -731,8 +849,7 @@ function emailResult(){
 ${resultLabel}
 ${levelLabel ? 'รายละเอียด: '+levelLabel : ''}
 
-หมายเหตุ: ผลนี้เป็นการสำรวจตนเองเบื้องต้นเท่านั้น
-สายด่วนสุขภาพจิต 1323 (ฟรี ตลอด 24 ชม.)`;
+หมายเหตุ: ผลนี้เป็นการสำรวจตนเองเบื้องต้นเท่านั้น`;
 
   const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   window.open(gmailUrl, '_blank');
@@ -753,11 +870,18 @@ function initGrid(){
       <div class="desc">${a.full}</div>
       <div class="card-footer">
         <span class="qcount">${qcount} ข้อประเมิน</span>
-        <span style="font-size:13px; color:#0284c7; font-weight:700;">เริ่มทำ <i class="fa-solid fa-chevron-right"></i></span>
+        <span class="btn-start-text">เริ่มทำ <i class="fa-solid fa-chevron-right"></i></span>
       </div>
     `;
     grid.appendChild(card);
   });
+}
+
+function triggerAnimation(elementId) {
+  const el = document.getElementById(elementId);
+  el.classList.remove('view-container');
+  void el.offsetWidth; // Trigger reflow
+  el.classList.add('view-container');
 }
 
 function showGrid(){
@@ -766,6 +890,7 @@ function showGrid(){
   document.getElementById('view-result').style.display = 'none';
   document.getElementById('heroHeader').style.display = 'block';
   document.getElementById('navBackBtn').style.display = 'none';
+  triggerAnimation('view-grid');
   window.scrollTo({top:0, behavior:'smooth'});
 }
 
@@ -783,6 +908,7 @@ function openAssessment(id){
     a.pairs.forEach((p,i)=>{
       const block = document.createElement('div');
       block.className = 'question';
+      block.style.animationDelay = `${i * 0.05}s`;
       block.innerHTML = `
         <div class="qnum">ข้อที่ ${i+1} จาก ${a.pairs.length}</div>
         <div class="options">
@@ -804,6 +930,7 @@ function openAssessment(id){
     qs.forEach((q,i)=>{
       const block = document.createElement('div');
       block.className = 'question';
+      block.style.animationDelay = `${i * 0.05}s`;
       let optsHtml = '';
       q.options.forEach((opt,j)=>{
         optsHtml += `
@@ -827,6 +954,7 @@ function openAssessment(id){
   document.getElementById('view-result').style.display = 'none';
   document.getElementById('view-quiz').style.display = 'block';
   document.getElementById('navBackBtn').style.display = 'inline-flex';
+  triggerAnimation('view-quiz');
   window.scrollTo({top:0, behavior:'smooth'});
 }
 
@@ -872,6 +1000,7 @@ function submitQuiz(){
 
   document.getElementById('view-quiz').style.display = 'none';
   document.getElementById('view-result').style.display = 'block';
+  triggerAnimation('view-result');
   window.scrollTo({top:0, behavior:'smooth'});
 }
 
@@ -894,10 +1023,10 @@ function renderMbtiResult(a){
     typeCode += winner;
     const pctA = Math.round((countA/total)*100);
     barsHtml += `
-      <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px; font-weight:700; font-size:14px;">
+      <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px; font-weight:700; font-size:14px;">
         <span style="width:20px; color:#0284c7; text-align:center;">${letterA}</span>
-        <div style="flex:1; height:10px; background:#e0f2fe; border-radius:10px; overflow:hidden;">
-          <div style="height:100%; width:${pctA}%; background:var(--primary-grad);"></div>
+        <div style="flex:1; height:12px; background:#e0f2fe; border-radius:10px; overflow:hidden;">
+          <div style="height:100%; width:${pctA}%; background:var(--primary-grad); transition: width 1s ease-out;"></div>
         </div>
         <span style="width:20px; color:#0284c7; text-align:center;">${letterB}</span>
       </div>`;
@@ -908,7 +1037,7 @@ function renderMbtiResult(a){
   document.getElementById('resultScore').textContent = typeCode;
   document.getElementById('resultScoreLabel').textContent = 'ผลการวิเคราะห์บุคลิกภาพเบื้องต้น';
   document.getElementById('resultBadgeWrap').innerHTML = '';
-  document.getElementById('dimBarsWrap').innerHTML = `<div style="margin:20px 0;">${barsHtml}</div>`;
+  document.getElementById('dimBarsWrap').innerHTML = `<div style="margin:24px 0;">${barsHtml}</div>`;
   document.getElementById('resultAdvice').innerHTML = `<b>${typeCode}:</b> ${MBTI_DESC[typeCode] || 'เป็นผู้มีความสามารถเฉพาะตัวและปรับตัวได้ดี'}`;
 
   const now1 = new Date();
@@ -922,7 +1051,7 @@ function renderMbtiResult(a){
   };
 }
 
-// เริ่มต้นโหลด Grid เมื่อเปิดหน้าเว็บ
+// โหลด Card Menu เริ่มต้น
 document.addEventListener('DOMContentLoaded', initGrid);
 </script>
 
