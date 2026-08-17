@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>แบบคัดกรองการใช้สารเสพติด</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-sage:#AFC4A2; --bg-sage-deep:#8FAA82;
+    --surface:#FBFAF5; --surface-alt:#F1EEE3;
+    --ink:#2B3A2E; --ink-soft:#5B6B5A;
+    --teal:#357B72; --teal-deep:#245A53;
+    --gold:#B98A2E; --coral:#C85A3F; --coral-soft:#F3DCD3;
+    --line:#D9DFCE; --radius:18px; --shadow:0 10px 30px rgba(40,58,42,0.14);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:linear-gradient(180deg,var(--bg-sage) 0%,var(--bg-sage-deep) 100%);font-family:'Sarabun',sans-serif;color:var(--ink);min-height:100vh;padding-bottom:40px;}
+  h1,h2,h3,.display{font-family:'Kanit',sans-serif;}
+
+  .hotline-bar{background:var(--teal-deep);color:#fff;text-align:center;padding:9px 16px;font-size:14px;}
+  .hotline-bar b{color:#F4D8A8;}
+
+  header.top{max-width:920px;margin:0 auto;padding:36px 24px 18px;text-align:center;}
+  header.top .eyebrow{font-size:13px;letter-spacing:2px;color:var(--teal-deep);font-weight:600;margin-bottom:8px;}
+  header.top h1{font-size:24px;margin:0 0 10px;}
+  header.top p{font-size:15px;color:var(--ink-soft);max-width:640px;margin:0 auto;line-height:1.7;}
+
+  main{max-width:920px;margin:0 auto;padding:10px 20px 20px;}
+
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px;}
+  @media (max-width:720px){ .grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:460px){ .grid{grid-template-columns:1fr;} }
+
+  .card{background:var(--surface);border-radius:var(--radius);padding:22px 18px;text-align:center;box-shadow:var(--shadow);cursor:pointer;border:1px solid transparent;transition:transform .18s ease, border-color .18s ease;}
+  .card:hover{transform:translateY(-4px);border-color:var(--teal);}
+  .card .icon{width:56px;height:56px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-family:'Kanit',sans-serif;font-weight:600;font-size:12px;}
+  .card .code{font-family:'Kanit',sans-serif;font-weight:600;font-size:16px;margin-bottom:4px;}
+  .card .desc{font-size:12.5px;color:var(--ink-soft);line-height:1.5;margin-bottom:12px;}
+  .card .qcount{display:inline-block;font-size:11.5px;color:var(--teal-deep);background:#E4EFE0;border-radius:20px;padding:3px 10px;}
+
+  .panel{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px 26px;margin-top:20px;}
+  .btn-ghost-back{background:none;border:1.5px solid var(--teal-deep);color:var(--teal-deep);padding:9px 22px;border-radius:30px;font-family:'Sarabun',sans-serif;font-size:14px;font-weight:600;cursor:pointer;margin-bottom:16px;}
+  .quiz-title{font-size:22px;margin:0 0 4px;}
+  .quiz-sub{font-size:13.5px;color:var(--ink-soft);margin:0 0 18px;line-height:1.6;}
+  .staff-banner{background:#EFE6CF;border:1px solid var(--gold);border-radius:12px;padding:12px 16px;font-size:13px;line-height:1.7;color:#5c470f;margin-bottom:18px;}
+
+  .substance-select{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:22px;}
+  .substance-chip{
+    border:1.5px solid var(--line);border-radius:14px;padding:12px 16px;
+    font-size:14px;cursor:pointer;background:#fff;font-family:'Sarabun',sans-serif;font-weight:600;
+    transition:border-color .15s, background .15s;
+  }
+  .substance-chip:hover{border-color:var(--teal);}
+  .substance-chip.selected{background:var(--teal-deep);border-color:var(--teal-deep);color:#fff;}
+  .substance-next-row{text-align:center;margin-bottom:10px;}
+
+  .domain-heading{font-family:'Kanit',sans-serif;font-size:14px;font-weight:700;color:var(--teal-deep);margin:22px 0 8px;padding:10px 14px;background:var(--surface-alt);border-radius:10px;}
+
+  .progress-wrap{background:var(--surface-alt);border-radius:20px;height:8px;overflow:hidden;margin-bottom:24px;}
+  .progress-fill{background:var(--teal);height:100%;width:0%;transition:width .25s ease;}
+
+  .question{border-top:1px solid var(--line);padding:16px 0;}
+  .question:first-of-type{border-top:none;}
+  .question .qtext{font-size:15px;line-height:1.6;margin-bottom:10px;}
+  .options{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;font-size:14px;transition:border-color .15s, background .15s;}
+  .opt:hover{border-color:var(--teal);}
+  .opt input{accent-color:var(--teal);width:16px;height:16px;flex:none;}
+  .opt.selected{border-color:var(--teal);background:#EAF3E9;font-weight:600;}
+
+  .submit-row{margin-top:22px;text-align:center;}
+  .btn-primary{background:var(--teal-deep);color:#fff;border:none;padding:13px 30px;border-radius:30px;font-family:'Sarabun',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:background .15s, opacity .15s;}
+  .btn-primary:hover{background:var(--teal);}
+  .btn-primary:disabled{opacity:.4;cursor:not-allowed;}
+  .btn-ghost{background:none;border:1.5px solid var(--teal-deep);color:var(--teal-deep);padding:11px 26px;border-radius:30px;font-family:'Sarabun',sans-serif;font-size:14.5px;font-weight:600;cursor:pointer;}
+  .hint{text-align:center;font-size:12.5px;color:var(--ink-soft);margin-top:10px;}
+
+  .result-head{text-align:center;margin-bottom:6px;}
+  .score-big{font-family:'Kanit',sans-serif;font-size:40px;font-weight:700;text-align:center;margin:2px 0 0;}
+  .score-label{text-align:center;font-size:13px;color:var(--ink-soft);margin-bottom:18px;}
+  .level-badge{display:block;width:fit-content;margin:0 auto 20px;padding:7px 18px;border-radius:30px;font-family:'Kanit',sans-serif;font-weight:600;font-size:14.5px;color:#fff;}
+  .advice-box{background:var(--surface-alt);border-radius:14px;padding:18px 20px;font-size:14.5px;line-height:1.75;margin-bottom:14px;}
+  .advice-box b{color:var(--teal-deep);}
+  .crisis-box{background:var(--coral-soft);border:1.5px solid var(--coral);border-radius:14px;padding:18px 20px;font-size:14.5px;line-height:1.75;margin-bottom:18px;}
+  .crisis-box .title{font-family:'Kanit',sans-serif;font-weight:600;color:var(--coral);margin-bottom:6px;font-size:15px;}
+
+  .substance-results{margin:16px 0;}
+  .substance-result-row{padding:12px 16px;border-radius:10px;background:var(--surface-alt);margin-bottom:10px;}
+  .substance-result-row .srow-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;}
+  .substance-result-row .sname{font-weight:700;font-family:'Kanit',sans-serif;font-size:14px;}
+  .substance-result-row .tag{font-size:11.5px;font-weight:700;font-family:'Kanit',sans-serif;padding:3px 12px;border-radius:20px;color:#fff;}
+  .substance-result-row .sdetail{font-size:13px;color:var(--ink-soft);}
+
+  .email-box{background:var(--surface-alt);border-radius:14px;padding:16px 18px;margin-bottom:6px;}
+  .email-box label{display:block;font-size:13px;font-weight:600;color:var(--teal-deep);margin-bottom:8px;}
+  .email-row{display:flex;gap:10px;flex-wrap:wrap;}
+  .email-row input{flex:1;min-width:220px;padding:10px 14px;border-radius:10px;border:1px solid var(--line);font-family:'Sarabun',sans-serif;font-size:14px;background:#fff;}
+  .email-row input:focus{outline:2px solid var(--teal);border-color:var(--teal);}
+  .email-row .btn-ghost{white-space:nowrap;}
+
+  .result-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:20px;}
+  footer.note{max-width:920px;margin:26px auto 0;padding:0 24px;text-align:center;font-size:12px;color:var(--ink);opacity:.75;line-height:1.7;}
+</style>
+</head>
+<body>
+
+<div class="hotline-bar">สายด่วนยาเสพติด <b>1165</b> · สายด่วนสุขภาพจิต <b>1323</b> · ให้บริการฟรีตลอด 24 ชั่วโมง</div>
+
+<header class="top">
+  <div class="eyebrow">MENTAL HEALTH CYBER-CARE</div>
+  <h1>แบบคัดกรองการใช้สารเสพติด</h1>
+  <p>Substance Use Screening — เครื่องมือคัดกรองเบื้องต้นสำหรับ อสม./เจ้าหน้าที่สาธารณสุข ใช้ระบุความเสี่ยงและส่งต่อผู้รับบริการเข้าสู่ระบบบำบัดที่เหมาะสม ไม่ใช่เครื่องมือวินิจฉัยและไม่มีข้อมูลการใช้สารเสพติดใดๆ อยู่ในระบบนี้</p>
+</header>
+
+<main>
+  <section id="view-grid" class="grid"></section>
+
+  <!-- ASSIST substance checklist view -->
+  <section id="view-substances" class="panel" style="display:none;">
+    <button class="btn-ghost-back" onclick="showGrid()">← ย้อนกลับ</button>
+    <h2 class="quiz-title">ASSIST — คัดกรองการใช้สารเสพติดหลายชนิด</h2>
+    <p class="quiz-sub">เลือกสารที่ผู้รับบริการเคยใช้ในช่วง 3 เดือนที่ผ่านมา (เลือกได้มากกว่า 1 ชนิด) จากนั้นระบบจะถามคำถามติดตามสำหรับแต่ละชนิดที่เลือก</p>
+    <div class="staff-banner">ผู้ประเมิน: กรุณาสัมภาษณ์ด้วยท่าทีไม่ตัดสิน (non-judgmental) เพื่อให้ได้ข้อมูลตามจริง</div>
+    <div class="substance-select" id="substanceSelect"></div>
+    <div class="substance-next-row">
+      <button class="btn-primary" id="substanceNextBtn" disabled onclick="startAssistQuestions()">ถัดไป</button>
+    </div>
+  </section>
+
+  <section id="view-quiz" class="panel" style="display:none;">
+    <button class="btn-ghost-back" onclick="showGrid()">← ย้อนกลับ</button>
+    <h2 class="quiz-title" id="quizTitle"></h2>
+    <p class="quiz-sub" id="quizSub"></p>
+    <div id="quizNote" class="staff-banner" style="display:none;"></div>
+    <div class="progress-wrap"><div class="progress-fill" id="progressFill"></div></div>
+    <div id="questionList"></div>
+    <div class="submit-row">
+      <button class="btn-primary" id="submitBtn" disabled onclick="submitQuiz()">ดูผลการประเมิน</button>
+      <div class="hint" id="progressHint"></div>
+    </div>
+  </section>
+
+  <section id="view-result" class="panel" style="display:none;">
+    <button class="btn-ghost-back" onclick="showGrid()">← ย้อนกลับ</button>
+    <div class="result-head">
+      <div class="eyebrow" id="resultCode" style="color:var(--teal-deep);font-size:12.5px;letter-spacing:1.5px;font-weight:600;"></div>
+      <h2 class="quiz-title" id="resultTitle" style="margin-top:4px;"></h2>
+    </div>
+    <div class="score-big" id="resultScore"></div>
+    <div class="score-label" id="resultScoreLabel"></div>
+    <div id="resultBadgeWrap" style="text-align:center;"></div>
+    <div id="substanceResultsWrap"></div>
+    <div class="advice-box" id="resultAdvice"></div>
+    <div class="crisis-box" id="resultCrisis" style="display:none;">
+      <div class="title">⚠ ความเสี่ยงสูง / มีการฉีดสารเสพติด</div>
+      ควรส่งต่อเข้ารับการบำบัดโดยเร็ว และให้ข้อมูลด้านการลดอันตราย (Harm Reduction) เช่น การไม่ใช้เข็มร่วมกัน หากมีความเสี่ยงต่อการใช้ยาเกินขนาด (overdose) ให้แจ้งสายด่วน 1669 ทันทีในกรณีฉุกเฉิน
+    </div>
+    <div class="email-box">
+      <label for="emailTo">ส่งผลไปที่อีเมล</label>
+      <div class="email-row">
+        <input type="email" id="emailTo" value="67319100012@Aitc.ac.th">
+        <button class="btn-ghost" onclick="emailResult()">✉ ส่งผลทางอีเมล</button>
+      </div>
+      <div class="hint">จะเปิดหน้าเขียนอีเมลของ Gmail ในแท็บใหม่ พร้อมกรอกผลให้อัตโนมัติ ท่านเพียงกดส่ง (ต้องเข้าสู่ระบบ Gmail ไว้ก่อน)</div>
+    </div>
+    <div class="result-actions">
+      <button class="btn-ghost" onclick="showGrid()">เลือกแบบประเมินอื่น</button>
+    </div>
+  </section>
+</main>
+
+<footer class="note">
+  แบบประเมินนี้ดัดแปลงจากเครื่องมือคัดกรองมาตรฐานสากลด้านสารเสพติด เพื่อการคัดกรองและส่งต่อเบื้องต้นเท่านั้น ไม่ใช่การวินิจฉัยและไม่ทดแทนการประเมินโดยแพทย์หรือผู้เชี่ยวชาญด้านการบำบัดยาเสพติด ข้อมูลของผู้รับบริการควรเก็บเป็นความลับตามหลักจริยธรรม
+</footer>
+
+<script>
+const scaleFreq5 = [
+  {label:'ไม่เคยเลย', score:0}, {label:'1-2 ครั้ง', score:1}, {label:'รายเดือน', score:2},
+  {label:'รายสัปดาห์', score:3}, {label:'รายวันหรือเกือบทุกวัน', score:4}
+];
+const yesNo = [ {label:'ไม่มี', score:0}, {label:'มี', score:1} ];
+const yesNoRev = [ {label:'ได้', score:0}, {label:'ไม่ได้', score:1} ];
+const scale4b = [
+  {label:'ไม่เลย', score:0}, {label:'บางครั้ง', score:1}, {label:'ค่อนข้างบ่อย', score:2}, {label:'เป็นประจำ', score:3}
+];
+const scale4rev = [
+  {label:'มากที่สุด', score:0}, {label:'ค่อนข้างมาก', score:1}, {label:'ค่อนข้างน้อย', score:2}, {label:'น้อยที่สุด/ไม่มีเลย', score:3}
+];
+
+const SUBSTANCES = [
+  'ยาสูบ (บุหรี่ / บุหรี่ไฟฟ้า)', 'กัญชา', 'สารกระตุ้นแอมเฟตามีน (ยาบ้า / ไอซ์)', 'ยาอี / เอ็คซ์ตาซี',
+  'สารระเหย (กาว ทินเนอร์)', 'ยากล่อมประสาท/ยานอนหลับ (ไม่ได้ใช้ตามแพทย์สั่ง)', 'สารหลอนประสาท (LSD เห็ดขี้ควาย)',
+  'ฝิ่น / เฮโรอีน / มอร์ฟีน (ไม่ได้ใช้ตามแพทย์สั่ง)', 'สารเสพติดอื่นๆ'
+];
+const ASSIST_FOLLOWUP = [
+  {text:'บ่อยเพียงใดที่ใช้ __SUB__ ในช่วง 3 เดือนที่ผ่านมา', options:scaleFreq5},
+  {text:'บ่อยเพียงใดที่รู้สึกอยากใช้ __SUB__ อย่างรุนแรง (craving)', options:scaleFreq5},
+  {text:'การใช้ __SUB__ ทำให้เกิดปัญหาสุขภาพ สังคม กฎหมาย หรือการเงินบ่อยเพียงใด', options:scaleFreq5},
+  {text:'บ่อยเพียงใดที่การใช้ __SUB__ ทำให้ทำหน้าที่ตามปกติ (งาน เรียน ดูแลครอบครัว) ไม่ได้', options:scaleFreq5},
+  {text:'เคยมีคนใกล้ชิดแสดงความกังวลเกี่ยวกับการใช้ __SUB__ ของท่านหรือไม่', options:yesNo},
+  {text:'เคยพยายามลดหรือเลิกใช้ __SUB__ แต่ทำไม่สำเร็จหรือไม่', options:yesNo},
+  {text:'เคยฉีด __SUB__ เข้าเส้นเลือดหรือไม่', options:yesNo}
+];
+
+const DAST_ITEMS = [
+  {text:'เคยใช้ยาเสพติดอื่นนอกเหนือจากที่จำเป็นทางการแพทย์หรือไม่', options:yesNo},
+  {text:'เคยใช้ยาเสพติดมากกว่าหนึ่งชนิดในคราวเดียวกันหรือไม่', options:yesNo},
+  {text:'สามารถหยุดใช้ยาเสพติดได้เมื่อต้องการหรือไม่', options:yesNoRev},
+  {text:'เคยมีอาการความจำเลอะเลือนหรือ blackout จากการใช้ยาเสพติดหรือไม่', options:yesNo},
+  {text:'เคยรู้สึกผิดหรือเสียใจเกี่ยวกับการใช้ยาเสพติดของตนเองหรือไม่', options:yesNo},
+  {text:'คู่สมรสหรือญาติเคยบ่นเกี่ยวกับการใช้ยาเสพติดของท่านหรือไม่', options:yesNo},
+  {text:'เคยละเลยครอบครัวเพราะการใช้ยาเสพติดหรือไม่', options:yesNo},
+  {text:'เคยทำสิ่งผิดกฎหมายเพื่อให้ได้มาซึ่งยาเสพติดหรือไม่', options:yesNo},
+  {text:'เคยมีอาการถอนยา (withdrawal) เมื่อหยุดใช้ยาเสพติดหรือไม่', options:yesNo},
+  {text:'เคยมีปัญหาสุขภาพจากการใช้ยาเสพติดหรือไม่ เช่น ความจำ ตับ ชัก เลือดออก', options:yesNo}
+];
+
+const CAGEAID_ITEMS = [
+  'เคยรู้สึกว่าควรลดการใช้ยาเสพติดหรือแอลกอฮอล์ของตนเองหรือไม่',
+  'เคยรู้สึกรำคาญที่คนอื่นวิจารณ์การใช้ยาเสพติดหรือแอลกอฮอล์ของท่านหรือไม่',
+  'เคยรู้สึกผิดเกี่ยวกับการใช้ยาเสพติดหรือแอลกอฮอล์ของตนเองหรือไม่',
+  'เคยต้องใช้ยาเสพติดหรือแอลกอฮอล์ทันทีที่ตื่นนอนเพื่อให้รู้สึกปกติหรือไม่'
+];
+
+const SDS_ITEMS = [
+  'ท่านรู้สึกว่าควบคุมการใช้สารเสพติดของตนเองไม่ได้มากน้อยเพียงใด',
+  'การต้องใช้สารเสพติดทำให้ท่านวิตกกังวลมากน้อยเพียงใด',
+  'ท่านกังวลเกี่ยวกับรูปแบบการใช้สารเสพติดของตนเองมากน้อยเพียงใด',
+  'ท่านอยากเลิกใช้สารเสพติดมากน้อยเพียงใด',
+  'ท่านคิดว่าการเลิกใช้สารเสพติด (หรือหยุดใช้) เป็นเรื่องยากมากน้อยเพียงใด'
+];
+
+const RELAPSE_ITEMS = [
+  {text:'ท่านยังคบหาหรือใช้เวลากับกลุ่มเพื่อนที่ใช้สารเสพติดอยู่มากน้อยเพียงใด', options:scale4b},
+  {text:'ท่านรู้สึกเครียดหรือมีปัญหาชีวิตที่ยังแก้ไม่ได้มากน้อยเพียงใด', options:scale4b},
+  {text:'ท่านยังมีความอยาก (craving) ที่จะกลับไปใช้สารเสพติดมากน้อยเพียงใด', options:scale4b},
+  {text:'ท่านมั่นใจว่าจะปฏิเสธได้เมื่อถูกชักชวนให้ใช้สารเสพติดมากน้อยเพียงใด', options:scale4rev},
+  {text:'ท่านมีกิจกรรมหรืองานที่สร้างสรรค์ทำในชีวิตประจำวันมากน้อยเพียงใด', options:scale4rev},
+  {text:'ท่านมีคนในครอบครัวหรือคนใกล้ชิดที่คอยสนับสนุนมากน้อยเพียงใด', options:scale4rev}
+];
+
+const ASSESSMENTS = {
+  assist:{
+    code:'ASSIST', title:'ASSIST', full:'คัดกรองการใช้สารเสพติดหลายชนิด',
+    sub:'ดัดแปลงจาก WHO ASSIST คัดกรองสารเสพติดหลายชนิดพร้อมกันและประเมินระดับความเสี่ยงแยกตามชนิด',
+    type:'assist', staffOnly:true
+  },
+  dast:{
+    code:'DAST-10', title:'DAST-10', full:'คัดกรองการใช้ยาเสพติดทั่วไป',
+    sub:'แบบคัดกรองการใช้ยาเสพติด 10 ข้อ (Drug Abuse Screening Test)',
+    type:'sum', options:null, items: DAST_ITEMS, staffOnly:false,
+    bands:[
+      {min:0,max:0,label:'ไม่พบปัญหา',color:'var(--teal)',advice:'ไม่พบสัญญาณของปัญหาการใช้ยาเสพติดในขณะนี้'},
+      {min:1,max:2,label:'ความเสี่ยงต่ำ',color:'var(--teal)',advice:'มีความเสี่ยงระดับต่ำ ควรติดตามและให้ความรู้เชิงป้องกัน'},
+      {min:3,max:5,label:'ความเสี่ยงปานกลาง',color:'var(--gold)',advice:'มีความเสี่ยงระดับปานกลาง แนะนำให้ปรึกษาเจ้าหน้าที่สาธารณสุขเพื่อประเมินเพิ่มเติมและวางแผนดูแล'},
+      {min:6,max:8,label:'ความเสี่ยงสูง',color:'var(--coral)',advice:'มีความเสี่ยงระดับสูง ควรส่งต่อเข้ารับการประเมินและบำบัดโดยผู้เชี่ยวชาญ'},
+      {min:9,max:10,label:'ความเสี่ยงสูงมาก',color:'var(--coral)',advice:'มีความเสี่ยงระดับสูงมาก ควรส่งต่อเข้าสู่ระบบบำบัดยาเสพติดโดยเร็วที่สุด'}
+    ]
+  },
+  cageaid:{
+    code:'CAGE-AID', title:'CAGE-AID', full:'คัดกรองอย่างรวดเร็ว (4 ข้อ)',
+    sub:'แบบคัดกรองอย่างย่อสำหรับแอลกอฮอล์และยาเสพติด ใช้เวลาไม่ถึง 1 นาที',
+    type:'sum', items: CAGEAID_ITEMS.map(t=>({text:t, options:yesNo})), staffOnly:false,
+    bands:[
+      {min:0,max:1,label:'ผลคัดกรองเป็นลบ',color:'var(--teal)',advice:'ไม่พบสัญญาณเสี่ยงชัดเจนจากแบบคัดกรองย่อนี้'},
+      {min:2,max:4,label:'ผลคัดกรองเป็นบวก ควรประเมินเพิ่มเติม',color:'var(--coral)',advice:'ผลคัดกรองเป็นบวก แนะนำให้ทำแบบประเมิน DAST-10 หรือ ASSIST ต่อเพื่อประเมินรายละเอียดเพิ่มเติม'}
+    ]
+  },
+  sds:{
+    code:'SDS', title:'SDS', full:'ประเมินความรุนแรงของการติดสาร',
+    sub:'Severity of Dependence Scale ประเมินระดับการติดสารเสพติดในเชิงจิตใจ',
+    type:'sum', items: SDS_ITEMS.map(t=>({text:t, options:scale4b})), staffOnly:false,
+    bands:[
+      {min:0,max:3,label:'ระดับการติดสารต่ำ',color:'var(--teal)',advice:'ระดับการพึ่งพาทางจิตใจต่อสารเสพติดยังอยู่ในระดับต่ำ'},
+      {min:4,max:8,label:'ระดับการติดสารปานกลาง',color:'var(--gold)',advice:'มีระดับการพึ่งพาทางจิตใจปานกลาง ควรปรึกษาเจ้าหน้าที่เพื่อวางแผนการลดหรือเลิกใช้'},
+      {min:9,max:15,label:'ระดับการติดสารสูง',color:'var(--coral)',advice:'มีระดับการพึ่งพาทางจิตใจสูง ควรส่งต่อเข้ารับการบำบัดโดยผู้เชี่ยวชาญ'}
+    ]
+  },
+  relapse:{
+    code:'Relapse Risk', title:'Relapse Risk', full:'ประเมินความเสี่ยงการกลับไปเสพซ้ำ',
+    sub:'ประเมินปัจจัยเสี่ยงและปัจจัยปกป้องที่เกี่ยวข้องกับการกลับไปใช้สารเสพติดซ้ำ สำหรับผู้ที่อยู่ระหว่างหรือหลังการบำบัด',
+    type:'sum', items: RELAPSE_ITEMS, staffOnly:false,
+    bands:[
+      {min:0,max:6,label:'ความเสี่ยงต่ำ',color:'var(--teal)',advice:'มีปัจจัยปกป้องที่ดีและความเสี่ยงต่อการกลับไปเสพซ้ำอยู่ในระดับต่ำ ควรรักษาปัจจัยสนับสนุนเหล่านี้ไว้'},
+      {min:7,max:13,label:'ความเสี่ยงปานกลาง',color:'var(--gold)',advice:'มีความเสี่ยงต่อการกลับไปเสพซ้ำระดับปานกลาง ควรเสริมสร้างทักษะการปฏิเสธและหากิจกรรมทดแทนเพิ่มเติม'},
+      {min:14,max:18,label:'ความเสี่ยงสูง',color:'var(--coral)',advice:'มีความเสี่ยงต่อการกลับไปเสพซ้ำระดับสูง ควรติดตามอย่างใกล้ชิดและปรึกษาทีมบำบัดเพื่อวางแผนป้องกันการกลับไปเสพซ้ำ'}
+    ]
+  }
+};
+
+let currentId = null;
+let currentAnswers = [];
+let selectedSubstances = [];
+let assistResults = [];
+let lastResult = null;
+
+function initGrid(){
+  const grid = document.getElementById('view-grid');
+  grid.innerHTML = '';
+  Object.keys(ASSESSMENTS).forEach(id=>{
+    const a = ASSESSMENTS[id];
+    let qcount = a.type==='assist' ? 'เลือกสาร + 7 ข้อ/ชนิด' : a.items.length+' ข้อ';
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.onclick = ()=>openAssessment(id);
+    card.innerHTML = `
+      <div class="icon">${a.code.slice(0,6)}</div>
+      <div class="code">${a.title}</div>
+      <div class="desc">${a.full}</div>
+      <div class="qcount">${qcount}</div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function showGrid(){
+  ['view-grid','view-substances','view-quiz','view-result'].forEach(v=>document.getElementById(v).style.display='none');
+  document.getElementById('view-grid').style.display = 'grid';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function hideAll(){
+  ['view-grid','view-substances','view-quiz','view-result'].forEach(v=>document.getElementById(v).style.display='none');
+}
+
+function openAssessment(id){
+  currentId = id;
+  const a = ASSESSMENTS[id];
+
+  if(a.type === 'assist'){
+    selectedSubstances = [];
+    assistResults = [];
+    const wrap = document.getElementById('substanceSelect');
+    wrap.innerHTML = '';
+    SUBSTANCES.forEach((s,i)=>{
+      const chip = document.createElement('div');
+      chip.className = 'substance-chip';
+      chip.textContent = s;
+      chip.id = 'sub-'+i;
+      chip.onclick = ()=>toggleSubstance(i,s,chip);
+      wrap.appendChild(chip);
+    });
+    document.getElementById('substanceNextBtn').disabled = true;
+    hideAll();
+    document.getElementById('view-substances').style.display = 'block';
+  } else {
+    document.getElementById('quizTitle').textContent = `${a.title} — ${a.full}`;
+    document.getElementById('quizSub').textContent = a.sub;
+    document.getElementById('quizNote').style.display = a.staffOnly ? 'block' : 'none';
+    if(a.staffOnly) document.getElementById('quizNote').textContent = 'ผู้ประเมิน: กรุณาให้เจ้าหน้าที่สาธารณสุขหรือ อสม. เป็นผู้สัมภาษณ์และบันทึกคะแนน';
+    renderQuestionList(a.items);
+    hideAll();
+    document.getElementById('view-quiz').style.display = 'block';
+  }
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function toggleSubstance(i,name,chip){
+  const idx = selectedSubstances.indexOf(name);
+  if(idx===-1){ selectedSubstances.push(name); chip.classList.add('selected'); }
+  else{ selectedSubstances.splice(idx,1); chip.classList.remove('selected'); }
+  document.getElementById('substanceNextBtn').disabled = selectedSubstances.length===0;
+}
+
+let assistQueue = [];
+function startAssistQuestions(){
+  assistQueue = [...selectedSubstances];
+  assistResults = [];
+  runNextAssistSubstance();
+}
+function runNextAssistSubstance(){
+  if(assistQueue.length===0){ finishAssist(); return; }
+  const sub = assistQueue[0];
+  document.getElementById('quizTitle').textContent = `ASSIST — ${sub}`;
+  document.getElementById('quizSub').textContent = `คำถามติดตามสำหรับ "${sub}" (เหลืออีก ${assistQueue.length} ชนิด รวมชนิดนี้)`;
+  document.getElementById('quizNote').style.display = 'block';
+  document.getElementById('quizNote').textContent = 'ผู้ประเมิน: กรุณาสัมภาษณ์ด้วยท่าทีไม่ตัดสิน';
+  const qs = ASSIST_FOLLOWUP.map(q=>({text:q.text.replace('__SUB__',sub), options:q.options}));
+  renderQuestionList(qs);
+  window._assistCurrentSub = sub;
+  hideAll();
+  document.getElementById('view-quiz').style.display = 'block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function renderQuestionList(qs){
+  currentAnswers = new Array(qs.length).fill(null);
+  window._currentQs = qs;
+  const list = document.getElementById('questionList');
+  list.innerHTML = '';
+  qs.forEach((q,i)=>{
+    const block = document.createElement('div');
+    block.className = 'question';
+    let optsHtml = '';
+    q.options.forEach((opt,j)=>{
+      optsHtml += `<label class="opt" id="opt-${i}-${j}"><input type="radio" name="q${i}" value="${opt.score}" onchange="selectOpt(${i},${j},${opt.score})">${opt.label}</label>`;
+    });
+    block.innerHTML = `<div class="qtext">${i+1}. ${q.text}</div><div class="options">${optsHtml}</div>`;
+    list.appendChild(block);
+  });
+  updateProgress();
+}
+
+function selectOpt(i,j,score){
+  currentAnswers[i] = score;
+  document.querySelectorAll(`[id^="opt-${i}-"]`).forEach(el=>el.classList.remove('selected'));
+  document.getElementById(`opt-${i}-${j}`).classList.add('selected');
+  updateProgress();
+}
+
+function updateProgress(){
+  const total = currentAnswers.length;
+  const answered = currentAnswers.filter(v=>v!==null).length;
+  const pct = total? Math.round((answered/total)*100) : 0;
+  document.getElementById('progressFill').style.width = pct+'%';
+  document.getElementById('progressHint').textContent = `ตอบแล้ว ${answered} จาก ${total} ข้อ`;
+  document.getElementById('submitBtn').disabled = answered < total;
+}
+
+function submitQuiz(){
+  if(currentId === 'assist'){
+    const sub = window._assistCurrentSub;
+    const score = currentAnswers.reduce((s,v)=>s+v,0);
+    const injected = currentAnswers[6] === 1;
+    let band;
+    if(score<=3) band = {label:'ความเสี่ยงต่ำ',color:'var(--teal)'};
+    else if(score<=15) band = {label:'ความเสี่ยงปานกลาง',color:'var(--gold)'};
+    else band = {label:'ความเสี่ยงสูง',color:'var(--coral)'};
+    if(injected) band = {label:'ความเสี่ยงสูง (มีการฉีด)',color:'var(--coral)'};
+    assistResults.push({sub, score, band, injected});
+
+    assistQueue.shift();
+    runNextAssistSubstance();
+    return;
+  }
+
+  const a = ASSESSMENTS[currentId];
+  const score = currentAnswers.reduce((s,v)=>s+v,0);
+  const band = a.bands.find(b=>score>=b.min && score<=b.max) || a.bands[a.bands.length-1];
+  document.getElementById('resultCode').textContent = a.code;
+  document.getElementById('resultTitle').textContent = a.full;
+  document.getElementById('resultScore').textContent = score;
+  document.getElementById('resultScore').style.color = band.color;
+  document.getElementById('resultScoreLabel').textContent = 'คะแนนรวม';
+  document.getElementById('resultBadgeWrap').innerHTML = `<span class="level-badge" style="background:${band.color}">${band.label}</span>`;
+  document.getElementById('substanceResultsWrap').innerHTML = '';
+  document.getElementById('resultAdvice').innerHTML = `<b>คำแนะนำ:</b> ${band.advice}`;
+  document.getElementById('resultCrisis').style.display = (currentId==='dast' && score>=9) ? 'block' : 'none';
+
+  lastResult = {code:a.code, full:a.full, score:score, levelLabel:band.label,
+    dateStr:new Date().toLocaleDateString('th-TH',{year:'numeric',month:'long',day:'numeric'})};
+
+  hideAll();
+  document.getElementById('view-result').style.display = 'block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function finishAssist(){
+  const a = ASSESSMENTS['assist'];
+  document.getElementById('resultCode').textContent = a.code;
+  document.getElementById('resultTitle').textContent = a.full;
+  document.getElementById('resultScoreLabel').textContent = 'ผลแยกตามชนิดสารที่ใช้';
+
+  const highestRisk = assistResults.some(r=>r.band.label.includes('สูง'));
+  const anyInjected = assistResults.some(r=>r.injected);
+  document.getElementById('resultScore').textContent = assistResults.length;
+  document.getElementById('resultScore').style.color = highestRisk ? 'var(--coral)' : 'var(--teal)';
+  document.getElementById('resultBadgeWrap').innerHTML = `<span class="level-badge" style="background:${highestRisk?'var(--coral)':'var(--teal)'}">${highestRisk?'พบสารที่มีความเสี่ยงสูง':'ความเสี่ยงโดยรวมต่ำ-ปานกลาง'}</span>`;
+
+  let rowsHtml = '';
+  assistResults.forEach(r=>{
+    rowsHtml += `<div class="substance-result-row">
+      <div class="srow-top"><span class="sname">${r.sub}</span><span class="tag" style="background:${r.band.color}">${r.band.label}</span></div>
+      <div class="sdetail">คะแนน ${r.score}/28${r.injected?' · มีประวัติการฉีด':''}</div>
+    </div>`;
+  });
+  document.getElementById('substanceResultsWrap').innerHTML = `<div class="substance-results">${rowsHtml}</div>`;
+
+  document.getElementById('resultAdvice').innerHTML = `<b>คำแนะนำ:</b> สารที่มีความเสี่ยงระดับปานกลางขึ้นไปควรได้รับการดูแลแบบสั้น (Brief Intervention) จากเจ้าหน้าที่สาธารณสุข ส่วนสารที่มีความเสี่ยงสูงควรส่งต่อเข้าสู่ระบบบำบัดยาเสพติดโดยเร็ว`;
+  document.getElementById('resultCrisis').style.display = (highestRisk || anyInjected) ? 'block' : 'none';
+
+  lastResult = {code:a.code, full:a.full, score:assistResults.length+' ชนิด', levelLabel: highestRisk?'พบความเสี่ยงสูง':'ความเสี่ยงต่ำ-ปานกลาง',
+    dateStr:new Date().toLocaleDateString('th-TH',{year:'numeric',month:'long',day:'numeric'})};
+
+  hideAll();
+  document.getElementById('view-result').style.display = 'block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function emailResult(){
+  if(!lastResult) return;
+  const to = document.getElementById('emailTo').value.trim();
+  if(!to){ alert('กรุณากรอกอีเมลผู้รับ'); return; }
+  const {code, full, score, levelLabel, dateStr} = lastResult;
+  const subject = `ผลแบบประเมิน ${code} — ${full}`;
+  let extra = '';
+  if(currentId === 'assist' && assistResults.length){
+    extra = '\n\nรายละเอียดแยกตามชนิดสาร:\n' + assistResults.map(r=>`- ${r.sub}: คะแนน ${r.score}/28 (${r.band.label})${r.injected?' [มีประวัติการฉีด]':''}`).join('\n');
+  }
+  const body =
+`ผลแบบคัดกรองการใช้สารเสพติด (Mental Health Cyber-Care)
+
+แบบประเมิน: ${code} (${full})
+วันที่ทำแบบประเมิน: ${dateStr}
+ผลคะแนน: ${score}
+ระดับผล: ${levelLabel}${extra}
+
+หมายเหตุ: ผลนี้เป็นการคัดกรองเบื้องต้นเท่านั้น ไม่ใช่การวินิจฉัย ข้อมูลนี้เป็นความลับ ควรเก็บรักษาตามหลักจริยธรรม
+สายด่วนยาเสพติด 1165 · สายด่วนสุขภาพจิต 1323 (ฟรี ตลอด 24 ชม.)`;
+  const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  window.open(gmailUrl, '_blank');
+}
+
+initGrid();
+showGrid();
+</script>
+</body>
+</html>
