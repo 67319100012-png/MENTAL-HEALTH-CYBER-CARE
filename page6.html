@@ -3,735 +3,824 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>แบบประเมินด้านจิตสังคมและความเป็นอยู่ที่ดี</title>
+<title>แบบประเมินพัฒนาการและสุขภาพจิตเด็ก - Mental Health Cyber-Care</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 <style>
   :root {
-    --bg-main: #EBF0E6;
-    --bg-gradient: linear-gradient(135deg, #E2ECD8 0%, #C3D8B8 100%);
-    --surface: #FFFFFF;
-    --surface-alt: #F4F7F1;
-    --ink: #1F2E23;
-    --ink-soft: #526354;
-    --teal: #2A6F68;
-    --teal-light: #3D8C84;
-    --teal-deep: #1B4B46;
-    --gold: #C08B2D;
-    --gold-bg: #FDF8EC;
-    --coral: #D95338;
-    --coral-bg: #FDF2F0;
-    --line: #E1E8DC;
-    --radius-lg: 24px;
-    --radius-md: 16px;
+    --brand-dark: #0F172A;
+    --teal-dark: #1E40AF;
+    --teal-main: #3B82F6;
+    --teal-soft: #93C5FD;
+    --teal-light: #EFF6FF;
+    --page-bg: #F8FAFC;
+    
+    --primary-grad: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
+    --primary-hover: linear-gradient(135deg, #1D4ED8 0%, #1E40AF 100%);
+    --card-grad: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
+
+    --text-main: #1E293B;
+    --text-muted: #64748B;
+    --border: #E2E8F0;
+    --border-light: rgba(226, 232, 240, 0.8);
+
+    --success: #10B981;
+    --warning: #F59E0B;
+    --danger: #EF4444;
+
+    --radius-lg: 20px;
+    --radius-md: 14px;
     --radius-sm: 10px;
-    --shadow-soft: 0 12px 32px rgba(27, 43, 30, 0.08);
-    --shadow-hover: 0 18px 40px rgba(27, 43, 30, 0.14);
+    --shadow-sm: 0 2px 8px rgba(37, 99, 235, 0.06);
+    --shadow-md: 0 12px 24px -4px rgba(37, 99, 235, 0.08), 0 4px 6px -2px rgba(0,0,0, 0.03);
+    --shadow-hover: 0 20px 32px -8px rgba(37, 99, 235, 0.18);
   }
 
-  * { box-sizing: border-box; }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
   body {
     margin: 0;
-    background: var(--bg-gradient);
+    background: var(--page-bg);
     font-family: 'Sarabun', sans-serif;
-    color: var(--ink);
+    color: var(--text-main);
     min-height: 100vh;
-    padding-bottom: 50px;
-  }
-  h1, h2, h3, .display { font-family: 'Kanit', sans-serif; }
-
-  .hotline-bar {
-    background: var(--teal-deep);
-    color: #FFFFFF;
-    text-align: center;
-    padding: 11px 20px;
-    font-size: 14px;
-    font-weight: 500;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  }
-  .hotline-bar b { color: #FFE3B3; font-family: 'Kanit', sans-serif; }
-
-  header.top {
-    max-width: 920px;
-    margin: 0 auto;
-    padding: 44px 24px 20px;
-    text-align: center;
-  }
-  header.top .eyebrow {
-    font-size: 12px;
-    letter-spacing: 2.5px;
-    color: var(--teal);
-    font-weight: 700;
-    margin-bottom: 10px;
-    text-transform: uppercase;
-  }
-  header.top h1 {
-    font-size: 30px;
-    margin: 0 0 14px;
-    color: var(--ink);
-    line-height: 1.3;
-  }
-  header.top p {
-    font-size: 15.5px;
-    color: var(--ink-soft);
-    max-width: 680px;
-    margin: 0 auto;
-    line-height: 1.7;
-  }
-
-  main {
-    max-width: 920px;
-    margin: 0 auto;
-    padding: 10px 20px 20px;
-  }
-
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    margin-top: 24px;
-  }
-  @media (max-width: 768px) { .grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 480px) { .grid { grid-template-columns: 1fr; } }
-
-  .card {
-    background: var(--surface);
-    border-radius: var(--radius-lg);
-    padding: 26px 20px;
-    text-align: center;
-    box-shadow: var(--shadow-soft);
-    cursor: pointer;
-    border: 1.5px solid transparent;
-    transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
+    overflow-x: hidden;
+    position: relative;
   }
-  .card:hover {
-    transform: translateY(-6px);
-    border-color: var(--teal-light);
-    box-shadow: var(--shadow-hover);
-  }
-  .card .icon {
-    width: 62px;
-    height: 62px;
+
+  /* Dynamic Subtle Background Blobs */
+  .bg-blob {
+    position: fixed;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--teal) 0%, var(--teal-deep) 100%);
-    color: #fff;
+    filter: blur(100px);
+    z-index: -1;
+    opacity: 0.4;
+    animation: floatBlob 20s infinite alternate ease-in-out;
+  }
+  .blob-1 { width: 450px; height: 450px; background: #DBEAFE; top: -120px; left: -100px; }
+  .blob-2 { width: 500px; height: 500px; background: #E0E7FF; bottom: -150px; right: -120px; animation-delay: -7s; }
+
+  @keyframes floatBlob {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(40px, 30px) scale(1.1); }
+    100% { transform: translate(-30px, 50px) scale(0.95); }
+  }
+
+  h1, h2, h3, .font-title { font-family: 'Kanit', sans-serif; }
+
+  /* Header Navigation */
+  header.nav-header {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border-light);
+    padding: 14px 6%;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    margin-bottom: 16px;
-    font-family: 'Kanit', sans-serif;
-    font-weight: 600;
-    font-size: 13px;
-    box-shadow: 0 6px 16px rgba(42, 111, 104, 0.25);
-  }
-  .card .code {
-    font-family: 'Kanit', sans-serif;
-    font-weight: 600;
-    font-size: 18px;
-    margin-bottom: 6px;
-    color: var(--ink);
-  }
-  .card .desc {
-    font-size: 13px;
-    color: var(--ink-soft);
-    line-height: 1.5;
-    margin-bottom: 16px;
-  }
-  .card .qcount {
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--teal);
-    background: var(--surface-alt);
-    border-radius: 20px;
-    padding: 4px 14px;
-    border: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: var(--shadow-sm);
   }
 
-  .panel {
-    background: var(--surface);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-soft);
-    padding: 36px 32px;
-    margin-top: 20px;
-  }
-  @media (max-width: 600px) { .panel { padding: 24px 18px; } }
-
-  .btn-ghost-back {
-    background: none;
-    border: 1.5px solid var(--teal);
-    color: var(--teal);
-    padding: 8px 20px;
-    border-radius: 30px;
-    font-family: 'Sarabun', sans-serif;
-    font-size: 13.5px;
-    font-weight: 600;
-    cursor: pointer;
-    margin-bottom: 20px;
-    transition: all 0.2s ease;
-  }
-  .btn-ghost-back:hover {
-    background: var(--teal);
-    color: #fff;
-  }
-
-  .quiz-title { font-size: 24px; margin: 0 0 6px; color: var(--ink); }
-  .quiz-sub { font-size: 14px; color: var(--ink-soft); margin: 0 0 22px; line-height: 1.6; }
-  .staff-banner {
-    background: var(--gold-bg);
-    border: 1px solid var(--gold);
-    border-radius: var(--radius-md);
-    padding: 14px 18px;
-    font-size: 13.5px;
-    line-height: 1.7;
-    color: #5C470F;
-    margin-bottom: 22px;
-  }
-
-  .progress-wrap {
-    background: var(--surface-alt);
-    border-radius: 20px;
-    height: 10px;
-    overflow: hidden;
-    margin-bottom: 28px;
-  }
-  .progress-fill {
-    background: linear-gradient(90deg, var(--teal-light), var(--teal));
-    height: 100%;
-    width: 0%;
-    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .question {
-    padding: 18px 0;
-    border-top: 1px solid var(--line);
-  }
-  .question:first-of-type { border-top: none; }
-  .question .qtext { font-size: 15.5px; line-height: 1.6; margin-bottom: 12px; font-weight: 500; color: var(--ink); }
-  .options { display: flex; flex-direction: column; gap: 9px; }
-  .opt {
+  header.nav-header .logo {
     display: flex;
     align-items: center;
     gap: 12px;
-    border: 1.5px solid var(--line);
-    border-radius: var(--radius-md);
-    padding: 12px 16px;
+    font-family: 'Kanit', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--teal-dark);
+    text-decoration: none;
+  }
+  header.nav-header .logo .badge {
+    width: 42px; height: 42px; border-radius: 50%;
+    background: var(--primary-grad); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+  }
+  header.nav-header .logo small { display: block; font-family: 'Sarabun', sans-serif; font-weight: 400; font-size: 0.75rem; color: var(--text-muted); }
+
+  .nav-actions { display: flex; align-items: center; gap: 12px; }
+
+  .btn-nav-prev {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--primary-grad); color: #ffffff;
+    padding: 10px 20px; border-radius: 30px;
+    font-size: 14px; font-weight: 600; text-decoration: none; cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+  }
+  .btn-nav-prev:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35); }
+
+  .btn-nav-back {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #FFFFFF;
+    border: 1.5px solid var(--border); color: var(--teal-dark);
+    padding: 9px 18px; border-radius: 30px;
+    font-size: 13.5px; font-weight: 600; cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  .btn-nav-back:hover { background: var(--teal-light); border-color: var(--teal-main); transform: translateY(-2px); }
+
+  /* Hero Banner */
+  header.hero { max-width: 900px; margin: 0 auto; padding: 36px 20px 10px; text-align: center; animation: fadeInUp 0.6s ease-out; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 16px; background: var(--teal-light); color: var(--teal-dark);
+    border-radius: 20px; font-size: 12.5px; font-weight: 700; letter-spacing: 0.3px;
+    margin-bottom: 14px; border: 1px solid var(--teal-soft);
+  }
+  header.hero h1 {
+    font-size: clamp(26px, 4.5vw, 36px); margin: 0 0 12px; line-height: 1.3;
+    color: var(--brand-dark);
+  }
+  header.hero p { font-size: 15.5px; color: var(--text-muted); max-width: 680px; margin: 0 auto; line-height: 1.6; }
+
+  .staff-global-alert { max-width: 900px; margin: 18px auto 0; padding: 0 20px; }
+  .staff-global-box {
+    background: #FFFBEB; border: 1px solid #FCD34D;
+    border-radius: var(--radius-md); padding: 14px 20px; font-size: 13.5px;
+    color: #92400E; line-height: 1.6; display: flex; align-items: flex-start; gap: 12px;
+  }
+  .staff-global-box i { font-size: 18px; color: var(--warning); margin-top: 2px; flex-shrink: 0; }
+
+  .feature-strip {
+    max-width: 900px; margin: 24px auto 6px; padding: 0 20px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  }
+  @media (max-width: 640px) { .feature-strip { grid-template-columns: 1fr; } }
+  .feature-item {
+    background: #FFFFFF; border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 18px 16px; text-align: center;
+    box-shadow: var(--shadow-sm);
+  }
+  .feature-item i { font-size: 22px; color: var(--teal-main); margin-bottom: 8px; display:block; }
+  .feature-item .ftitle { font-family:'Kanit',sans-serif; font-weight:600; font-size: 14.5px; margin-bottom: 4px; }
+  .feature-item .fdesc { font-size: 12.5px; color: var(--text-muted); line-height: 1.5; }
+
+  /* Main Layout & Cards */
+  main { max-width: 900px; width: 100%; margin: 0 auto; padding: 10px 20px 50px; flex: 1; }
+
+  .view-container { animation: fadeInUp 0.4s ease-out forwards; }
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(16px);} to { opacity: 1; transform: translateY(0);} }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 20px; margin-top: 10px; }
+  .card {
+    background: var(--card-grad);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
     cursor: pointer;
-    font-size: 14.5px;
-    transition: all 0.2s ease;
-    background: #fff;
+    transition: all 0.3s ease;
+    display: flex; flex-direction: column; position: relative; overflow: hidden;
   }
-  .opt:hover { border-color: var(--teal-light); background: var(--surface-alt); }
-  .opt input { accent-color: var(--teal); width: 18px; height: 18px; flex: none; }
-  .opt.selected {
-    border-color: var(--teal);
-    background: #EDF5EC;
+  .card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); border-color: var(--teal-soft); }
+
+  .card .icon {
+    width: 52px; height: 52px; border-radius: var(--radius-md);
+    background: var(--teal-light); color: var(--teal-main);
+    display: flex; align-items: center; justify-content: center; font-size: 22px;
+    margin-bottom: 16px; transition: all 0.3s ease;
+  }
+  .card:hover .icon { background: var(--primary-grad); color: #FFF; transform: scale(1.08); }
+
+  .card .code { font-size: 19px; font-weight: 700; margin-bottom: 6px; color: var(--brand-dark); }
+  .card .desc { font-size: 13.5px; color: var(--text-muted); line-height: 1.55; margin-bottom: 20px; flex: 1; }
+  .card .card-footer { display: flex; align-items: center; justify-content: space-between; border-top: 1px dashed var(--border); padding-top: 14px; }
+  .card .qcount { font-size: 12.5px; font-weight: 600; color: var(--teal-dark); background: var(--teal-light); border-radius: 20px; padding: 4px 12px; }
+  .card .btn-start-text { font-size: 13.5px; color: var(--teal-main); font-weight: 700; display: flex; align-items: center; gap: 4px; transition: gap 0.2s ease; }
+  .card:hover .btn-start-text { gap: 8px; }
+
+  /* Panels */
+  .panel {
+    background: #FFFFFF;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border);
+    padding: 32px;
+  }
+  @media (max-width: 600px) {
+    .panel { padding: 20px 16px; }
+    header.nav-header { flex-direction: column; gap: 12px; padding: 12px 4%; text-align: center; }
+    .nav-actions { width: 100%; justify-content: center; }
+  }
+
+  .panel-header-actions { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+  .quiz-title { font-size: 22px; margin: 0 0 6px; color: var(--brand-dark); }
+  .quiz-sub { font-size: 14px; color: var(--text-muted); margin: 0 0 20px; line-height: 1.6; }
+
+  /* Target Chip Selector */
+  .target-select-wrap {
+    background: var(--teal-light);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    margin-bottom: 24px;
+    border: 1px solid var(--teal-soft);
+  }
+  .target-select-wrap .section-label { font-family: 'Kanit', sans-serif; font-size: 13.5px; font-weight: 600; color: var(--teal-dark); margin-bottom: 10px; }
+  .target-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip-btn {
+    border: 1px solid var(--border);
+    background: #FFF;
+    color: var(--text-main);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 13px;
     font-weight: 600;
-    color: var(--teal-deep);
+    cursor: pointer;
+    transition: all 0.2s ease;
   }
+  .chip-btn:hover { border-color: var(--teal-main); }
+  .chip-btn.selected { background: var(--primary-grad); color: #FFF; border-color: transparent; box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25); }
+
+  /* Progress Bar */
+  .progress-wrap { background: #E2E8F0; border-radius: 10px; height: 10px; overflow: hidden; margin-bottom: 24px; position: relative; }
+  .progress-fill { background: var(--primary-grad); height: 100%; width: 0%; transition: width 0.3s ease; border-radius: 10px; }
+
+  /* Questions & Option Styling */
+  .question { padding: 20px 0; border-bottom: 1px dashed var(--border); animation: fadeInUp 0.3s ease; }
+  .question:last-child { border-bottom: none; }
+  .question .qnum { font-size: 13px; font-weight: 700; color: var(--teal-main); margin-bottom: 6px; }
+  .question .qtext { font-size: 16px; font-weight: 600; line-height: 1.5; margin-bottom: 14px; color: var(--brand-dark); }
+  .options { display: flex; flex-direction: column; gap: 8px; }
+
+  .opt {
+    display: flex; align-items: center; gap: 12px;
+    border: 1.5px solid var(--border); border-radius: var(--radius-md);
+    padding: 12px 16px; cursor: pointer; font-size: 14.5px;
+    background: #FFFFFF;
+    transition: all 0.2s ease;
+    user-select: none; min-height: 48px;
+  }
+  .opt:hover { border-color: var(--teal-soft); background: var(--teal-light); }
+  .opt input { accent-color: var(--teal-dark); width: 18px; height: 18px; flex-shrink: 0; }
+  .opt.selected {
+    border-color: var(--teal-main);
+    background: var(--teal-light);
+    font-weight: 600; color: var(--teal-dark);
+  }
+
+  /* Buttons */
+  .btn-primary {
+    background: var(--primary-grad); color: #fff; border: none;
+    padding: 14px 32px; border-radius: 30px;
+    font-size: 15px; font-weight: 700; cursor: pointer;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25);
+    transition: all 0.25s ease;
+    width: 100%; max-width: 300px;
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .btn-primary:hover:not(:disabled) { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 6px 18px rgba(37, 99, 235, 0.35); }
+  .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; box-shadow: none; }
+
+  .btn-secondary {
+    background: #fff; border: 1.5px solid var(--border); color: var(--teal-dark);
+    padding: 12px 24px; border-radius: 30px;
+    font-size: 14px; font-weight: 600; cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .btn-secondary:hover { background: var(--teal-light); border-color: var(--teal-main); }
 
   .submit-row { margin-top: 28px; text-align: center; }
-  .btn-primary {
-    background: linear-gradient(135deg, var(--teal) 0%, var(--teal-deep) 100%);
-    color: #fff;
-    border: none;
-    padding: 14px 36px;
-    border-radius: 30px;
-    font-family: 'Sarabun', sans-serif;
-    font-size: 15.5px;
-    font-weight: 700;
-    cursor: pointer;
-    box-shadow: 0 6px 18px rgba(42, 111, 104, 0.25);
-    transition: all 0.2s ease;
-  }
-  .btn-primary:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(42, 111, 104, 0.35);
-  }
-  .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none; }
-  .btn-ghost {
-    background: #fff;
-    border: 1.5px solid var(--teal);
-    color: var(--teal);
-    padding: 11px 26px;
-    border-radius: 30px;
-    font-family: 'Sarabun', sans-serif;
-    font-size: 14.5px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-  .btn-ghost:hover { background: var(--surface-alt); }
-  .hint { text-align: center; font-size: 13px; color: var(--ink-soft); margin-top: 12px; }
+  .hint { text-align: center; font-size: 13px; color: var(--text-muted); margin-top: 10px; }
 
-  .result-head { text-align: center; margin-bottom: 10px; }
-  .score-big { font-family: 'Kanit', sans-serif; font-size: 52px; font-weight: 700; text-align: center; margin: 4px 0 0; line-height: 1; }
-  .score-label { text-align: center; font-size: 13.5px; color: var(--ink-soft); margin-bottom: 20px; }
-  .level-badge {
-    display: block;
-    width: fit-content;
-    margin: 0 auto 24px;
-    padding: 8px 22px;
-    border-radius: 30px;
-    font-family: 'Kanit', sans-serif;
-    font-weight: 600;
-    font-size: 15px;
-    color: #fff;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  /* Result Screen */
+  .result-head { text-align: center; margin-bottom: 12px; }
+  .score-big {
+    font-size: 56px; font-weight: 700; text-align: center; line-height: 1; margin: 10px 0 4px;
+    color: var(--teal-dark);
   }
+  .score-label { text-align: center; font-size: 14px; color: var(--text-muted); margin-bottom: 18px; }
+  .level-badge { display: inline-block; padding: 6px 22px; border-radius: 20px; font-size: 15px; font-weight: 700; color: #fff; }
+
+  .breakdown-box {
+    background: var(--page-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 18px; margin: 20px 0 16px;
+  }
+  .breakdown-title { font-family: 'Kanit', sans-serif; font-size: 14.5px; font-weight: 600; color: var(--brand-dark); margin-bottom: 10px; }
+  .breakdown-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px dashed var(--border); font-size: 13.5px; }
+  .breakdown-item:last-child { border-bottom: none; }
+  .breakdown-tag { font-size: 12px; padding: 2px 10px; border-radius: 12px; color: #FFF; font-weight: 600; background: var(--teal-dark); font-family: 'Kanit', sans-serif; }
+
   .advice-box {
-    background: var(--surface-alt);
+    background: var(--teal-light);
+    border: 1px solid var(--teal-soft);
     border-radius: var(--radius-md);
-    padding: 20px 22px;
-    font-size: 15px;
-    line-height: 1.75;
-    margin-bottom: 18px;
-    border: 1px solid var(--line);
+    padding: 20px; font-size: 14.5px; line-height: 1.65; margin: 16px 0 20px;
   }
-  .advice-box b { color: var(--teal-deep); font-family: 'Kanit', sans-serif; }
+  .advice-box b { color: var(--teal-dark); }
 
-  .dim-bars { margin: 22px 0; }
-  .dim-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; font-size: 13.5px; }
-  .dim-row .dname { width: 110px; flex: none; color: var(--ink-soft); font-weight: 500; }
-  .dim-row .bar-track { flex: 1; height: 12px; background: var(--surface-alt); border-radius: 10px; overflow: hidden; border: 1px solid var(--line); }
-  .dim-row .bar-fill { height: 100%; background: linear-gradient(90deg, var(--teal-light), var(--teal)); border-radius: 10px; }
-  .dim-row .dval { width: 44px; flex: none; text-align: right; font-weight: 600; font-family: 'Kanit', sans-serif; color: var(--teal-deep); }
-
-  .email-box {
-    background: var(--surface-alt);
-    border-radius: var(--radius-md);
-    padding: 18px 20px;
-    margin-bottom: 10px;
-    border: 1px solid var(--line);
-  }
-  .email-box label { display: block; font-size: 13.5px; font-weight: 600; color: var(--teal-deep); margin-bottom: 10px; font-family: 'Kanit', sans-serif; }
+  .email-box { background: var(--page-bg); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 18px; margin-top: 20px; }
+  .email-box label { display: block; font-size: 13.5px; font-weight: 700; margin-bottom: 10px; color: var(--brand-dark); }
   .email-row { display: flex; gap: 10px; flex-wrap: wrap; }
-  .email-row input {
-    flex: 1;
-    min-width: 220px;
-    padding: 11px 16px;
-    border-radius: var(--radius-sm);
-    border: 1.5px solid var(--line);
-    font-family: 'Sarabun', sans-serif;
-    font-size: 14.5px;
-    background: #fff;
-    transition: border-color 0.2s;
-  }
-  .email-row input:focus { outline: none; border-color: var(--teal); }
-  .email-row .btn-ghost { white-space: nowrap; }
+  .email-row input { flex: 1; min-width: 220px; padding: 11px 16px; border-radius: var(--radius-sm); border: 1.5px solid var(--border); font-family: inherit; font-size: 14px; outline: none; }
+  .email-row input:focus { border-color: var(--teal-main); background: #fff; }
 
-  .result-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 24px; }
-  footer.note { max-width: 920px; margin: 30px auto 0; padding: 0 24px; text-align: center; font-size: 12.5px; color: var(--ink-soft); line-height: 1.7; }
+  .result-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 28px; }
+
+  footer.note { max-width: 900px; margin: 24px auto 30px; padding: 0 20px; text-align: center; font-size: 12.5px; color: var(--text-muted); line-height: 1.6; }
 </style>
 </head>
 <body>
 
-<div class="hotline-bar">สายด่วนสุขภาพจิต <b>1323</b> ให้บริการฟรีตลอด 24 ชั่วโมง</div>
+<div class="bg-blob blob-1"></div>
+<div class="bg-blob blob-2"></div>
 
-<header class="top">
-  <div class="eyebrow">MENTAL HEALTH CYBER-CARE</div>
-  <h1>แบบประเมินด้านจิตสังคมและความเป็นอยู่ที่ดี</h1>
-  <p>Psychosocial & Well-being Tests — ประเมินคุณภาพชีวิต ความสุข สัมพันธภาพในครอบครัว ภาวะหมดไฟ และการสนับสนุนทางสังคม ผลลัพธ์ใช้เพื่อความเข้าใจตนเองและวางแผนดูแลสุขภาพใจเบื้องต้น</p>
+<!-- Header Navigation -->
+<header class="nav-header">
+  <a href="#" onclick="showGrid()" class="logo">
+    <span class="badge"><i class="fa-solid fa-child-reaching"></i></span>
+    <span>MENTAL HEALTH CYBER-CARE<small>โครงการ อสม. ฮีลใจ &bull; เด็กและวัยรุ่น</small></span>
+  </a>
+  <div class="nav-actions">
+    <a href="assessment.html" class="btn-nav-prev" onclick="showGrid()">
+      <i class="fa-solid fa-arrow-left"></i> ย้อนกลับหน้าหลัก
+    </a>
+    <button class="btn-nav-back" id="navBackBtn" style="display:none;" onclick="showGrid()">
+      <i class="fa-solid fa-grip"></i> เลือกแบบประเมิน
+    </button>
+  </div>
 </header>
 
-<main>
-  <section id="view-grid" class="grid"></section>
+<!-- Hero Section Wrapper -->
+<div id="heroWrapper">
+  <header class="hero">
+    <span class="hero-badge"><i class="fa-solid fa-clipboard-check"></i> DEVELOPMENT & BEHAVIOR SCREENING</span>
+    <h1>แบบประเมินพัฒนาการและพฤติกรรมเด็ก</h1>
+    <p>เครื่องมือคัดกรองมาตรฐานสำหรับผู้ปกครอง ครู และ อสม. เพื่อประเมินความเสี่ยงด้านพัฒนาการ พฤติกรรม และสุขภาพจิตเด็กเบื้องต้น</p>
+  </header>
 
-  <section id="view-quiz" class="panel" style="display:none;">
-    <button class="btn-ghost-back" onclick="showGrid()">← ย้อนกลับ</button>
+  <div class="staff-global-alert">
+    <div class="staff-global-box">
+      <i class="fa-solid fa-circle-exclamation"></i>
+      <div>
+        <b>ข้อแนะนำในการใช้งาน:</b> แบบประเมินชุดนี้ออกแบบเพื่อใช้ประเมินพัฒนาการและสังเกตพฤติกรรมเด็กอย่างครอบคลุม หากพบข้อสงสัยหรือพัฒนาการล่าช้า ควรได้รับการตรวจประเมินยืนยันโดยกุมารแพทย์หรือผู้เชี่ยวชาญเพิ่มเติม
+      </div>
+    </div>
+  </div>
+
+  <div class="feature-strip">
+    <div class="feature-item">
+      <i class="fa-solid fa-phone-volume"></i>
+      <div class="ftitle">สายด่วน 1323</div>
+      <div class="fdesc">ปรึกษาปัญหาสุขภาพจิตและพัฒนาการเด็ก ฟรี 24 ชม.</div>
+    </div>
+    <div class="feature-item">
+      <i class="fa-solid fa-scale-balanced"></i>
+      <div class="ftitle">เกณฑ์มาตรฐาน</div>
+      <div class="fdesc">อิงตามมาตรฐาน DSPM, Denver II, SDQ, SNAP-IV และ M-CHAT</div>
+    </div>
+    <div class="feature-item">
+      <i class="fa-solid fa-user-shield"></i>
+      <div class="ftitle">ปลอดภัยเป็นความลับ</div>
+      <div class="fdesc">ไม่มีการจัดเก็บข้อมูลส่วนบุคคลลงเซิร์ฟเวอร์ใด ๆ</div>
+    </div>
+  </div>
+</div>
+
+<main>
+  <!-- Main Grid Cards View -->
+  <section id="view-grid" class="grid view-container"></section>
+
+  <!-- Assessment Quiz View -->
+  <section id="view-quiz" class="panel view-container" style="display:none;">
+    <div class="panel-header-actions">
+      <button class="btn-nav-back" onclick="showGrid()"><i class="fa-solid fa-arrow-left"></i> ย้อนกลับไปหน้าเลือกแบบประเมิน</button>
+    </div>
     <h2 class="quiz-title" id="quizTitle"></h2>
     <p class="quiz-sub" id="quizSub"></p>
-    <div id="quizNote" class="staff-banner" style="display:none;"></div>
-    <div class="progress-wrap"><div class="progress-fill" id="progressFill"></div></div>
+
+    <div id="targetWrap" class="target-select-wrap" style="display:none;">
+      <div id="targetLabel" class="section-label"></div>
+      <div id="targetChips" class="target-chips"></div>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+
     <div id="questionList"></div>
+
     <div class="submit-row">
-      <button class="btn-primary" id="submitBtn" disabled onclick="submitQuiz()">ดูผลการประเมิน</button>
+      <button class="btn-primary" id="submitBtn" disabled onclick="processResults()">
+        <i class="fa-solid fa-paper-plane"></i> ประมวลผลการประเมิน
+      </button>
       <div class="hint" id="progressHint"></div>
     </div>
   </section>
 
-  <section id="view-result" class="panel" style="display:none;">
-    <button class="btn-ghost-back" onclick="showGrid()">← ย้อนกลับ</button>
+  <!-- Result Screen View -->
+  <section id="view-result" class="panel view-container" style="display:none;">
+    <div class="panel-header-actions">
+      <button class="btn-nav-back" onclick="showGrid()"><i class="fa-solid fa-house"></i> กลับสู่หน้าหลักแบบประเมิน</button>
+    </div>
+    
     <div class="result-head">
-      <div class="eyebrow" id="resultCode" style="color:var(--teal);font-size:13px;letter-spacing:1.5px;font-weight:600;"></div>
+      <div class="hero-badge" id="resultCode"></div>
       <h2 class="quiz-title" id="resultTitle" style="margin-top:4px;"></h2>
     </div>
+
     <div class="score-big" id="resultScore"></div>
-    <div class="score-label" id="resultScoreLabel"></div>
-    <div id="resultBadgeWrap" style="text-align:center;"></div>
-    <div id="dimBarsWrap"></div>
+    <div class="score-label" id="resultScoreLabel">คะแนนรวมการประเมิน</div>
+    
+    <div id="resultBadgeWrap" style="text-align:center;">
+      <span id="resultBadge" class="level-badge"></span>
+    </div>
+
+    <div id="resultBreakdown" class="breakdown-box" style="display:none;"></div>
     <div class="advice-box" id="resultAdvice"></div>
+
     <div class="email-box">
-      <label for="emailTo">ส่งผลไปที่อีเมล</label>
+      <label for="emailTo"><i class="fa-solid fa-envelope-open-text"></i> ส่งสรุปผลการประเมินเข้าสู่อีเมล</label>
       <div class="email-row">
         <input type="email" id="emailTo" value="67319100012@Aitc.ac.th">
-        <button class="btn-ghost" onclick="emailResult()">✉ ส่งผลทางอีเมล</button>
+        <button class="btn-secondary" onclick="sendGmail()"><i class="fa-solid fa-paper-plane"></i> ส่งผลทาง Gmail</button>
       </div>
-      <div class="hint">จะเปิดหน้าเขียนอีเมลของ Gmail ในแท็บใหม่ พร้อมกรอกผลให้อัตโนมัติ ท่านเพียงกดส่ง (ต้องเข้าสู่ระบบ Gmail ไว้ก่อน)</div>
+      <div class="hint">ระบบจะเปิดหน้าแต่งอีเมล Gmail พร้อมกรอกสรุปผลการประเมินให้อัตโนมัติ</div>
     </div>
+
     <div class="result-actions">
-      <button class="btn-ghost" onclick="openAssessment(currentId)">ทำแบบประเมินนี้อีกครั้ง</button>
-      <button class="btn-primary" onclick="showGrid()">เลือกแบบประเมินอื่น</button>
+      <button class="btn-secondary" onclick="startAssessment(activeId)"><i class="fa-solid fa-rotate-left"></i> ทำแบบประเมินนี้อีกครั้ง</button>
+      <button class="btn-primary" onclick="showGrid()"><i class="fa-solid fa-grip"></i> เลือกแบบประเมินอื่น</button>
     </div>
   </section>
 </main>
 
 <footer class="note">
-  แบบประเมินนี้ดัดแปลงจากเครื่องมือมาตรฐานที่ใช้ทั่วไปด้านจิตสังคมและความเป็นอยู่ที่ดี เพื่อการคัดกรองเบื้องต้นเท่านั้น ไม่ใช่การวินิจฉัยและไม่ทดแทนการประเมินโดยผู้เชี่ยวชาญ
+  <i class="fa-solid fa-circle-info"></i> แบบประเมินเหล่านี้เป็นเครื่องมือคัดกรองเบื้องต้นเพื่อส่งเสริมพัฒนาการและเฝ้าระวังพฤติกรรมเด็ก ผลคะแนนไม่ได้เป็นคำวินิจฉัยทางการแพทย์โดยตรง
 </footer>
 
 <script>
-const scale5 = [
-  {label:'น้อยที่สุด', score:1}, {label:'ค่อนข้างน้อย', score:2}, {label:'ปานกลาง', score:3},
-  {label:'ค่อนข้างมาก', score:4}, {label:'มากที่สุด', score:5}
+// Options Schemas
+const OPT_YN = [{label:'ผ่าน / ใช่', score:1}, {label:'ไม่ผ่าน / ไม่ใช่', score:0}];
+const OPT_SCALE4 = [
+  {label:'ไม่ค่อยพบ (0-1 ครั้ง/สัปดาห์)', score:0},
+  {label:'บางครั้ง (2-3 ครั้ง/สัปดาห์)', score:1},
+  {label:'บ่อยครั้ง (4-5 ครั้ง/สัปดาห์)', score:2},
+  {label:'ตลอดเวลา (เกือบทุกวัน)', score:3}
 ];
-const scale4freq = [
-  {label:'ไม่เคยเลย', score:0}, {label:'นาน ๆ ครั้ง', score:1}, {label:'บ่อยครั้ง', score:2}, {label:'เป็นประจำ', score:3}
-];
-const scale3agree = [ {label:'แทบไม่เคย', score:0}, {label:'บางครั้ง', score:1}, {label:'เกือบทุกครั้ง', score:2} ];
-const burnoutScale = (reverse)=> reverse ? [
-  {label:'ไม่เคยเลย', score:3}, {label:'นาน ๆ ครั้ง', score:2}, {label:'บ่อยครั้ง', score:1}, {label:'เกือบทุกวัน', score:0}
-] : [
-  {label:'ไม่เคยเลย', score:0}, {label:'นาน ๆ ครั้ง', score:1}, {label:'บ่อยครั้ง', score:2}, {label:'เกือบทุกวัน', score:3}
-];
-const agree4 = [
-  {label:'ไม่เห็นด้วยเลย', score:0}, {label:'ไม่ค่อยเห็นด้วย', score:1}, {label:'ค่อนข้างเห็นด้วย', score:2}, {label:'เห็นด้วยอย่างยิ่ง', score:3}
-];
+const OPT_SDQ = (rev) => rev 
+  ? [{label:'ไม่จริง', score:2}, {label:'ค่อนข้างจริง', score:1}, {label:'จริงแน่นอน', score:0}]
+  : [{label:'ไม่จริง', score:0}, {label:'ค่อนข้างจริง', score:1}, {label:'จริงแน่นอน', score:2}];
 
-const WHOQOL_ITEMS = [
-  {text:'ท่านให้คะแนนคุณภาพชีวิตโดยรวมของท่านอย่างไร', domain:'ทั่วไป', rev:false},
-  {text:'ท่านพึงพอใจกับสุขภาพของตนเองมากน้อยเพียงใด', domain:'ทั่วไป', rev:false},
-  {text:'ความเจ็บปวดทางร่างกายรบกวนการใช้ชีวิตประจำวันของท่านมากน้อยเพียงใด', domain:'ร่างกาย', rev:true},
-  {text:'ท่านต้องพึ่งพาการรักษาทางการแพทย์เพื่อดำเนินชีวิตประจำวันมากน้อยเพียงใด', domain:'ร่างกาย', rev:true},
-  {text:'ท่านมีพลังงานเพียงพอสำหรับการดำเนินชีวิตประจำวันมากน้อยเพียงใด', domain:'ร่างกาย', rev:false},
-  {text:'ท่านสามารถเคลื่อนไหวร่างกายได้คล่องแคล่วมากน้อยเพียงใด', domain:'ร่างกาย', rev:false},
-  {text:'ท่านพึงพอใจกับการนอนหลับของตนเองมากน้อยเพียงใด', domain:'ร่างกาย', rev:false},
-  {text:'ท่านสามารถทำกิจวัตรประจำวันได้ดีมากน้อยเพียงใด', domain:'ร่างกาย', rev:false},
-  {text:'ท่านมีความสามารถในการทำงานได้ดีมากน้อยเพียงใด', domain:'ร่างกาย', rev:false},
-  {text:'ท่านรู้สึกเพลิดเพลินกับชีวิตมากน้อยเพียงใด', domain:'จิตใจ', rev:false},
-  {text:'ท่านรู้สึกว่าชีวิตมีความหมายมากน้อยเพียงใด', domain:'จิตใจ', rev:false},
-  {text:'ท่านมีสมาธิในการทำสิ่งต่าง ๆ ได้ดีมากน้อยเพียงใด', domain:'จิตใจ', rev:false},
-  {text:'ท่านยอมรับรูปร่างหน้าตาของตนเองได้มากน้อยเพียงใด', domain:'จิตใจ', rev:false},
-  {text:'ท่านพึงพอใจในตัวเองมากน้อยเพียงใด', domain:'จิตใจ', rev:false},
-  {text:'ท่านมีความรู้สึกทางลบ เช่น เศร้า สิ้นหวัง วิตกกังวล บ่อยเพียงใด', domain:'จิตใจ', rev:true},
-  {text:'ท่านพึงพอใจกับความสัมพันธ์ส่วนตัวของท่านมากน้อยเพียงใด', domain:'สังคม', rev:false},
-  {text:'ท่านพึงพอใจกับชีวิตคู่หรือความสัมพันธ์ใกล้ชิดมากน้อยเพียงใด', domain:'สังคม', rev:false},
-  {text:'ท่านได้รับการสนับสนุนจากเพื่อนมากน้อยเพียงใด', domain:'สังคม', rev:false},
-  {text:'ท่านรู้สึกปลอดภัยในชีวิตประจำวันมากน้อยเพียงใด', domain:'สิ่งแวดล้อม', rev:false},
-  {text:'สภาพแวดล้อมทางกายภาพรอบตัวท่าน (อากาศ เสียง) เอื้อต่อสุขภาพมากน้อยเพียงใด', domain:'สิ่งแวดล้อม', rev:false},
-  {text:'ท่านมีเงินเพียงพอสำหรับความต้องการพื้นฐานมากน้อยเพียงใด', domain:'สิ่งแวดล้อม', rev:false},
-  {text:'ท่านสามารถเข้าถึงข้อมูลข่าวสารที่ต้องการในชีวิตประจำวันได้มากน้อยเพียงใด', domain:'สิ่งแวดล้อม', rev:false},
-  {text:'ท่านมีโอกาสทำกิจกรรมนันทนาการหรือผ่อนคลายมากน้อยเพียงใด', domain:'สิ่งแวดล้อม', rev:false},
-  {text:'สภาพที่อยู่อาศัยของท่านเอื้อต่อการดำรงชีวิตมากน้อยเพียงใด', domain:'สิ่งแวดล้อม', rev:false},
-  {text:'ท่านสามารถเข้าถึงบริการสาธารณสุขเมื่อจำเป็นได้มากน้อยเพียงใด', domain:'สิ่งแวดล้อม', rev:false},
-  {text:'ท่านพึงพอใจกับการเดินทาง/คมนาคมในพื้นที่ของท่านมากน้อยเพียงใด', domain:'สิ่งแวดล้อม', rev:false}
-];
-
-const HAPPY_ITEMS = [
-  {label:'Happy Body', text:'ท่านรู้สึกว่าร่างกายของท่านแข็งแรงเพียงพอสำหรับการดำเนินชีวิตประจำวัน'},
-  {label:'Happy Relax', text:'ท่านมีเวลาพักผ่อนคลายเครียดเพียงพอในแต่ละวัน'},
-  {label:'Happy Heart', text:'ท่านรู้สึกมีน้ำใจ เอื้อเฟื้อต่อผู้อื่น'},
-  {label:'Happy Soul', text:'ท่านรู้สึกมีที่ยึดเหนี่ยวทางใจ เช่น ศาสนาหรือหลักคิดในการดำเนินชีวิต'},
-  {label:'Happy Family', text:'ท่านรู้สึกอบอุ่นและได้รับการสนับสนุนจากครอบครัว'},
-  {label:'Happy Society', text:'ท่านรู้สึกเป็นส่วนหนึ่งของชุมชนหรือสังคมรอบตัว'},
-  {label:'Happy Brain', text:'ท่านมีโอกาสเรียนรู้สิ่งใหม่และพัฒนาตนเองอยู่เสมอ'},
-  {label:'Happy Money', text:'ท่านรู้สึกมั่นคงทางการเงินเพียงพอสำหรับการดำรงชีวิต'},
-  {label:'Happy Work', text:'ท่านพึงพอใจกับงานหรือกิจกรรมหลักที่ทำอยู่ในปัจจุบัน'}
-];
-
-const APGAR_ITEMS = [
-  'ฉันพึงพอใจที่สามารถขอความช่วยเหลือจากครอบครัวได้เมื่อมีปัญหา',
-  'ฉันพึงพอใจกับวิธีที่ครอบครัวพูดคุยและแบ่งปันปัญหาร่วมกัน',
-  'ฉันพึงพอใจที่ครอบครัวยอมรับและสนับสนุนความต้องการหรือกิจกรรมใหม่ ๆ ของฉัน',
-  'ฉันพึงพอใจกับวิธีที่ครอบครัวแสดงความรักและตอบสนองต่ออารมณ์ของฉัน เช่น ความโกรธ ความเศร้า ความรัก',
-  'ฉันพึงพอใจกับเวลาที่ฉันและครอบครัวใช้ร่วมกัน'
-];
-
-const BURNOUT_ITEMS = [
-  {text:'รู้สึกหมดแรงทางอารมณ์จากการทำงาน', rev:false},
-  {text:'รู้สึกเหนื่อยล้าตั้งแต่ตื่นนอนเมื่อต้องไปทำงาน', rev:false},
-  {text:'รู้สึกว่าตัวเองใช้พลังงานจนหมดไปกับงาน', rev:false},
-  {text:'รู้สึกกดดันหรือเครียดจากภาระงานที่มากเกินไป', rev:false},
-  {text:'รู้สึกเฉยชาหรือไม่แยแสต่อเพื่อนร่วมงานหรือผู้รับบริการมากขึ้น', rev:false},
-  {text:'รู้สึกความกระตือรือร้นในการทำงานลดลงอย่างชัดเจน', rev:false},
-  {text:'รู้สึกเบื่อหน่ายกับงานที่ทำอยู่', rev:false},
-  {text:'มองงานที่ทำเป็นเพียงภาระ ไม่มีความหมายเหมือนก่อน', rev:false},
-  {text:'รู้สึกว่าตนเองทำงานได้อย่างมีประสิทธิภาพ', rev:true},
-  {text:'รู้สึกภูมิใจในผลงานของตนเอง', rev:true},
-  {text:'รู้สึกว่าตนเองสามารถช่วยเหลือผู้อื่นได้ดีผ่านงานที่ทำ', rev:true},
-  {text:'รู้สึกมีพลังงานและแรงจูงใจในการทำงาน', rev:true}
-];
-
-const SOCSUP_ITEMS = [
-  {text:'ครอบครัวของฉันพยายามช่วยเหลือฉันอย่างแท้จริง', sub:'ครอบครัว'},
-  {text:'ฉันได้รับความช่วยเหลือทางอารมณ์และการสนับสนุนจากครอบครัวเมื่อต้องการ', sub:'ครอบครัว'},
-  {text:'ฉันสามารถพูดคุยเกี่ยวกับปัญหาของฉันกับครอบครัวได้', sub:'ครอบครัว'},
-  {text:'ครอบครัวของฉันเต็มใจช่วยฉันตัดสินใจ', sub:'ครอบครัว'},
-  {text:'เพื่อนของฉันพยายามช่วยเหลือฉันอย่างแท้จริง', sub:'เพื่อน'},
-  {text:'ฉันสามารถพึ่งพาเพื่อนได้เมื่อมีเรื่องไม่ดีเกิดขึ้น', sub:'เพื่อน'},
-  {text:'ฉันมีเพื่อนที่สามารถแบ่งปันความสุขและความทุกข์ได้', sub:'เพื่อน'},
-  {text:'ฉันสามารถพูดคุยเรื่องปัญหาของฉันกับเพื่อนได้', sub:'เพื่อน'},
-  {text:'มีบุคคลพิเศษที่อยู่เคียงข้างฉันเมื่อฉันต้องการ', sub:'บุคคลใกล้ชิด'},
-  {text:'มีบุคคลพิเศษที่ฉันสามารถแบ่งปันความสุขและความทุกข์ได้อย่างแท้จริง', sub:'บุคคลใกล้ชิด'},
-  {text:'มีบุคคลที่ใส่ใจความรู้สึกของฉัน', sub:'บุคคลใกล้ชิด'},
-  {text:'ฉันมีคนที่ช่วยเหลือฉันได้เมื่อมีปัญหา', sub:'บุคคลใกล้ชิด'}
-];
-
-const ASSESSMENTS = {
-  whoqol:{
-    code:'WHOQOL-BREF', title:'WHOQOL-BREF', full:'แบบประเมินคุณภาพชีวิต',
-    sub:'ประเมินคุณภาพชีวิตใน 4 ด้าน ได้แก่ ร่างกาย จิตใจ สังคม และสิ่งแวดล้อม (ดัดแปลงจากเครื่องมือขององค์การอนามัยโลก)',
-    type:'whoqol'
+// Standardized Assessment Database
+const TOOLS = {
+  dspm: {
+    code: 'DSPM',
+    title: 'DSPM พัฒนาการตามวัย',
+    desc: 'คัดกรองพัฒนาการ 5 ด้านหลักสำหรับเด็กแรกเกิด - 5 ปี',
+    icon: 'fa-child-reaching',
+    targetTitle: 'เลือกช่วงอายุของเด็ก',
+    groups: [
+      { id: '9m', name: '9 เดือน', items: [
+        { text: 'นั่งได้เองมั่นคงโดยไม่ต้องพยุง', domain: 'กล้ามเนื้อมัดใหญ่' },
+        { text: 'หยิบของชิ้นเล็กด้วยนิ้วหัวแม่มือและนิ้วชี้', domain: 'กล้ามเนื้อมัดเล็ก' },
+        { text: 'หันมองตามเสียงเรียกชื่อ', domain: 'การเข้าใจภาษา' },
+        { text: 'ส่งเสียงอ้อแอ้เลียนเสียงพูดซ้ำๆ', domain: 'การใช้ภาษา' },
+        { text: 'เล่นจ๊ะเอ๋หรือโบกมือบ๊ายบายได้', domain: 'สังคมและการช่วยเหลือตนเอง' }
+      ]},
+      { id: '18m', name: '18 เดือน', items: [
+        { text: 'เดินได้เองอย่างมั่นคง', domain: 'กล้ามเนื้อมัดใหญ่' },
+        { text: 'ต่อบล็อกไม้ซ้อนกันได้ 2-3 ชั้น', domain: 'กล้ามเนื้อมัดเล็ก' },
+        { text: 'ทำตามคำสั่งง่ายๆ ที่มีคำชี้บอกได้', domain: 'การเข้าใจภาษา' },
+        { text: 'พูดคำที่มีความหมายได้อย่างน้อย 3-5 คำ', domain: 'การใช้ภาษา' },
+        { text: 'ใช้ช้อนตักอาหารเข้าปากเองได้บ้าง', domain: 'สังคมและการช่วยเหลือตนเอง' }
+      ]},
+      { id: '36m', name: '3 ปี', items: [
+        { text: 'กระโดดสองขาพร้อมกันขึ้นจากพื้นได้', domain: 'กล้ามเนื้อมัดใหญ่' },
+        { text: 'วาดเส้นตรงตามแบบได้', domain: 'กล้ามเนื้อมัดเล็ก' },
+        { text: 'เข้าใจคำสั่ง 2 ขั้นตอนต่อเนื่องกัน', domain: 'การเข้าใจภาษา' },
+        { text: 'พูดเป็นประโยคสั้นๆ 3 คำขึ้นไปได้', domain: 'การใช้ภาษา' },
+        { text: 'บอกเมื่อต้องการขับถ่ายได้ก่อนเปียกชื้น', domain: 'สังคมและการช่วยเหลือตนเอง' }
+      ]}
+    ],
+    options: OPT_YN
   },
-  happy:{
-    code:'Happinometer', title:'Happinometer', full:'แบบประเมินความสุข',
-    sub:'ประเมินความสุข 9 มิติ ตามกรอบแนวคิด "ความสุข" ที่ใช้ในระบบสาธารณสุขไทย',
-    type:'sum', options:scale4freq,
-    questions: HAPPY_ITEMS.map(h=>`[${h.label}] ${h.text}`),
-    bands:[
-      {min:0,max:9,label:'ควรดูแลเพิ่มเติม',color:'var(--coral)',advice:'คะแนนความสุขโดยรวมค่อนข้างต่ำ ลองเลือกมิติที่คะแนนต่ำที่สุดมาดูแลก่อน และปรึกษา อสม. หรือคนใกล้ชิดหากต้องการคำแนะนำ'},
-      {min:10,max:18,label:'ระดับปานกลาง',color:'var(--gold)',advice:'มีความสุขในระดับปานกลาง ลองสำรวจว่ามิติใดยังต่ำอยู่และหาวิธีดูแลเพิ่มเติมในด้านนั้น'},
-      {min:19,max:27,label:'ระดับดี',color:'var(--teal)',advice:'มีความสุขโดยรวมอยู่ในระดับดี รักษาสมดุลในแต่ละด้านนี้ต่อไป'}
+  denver: {
+    code: 'DENVER-II',
+    title: 'Denver II คัดกรองพัฒนาการ',
+    desc: 'การคัดกรองรายละเอียดด้านร่างกาย ภาษา และสังคม',
+    icon: 'fa-baby',
+    targetTitle: 'เลือกช่วงอายุประเมิน',
+    groups: [
+      { id: '12m', name: '12 เดือน', items: [
+        { text: 'ยืนเกาะทรงตัวได้มั่นคง', domain: 'Personal-Social' },
+        { text: 'ใช้นิ้วหยิบวัตถุชิ้นเล็กแบบ Pincer grasp', domain: 'Fine Motor' },
+        { text: 'ตอบสนองต่อคำสั่งห้ามหรือคำว่า "ไม่"', domain: 'Language' },
+        { text: 'ก้าวเดินโดยมีคนช่วยพยุงจับมือ', domain: 'Gross Motor' }
+      ]},
+      { id: '24m', name: '24 เดือน', items: [
+        { text: 'ถอดเสื้อผ้าชิ้นง่ายๆ ได้เอง', domain: 'Personal-Social' },
+        { text: 'ต่อบล็อกไม้ได้ 4-6 ก้อน', domain: 'Fine Motor' },
+        { text: 'ชี้ส่วนประกอบร่างกายได้ 4 จุด', domain: 'Language' },
+        { text: 'เตะลูกบอลไปข้างหน้าโดยไม่ล้ม', domain: 'Gross Motor' }
+      ]}
+    ],
+    options: OPT_YN
+  },
+  sdq: {
+    code: 'SDQ',
+    title: 'SDQ พฤติกรรมและอารมณ์',
+    desc: 'ประเมินจุดแข็งและจุดอ่อนพฤติกรรม 5 ด้านสำหรับเด็ก 4-16 ปี',
+    icon: 'fa-masks-theater',
+    targetTitle: 'กลุ่มผู้ให้ข้อมูล',
+    groups: [
+      { id: 'parent', name: 'ฉบับผู้ปกครองประเมิน', items: [
+        { text: 'ห่วงใยความรู้สึกของผู้อื่น', domain: 'พฤติกรรมเอื้อสังคม', rev: false },
+        { text: 'อยู่ไม่นิ่ง ซุกซนมาก นั่งนานๆ ไม่ได้', domain: 'สมาธิสั้น/อยู่ไม่นิ่ง', rev: false },
+        { text: 'บ่นปวดหัว ปวดท้อง หรือไม่สบายบ่อยๆ', domain: 'อาการทางอารมณ์', rev: false },
+        { text: 'ชอบแบ่งปันสิ่งของให้เพื่อน', domain: 'พฤติกรรมเอื้อสังคม', rev: false },
+        { text: 'มักโมโห ฉุนเฉียวง่าย', domain: 'ปัญหาความประพฤติ', rev: false },
+        { text: 'ชอบอยู่คนเดียว มักเล่นคนเดียว', domain: 'ปัญหาความสัมพันธ์กับเพื่อน', rev: false },
+        { text: 'เชื่อฟัง มักทำตามที่ผู้ใหญ่ขอ', domain: 'ปัญหาความประพฤติ', rev: true }
+      ]}
     ]
   },
-  apgar:{
-    code:'APGAR', title:'Family APGAR', full:'แบบประเมินสัมพันธภาพในครอบครัว',
-    sub:'ประเมินความพึงพอใจต่อสัมพันธภาพในครอบครัวใน 5 ด้าน',
-    type:'sum', options:scale3agree,
-    questions: APGAR_ITEMS,
-    bands:[
-      {min:0,max:3,label:'ครอบครัวมีปัญหาสัมพันธภาพสูง',color:'var(--coral)',advice:'ผลบ่งชี้ว่าสัมพันธภาพในครอบครัวอาจมีปัญหาค่อนข้างมาก แนะนำให้ปรึกษา อสม. หรือนักสังคมสงเคราะห์เพื่อหาแนวทางเสริมสร้างความสัมพันธ์'},
-      {min:4,max:6,label:'สัมพันธภาพระดับปานกลาง',color:'var(--gold)',advice:'สัมพันธภาพในครอบครัวอยู่ในระดับปานกลาง ลองหาเวลาพูดคุยและทำกิจกรรมร่วมกันมากขึ้น'},
-      {min:7,max:10,label:'สัมพันธภาพดี',color:'var(--teal)',advice:'สัมพันธภาพในครอบครัวอยู่ในเกณฑ์ดี รักษาความสัมพันธ์ที่ดีนี้ต่อไป'}
-    ]
+  adhd: {
+    code: 'SNAP-IV',
+    title: 'SNAP-IV คัดกรองสมาธิสั้น',
+    desc: 'แบบคัดกรองอาการขาดสมาธิ ซน ซ่า หุนหันพลันแล่น',
+    icon: 'fa-bolt',
+    targetTitle: 'กลุ่มผู้ประเมิน',
+    groups: [
+      { id: 'standard', name: 'ประเมินพฤติกรรมทั่วไป', items: [
+        { text: 'ไม่ค่อยจดจ่อกับรายละเอียด หรือทำผิดพลาดด้วยความประมาท', domain: 'ด้านขาดสมาธิ' },
+        { text: 'มีปัญหาในการรักษาความสนใจในการทำงานหรือการเล่น', domain: 'ด้านขาดสมาธิ' },
+        { text: 'ดูเหมือนไม่ได้ฟังเมื่อมีคนพูดด้วยโดยตรง', domain: 'ด้านขาดสมาธิ' },
+        { text: 'ขยับมือเท้าไปมา หรือนั่งยุกยิกอยู่บนเก้าอี้', domain: 'ด้านซน/หุนหันพลันแล่น' },
+        { text: 'ลุกออกจากที่นั่งในห้องเรียนหรือสถานการณ์ที่ควรรรนั่ง', domain: 'ด้านซน/หุนหันพลันแล่น' },
+        { text: 'พูดโพล่งคำตอบออกมาก่อนฟังคำถามจบ', domain: 'ด้านซน/หุนหันพลันแล่น' }
+      ]}
+    ],
+    options: OPT_SCALE4
   },
-  burnout:{
-    code:'Burnout', title:'Burnout', full:'แบบประเมินภาวะหมดไฟ',
-    sub:'แบบคัดกรองภาวะหมดไฟในการทำงานฉบับดัดแปลง ครอบคลุมความอ่อนล้าทางอารมณ์ ทัศนคติต่องาน และความรู้สึกประสบความสำเร็จ (ไม่ใช่ Maslach Burnout Inventory ฉบับลิขสิทธิ์)',
-    type:'custom', items: BURNOUT_ITEMS.map(it=>({text:it.text, options:burnoutScale(it.rev)})),
-    bands:[
-      {min:0,max:12,label:'ความเสี่ยงต่ำ',color:'var(--teal)',advice:'ยังไม่พบสัญญาณของภาวะหมดไฟที่ชัดเจน ดูแลสมดุลชีวิตและการทำงานต่อไป'},
-      {min:13,max:24,label:'ความเสี่ยงปานกลาง',color:'var(--gold)',advice:'เริ่มมีสัญญาณของภาวะหมดไฟ ควรหาวิธีลดภาระงาน พักผ่อนให้เพียงพอ และพูดคุยกับหัวหน้างานหรือเพื่อนร่วมงาน'},
-      {min:25,max:36,label:'ความเสี่ยงสูง',color:'var(--coral)',advice:'มีความเสี่ยงสูงต่อภาวะหมดไฟในการทำงาน ควรปรับสมดุลชีวิตการทำงานอย่างจริงจัง และปรึกษาเจ้าหน้าที่สาธารณสุขหรือผู้เชี่ยวชาญด้านสุขภาพจิต'}
-    ]
-  },
-  socsupport:{
-    code:'Social Support', title:'Social Support', full:'แบบประเมินการสนับสนุนทางสังคม',
-    sub:'ประเมินการรับรู้การสนับสนุนทางสังคมจาก 3 แหล่ง ได้แก่ ครอบครัว เพื่อน และบุคคลใกล้ชิด',
-    type:'sum', options:agree4,
-    questions: SOCSUP_ITEMS.map(it=>it.text),
-    bands:[
-      {min:0,max:12,label:'ได้รับการสนับสนุนต่ำ',color:'var(--coral)',advice:'รู้สึกได้รับการสนับสนุนทางสังคมค่อนข้างน้อย ลองเริ่มเปิดใจพูดคุยกับคนใกล้ชิด หรือเข้าร่วมกิจกรรมชุมชนเพื่อสร้างเครือข่ายสนับสนุน'},
-      {min:13,max:24,label:'ได้รับการสนับสนุนปานกลาง',color:'var(--gold)',advice:'มีการสนับสนุนทางสังคมอยู่ในระดับปานกลาง ลองเสริมสร้างความสัมพันธ์ในด้านที่ยังขาดอยู่'},
-      {min:25,max:36,label:'ได้รับการสนับสนุนดี',color:'var(--teal)',advice:'มีเครือข่ายการสนับสนุนทางสังคมที่ดี รักษาความสัมพันธ์เหล่านี้ไว้และเป็นแรงสนับสนุนให้ผู้อื่นได้เช่นกัน'}
+  mchat: {
+    code: 'M-CHAT',
+    title: 'M-CHAT-R คัดกรองออทิสติก',
+    desc: 'คัดกรองความเสี่ยงภาวะออทิสติกสเปกตรัม (16-30 เดือน)',
+    icon: 'fa-puzzle-piece',
+    targetTitle: 'ช่วงอายุเด็ก',
+    groups: [
+      { id: 'toddler', name: 'เด็กอายุ 16-30 เดือน', items: [
+        { text: 'เมื่อท่านชี้ไปที่สิ่งของ เด็กมองตามสิ่งที่ชี้หรือไม่', domain: 'การตอบสนองร่วม', riskVal: 0 },
+        { text: 'ท่านเคยสงสัยว่าเด็กมีปัญหาการได้ยินหรือไม่', domain: 'การรับรู้ประสาทสัมผัส', riskVal: 1 },
+        { text: 'เด็กเคยเล่นสมมติหรือไม่ เช่น ชงชา ถูบ้าน', domain: 'จินตนาการและการเล่น', riskVal: 0 },
+        { text: 'เด็กชอบปีนป่ายสิ่งของสูงๆ หรือไม่', domain: 'การเคลื่อนไหว', riskVal: 0 },
+        { text: 'เด็กขยับนิ้วมือแปลกๆ ใกล้ตาตนเองหรือไม่', domain: 'พฤติกรรมซ้ำซาก', riskVal: 1 },
+        { text: 'เด็กชี้นิ้วเพื่อบอกสิ่งที่สนใจให้ท่านดูหรือไม่', domain: 'การสื่อสารทางสังคม', riskVal: 0 }
+      ]}
     ]
   }
 };
 
-let currentId = null;
-let currentAnswers = [];
-let lastResult = null;
+let activeId = null;
+let activeGroup = null;
+let userAnswers = [];
+let lastReport = "";
 
-function initGrid(){
+function initApp() {
   const grid = document.getElementById('view-grid');
   grid.innerHTML = '';
-  Object.keys(ASSESSMENTS).forEach(id=>{
-    const a = ASSESSMENTS[id];
-    let qcount;
-    if(a.type==='whoqol') qcount = WHOQOL_ITEMS.length+' ข้อ';
-    else if(a.type==='custom') qcount = a.items.length+' ข้อ';
-    else qcount = a.questions.length+' ข้อ';
-
+  Object.keys(TOOLS).forEach(id => {
+    const item = TOOLS[id];
+    const totalQ = item.groups[0].items.length;
     const card = document.createElement('div');
     card.className = 'card';
-    card.onclick = ()=>openAssessment(id);
+    card.onclick = () => startAssessment(id);
     card.innerHTML = `
-      <div class="icon">${a.code.slice(0,6)}</div>
-      <div class="code">${a.title}</div>
-      <div class="desc">${a.full}</div>
-      <div class="qcount">${qcount}</div>
+      <div class="icon"><i class="fa-solid ${item.icon}"></i></div>
+      <div class="code font-title">${item.code}</div>
+      <div class="desc">${item.desc}</div>
+      <div class="card-footer">
+        <span class="qcount"><i class="fa-regular fa-circle-question"></i> ${totalQ} ข้อประเมิน</span>
+        <span class="btn-start-text">เริ่มประเมิน <i class="fa-solid fa-arrow-right"></i></span>
+      </div>
     `;
     grid.appendChild(card);
   });
 }
 
-function showGrid(){
+function showGrid() {
+  document.getElementById('heroWrapper').style.display = 'block';
   document.getElementById('view-grid').style.display = 'grid';
   document.getElementById('view-quiz').style.display = 'none';
   document.getElementById('view-result').style.display = 'none';
-  window.scrollTo({top:0,behavior:'smooth'});
+  document.getElementById('navBackBtn').style.display = 'none';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function openAssessment(id){
-  currentId = id;
-  const a = ASSESSMENTS[id];
-  document.getElementById('quizTitle').textContent = `${a.title} — ${a.full}`;
-  document.getElementById('quizSub').textContent = a.sub;
-  document.getElementById('quizNote').style.display = 'none';
+function startAssessment(id) {
+  activeId = id;
+  const data = TOOLS[id];
 
-  const list = document.getElementById('questionList');
-  list.innerHTML = '';
-
-  let qs;
-  if(a.type === 'whoqol'){
-    qs = WHOQOL_ITEMS.map(it=>({text:it.text, options:scale5}));
-  } else if(a.type === 'custom'){
-    qs = a.items;
-  } else {
-    qs = a.questions.map(t=>({text:t, options:a.options}));
-  }
-
-  currentAnswers = new Array(qs.length).fill(null);
-  qs.forEach((q,i)=>{
-    const block = document.createElement('div');
-    block.className = 'question';
-    let optsHtml = '';
-    q.options.forEach((opt,j)=>{
-      optsHtml += `<label class="opt" id="opt-${i}-${j}"><input type="radio" name="q${i}" value="${opt.score}" onchange="selectOpt(${i},${j},${opt.score})">${opt.label}</label>`;
-    });
-    block.innerHTML = `<div class="qtext">${i+1}. ${q.text}</div><div class="options">${optsHtml}</div>`;
-    list.appendChild(block);
+  document.getElementById('heroWrapper').style.display = 'none';
+  document.getElementById('quizTitle').textContent = data.title;
+  document.getElementById('quizSub').textContent = data.desc;
+  document.getElementById('targetLabel').textContent = data.targetTitle;
+  document.getElementById('targetWrap').style.display = 'block';
+  document.getElementById('navBackBtn').style.display = 'inline-flex';
+  
+  const chipsContainer = document.getElementById('targetChips');
+  chipsContainer.innerHTML = '';
+  
+  data.groups.forEach((g, idx) => {
+    const btn = document.createElement('button');
+    btn.className = `chip-btn ${idx === 0 ? 'selected' : ''}`;
+    btn.textContent = g.name;
+    btn.onclick = () => loadGroupQuestions(g);
+    chipsContainer.appendChild(btn);
   });
 
-  updateProgress();
+  loadGroupQuestions(data.groups[0]);
+
   document.getElementById('view-grid').style.display = 'none';
   document.getElementById('view-result').style.display = 'none';
   document.getElementById('view-quiz').style.display = 'block';
-  window.scrollTo({top:0,behavior:'smooth'});
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function selectOpt(i,j,score){
-  currentAnswers[i] = score;
-  document.querySelectorAll(`[id^="opt-${i}-"]`).forEach(el=>el.classList.remove('selected'));
-  document.getElementById(`opt-${i}-${j}`).classList.add('selected');
+function loadGroupQuestions(group) {
+  activeGroup = group;
+  document.querySelectorAll('.chip-btn').forEach(b => {
+    b.classList.toggle('selected', b.textContent === group.name);
+  });
+
+  const tool = TOOLS[activeId];
+  const container = document.getElementById('questionList');
+  container.innerHTML = '';
+  userAnswers = new Array(group.items.length).fill(null);
+
+  group.items.forEach((item, qIdx) => {
+    const qDiv = document.createElement('div');
+    qDiv.className = 'question';
+
+    let options = tool.options;
+    if (activeId === 'sdq') options = OPT_SDQ(item.rev);
+    if (activeId === 'mchat') options = OPT_YN;
+
+    let optsHtml = '';
+    options.forEach((opt, oIdx) => {
+      const val = (activeId === 'mchat') ? (opt.score === item.riskVal ? 1 : 0) : opt.score;
+      optsHtml += `
+        <label class="opt" id="opt-lbl-${qIdx}-${oIdx}">
+          <input type="radio" name="q_${qIdx}" value="${val}" onchange="selectAnswer(${qIdx}, ${oIdx}, ${val}, '${item.domain.replace(/'/g, "\\'")}')">
+          <span>${opt.label}</span>
+        </label>
+      `;
+    });
+
+    qDiv.innerHTML = `
+      <div class="qnum">ข้อที่ ${qIdx + 1} จาก ${group.items.length}</div>
+      <div class="qtext">${item.text}</div>
+      <div class="options">${optsHtml}</div>
+    `;
+    container.appendChild(qDiv);
+  });
+
   updateProgress();
 }
 
-function updateProgress(){
-  const total = currentAnswers.length;
-  const answered = currentAnswers.filter(v=>v!==null).length;
-  const pct = total? Math.round((answered/total)*100) : 0;
-  document.getElementById('progressFill').style.width = pct+'%';
-  document.getElementById('progressHint').textContent = `ตอบแล้ว ${answered} จาก ${total} ข้อ`;
+function selectAnswer(qIdx, oIdx, val, domain) {
+  userAnswers[qIdx] = { score: val, domain: domain };
+  
+  // Highlight UI Option
+  const parent = document.getElementById(`opt-lbl-${qIdx}-${oIdx}`).parentElement;
+  parent.querySelectorAll('.opt').forEach(el => el.classList.remove('selected'));
+  document.getElementById(`opt-lbl-${qIdx}-${oIdx}`).classList.add('selected');
+
+  updateProgress();
+}
+
+function updateProgress() {
+  const answered = userAnswers.filter(a => a !== null).length;
+  const total = activeGroup.items.length;
+  const pct = Math.round((answered / total) * 100);
+
+  document.getElementById('progressFill').style.width = `${pct}%`;
+  document.getElementById('progressHint').textContent = `ประเมินแล้ว ${answered} จาก ${total} ข้อ (${pct}%)`;
   document.getElementById('submitBtn').disabled = answered < total;
 }
 
-function submitQuiz(){
-  const a = ASSESSMENTS[currentId];
-  document.getElementById('dimBarsWrap').innerHTML = '';
+function processResults() {
+  const tool = TOOLS[activeId];
+  let totalScore = 0;
+  const domainScores = {};
 
-  if(a.type === 'whoqol'){
-    renderWhoqolResult(a);
-  } else if(currentId === 'socsupport'){
-    renderSocSupportResult(a);
-  } else {
-    const score = currentAnswers.reduce((s,v)=>s+v,0);
-    const band = a.bands.find(b=>score>=b.min && score<=b.max) || a.bands[a.bands.length-1];
-    document.getElementById('resultCode').textContent = a.code;
-    document.getElementById('resultTitle').textContent = a.full;
-    document.getElementById('resultScore').textContent = score;
-    document.getElementById('resultScore').style.color = band.color;
-    document.getElementById('resultScoreLabel').textContent = 'คะแนนรวม';
-    document.getElementById('resultBadgeWrap').innerHTML = `<span class="level-badge" style="background:${band.color}">${band.label}</span>`;
-    document.getElementById('resultAdvice').innerHTML = `<b>คำแนะนำ:</b> ${band.advice}`;
-    lastResult = {code:a.code, full:a.full, score:score, levelLabel:band.label,
-      dateStr:new Date().toLocaleDateString('th-TH',{year:'numeric',month:'long',day:'numeric'})};
+  userAnswers.forEach(ans => {
+    totalScore += ans.score;
+    domainScores[ans.domain] = (domainScores[ans.domain] || 0) + ans.score;
+  });
+
+  let levelText = "";
+  let levelColor = "var(--success)";
+  let advice = "";
+
+  // Standard Logic Evaluation
+  if (activeId === 'dspm' || activeId === 'denver') {
+    const maxScore = activeGroup.items.length;
+    if (totalScore === maxScore) {
+      levelText = "พัฒนาการสมวัย";
+      levelColor = "var(--success)";
+      advice = "<b>ผลประเมิน:</b> เด็กมีพัฒนาการสมวัยตามเกณฑ์มาตรฐาน ควรส่งเสริมพัฒนาการอย่างต่อเนื่องตามช่วงวัยต่อไป";
+    } else {
+      levelText = "ควรเฝ้าระวัง / ส่งเสริมพัฒนาการ";
+      levelColor = "var(--warning)";
+      advice = "<b>ผลประเมิน:</b> พบจุดที่ควรส่งเสริมเพิ่มเติม กระตุ้นเด็กในทักษะที่ไม่ผ่านเป็นเวลา 1 เดือน แล้วทำการประเมินซ้ำ หากยังไม่ผ่านควรปรึกษาแพทย์";
+    }
+  } else if (activeId === 'sdq') {
+    if (totalScore <= 13) {
+      levelText = "กลุ่มปกติ";
+      levelColor = "var(--success)";
+      advice = "<b>ผลประเมิน:</b> พฤติกรรมและอารมณ์อยู่ในเกณฑ์ปกติ ส่งเสริมบรรยากาศเชิงบวกและการเรียนรู้ตามปกติ";
+    } else if (totalScore <= 16) {
+      levelText = "กลุ่มเสี่ยง";
+      levelColor = "var(--warning)";
+      advice = "<b>ผลประเมิน:</b> มีความเสี่ยงด้านพฤติกรรมหรืออารมณ์ ควรสังเกตอาการใกล้ชิดและให้การสนับสนุนอย่างเข้าใจ";
+    } else {
+      levelText = "กลุ่มที่มีปัญหา";
+      levelColor = "var(--danger)";
+      advice = "<b>ผลประเมิน:</b> ควรได้รับคำปรึกษาจากผู้เชี่ยวชาญหรือจิตแพทย์เด็ก เพื่อการดูแลอย่างตรงจุด";
+    }
+  } else if (activeId === 'adhd') {
+    const avgScore = totalScore / activeGroup.items.length;
+    if (avgScore < 1.5) {
+      levelText = "พฤติกรรมปกติ";
+      levelColor = "var(--success)";
+      advice = "<b>ผลประเมิน:</b> ไม่พบอาการขาดสมาธิหรือซนเกินเกณฑ์มาตรฐาน";
+    } else {
+      levelText = "มีความเสี่ยงสมาธิสั้น/พฤติกรรมซนเกิน";
+      levelColor = "var(--danger)";
+      advice = "<b>ผลประเมิน:</b> พฤติกรรมมีแนวโน้มเข้าข่ายสมาธิสั้น ควรปรึกษาจิตแพทย์เด็กเพื่อการประเมินโดยละเอียด";
+    }
+  } else if (activeId === 'mchat') {
+    if (totalScore <= 2) {
+      levelText = "ความเสี่ยงต่ำ";
+      levelColor = "var(--success)";
+      advice = "<b>ผลประเมิน:</b> เด็กมีความเสี่ยงต่ำต่อภาวะออทิสติก ไม่จำเป็นต้องดำเนินการเพิ่มเติมหากไม่มีข้อกังวลอื่น";
+    } else if (totalScore <= 7) {
+      levelText = "ความเสี่ยงปานกลาง";
+      levelColor = "var(--warning)";
+      advice = "<b>ผลประเมิน:</b> มีความเสี่ยงปานกลาง แนะนำให้ประเมินซ้ำด้วย M-CHAT-R/F หรือปรึกษากุมารแพทย์พัฒนาการ";
+    } else {
+      levelText = "ความเสี่ยงสูง";
+      levelColor = "var(--danger)";
+      advice = "<b>ผลประเมิน:</b> มีความเสี่ยงสูง ควรส่งต่อเพื่อรับการประเมินทางการแพทย์และเริ่มการช่วยเหลือโดยเร็ว";
+    }
   }
+
+  // Display Result UI
+  document.getElementById('resultCode').textContent = tool.code;
+  document.getElementById('resultTitle').textContent = `${tool.title} (${activeGroup.name})`;
+  document.getElementById('resultScore').textContent = totalScore;
+  
+  const badge = document.getElementById('resultBadge');
+  badge.textContent = levelText;
+  badge.style.backgroundColor = levelColor;
+  
+  document.getElementById('resultAdvice').innerHTML = advice;
+
+  // Render Domain Breakdown
+  const breakdownBox = document.getElementById('resultBreakdown');
+  let breakdownHtml = `<div class="breakdown-title"><i class="fa-solid fa-chart-pie"></i> สรุปรายด้าน:</div>`;
+  Object.keys(domainScores).forEach(d => {
+    breakdownHtml += `
+      <div class="breakdown-item">
+        <span>${d}</span>
+        <span class="breakdown-tag">${domainScores[d]} คะแนน</span>
+      </div>
+    `;
+  });
+  breakdownBox.innerHTML = breakdownHtml;
+  breakdownBox.style.display = 'block';
+
+  // Format Email Report Text
+  lastReport = `สรุปผลการประเมิน: ${tool.title} (${activeGroup.name})\nคะแนนรวม: ${totalScore}\nผลการประเมิน: ${levelText}\n\nคำแนะนำ:\n${advice.replace(/<[^>]*>?/gm, '')}`;
 
   document.getElementById('view-quiz').style.display = 'none';
   document.getElementById('view-result').style.display = 'block';
-  window.scrollTo({top:0,behavior:'smooth'});
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function renderWhoqolResult(a){
-  const domainTotals = {};
-  const domainCounts = {};
-  WHOQOL_ITEMS.forEach((it,i)=>{
-    const raw = currentAnswers[i];
-    const val = it.rev ? (6-raw) : raw;
-    domainTotals[it.domain] = (domainTotals[it.domain]||0) + val;
-    domainCounts[it.domain] = (domainCounts[it.domain]||0) + 1;
-  });
-  const domainOrder = ['ทั่วไป','ร่างกาย','จิตใจ','สังคม','สิ่งแวดล้อม'];
-  let overallSum = 0, overallCount = 0;
-  let barsHtml = '';
-  domainOrder.forEach(d=>{
-    if(!domainTotals[d]) return;
-    const avg = domainTotals[d]/domainCounts[d]; // 1-5
-    const pct = Math.round((avg/5)*100);
-    overallSum += domainTotals[d]; overallCount += domainCounts[d];
-    barsHtml += `<div class="dim-row"><span class="dname">${d}</span><div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div><span class="dval">${pct}%</span></div>`;
-  });
-  const overallPct = Math.round((overallSum/overallCount/5)*100);
-
-  let band;
-  if(overallPct < 50) band = {label:'ควรปรับปรุงคุณภาพชีวิต',color:'var(--coral)'};
-  else if(overallPct < 70) band = {label:'คุณภาพชีวิตระดับปานกลาง',color:'var(--gold)'};
-  else band = {label:'คุณภาพชีวิตระดับดี',color:'var(--teal)'};
-
-  document.getElementById('resultCode').textContent = a.code;
-  document.getElementById('resultTitle').textContent = a.full;
-  document.getElementById('resultScore').textContent = overallPct;
-  document.getElementById('resultScore').style.color = band.color;
-  document.getElementById('resultScoreLabel').textContent = 'คะแนนคุณภาพชีวิตโดยรวม (เต็ม 100)';
-  document.getElementById('resultBadgeWrap').innerHTML = `<span class="level-badge" style="background:${band.color}">${band.label}</span>`;
-  document.getElementById('dimBarsWrap').innerHTML = `<div class="dim-bars">${barsHtml}</div>`;
-  document.getElementById('resultAdvice').innerHTML = `<b>คำแนะนำ:</b> พิจารณาแถบคะแนนแต่ละด้านด้านบน ด้านที่มีคะแนนต่ำสุดคือด้านที่ควรให้ความสำคัญเป็นพิเศษก่อน หากคุณภาพชีวิตโดยรวมอยู่ในระดับต่ำต่อเนื่อง ควรปรึกษา อสม. หรือเจ้าหน้าที่สาธารณสุขในพื้นที่`;
-
-  lastResult = {code:a.code, full:a.full, score:overallPct+'/100', levelLabel:band.label,
-    dateStr:new Date().toLocaleDateString('th-TH',{year:'numeric',month:'long',day:'numeric'})};
+function sendGmail() {
+  const email = document.getElementById('emailTo').value || '';
+  const subject = encodeURIComponent(`[สรุปผลการประเมิน] ${TOOLS[activeId].code} - Mental Health Cyber-Care`);
+  const body = encodeURIComponent(lastReport);
+  window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${subject}&body=${body}`, '_blank');
 }
 
-function renderSocSupportResult(a){
-  const subTotals = {'ครอบครัว':0,'เพื่อน':0,'บุคคลใกล้ชิด':0};
-  SOCSUP_ITEMS.forEach((it,i)=>{ subTotals[it.sub] += currentAnswers[i]; });
-  const total = currentAnswers.reduce((s,v)=>s+v,0);
-  const band = a.bands.find(b=>total>=b.min && total<=b.max) || a.bands[a.bands.length-1];
-
-  document.getElementById('resultCode').textContent = a.code;
-  document.getElementById('resultTitle').textContent = a.full;
-  document.getElementById('resultScore').textContent = total;
-  document.getElementById('resultScore').style.color = band.color;
-  document.getElementById('resultScoreLabel').textContent = 'คะแนนรวม';
-  document.getElementById('resultBadgeWrap').innerHTML = `<span class="level-badge" style="background:${band.color}">${band.label}</span>`;
-
-  let barsHtml = '';
-  Object.keys(subTotals).forEach(k=>{
-    const pct = Math.round((subTotals[k]/12)*100);
-    barsHtml += `<div class="dim-row"><span class="dname">${k}</span><div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div><span class="dval">${subTotals[k]}/12</span></div>`;
-  });
-  document.getElementById('dimBarsWrap').innerHTML = `<div class="dim-bars">${barsHtml}</div>`;
-  document.getElementById('resultAdvice').innerHTML = `<b>คำแนะนำ:</b> ${band.advice}`;
-
-  lastResult = {code:a.code, full:a.full, score:total, levelLabel:band.label,
-    dateStr:new Date().toLocaleDateString('th-TH',{year:'numeric',month:'long',day:'numeric'})};
-}
-
-function emailResult(){
-  if(!lastResult) return;
-  const to = document.getElementById('emailTo').value.trim();
-  if(!to){ alert('กรุณากรอกอีเมลผู้รับ'); return; }
-  const {code, full, score, levelLabel, dateStr} = lastResult;
-  const subject = `ผลแบบประเมิน ${code} — ${full}`;
-  const body =
-`ผลแบบประเมินด้านจิตสังคมและความเป็นอยู่ที่ดี (Mental Health Cyber-Care)
-
-แบบประเมิน: ${code} (${full})
-วันที่ทำแบบประเมิน: ${dateStr}
-ผลคะแนน: ${score}
-ระดับผล: ${levelLabel}
-
-หมายเหตุ: ผลนี้เป็นการคัดกรองเบื้องต้นเท่านั้น ไม่ใช่การวินิจฉัยโรค
-สายด่วนสุขภาพจิต 1323 (ฟรี ตลอด 24 ชม.)`;
-  const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  window.open(gmailUrl, '_blank');
-}
-
-initGrid();
-showGrid();
+window.onload = initApp;
 </script>
 </body>
 </html>
