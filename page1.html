@@ -100,30 +100,23 @@
   header.nav-header .logo small { display: block; font-family: 'Sarabun', sans-serif; font-weight: 400; font-size: 0.68rem; color: var(--text-muted); }
 
   nav { display: flex; align-items: center; gap: 22px; }
-  nav a { text-decoration: none; font-size: 0.92rem; font-weight: 500; color: var(--text-main); }
-  nav a:hover { color: var(--teal-dark); }
   nav a.nav-cta {
     background: var(--primary-grad); color: #fff; padding: 9px 20px; border-radius: 30px; font-weight: 600;
-    box-shadow: 0 4px 14px rgba(37,99,168,0.3);
+    box-shadow: 0 4px 14px rgba(37,99,168,0.3); text-decoration: none; font-size: 0.9rem;
+    display: inline-flex; align-items: center; gap: 8px;
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  nav a.nav-cta:hover {
+    background: var(--primary-hover); transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(37,99,168,0.4);
   }
 
   @media (max-width: 768px) {
-    header.nav-header { flex-direction: column; gap: 12px; padding: 12px 5%; }
-    nav { gap: 14px; flex-wrap: wrap; justify-content: center; }
+    header.nav-header { flex-direction: row; gap: 12px; padding: 12px 5%; }
   }
 
   /* ---- Page hero ---- */
   header.hero { max-width: 900px; margin: 0 auto; padding: 34px 24px 8px; text-align: center; animation: fadeInUp 0.8s ease-out; }
-  .btn-back-category {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(255,255,255,0.9); color: var(--teal-dark);
-    border: 1.5px solid var(--teal-soft);
-    padding: 9px 20px; border-radius: 30px;
-    font-size: 13.5px; font-weight: 600; text-decoration: none;
-    margin-bottom: 18px; box-shadow: var(--shadow-sm);
-    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-  .btn-back-category:hover { background: var(--teal-light); border-color: var(--teal-dark); transform: translateY(-2px); }
 
   .hero-badge {
     display: inline-flex; align-items: center; gap: 6px;
@@ -302,12 +295,11 @@
     <span>MENTAL HEALTH CYBER-CARE<small>โครงการ อสม. ฮีลใจ</small></span>
   </a>
   <nav>
-    <a href="assessment.html" class="nav-cta">เลือกแบบประเมิน</a>
+    <a href="assessment.html" class="nav-cta"><i class="fa-solid fa-arrow-left"></i> ย้อนกลับหน้าหลัก</a>
   </nav>
 </header>
 
 <header class="hero" id="heroHeader">
-  <a href="assessment.html" class="btn-back-category"><i class="fa-solid fa-arrow-left"></i> ย้อนกลับหน้าเลือกประเภทแบบประเมิน</a>
   <div><span class="hero-badge"><i class="fa-solid fa-clipboard-check"></i> SCREENING TOOLS</span></div>
   <h1>แบบคัดกรองทั่วไป (Screening Tools)</h1>
   <p>เลือกแบบประเมินที่ต้องการทำ แต่ละแบบใช้เวลาไม่กี่นาที ผลที่ได้เป็นการคัดกรองเบื้องต้นเท่านั้น ไม่ใช่การวินิจฉัยโรค</p>
