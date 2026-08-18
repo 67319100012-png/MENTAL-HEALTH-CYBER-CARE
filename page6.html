@@ -3,629 +3,114 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>แบบคัดกรองทั่วไป (Screening Tools) — Mental Health Cyber-Care</title>
+<title>แบบประเมินด้านจิตสังคมและความเป็นอยู่ที่ดี</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg-main: #f4f8fc;
-    --surface: #ffffff;
-    --surface-sub: #f8fafc;
-    --border: #e2e8f0;
-    --border-hover: #93c5fd;
-    
-    --primary: #2563eb;
-    --primary-dark: #1e40af;
-    --primary-light: #eff6ff;
-    --primary-muted: #60a5fa;
-    
-    --text-main: #0f172a;
-    --text-muted: #64748b;
-    
-    --gold: #d97706;
-    --coral: #dc2626;
-    
-    --radius-lg: 20px;
-    --radius-md: 14px;
-    --radius-sm: 8px;
-    --shadow-sm: 0 4px 15px rgba(0, 0, 0, 0.03);
-    --shadow-md: 0 12px 30px -5px rgba(37, 99, 235, 0.08);
-    --transition: all 0.25s ease;
+  :root{
+    --bg-sage:#AFC4A2; --bg-sage-deep:#8FAA82;
+    --surface:#FBFAF5; --surface-alt:#F1EEE3;
+    --ink:#2B3A2E; --ink-soft:#5B6B5A;
+    --teal:#357B72; --teal-deep:#245A53;
+    --gold:#B98A2E; --coral:#C85A3F; --coral-soft:#F3DCD3;
+    --line:#D9DFCE; --radius:18px; --shadow:0 10px 30px rgba(40,58,42,0.14);
   }
+  *{box-sizing:border-box;}
+  body{margin:0;background:linear-gradient(180deg,var(--bg-sage) 0%,var(--bg-sage-deep) 100%);font-family:'Sarabun',sans-serif;color:var(--ink);min-height:100vh;padding-bottom:40px;}
+  h1,h2,h3,.display{font-family:'Kanit',sans-serif;}
 
-  * { box-sizing: border-box; }
-  
-  body {
-    margin: 0;
-    background-color: var(--bg-main);
-    background-image: radial-gradient(circle at 50% 0%, #e0f2fe 0%, var(--bg-main) 70%);
-    font-family: 'Sarabun', sans-serif;
-    color: var(--text-main);
-    min-height: 100vh;
-    padding-bottom: 60px;
-    -webkit-font-smoothing: antialiased;
-  }
+  .hotline-bar{background:var(--teal-deep);color:#fff;text-align:center;padding:9px 16px;font-size:14px;}
+  .hotline-bar b{color:#F4D8A8;}
 
-  h1, h2, h3, .font-heading {
-    font-family: 'Kanit', sans-serif;
-  }
+  header.top{max-width:920px;margin:0 auto;padding:36px 24px 18px;text-align:center;}
+  header.top .eyebrow{font-size:13px;letter-spacing:2px;color:var(--teal-deep);font-weight:600;margin-bottom:8px;}
+  header.top h1{font-size:24px;margin:0 0 10px;}
+  header.top p{font-size:15px;color:var(--ink-soft);max-width:640px;margin:0 auto;line-height:1.7;}
 
-  /* Top Navigation Bar */
-  .top-navbar {
-    background: #ffffff;
-    border-bottom: 1px solid var(--border);
-    padding: 12px 32px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.02);
-  }
-  .brand {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .brand-logo {
-    width: 38px;
-    height: 38px;
-    background: var(--primary);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-size: 20px;
-  }
-  .brand-text {
-    display: flex;
-    flex-direction: column;
-  }
-  .brand-title {
-    font-family: 'Kanit', sans-serif;
-    font-weight: 700;
-    font-size: 15px;
-    color: var(--primary-dark);
-    line-height: 1.2;
-    letter-spacing: 0.5px;
-  }
-  .brand-sub {
-    font-size: 11px;
-    color: var(--text-muted);
-  }
-  .btn-nav-back {
-    background: #3b82f6;
-    color: #ffffff;
-    border: none;
-    padding: 8px 20px;
-    border-radius: 20px;
-    font-family: 'Sarabun', sans-serif;
-    font-size: 13.5px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: var(--transition);
-  }
-  .btn-nav-back:hover {
-    background: var(--primary-dark);
-    transform: translateY(-1px);
-  }
+  main{max-width:920px;margin:0 auto;padding:10px 20px 20px;}
 
-  /* Main Container */
-  main {
-    max-width: 1040px;
-    margin: 0 auto;
-    padding: 32px 20px;
-  }
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px;}
+  @media (max-width:720px){ .grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:460px){ .grid{grid-template-columns:1fr;} }
 
-  /* Hero Header */
-  header.hero-top {
-    text-align: center;
-    margin-bottom: 32px;
-  }
-  header.hero-top .eyebrow-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-family: 'Kanit', sans-serif;
-    font-size: 11.5px;
-    letter-spacing: 1.5px;
-    color: var(--primary);
-    background: var(--primary-light);
-    border: 1px solid #bfdbfe;
-    padding: 4px 16px;
-    border-radius: 20px;
-    font-weight: 700;
-    margin-bottom: 14px;
-    text-transform: uppercase;
-  }
-  header.hero-top h1 {
-    font-size: 32px;
-    color: #1e3a8a;
-    margin: 0 0 10px;
-    line-height: 1.3;
-    font-weight: 700;
-  }
-  header.hero-top p {
-    font-size: 14.5px;
-    color: var(--text-muted);
-    max-width: 620px;
-    margin: 0 auto;
-    line-height: 1.6;
-  }
+  .card{background:var(--surface);border-radius:var(--radius);padding:22px 18px;text-align:center;box-shadow:var(--shadow);cursor:pointer;border:1px solid transparent;transition:transform .18s ease, border-color .18s ease;}
+  .card:hover{transform:translateY(-4px);border-color:var(--teal);}
+  .card .icon{width:56px;height:56px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-family:'Kanit',sans-serif;font-weight:600;font-size:12px;}
+  .card .code{font-family:'Kanit',sans-serif;font-weight:600;font-size:16px;margin-bottom:4px;}
+  .card .desc{font-size:12.5px;color:var(--ink-soft);line-height:1.5;margin-bottom:12px;}
+  .card .qcount{display:inline-block;font-size:11.5px;color:var(--teal-deep);background:#E4EFE0;border-radius:20px;padding:3px 10px;}
 
-  /* Feature Info Cards (Top Row) */
-  .feature-row {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 16px;
-    margin-bottom: 28px;
-  }
-  .feature-card {
-    background: #ffffff;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    padding: 20px;
-    text-align: center;
-    box-shadow: var(--shadow-sm);
-  }
-  .feature-card .f-icon {
-    font-size: 22px;
-    color: var(--primary);
-    margin-bottom: 8px;
-  }
-  .feature-card .f-title {
-    font-family: 'Kanit', sans-serif;
-    font-weight: 600;
-    font-size: 15px;
-    color: var(--text-main);
-    margin-bottom: 4px;
-  }
-  .feature-card .f-desc {
-    font-size: 12.5px;
-    color: var(--text-muted);
-    line-height: 1.5;
-  }
+  .panel{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px 26px;margin-top:20px;}
+  .btn-ghost-back{background:none;border:1.5px solid var(--teal-deep);color:var(--teal-deep);padding:9px 22px;border-radius:30px;font-family:'Sarabun',sans-serif;font-size:14px;font-weight:600;cursor:pointer;margin-bottom:16px;}
+  .quiz-title{font-size:22px;margin:0 0 4px;}
+  .quiz-sub{font-size:13.5px;color:var(--ink-soft);margin:0 0 18px;line-height:1.6;}
+  .staff-banner{background:#EFE6CF;border:1px solid var(--gold);border-radius:12px;padding:12px 16px;font-size:13px;line-height:1.7;color:#5c470f;margin-bottom:18px;}
 
-  /* Assessment Grid Layout */
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-    gap: 20px;
-  }
+  .progress-wrap{background:var(--surface-alt);border-radius:20px;height:8px;overflow:hidden;margin-bottom:24px;}
+  .progress-fill{background:var(--teal);height:100%;width:0%;transition:width .25s ease;}
 
-  /* Assessment Card Component */
-  .card {
-    background: var(--surface);
-    border-radius: var(--radius-lg);
-    padding: 24px 20px 18px;
-    text-align: center;
-    box-shadow: var(--shadow-sm);
-    cursor: pointer;
-    border: 1px solid var(--border);
-    transition: var(--transition);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-  }
-  .card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-md);
-    border-color: var(--border-hover);
-  }
-  .card .icon-box {
-    width: 54px;
-    height: 54px;
-    border-radius: 14px;
-    background: var(--primary);
-    color: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 14px;
-    font-family: 'Kanit', sans-serif;
-    font-weight: 700;
-    font-size: 15px;
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
-  }
-  .card .code-title {
-    font-family: 'Kanit', sans-serif;
-    font-weight: 700;
-    font-size: 18px;
-    color: var(--text-main);
-    margin-bottom: 6px;
-  }
-  .card .desc {
-    font-size: 13.5px;
-    color: var(--text-muted);
-    line-height: 1.5;
-    margin-bottom: 20px;
-    flex-grow: 1;
-  }
-  .card-footer {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 12px;
-    border-top: 1px solid #f1f5f9;
-  }
-  .qcount-badge {
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--primary);
-    background: var(--primary-light);
-    border-radius: 20px;
-    padding: 3px 12px;
-    border: 1px solid #dbeafe;
-  }
-  .action-link {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--primary);
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
+  .domain-heading{font-family:'Kanit',sans-serif;font-size:13px;font-weight:600;color:var(--teal-deep);margin:20px 0 6px;padding-top:14px;border-top:1px solid var(--line);}
+  .domain-heading:first-child{border-top:none;padding-top:0;margin-top:0;}
 
-  /* Panel Sections */
-  .panel {
-    background: var(--surface);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
-    padding: 36px 32px;
-    border: 1px solid var(--border);
-  }
-  @media (max-width: 600px) {
-    .panel { padding: 24px 18px; }
-  }
+  .question{padding:14px 0;border-top:1px solid var(--line);}
+  .question:first-of-type{border-top:none;}
+  .question .qtext{font-size:15px;line-height:1.6;margin-bottom:10px;}
+  .options{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;font-size:14px;transition:border-color .15s, background .15s;}
+  .opt:hover{border-color:var(--teal);}
+  .opt input{accent-color:var(--teal);width:16px;height:16px;flex:none;}
+  .opt.selected{border-color:var(--teal);background:#EAF3E9;font-weight:600;}
 
-  .btn-ghost-back {
-    background: none;
-    border: none;
-    color: var(--primary);
-    padding: 0;
-    font-family: 'Sarabun', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    margin-bottom: 20px;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    transition: var(--transition);
-  }
-  .btn-ghost-back:hover {
-    color: var(--primary-dark);
-    transform: translateX(-3px);
-  }
+  .submit-row{margin-top:22px;text-align:center;}
+  .btn-primary{background:var(--teal-deep);color:#fff;border:none;padding:13px 30px;border-radius:30px;font-family:'Sarabun',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:background .15s, opacity .15s;}
+  .btn-primary:hover{background:var(--teal);}
+  .btn-primary:disabled{opacity:.4;cursor:not-allowed;}
+  .btn-ghost{background:none;border:1.5px solid var(--teal-deep);color:var(--teal-deep);padding:11px 26px;border-radius:30px;font-family:'Sarabun',sans-serif;font-size:14.5px;font-weight:600;cursor:pointer;}
+  .hint{text-align:center;font-size:12.5px;color:var(--ink-soft);margin-top:10px;}
 
-  .quiz-title {
-    font-size: 24px;
-    color: var(--primary-dark);
-    margin: 0 0 6px;
-  }
-  .quiz-sub {
-    font-size: 14px;
-    color: var(--text-muted);
-    margin: 0 0 24px;
-    line-height: 1.6;
-  }
+  .result-head{text-align:center;margin-bottom:6px;}
+  .score-big{font-family:'Kanit',sans-serif;font-size:44px;font-weight:700;text-align:center;margin:2px 0 0;}
+  .score-label{text-align:center;font-size:13px;color:var(--ink-soft);margin-bottom:18px;}
+  .level-badge{display:block;width:fit-content;margin:0 auto 20px;padding:7px 18px;border-radius:30px;font-family:'Kanit',sans-serif;font-weight:600;font-size:14.5px;color:#fff;}
+  .advice-box{background:var(--surface-alt);border-radius:14px;padding:18px 20px;font-size:14.5px;line-height:1.75;margin-bottom:14px;}
+  .advice-box b{color:var(--teal-deep);}
 
-  /* Progress Bar */
-  .progress-wrap {
-    background: #e2e8f0;
-    border-radius: 10px;
-    height: 10px;
-    overflow: hidden;
-    margin-bottom: 28px;
-  }
-  .progress-fill {
-    background: linear-gradient(90deg, var(--primary-muted), var(--primary));
-    height: 100%;
-    width: 0%;
-    transition: width 0.3s ease;
-  }
+  .dim-bars{margin:18px 0;}
+  .dim-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;font-size:13px;}
+  .dim-row .dname{width:110px;flex:none;color:var(--ink-soft);}
+  .dim-row .bar-track{flex:1;height:10px;background:var(--surface-alt);border-radius:10px;overflow:hidden;}
+  .dim-row .bar-fill{height:100%;background:var(--teal);}
+  .dim-row .dval{width:38px;flex:none;text-align:right;font-weight:600;font-family:'Kanit',sans-serif;}
 
-  /* Questions */
-  .question {
-    padding: 20px 0;
-    border-top: 1px solid var(--border);
-  }
-  .question:first-of-type {
-    border-top: none;
-    padding-top: 0;
-  }
-  .question .qtext {
-    font-size: 15.5px;
-    font-weight: 500;
-    line-height: 1.6;
-    margin-bottom: 14px;
-    color: var(--text-main);
-  }
-  .options {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .opt {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    border: 1.5px solid var(--border);
-    border-radius: var(--radius-md);
-    padding: 12px 16px;
-    cursor: pointer;
-    font-size: 14.5px;
-    transition: var(--transition);
-    background: var(--surface);
-    user-select: none;
-  }
-  .opt:hover {
-    border-color: var(--border-hover);
-    background: var(--surface-sub);
-  }
-  .opt input {
-    accent-color: var(--primary);
-    width: 18px;
-    height: 18px;
-    flex: none;
-    cursor: pointer;
-  }
-  .opt.selected {
-    border-color: var(--primary);
-    background: var(--primary-light);
-    color: var(--primary-dark);
-    font-weight: 600;
-  }
+  .email-box{background:var(--surface-alt);border-radius:14px;padding:16px 18px;margin-bottom:6px;}
+  .email-box label{display:block;font-size:13px;font-weight:600;color:var(--teal-deep);margin-bottom:8px;}
+  .email-row{display:flex;gap:10px;flex-wrap:wrap;}
+  .email-row input{flex:1;min-width:220px;padding:10px 14px;border-radius:10px;border:1px solid var(--line);font-family:'Sarabun',sans-serif;font-size:14px;background:#fff;}
+  .email-row input:focus{outline:2px solid var(--teal);border-color:var(--teal);}
+  .email-row .btn-ghost{white-space:nowrap;}
 
-  /* Controls & Buttons */
-  .submit-row {
-    margin-top: 32px;
-    text-align: center;
-  }
-  .btn-primary {
-    background: var(--primary);
-    color: #fff;
-    border: none;
-    padding: 14px 36px;
-    border-radius: 30px;
-    font-family: 'Sarabun', sans-serif;
-    font-size: 15px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: var(--transition);
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
-  }
-  .btn-primary:hover:not(:disabled) {
-    background: var(--primary-dark);
-    transform: translateY(-1px);
-    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
-  }
-  .btn-primary:disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
-    box-shadow: none;
-  }
-  .btn-ghost {
-    background: transparent;
-    border: 1.5px solid var(--primary);
-    color: var(--primary);
-    padding: 12px 28px;
-    border-radius: 30px;
-    font-family: 'Sarabun', sans-serif;
-    font-size: 14.5px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: var(--transition);
-  }
-  .btn-ghost:hover {
-    background: var(--primary-light);
-  }
-  .hint {
-    text-align: center;
-    font-size: 13px;
-    color: var(--text-muted);
-    margin-top: 12px;
-  }
-
-  /* Result View */
-  .result-head {
-    text-align: center;
-    margin-bottom: 12px;
-  }
-  .score-big {
-    font-family: 'Kanit', sans-serif;
-    font-size: 56px;
-    font-weight: 700;
-    text-align: center;
-    line-height: 1;
-    margin: 10px 0 4px;
-  }
-  .score-label {
-    text-align: center;
-    font-size: 13.5px;
-    color: var(--text-muted);
-    margin-bottom: 20px;
-  }
-  .level-badge {
-    display: inline-block;
-    padding: 8px 22px;
-    border-radius: 30px;
-    font-family: 'Kanit', sans-serif;
-    font-weight: 600;
-    font-size: 15px;
-    color: #fff;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  }
-  .advice-box {
-    background: var(--surface-sub);
-    border-left: 4px solid var(--primary);
-    border-radius: 0 var(--radius-md) var(--radius-md) 0;
-    padding: 20px 22px;
-    font-size: 15px;
-    line-height: 1.7;
-    margin: 24px 0;
-    color: var(--text-main);
-  }
-  .advice-box b {
-    color: var(--primary-dark);
-  }
-
-  /* Dimension Bars */
-  .dim-bars {
-    margin: 24px 0;
-    background: var(--surface-sub);
-    padding: 20px;
-    border-radius: var(--radius-md);
-  }
-  .dim-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 12px;
-    font-size: 13.5px;
-  }
-  .dim-row:last-child { margin-bottom: 0; }
-  .dim-row .dname {
-    width: 110px;
-    flex: none;
-    color: var(--text-main);
-    font-weight: 500;
-  }
-  .dim-row .bar-track {
-    flex: 1;
-    height: 10px;
-    background: var(--border);
-    border-radius: 10px;
-    overflow: hidden;
-  }
-  .dim-row .bar-fill {
-    height: 100%;
-    background: var(--primary);
-    border-radius: 10px;
-    transition: width 0.5s ease;
-  }
-  .dim-row .dval {
-    width: 48px;
-    flex: none;
-    text-align: right;
-    font-weight: 600;
-    font-family: 'Kanit', sans-serif;
-    color: var(--primary-dark);
-  }
-
-  /* Email Section */
-  .email-box {
-    background: var(--surface-sub);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    padding: 20px;
-    margin-top: 24px;
-  }
-  .email-box label {
-    display: block;
-    font-size: 13.5px;
-    font-weight: 600;
-    color: var(--primary-dark);
-    margin-bottom: 10px;
-  }
-  .email-row {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-  .email-row input {
-    flex: 1;
-    min-width: 220px;
-    padding: 12px 16px;
-    border-radius: 20px;
-    border: 1px solid var(--border);
-    font-family: 'Sarabun', sans-serif;
-    font-size: 14px;
-    background: #fff;
-    outline: none;
-    transition: var(--transition);
-  }
-  .email-row input:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
-  }
-
-  .result-actions {
-    display: flex;
-    gap: 12px;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-top: 28px;
-  }
-
-  /* Footer */
-  footer.note {
-    max-width: 860px;
-    margin: 32px auto 0;
-    padding: 0 24px;
-    text-align: center;
-    font-size: 12.5px;
-    color: var(--text-muted);
-    line-height: 1.7;
-  }
+  .result-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:20px;}
+  footer.note{max-width:920px;margin:26px auto 0;padding:0 24px;text-align:center;font-size:12px;color:var(--ink);opacity:.75;line-height:1.7;}
 </style>
 </head>
 <body>
 
-<!-- Top Navigation Bar -->
-<div class="top-navbar">
-  <div class="brand">
-    <div class="brand-logo">🛡️</div>
-    <div class="brand-text">
-      <span class="brand-title">MENTAL HEALTH CYBER-CARE</span>
-      <span class="brand-sub">โครงการ คณะ... / Cyber-Care System</span>
-    </div>
-  </div>
-  <button class="btn-nav-back" onclick="showGrid()">← ย้อนกลับหน้าหลัก</button>
-</div>
+<div class="hotline-bar">สายด่วนสุขภาพจิต <b>1323</b> ให้บริการฟรีตลอด 24 ชั่วโมง</div>
+
+<header class="top">
+  <div class="eyebrow">MENTAL HEALTH CYBER-CARE</div>
+  <h1>แบบประเมินด้านจิตสังคมและความเป็นอยู่ที่ดี</h1>
+  <p>Psychosocial & Well-being Tests — ประเมินคุณภาพชีวิต ความสุข สัมพันธภาพในครอบครัว ภาวะหมดไฟ และการสนับสนุนทางสังคม ผลลัพธ์ใช้เพื่อความเข้าใจตนเองและวางแผนดูแลสุขภาพใจเบื้องต้น</p>
+</header>
 
 <main>
-  <!-- Home Landing View -->
-  <div id="view-home">
-    <header class="hero-top">
-      <div class="eyebrow-badge">🛡️ SCREENING TOOLS</div>
-      <h1>แบบคัดกรองทั่วไป (Screening Tools)</h1>
-      <p>เลือกแบบประเมินที่ต้องการทำ แต่ละแบบใช้เวลาไม่กี่นาที ผลที่ได้เป็นการคัดกรองเบื้องต้นเท่านั้น ไม่ใช่การวินิจฉัยโรค</p>
-    </header>
+  <section id="view-grid" class="grid"></section>
 
-    <!-- 3 Feature Cards -->
-    <div class="feature-row">
-      <div class="feature-card">
-        <div class="f-icon">⏱️</div>
-        <div class="f-title">ใช้เวลาไม่นาน</div>
-        <div class="f-desc">แต่ละแบบใช้เวลาเพียง 2-5 นาที ทำได้ทุกที่ทุกเวลา</div>
-      </div>
-      <div class="feature-card">
-        <div class="f-icon">⚡</div>
-        <div class="f-title">รู้ผลทันที</div>
-        <div class="f-desc">เห็นคะแนนและคำแนะนำทันทีที่ทำเสร็จ พร้อมส่งผลเข้าอีเมลได้</div>
-      </div>
-      <div class="feature-card">
-        <div class="f-icon">📞</div>
-        <div class="f-title">มีสายด่วนช่วยเหลือ</div>
-        <div class="f-desc">หากพบความเสี่ยง มีเบอร์ 1323 ให้ติดต่อได้ทันที ตลอด 24 ชม.</div>
-      </div>
-    </div>
-
-    <!-- Assessment Grid -->
-    <section id="view-grid" class="grid"></section>
-  </div>
-
-  <!-- Quiz View -->
   <section id="view-quiz" class="panel" style="display:none;">
-    <button class="btn-ghost-back" onclick="showGrid()">← ย้อนกลับหน้าหลัก</button>
+    <button class="btn-ghost-back" onclick="showGrid()">← ย้อนกลับ</button>
     <h2 class="quiz-title" id="quizTitle"></h2>
     <p class="quiz-sub" id="quizSub"></p>
+    <div id="quizNote" class="staff-banner" style="display:none;"></div>
     <div class="progress-wrap"><div class="progress-fill" id="progressFill"></div></div>
     <div id="questionList"></div>
     <div class="submit-row">
@@ -634,11 +119,10 @@
     </div>
   </section>
 
-  <!-- Result View -->
   <section id="view-result" class="panel" style="display:none;">
-    <button class="btn-ghost-back" onclick="showGrid()">← ย้อนกลับหน้าหลัก</button>
+    <button class="btn-ghost-back" onclick="showGrid()">← ย้อนกลับ</button>
     <div class="result-head">
-      <div id="resultCode" style="color:var(--primary);font-size:13px;letter-spacing:1.5px;font-weight:600;font-family:'Kanit';"></div>
+      <div class="eyebrow" id="resultCode" style="color:var(--teal-deep);font-size:12.5px;letter-spacing:1.5px;font-weight:600;"></div>
       <h2 class="quiz-title" id="resultTitle" style="margin-top:4px;"></h2>
     </div>
     <div class="score-big" id="resultScore"></div>
@@ -646,16 +130,14 @@
     <div id="resultBadgeWrap" style="text-align:center;"></div>
     <div id="dimBarsWrap"></div>
     <div class="advice-box" id="resultAdvice"></div>
-    
     <div class="email-box">
-      <label for="emailTo">ส่งผลประเมินเข้าสู่อีเมล</label>
+      <label for="emailTo">ส่งผลไปที่อีเมล</label>
       <div class="email-row">
-        <input type="email" id="emailTo" value="67319100012@Aitc.ac.th" placeholder="กรอกอีเมลของคุณ">
+        <input type="email" id="emailTo" value="67319100012@Aitc.ac.th">
         <button class="btn-ghost" onclick="emailResult()">✉ ส่งผลทางอีเมล</button>
       </div>
-      <div class="hint" style="text-align:left; margin-top:8px;">ระบบจะเปิดหน้าแต่งอีเมลของ Gmail พร้อมกรอกข้อมูลให้อัตโนมัติ (จำเป็นต้องเข้าสู่ระบบ Gmail ไว้ก่อน)</div>
+      <div class="hint">จะเปิดหน้าเขียนอีเมลของ Gmail ในแท็บใหม่ พร้อมกรอกผลให้อัตโนมัติ ท่านเพียงกดส่ง (ต้องเข้าสู่ระบบ Gmail ไว้ก่อน)</div>
     </div>
-
     <div class="result-actions">
       <button class="btn-ghost" onclick="openAssessment(currentId)">ทำแบบประเมินนี้อีกครั้ง</button>
       <button class="btn-primary" onclick="showGrid()">เลือกแบบประเมินอื่น</button>
@@ -664,7 +146,7 @@
 </main>
 
 <footer class="note">
-  แบบประเมินนี้ดัดแปลงจากเครื่องมือมาตรฐานที่ใช้ทั่วไปด้านจิตสังคมและความเป็นอยู่ที่ดี เพื่อการคัดกรองเบื้องต้นเท่านั้น ไม่ใช่การวินิจฉัยและไม่ทดแทนการประเมินโดยผู้เชี่ยวชาญทางการแพทย์
+  แบบประเมินนี้ดัดแปลงจากเครื่องมือมาตรฐานที่ใช้ทั่วไปด้านจิตสังคมและความเป็นอยู่ที่ดี เพื่อการคัดกรองเบื้องต้นเท่านั้น ไม่ใช่การวินิจฉัยและไม่ทดแทนการประเมินโดยผู้เชี่ยวชาญ
 </footer>
 
 <script>
@@ -766,19 +248,19 @@ const SOCSUP_ITEMS = [
 
 const ASSESSMENTS = {
   whoqol:{
-    code:'WHOQOL', title:'WHOQOL-BREF', full:'แบบประเมินคุณภาพชีวิต',
-    sub:'ประเมินคุณภาพชีวิตใน 4 ด้าน ได้แก่ ร่างกาย จิตใจ สังคม และสิ่งแวดล้อม',
+    code:'WHOQOL-BREF', title:'WHOQOL-BREF', full:'แบบประเมินคุณภาพชีวิต',
+    sub:'ประเมินคุณภาพชีวิตใน 4 ด้าน ได้แก่ ร่างกาย จิตใจ สังคม และสิ่งแวดล้อม (ดัดแปลงจากเครื่องมือขององค์การอนามัยโลก)',
     type:'whoqol'
   },
   happy:{
-    code:'HAPPY', title:'Happinometer', full:'แบบประเมินความสุข',
-    sub:'ประเมินความสุข 9 มิติ ตามกรอบแนวคิดความสุขในระบบสาธารณสุขไทย',
+    code:'Happinometer', title:'Happinometer', full:'แบบประเมินความสุข',
+    sub:'ประเมินความสุข 9 มิติ ตามกรอบแนวคิด "ความสุข" ที่ใช้ในระบบสาธารณสุขไทย',
     type:'sum', options:scale4freq,
     questions: HAPPY_ITEMS.map(h=>`[${h.label}] ${h.text}`),
     bands:[
       {min:0,max:9,label:'ควรดูแลเพิ่มเติม',color:'var(--coral)',advice:'คะแนนความสุขโดยรวมค่อนข้างต่ำ ลองเลือกมิติที่คะแนนต่ำที่สุดมาดูแลก่อน และปรึกษา อสม. หรือคนใกล้ชิดหากต้องการคำแนะนำ'},
       {min:10,max:18,label:'ระดับปานกลาง',color:'var(--gold)',advice:'มีความสุขในระดับปานกลาง ลองสำรวจว่ามิติใดยังต่ำอยู่และหาวิธีดูแลเพิ่มเติมในด้านนั้น'},
-      {min:19,max:27,label:'ระดับดี',color:'var(--primary)',advice:'มีความสุขโดยรวมอยู่ในระดับดี รักษาสมดุลในแต่ละด้านนี้ต่อไป'}
+      {min:19,max:27,label:'ระดับดี',color:'var(--teal)',advice:'มีความสุขโดยรวมอยู่ในระดับดี รักษาสมดุลในแต่ละด้านนี้ต่อไป'}
     ]
   },
   apgar:{
@@ -787,30 +269,30 @@ const ASSESSMENTS = {
     type:'sum', options:scale3agree,
     questions: APGAR_ITEMS,
     bands:[
-      {min:0,max:3,label:'สัมพันธภาพมีปัญหาค่อนข้างสูง',color:'var(--coral)',advice:'ผลบ่งชี้ว่าสัมพันธภาพในครอบครัวอาจมีปัญหาค่อนข้างมาก แนะนำให้ปรึกษาผู้เชี่ยวชาญหรือนักสังคมสงเคราะห์เพื่อหาแนวทางเสริมสร้างความสัมพันธ์'},
+      {min:0,max:3,label:'ครอบครัวมีปัญหาสัมพันธภาพสูง',color:'var(--coral)',advice:'ผลบ่งชี้ว่าสัมพันธภาพในครอบครัวอาจมีปัญหาค่อนข้างมาก แนะนำให้ปรึกษา อสม. หรือนักสังคมสงเคราะห์เพื่อหาแนวทางเสริมสร้างความสัมพันธ์'},
       {min:4,max:6,label:'สัมพันธภาพระดับปานกลาง',color:'var(--gold)',advice:'สัมพันธภาพในครอบครัวอยู่ในระดับปานกลาง ลองหาเวลาพูดคุยและทำกิจกรรมร่วมกันมากขึ้น'},
-      {min:7,max:10,label:'สัมพันธภาพดี',color:'var(--primary)',advice:'สัมพันธภาพในครอบครัวอยู่ในเกณฑ์ดี รักษาความสัมพันธ์ที่ดีนี้ต่อไป'}
+      {min:7,max:10,label:'สัมพันธภาพดี',color:'var(--teal)',advice:'สัมพันธภาพในครอบครัวอยู่ในเกณฑ์ดี รักษาความสัมพันธ์ที่ดีนี้ต่อไป'}
     ]
   },
   burnout:{
-    code:'BURNOUT', title:'Burnout Assessment', full:'แบบประเมินภาวะหมดไฟ',
-    sub:'แบบคัดกรองภาวะหมดไฟในการทำงาน ครอบคลุมความอ่อนล้าทางอารมณ์และเจตคติต่องาน',
+    code:'Burnout', title:'Burnout', full:'แบบประเมินภาวะหมดไฟ',
+    sub:'แบบคัดกรองภาวะหมดไฟในการทำงานฉบับดัดแปลง ครอบคลุมความอ่อนล้าทางอารมณ์ ทัศนคติต่องาน และความรู้สึกประสบความสำเร็จ (ไม่ใช่ Maslach Burnout Inventory ฉบับลิขสิทธิ์)',
     type:'custom', items: BURNOUT_ITEMS.map(it=>({text:it.text, options:burnoutScale(it.rev)})),
     bands:[
-      {min:0,max:12,label:'ความเสี่ยงต่ำ',color:'var(--primary)',advice:'ยังไม่พบสัญญาณของภาวะหมดไฟที่ชัดเจน ดูแลสมดุลชีวิตและการทำงานต่อไป'},
+      {min:0,max:12,label:'ความเสี่ยงต่ำ',color:'var(--teal)',advice:'ยังไม่พบสัญญาณของภาวะหมดไฟที่ชัดเจน ดูแลสมดุลชีวิตและการทำงานต่อไป'},
       {min:13,max:24,label:'ความเสี่ยงปานกลาง',color:'var(--gold)',advice:'เริ่มมีสัญญาณของภาวะหมดไฟ ควรหาวิธีลดภาระงาน พักผ่อนให้เพียงพอ และพูดคุยกับหัวหน้างานหรือเพื่อนร่วมงาน'},
-      {min:25,max:36,label:'ความเสี่ยงสูง',color:'var(--coral)',advice:'มีความเสี่ยงสูงต่อภาวะหมดไฟในการทำงาน ควรปรับสมดุลชีวิตการทำงานอย่างจริงจัง และปรึกษาผู้เชี่ยวชาญด้านสุขภาพจิต'}
+      {min:25,max:36,label:'ความเสี่ยงสูง',color:'var(--coral)',advice:'มีความเสี่ยงสูงต่อภาวะหมดไฟในการทำงาน ควรปรับสมดุลชีวิตการทำงานอย่างจริงจัง และปรึกษาเจ้าหน้าที่สาธารณสุขหรือผู้เชี่ยวชาญด้านสุขภาพจิต'}
     ]
   },
   socsupport:{
-    code:'SOC-SUP', title:'Social Support', full:'แบบประเมินการสนับสนุนทางสังคม',
-    sub:'ประเมินการรับรู้การสนับสนุนทางสังคมจาก ครอบครัว เพื่อน และบุคคลใกล้ชิด',
+    code:'Social Support', title:'Social Support', full:'แบบประเมินการสนับสนุนทางสังคม',
+    sub:'ประเมินการรับรู้การสนับสนุนทางสังคมจาก 3 แหล่ง ได้แก่ ครอบครัว เพื่อน และบุคคลใกล้ชิด',
     type:'sum', options:agree4,
     questions: SOCSUP_ITEMS.map(it=>it.text),
     bands:[
       {min:0,max:12,label:'ได้รับการสนับสนุนต่ำ',color:'var(--coral)',advice:'รู้สึกได้รับการสนับสนุนทางสังคมค่อนข้างน้อย ลองเริ่มเปิดใจพูดคุยกับคนใกล้ชิด หรือเข้าร่วมกิจกรรมชุมชนเพื่อสร้างเครือข่ายสนับสนุน'},
       {min:13,max:24,label:'ได้รับการสนับสนุนปานกลาง',color:'var(--gold)',advice:'มีการสนับสนุนทางสังคมอยู่ในระดับปานกลาง ลองเสริมสร้างความสัมพันธ์ในด้านที่ยังขาดอยู่'},
-      {min:25,max:36,label:'ได้รับการสนับสนุนดี',color:'var(--primary)',advice:'มีเครือข่ายการสนับสนุนทางสังคมที่ดี รักษาความสัมพันธ์เหล่านี้ไว้และเป็นแรงสนับสนุนให้ผู้อื่นได้เช่นกัน'}
+      {min:25,max:36,label:'ได้รับการสนับสนุนดี',color:'var(--teal)',advice:'มีเครือข่ายการสนับสนุนทางสังคมที่ดี รักษาความสัมพันธ์เหล่านี้ไว้และเป็นแรงสนับสนุนให้ผู้อื่นได้เช่นกัน'}
     ]
   }
 };
@@ -833,20 +315,17 @@ function initGrid(){
     card.className = 'card';
     card.onclick = ()=>openAssessment(id);
     card.innerHTML = `
-      <div class="icon-box">${a.code}</div>
-      <div class="code-title">${a.title}</div>
+      <div class="icon">${a.code.slice(0,6)}</div>
+      <div class="code">${a.title}</div>
       <div class="desc">${a.full}</div>
-      <div class="card-footer">
-        <span class="qcount-badge">${qcount}</span>
-        <span class="action-link">เริ่มทำ ›</span>
-      </div>
+      <div class="qcount">${qcount}</div>
     `;
     grid.appendChild(card);
   });
 }
 
 function showGrid(){
-  document.getElementById('view-home').style.display = 'block';
+  document.getElementById('view-grid').style.display = 'grid';
   document.getElementById('view-quiz').style.display = 'none';
   document.getElementById('view-result').style.display = 'none';
   window.scrollTo({top:0,behavior:'smooth'});
@@ -857,6 +336,7 @@ function openAssessment(id){
   const a = ASSESSMENTS[id];
   document.getElementById('quizTitle').textContent = `${a.title} — ${a.full}`;
   document.getElementById('quizSub').textContent = a.sub;
+  document.getElementById('quizNote').style.display = 'none';
 
   const list = document.getElementById('questionList');
   list.innerHTML = '';
@@ -876,14 +356,14 @@ function openAssessment(id){
     block.className = 'question';
     let optsHtml = '';
     q.options.forEach((opt,j)=>{
-      optsHtml += `<label class="opt" id="opt-${i}-${j}"><input type="radio" name="q${i}" value="${opt.score}" onchange="selectOpt(${i},${j},${opt.score})"><span>${opt.label}</span></label>`;
+      optsHtml += `<label class="opt" id="opt-${i}-${j}"><input type="radio" name="q${i}" value="${opt.score}" onchange="selectOpt(${i},${j},${opt.score})">${opt.label}</label>`;
     });
     block.innerHTML = `<div class="qtext">${i+1}. ${q.text}</div><div class="options">${optsHtml}</div>`;
     list.appendChild(block);
   });
 
   updateProgress();
-  document.getElementById('view-home').style.display = 'none';
+  document.getElementById('view-grid').style.display = 'none';
   document.getElementById('view-result').style.display = 'none';
   document.getElementById('view-quiz').style.display = 'block';
   window.scrollTo({top:0,behavior:'smooth'});
@@ -901,7 +381,7 @@ function updateProgress(){
   const answered = currentAnswers.filter(v=>v!==null).length;
   const pct = total? Math.round((answered/total)*100) : 0;
   document.getElementById('progressFill').style.width = pct+'%';
-  document.getElementById('progressHint').textContent = `ตอบแล้ว ${answered} จาก ${total} ข้อ (${pct}%)`;
+  document.getElementById('progressHint').textContent = `ตอบแล้ว ${answered} จาก ${total} ข้อ`;
   document.getElementById('submitBtn').disabled = answered < total;
 }
 
@@ -946,17 +426,17 @@ function renderWhoqolResult(a){
   let barsHtml = '';
   domainOrder.forEach(d=>{
     if(!domainTotals[d]) return;
-    const avg = domainTotals[d]/domainCounts[d];
+    const avg = domainTotals[d]/domainCounts[d]; // 1-5
     const pct = Math.round((avg/5)*100);
     overallSum += domainTotals[d]; overallCount += domainCounts[d];
-    barsHtml += `<div class="dim-row"><span class="dname">${d}</span><div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div><span class="dval">${pct}%</span></div>`;
+    barsHtml += `<div class="dim-row"><span class="dname">${d}</span><div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div><span class="dval">${pct}</span></div>`;
   });
   const overallPct = Math.round((overallSum/overallCount/5)*100);
 
   let band;
   if(overallPct < 50) band = {label:'ควรปรับปรุงคุณภาพชีวิต',color:'var(--coral)'};
   else if(overallPct < 70) band = {label:'คุณภาพชีวิตระดับปานกลาง',color:'var(--gold)'};
-  else band = {label:'คุณภาพชีวิตระดับดี',color:'var(--primary)'};
+  else band = {label:'คุณภาพชีวิตระดับดี',color:'var(--teal)'};
 
   document.getElementById('resultCode').textContent = a.code;
   document.getElementById('resultTitle').textContent = a.full;
@@ -1002,14 +482,22 @@ function emailResult(){
   if(!to){ alert('กรุณากรอกอีเมลผู้รับ'); return; }
   const {code, full, score, levelLabel, dateStr} = lastResult;
   const subject = `ผลแบบประเมิน ${code} — ${full}`;
-  const body = `ผลแบบประเมินด้านจิตสังคมและความเป็นอยู่ที่ดี (Mental Health Cyber-Care)\n\nแบบประเมิน: ${code} (${full})\nวันที่ทำแบบประเมิน: ${dateStr}\nผลคะแนน: ${score}\nระดับผล: ${levelLabel}\n\nหมายเหตุ: ผลนี้เป็นการคัดกรองเบื้องต้นเท่านั้น ไม่ใช่การวินิจฉัยโรค\nสายด่วนสุขภาพจิต 1323 ให้บริการฟรีตลอด 24 ชั่วโมง`;
+  const body =
+`ผลแบบประเมินด้านจิตสังคมและความเป็นอยู่ที่ดี (Mental Health Cyber-Care)
 
+แบบประเมิน: ${code} (${full})
+วันที่ทำแบบประเมิน: ${dateStr}
+ผลคะแนน: ${score}
+ระดับผล: ${levelLabel}
+
+หมายเหตุ: ผลนี้เป็นการคัดกรองเบื้องต้นเท่านั้น ไม่ใช่การวินิจฉัยโรค
+สายด่วนสุขภาพจิต 1323 (ฟรี ตลอด 24 ชม.)`;
   const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   window.open(gmailUrl, '_blank');
 }
 
-// โหลดรายการการ์ดแบบประเมินเมื่อเริ่มต้น
 initGrid();
+showGrid();
 </script>
 </body>
 </html>
