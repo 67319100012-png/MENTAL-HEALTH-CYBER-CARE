@@ -7,99 +7,306 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --bg-sage:#AFC4A2; --bg-sage-deep:#8FAA82;
-    --surface:#FBFAF5; --surface-alt:#F1EEE3;
-    --ink:#2B3A2E; --ink-soft:#5B6B5A;
-    --teal:#357B72; --teal-deep:#245A53;
-    --gold:#B98A2E; --coral:#C85A3F; --coral-soft:#F3DCD3;
-    --line:#D9DFCE; --radius:18px; --shadow:0 10px 30px rgba(40,58,42,0.14);
+  :root {
+    --bg-sage: #AFC4A2;
+    --bg-sage-deep: #8FAA82;
+    --surface: #FBFAF5;
+    --surface-alt: #F1EEE3;
+    --ink: #2B3A2E;
+    --ink-soft: #5B6B5A;
+    --teal: #357B72;
+    --teal-deep: #245A53;
+    --gold: #B98A2E;
+    --coral: #C85A3F;
+    --coral-soft: #F3DCD3;
+    --line: #D9DFCE;
+    --radius: 18px;
+    --shadow: 0 10px 30px rgba(40,58,42,0.14);
   }
-  *{box-sizing:border-box;}
-  body{margin:0;background:linear-gradient(180deg,var(--bg-sage) 0%,var(--bg-sage-deep) 100%);font-family:'Sarabun',sans-serif;color:var(--ink);min-height:100vh;padding-bottom:40px;}
-  h1,h2,h3,.display{font-family:'Kanit',sans-serif;}
 
-  .hotline-bar{background:var(--teal-deep);color:#fff;text-align:center;padding:9px 16px;font-size:14px;}
-  .hotline-bar b{color:#F4D8A8;}
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: linear-gradient(180deg, var(--bg-sage) 0%, var(--bg-sage-deep) 100%);
+    font-family: 'Sarabun', sans-serif;
+    color: var(--ink);
+    min-height: 100vh;
+    padding-bottom: 40px;
+  }
+  h1, h2, h3, .display { font-family: 'Kanit', sans-serif; }
 
-  header.top{max-width:920px;margin:0 auto;padding:36px 24px 18px;text-align:center;}
-  header.top .eyebrow{font-size:13px;letter-spacing:2px;color:var(--teal-deep);font-weight:600;margin-bottom:8px;}
-  header.top h1{font-size:24px;margin:0 0 10px;}
-  header.top p{font-size:15px;color:var(--ink-soft);max-width:640px;margin:0 auto;line-height:1.7;}
+  .hotline-bar {
+    background: var(--teal-deep);
+    color: #fff;
+    text-align: center;
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .hotline-bar b { color: #F4D8A8; }
 
-  main{max-width:920px;margin:0 auto;padding:10px 20px 20px;}
+  header.top {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 36px 24px 18px;
+    text-align: center;
+  }
+  header.top .eyebrow {
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: var(--teal-deep);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  header.top h1 { font-size: 26px; margin: 0 0 10px; }
+  header.top p {
+    font-size: 15px;
+    color: var(--ink-soft);
+    max-width: 640px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
 
-  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px;}
-  @media (max-width:720px){ .grid{grid-template-columns:repeat(2,1fr);} }
-  @media (max-width:460px){ .grid{grid-template-columns:1fr;} }
+  main { max-width: 920px; margin: 0 auto; padding: 10px 20px 20px; }
 
-  .card{background:var(--surface);border-radius:var(--radius);padding:22px 18px;text-align:center;box-shadow:var(--shadow);cursor:pointer;border:1px solid transparent;transition:transform .18s ease, border-color .18s ease;position:relative;}
-  .card:hover{transform:translateY(-4px);border-color:var(--teal);}
-  .card .icon{width:56px;height:56px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-family:'Kanit',sans-serif;font-weight:600;font-size:12px;}
-  .card .code{font-family:'Kanit',sans-serif;font-weight:600;font-size:16px;margin-bottom:4px;}
-  .card .desc{font-size:12.5px;color:var(--ink-soft);line-height:1.5;margin-bottom:12px;}
-  .card .qcount{display:inline-block;font-size:11.5px;color:var(--teal-deep);background:#E4EFE0;border-radius:20px;padding:3px 10px;}
-  .card .info-tag{position:absolute;top:10px;right:10px;background:var(--ink-soft);color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;font-family:'Kanit',sans-serif;}
+  /* Grid Layout */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 22px;
+  }
+  @media (max-width: 720px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 460px) { .grid { grid-template-columns: 1fr; } }
 
-  .panel{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px 26px;margin-top:20px;}
-  .back-link{display:inline-flex;align-items:center;gap:6px;background:none;border:none;cursor:pointer;color:var(--teal-deep);font-family:'Sarabun',sans-serif;font-size:14px;font-weight:600;margin-bottom:14px;padding:0;}
-  .quiz-title{font-size:22px;margin:0 0 4px;}
-  .quiz-sub{font-size:13.5px;color:var(--ink-soft);margin:0 0 18px;line-height:1.6;}
+  /* Cards */
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 22px 18px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: var(--teal);
+    box-shadow: 0 14px 36px rgba(40,58,42,0.2);
+  }
+  .card .icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--teal);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+    font-family: 'Kanit', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    box-shadow: 0 4px 12px rgba(53,123,114,0.3);
+  }
+  .card .code { font-family: 'Kanit', sans-serif; font-weight: 600; font-size: 17px; margin-bottom: 4px; }
+  .card .desc { font-size: 13px; color: var(--ink-soft); line-height: 1.5; margin-bottom: 14px; flex-grow: 1; }
+  .card .qcount {
+    display: inline-block;
+    font-size: 12px;
+    color: var(--teal-deep);
+    background: #E4EFE0;
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-weight: 600;
+  }
+  .card .info-tag {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: var(--ink-soft);
+    color: #fff;
+    font-size: 10.5px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 20px;
+    font-family: 'Kanit', sans-serif;
+  }
 
-  .staff-banner{background:#EFE6CF;border:1px solid var(--gold);border-radius:12px;padding:12px 16px;font-size:13px;line-height:1.7;color:#5c470f;margin-bottom:18px;}
+  /* Panels */
+  .panel {
+    background: var(--surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 28px 26px;
+    margin-top: 20px;
+  }
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--teal-deep);
+    font-family: 'Sarabun', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    padding: 0;
+  }
+  .quiz-title { font-size: 22px; margin: 0 0 6px; color: var(--ink); }
+  .quiz-sub { font-size: 14px; color: var(--ink-soft); margin: 0 0 18px; line-height: 1.6; }
 
-  .progress-wrap{background:var(--surface-alt);border-radius:20px;height:8px;overflow:hidden;margin-bottom:24px;}
-  .progress-fill{background:var(--teal);height:100%;width:0%;transition:width .25s ease;}
+  .staff-banner {
+    background: #EFE6CF;
+    border: 1px solid var(--gold);
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: #5c470f;
+    margin-bottom: 20px;
+  }
 
-  .question{border-top:1px solid var(--line);padding:18px 0;}
-  .question:first-of-type{border-top:none;}
-  .question .qnum{font-family:'Kanit',sans-serif;font-size:12.5px;color:var(--teal-deep);font-weight:600;margin-bottom:6px;}
-  .question .qtext{font-size:15.5px;line-height:1.6;margin-bottom:12px;}
-  .options{display:flex;flex-direction:column;gap:8px;}
-  .opt{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;font-size:14px;transition:border-color .15s, background .15s;}
-  .opt:hover{border-color:var(--teal);}
-  .opt input{accent-color:var(--teal);width:16px;height:16px;flex:none;}
-  .opt.selected{border-color:var(--teal);background:#EAF3E9;font-weight:600;}
+  /* Progress Bar */
+  .progress-wrap {
+    background: var(--surface-alt);
+    border-radius: 20px;
+    height: 10px;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+  .progress-fill { background: var(--teal); height: 100%; width: 0%; transition: width .25s ease; }
 
-  .submit-row{margin-top:22px;text-align:center;}
-  .btn-primary{background:var(--teal-deep);color:#fff;border:none;padding:13px 30px;border-radius:30px;font-family:'Sarabun',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:background .15s, opacity .15s;}
-  .btn-primary:hover{background:var(--teal);}
-  .btn-primary:disabled{opacity:.4;cursor:not-allowed;}
-  .btn-ghost{background:none;border:1.5px solid var(--teal-deep);color:var(--teal-deep);padding:11px 26px;border-radius:30px;font-family:'Sarabun',sans-serif;font-size:14.5px;font-weight:600;cursor:pointer;}
-  .hint{text-align:center;font-size:12.5px;color:var(--ink-soft);margin-top:10px;}
+  /* Questions & Options */
+  .question { border-top: 1px solid var(--line); padding: 20px 0; }
+  .question:first-of-type { border-top: none; }
+  .question .qnum { font-family: 'Kanit', sans-serif; font-size: 13px; color: var(--teal-deep); font-weight: 600; margin-bottom: 6px; }
+  .question .qtext { font-size: 16px; line-height: 1.6; margin-bottom: 14px; font-weight: 500; }
+  .options { display: flex; flex-direction: column; gap: 10px; }
+  .opt {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1.5px solid var(--line);
+    border-radius: 12px;
+    padding: 12px 16px;
+    cursor: pointer;
+    font-size: 14.5px;
+    transition: border-color .15s, background .15s;
+    background: #fff;
+  }
+  .opt:hover { border-color: var(--teal); background: #F7FAF6; }
+  .opt input { accent-color: var(--teal); width: 18px; height: 18px; flex: none; }
+  .opt.selected { border-color: var(--teal); background: #EAF3E9; font-weight: 600; }
 
-  .result-head{text-align:center;margin-bottom:6px;}
-  .score-big{font-family:'Kanit',sans-serif;font-size:44px;font-weight:700;text-align:center;margin:2px 0 0;}
-  .score-label{text-align:center;font-size:13px;color:var(--ink-soft);margin-bottom:18px;}
-  .level-badge{display:block;width:fit-content;margin:0 auto 20px;padding:7px 18px;border-radius:30px;font-family:'Kanit',sans-serif;font-weight:600;font-size:14.5px;color:#fff;}
-  .advice-box{background:var(--surface-alt);border-radius:14px;padding:18px 20px;font-size:14.5px;line-height:1.75;margin-bottom:14px;}
-  .advice-box b{color:var(--teal-deep);}
+  /* Buttons */
+  .submit-row { margin-top: 24px; text-align: center; }
+  .btn-primary {
+    background: var(--teal-deep);
+    color: #fff;
+    border: none;
+    padding: 13px 32px;
+    border-radius: 30px;
+    font-family: 'Sarabun', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background .15s, opacity .15s, transform .1s;
+    box-shadow: 0 4px 12px rgba(36,90,83,0.2);
+  }
+  .btn-primary:hover:not(:disabled) { background: var(--teal); transform: translateY(-1px); }
+  .btn-primary:disabled { opacity: .45; cursor: not-allowed; }
+  .btn-ghost {
+    background: none;
+    border: 1.5px solid var(--teal-deep);
+    color: var(--teal-deep);
+    padding: 11px 26px;
+    border-radius: 30px;
+    font-family: 'Sarabun', sans-serif;
+    font-size: 14.5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .15s, color .15s;
+  }
+  .btn-ghost:hover { background: #EAF3E9; }
+  .hint { text-align: center; font-size: 12.5px; color: var(--ink-soft); margin-top: 10px; }
 
-  .email-box{background:var(--surface-alt);border-radius:14px;padding:16px 18px;margin-bottom:6px;}
-  .email-box label{display:block;font-size:13px;font-weight:600;color:var(--teal-deep);margin-bottom:8px;}
-  .email-row{display:flex;gap:10px;flex-wrap:wrap;}
-  .email-row input{flex:1;min-width:220px;padding:10px 14px;border-radius:10px;border:1px solid var(--line);font-family:'Sarabun',sans-serif;font-size:14px;background:#fff;}
-  .email-row input:focus{outline:2px solid var(--teal);border-color:var(--teal);}
-  .email-row .btn-ghost{white-space:nowrap;}
+  /* Result View */
+  .result-head { text-align: center; margin-bottom: 8px; }
+  .score-big { font-family: 'Kanit', sans-serif; font-size: 48px; font-weight: 700; text-align: center; margin: 4px 0 0; }
+  .score-label { text-align: center; font-size: 13.5px; color: var(--ink-soft); margin-bottom: 18px; }
+  .level-badge {
+    display: inline-block;
+    padding: 8px 22px;
+    border-radius: 30px;
+    font-family: 'Kanit', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+  .advice-box { background: var(--surface-alt); border-radius: 14px; padding: 20px; font-size: 15px; line-height: 1.75; margin: 20px 0; }
+  .advice-box b { color: var(--teal-deep); }
 
-  .result-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:20px;}
-  footer.note{max-width:920px;margin:26px auto 0;padding:0 24px;text-align:center;font-size:12px;color:var(--ink);opacity:.75;line-height:1.7;}
+  .email-box { background: var(--surface-alt); border-radius: 14px; padding: 18px; margin-bottom: 12px; }
+  .email-box label { display: block; font-size: 13.5px; font-weight: 600; color: var(--teal-deep); margin-bottom: 8px; }
+  .email-row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .email-row input {
+    flex: 1;
+    min-width: 220px;
+    padding: 11px 16px;
+    border-radius: 10px;
+    border: 1.5px solid var(--line);
+    font-family: 'Sarabun', sans-serif;
+    font-size: 14px;
+    background: #fff;
+  }
+  .email-row input:focus { outline: none; border-color: var(--teal); }
 
-  /* Info panel (MMSE / MoCA) */
-  .info-body{font-size:14.5px;line-height:1.8;color:var(--ink);}
-  .info-body b{color:var(--teal-deep);}
-  .info-box{background:var(--surface-alt);border-radius:14px;padding:18px 20px;margin:16px 0;font-size:14px;line-height:1.75;}
+  .result-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 24px; }
+  footer.note { max-width: 920px; margin: 26px auto 0; padding: 0 24px; text-align: center; font-size: 12.5px; color: var(--ink); opacity: .8; line-height: 1.7; }
 
-  /* Clock drawing */
-  .clock-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;margin-bottom:20px;}
-  canvas{background:#fff;border:1.5px solid var(--line);border-radius:16px;touch-action:none;cursor:crosshair;}
-  .clock-controls{display:flex;gap:10px;}
-  .checklist-item{display:flex;align-items:center;justify-content:space-between;border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-bottom:10px;}
-  .checklist-item .label{font-size:14.5px;}
-  .checklist-item .toggle{display:flex;gap:8px;}
-  .toggle button{border:1.5px solid var(--line);background:#fff;border-radius:20px;padding:6px 16px;font-size:13px;cursor:pointer;font-family:'Sarabun',sans-serif;font-weight:600;}
-  .toggle button.active-yes{background:var(--teal);border-color:var(--teal);color:#fff;}
-  .toggle button.active-no{background:var(--coral);border-color:var(--coral);color:#fff;}
+  /* Info Bodies */
+  .info-body { font-size: 15px; line-height: 1.8; color: var(--ink); }
+  .info-body b { color: var(--teal-deep); }
+  .info-box { background: var(--surface-alt); border-radius: 14px; padding: 18px 20px; margin: 18px 0; font-size: 14px; line-height: 1.75; }
+
+  /* Clock Drawing Canvas & Checklist */
+  .clock-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; margin-bottom: 24px; }
+  canvas { background: #fff; border: 2px solid var(--line); border-radius: 16px; touch-action: none; cursor: crosshair; box-shadow: inset 0 2px 6px rgba(0,0,0,0.03); }
+  .checklist-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1.5px solid var(--line);
+    border-radius: 12px;
+    padding: 12px 18px;
+    margin-bottom: 10px;
+    background: #fff;
+  }
+  .checklist-item .label { font-size: 14.5px; font-weight: 500; }
+  .checklist-item .toggle { display: flex; gap: 8px; }
+  .toggle button {
+    border: 1.5px solid var(--line);
+    background: #fff;
+    border-radius: 20px;
+    padding: 6px 18px;
+    font-size: 13.5px;
+    cursor: pointer;
+    font-family: 'Sarabun', sans-serif;
+    font-weight: 600;
+    transition: all .15s ease;
+  }
+  .toggle button.active-yes { background: var(--teal); border-color: var(--teal); color: #fff; }
+  .toggle button.active-no { background: var(--coral); border-color: var(--coral); color: #fff; }
 </style>
 </head>
 <body>
@@ -113,14 +320,17 @@
 </header>
 
 <main>
+  <!-- Main Grid View -->
   <section id="view-grid" class="grid"></section>
 
-  <!-- Quiz view (TMSE, IQ) -->
+  <!-- Quiz View (TMSE, IQ) -->
   <section id="view-quiz" class="panel" style="display:none;">
-    <button class="btn-ghost" onclick="showGrid()" style="margin-bottom:16px;">← ย้อนกลับ</button>
+    <button class="back-link" onclick="showGrid()">← ย้อนกลับไปหน้าหลัก</button>
     <h2 class="quiz-title" id="quizTitle"></h2>
     <p class="quiz-sub" id="quizSub"></p>
-    <div id="quizStaffBanner" class="staff-banner" style="display:none;">ผู้ประเมิน: กรุณาให้เจ้าหน้าที่สาธารณสุขหรือ อสม. เป็นผู้สัมภาษณ์และบันทึกคะแนนจากการตอบสนองจริงของผู้รับบริการ</div>
+    <div id="quizStaffBanner" class="staff-banner" style="display:none;">
+      <b>คำแนะนำผู้ประเมิน:</b> กรุณาให้เจ้าหน้าที่สาธารณสุขหรือ อสม. เป็นผู้สัมภาษณ์และบันทึกคะแนนจากการตอบสนองจริงของผู้รับบริการ
+    </div>
     <div class="progress-wrap"><div class="progress-fill" id="progressFill"></div></div>
     <div id="questionList"></div>
     <div class="submit-row">
@@ -129,19 +339,20 @@
     </div>
   </section>
 
-  <!-- Info view (MMSE, MoCA) -->
+  <!-- Info View (MMSE, MoCA) -->
   <section id="view-info" class="panel" style="display:none;">
-    <button class="btn-ghost" onclick="showGrid()" style="margin-bottom:16px;">← ย้อนกลับ</button>
+    <button class="back-link" onclick="showGrid()">← ย้อนกลับไปหน้าหลัก</button>
     <h2 class="quiz-title" id="infoTitle"></h2>
     <div class="info-body" id="infoBody"></div>
   </section>
 
-  <!-- Clock drawing view -->
+  <!-- Clock Drawing View -->
   <section id="view-clock" class="panel" style="display:none;">
-    <button class="btn-ghost" onclick="showGrid()" style="margin-bottom:16px;">← ย้อนกลับ</button>
+    <button class="back-link" onclick="showGrid()">← ย้อนกลับไปหน้าหลัก</button>
     <h2 class="quiz-title">Clock Drawing Test — ทดสอบการทำงานของสมอง</h2>
     <p class="quiz-sub">ผู้ประเมินขอให้ผู้รับบริการ <b>วาดหน้าปัดนาฬิกาให้ครบ 12 ตัวเลข แล้ววาดเข็มนาฬิกาให้ชี้เวลา 11 นาฬิกา 10 นาที</b> ในกรอบด้านล่าง จากนั้นให้เจ้าหน้าที่ประเมินผลตามเกณฑ์ที่กำหนด</p>
-    <div class="staff-banner">ผู้ประเมิน: กรุณาสังเกตผู้รับบริการวาดด้วยตนเอง และให้คะแนนตามความเป็นจริงของภาพที่วาดได้</div>
+    <div class="staff-banner"><b>คำแนะนำผู้ประเมิน:</b> กรุณาสังเกตผู้รับบริการวาดด้วยตนเอง และให้คะแนนตามความเป็นจริงของภาพที่วาดได้</div>
+    
     <div class="clock-wrap">
       <canvas id="clockCanvas" width="320" height="320"></canvas>
       <div class="clock-controls">
@@ -154,25 +365,27 @@
     </div>
   </section>
 
-  <!-- Result view (shared) -->
+  <!-- Result View (Shared) -->
   <section id="view-result" class="panel" style="display:none;">
-    <button class="btn-ghost" onclick="showGrid()" style="margin-bottom:16px;">← ย้อนกลับ</button>
+    <button class="back-link" onclick="showGrid()">← ย้อนกลับไปหน้าหลัก</button>
     <div class="result-head">
-      <div class="eyebrow" id="resultCode" style="color:var(--teal-deep);font-size:12.5px;letter-spacing:1.5px;font-weight:600;"></div>
-      <h2 class="quiz-title" id="resultTitle" style="margin-top:4px;"></h2>
+      <div class="eyebrow" id="resultCode"></div>
+      <h2 class="quiz-title" id="resultTitle"></h2>
     </div>
     <div class="score-big" id="resultScore"></div>
     <div class="score-label" id="resultScoreLabel"></div>
     <div id="resultBadgeWrap" style="text-align:center;"></div>
     <div class="advice-box" id="resultAdvice"></div>
+    
     <div class="email-box">
-      <label for="emailTo">ส่งผลไปที่อีเมล</label>
+      <label for="emailTo">ส่งผลการประเมินไปที่อีเมล</label>
       <div class="email-row">
-        <input type="email" id="emailTo" value="67319100012@Aitc.ac.th">
+        <input type="email" id="emailTo" value="67319100012@Aitc.ac.th" placeholder="กรอกอีเมลปลายทาง">
         <button class="btn-ghost" onclick="emailResult()">✉ ส่งผลทางอีเมล</button>
       </div>
-      <div class="hint">จะเปิดหน้าเขียนอีเมลของ Gmail ในแท็บใหม่ พร้อมกรอกผลให้อัตโนมัติ ท่านเพียงกดส่ง (ต้องเข้าสู่ระบบ Gmail ไว้ก่อน)</div>
+      <div class="hint">ระบบจะเปิดหน้าเขียนอีเมลของ Gmail ในแท็บใหม่ พร้อมกรอกข้อมูลผลการประเมินให้อัตโนมัติ</div>
     </div>
+
     <div class="result-actions">
       <button class="btn-ghost" onclick="reopenLast()">ทำแบบทดสอบนี้อีกครั้ง</button>
       <button class="btn-primary" onclick="showGrid()">เลือกแบบทดสอบอื่น</button>
@@ -185,91 +398,85 @@
 </footer>
 
 <script>
-const yesNoScale = (max)=> [ {label:`ถูกครบ (${max})`, score:max}, {label:`ถูกบางส่วน (${Math.ceil(max/2)})`, score:Math.ceil(max/2)}, {label:'ถูกเล็กน้อย (1)', score: max>1?1:0}, {label:'ตอบผิด/ทำไม่ได้ (0)', score:0} ];
+// Scalable scoring system for multi-point TMSE questions
+const yesNoScale = (max) => [
+  { label: `ถูกครบ (${max} คะแนน)`, score: max },
+  { label: `ถูกบางส่วน (${Math.ceil(max / 2)} คะแนน)`, score: Math.ceil(max / 2) },
+  ...(max > 1 ? [{ label: 'ถูกเล็กน้อย (1 คะแนน)', score: 1 }] : []),
+  { label: 'ตอบผิด / ทำไม่ได้ (0 คะแนน)', score: 0 }
+];
 
 const TMSE_ITEMS = [
-  {text:'บอกวัน เดือน ปี ฤดูกาล และวันในสัปดาห์ปัจจุบันได้ถูกต้อง (Orientation: Time)', max:6},
-  {text:'บอกสถานที่ปัจจุบัน จังหวัด อำเภอ ตำบล และสถานที่ที่อยู่ได้ถูกต้อง (Orientation: Place)', max:6},
-  {text:'พูดตามคำ 3 คำที่บอกได้ทันที (Registration)', max:3},
-  {text:'นับถอยหลังทีละ 7 จาก 100 หรือสะกดคำถอยหลัง (Attention & Calculation)', max:5},
-  {text:'ทวนคำ 3 คำที่จำไว้ก่อนหน้าได้ (Recall)', max:3},
-  {text:'บอกชื่อสิ่งของ 2 ชิ้นที่ชี้ให้ดูได้ถูกต้อง (Naming)', max:2},
-  {text:'ทำตามคำสั่ง 3 ขั้นตอนได้ถูกต้อง เช่น "หยิบกระดาษด้วยมือขวา พับครึ่ง แล้ววางบนพื้น" (Command)', max:3},
-  {text:'วาดรูปห้าเหลี่ยม 2 รูปซ้อนทับกันตามแบบที่กำหนดได้ (Visuospatial)', max:2}
+  { text: 'บอกวัน เดือน ปี ฤดูกาล และวันในสัปดาห์ปัจจุบันได้ถูกต้อง (Orientation: Time)', max: 6 },
+  { text: 'บอกสถานที่ปัจจุบัน จังหวัด อำเภอ ตำบล และสถานที่ที่อยู่ได้ถูกต้อง (Orientation: Place)', max: 6 },
+  { text: 'พูดตามคำ 3 คำที่บอกได้ทันที (Registration)', max: 3 },
+  { text: 'นับถอยหลังทีละ 7 จาก 100 หรือสะกดคำถอยหลัง (Attention & Calculation)', max: 5 },
+  { text: 'ทวนคำ 3 คำที่จำไว้ก่อนหน้าได้ (Recall)', max: 3 },
+  { text: 'บอกชื่อสิ่งของ 2 ชิ้นที่ชี้ให้ดูได้ถูกต้อง (Naming)', max: 2 },
+  { text: 'ทำตามคำสั่ง 3 ขั้นตอนได้ถูกต้อง เช่น "หยิบกระดาษด้วยมือขวา พับครึ่ง แล้ววางบนพื้น" (Command)', max: 3 },
+  { text: 'วาดรูปห้าเหลี่ยม 2 รูปซ้อนทับกันตามแบบที่กำหนดได้ (Visuospatial)', max: 2 }
 ];
 
 const IQ_ITEMS = [
-  {text:'อนุกรมตัวเลข: 2, 4, 6, 8, ? ตัวถัดไปคือเลขอะไร', options:['9','10','11','12'], answer:1},
-  {text:'อนุกรมตัวอักษร: A, C, E, G, ? ตัวถัดไปคือตัวอะไร', options:['H','I','J','F'], answer:1},
-  {text:'อุปมาอุปไมย: "นกกับท้องฟ้า" เหมือนกับ "ปลากับ ___"', options:['น้ำ','บก','อากาศ','ต้นไม้'], answer:0},
-  {text:'ถ้าวันนี้เป็นวันพุธ อีก 10 วันจะเป็นวันอะไร', options:['ศุกร์','เสาร์','อาทิตย์','จันทร์'], answer:1},
-  {text:'รถวิ่งด้วยความเร็ว 60 กม./ชม. เป็นเวลา 2.5 ชั่วโมง จะวิ่งได้ระยะทางเท่าไร', options:['120 กม.','130 กม.','140 กม.','150 กม.'], answer:3},
-  {text:'อนุกรมรูปร่าง: วงกลม สี่เหลี่ยม วงกลม สี่เหลี่ยม วงกลม ___', options:['วงกลม','สี่เหลี่ยม','สามเหลี่ยม','ห้าเหลี่ยม'], answer:1},
-  {text:'ข้อใดไม่เข้าพวกกับข้ออื่น', options:['แอปเปิ้ล','กล้วย','แครอท','ส้ม'], answer:2},
-  {text:'สัตว์เลี้ยงลูกด้วยนมทุกตัวหายใจด้วยปอด ปลาวาฬเป็นสัตว์เลี้ยงลูกด้วยนม ดังนั้น...', options:['ปลาวาฬหายใจด้วยปอด','ปลาวาฬหายใจด้วยเหงือก','ไม่แน่ใจ','ปลาวาฬไม่หายใจ'], answer:0},
-  {text:'อนุกรมตัวเลข: 1, 1, 2, 3, 5, 8, ? ตัวถัดไปคือเลขอะไร', options:['10','11','13','15'], answer:2},
-  {text:'ถ้าพับกระดาษสี่เหลี่ยมครึ่งหนึ่งสองครั้ง จะได้กระดาษกี่ส่วน', options:['2','3','4','8'], answer:2}
+  { text: 'อนุกรมตัวเลข: 2, 4, 6, 8, ? ตัวถัดไปคือเลขอะไร', options: ['9', '10', '11', '12'], answer: 1 },
+  { text: 'อนุกรมตัวอักษร: A, C, E, G, ? ตัวถัดไปคือตัวอะไร', options: ['H', 'I', 'J', 'F'], answer: 1 },
+  { text: 'อุปมาอุปไมย: "นกกับท้องฟ้า" เหมือนกับ "ปลากับ ___"', options: ['น้ำ', 'บก', 'อากาศ', 'ต้นไม้'], answer: 0 },
+  { text: 'ถ้าวันนี้เป็นวันพุธ อีก 10 วันจะเป็นวันอะไร', options: ['ศุกร์', 'เสาร์', 'อาทิตย์', 'จันทร์'], answer: 1 },
+  { text: 'รถวิ่งด้วยความเร็ว 60 กม./ชม. เป็นเวลา 2.5 ชั่วโมง จะวิ่งได้ระยะทางเท่าไร', options: ['120 กม.', '130 กม.', '140 กม.', '150 กม.'], answer: 3 },
+  { text: 'อนุกรมรูปร่าง: วงกลม, สี่เหลี่ยม, วงกลม, สี่เหลี่ยม, วงกลม, ___', options: ['วงกลม', 'สี่เหลี่ยม', 'สามเหลี่ยม', 'ห้าเหลี่ยม'], answer: 1 },
+  { text: 'ข้อใดไม่เข้าพวกกับข้ออื่น', options: ['แอปเปิ้ล', 'กล้วย', 'แครอท', 'ส้ม'], answer: 2 },
+  { text: 'สัตว์เลี้ยงลูกด้วยนมทุกตัวหายใจด้วยปอด ปลาวาฬเป็นสัตว์เลี้ยงลูกด้วยนม ดังนั้น...', options: ['ปลาวาฬหายใจด้วยปอด', 'ปลาวาฬหายใจด้วยเหงือก', 'ไม่แน่นอน', 'ปลาวาฬไม่หายใจ'], answer: 0 },
+  { text: 'อนุกรมตัวเลข: 1, 1, 2, 3, 5, 8, ? ตัวถัดไปคือเลขอะไร', options: ['10', '11', '13', '15'], answer: 2 },
+  { text: 'ถ้าพับกระดาษสี่เหลี่ยมครึ่งหนึ่งสองครั้ง จะได้กระดาษกี่ส่วน', options: ['2', '3', '4', '8'], answer: 2 }
 ];
 
 const ASSESSMENTS = {
-  mmse:{
-    code:'MMSE', title:'MMSE', full:'ประเมินภาวะสมองเสื่อมเบื้องต้น', type:'info'
-  },
-  tmse:{
-    code:'TMSE', title:'TMSE', full:'แบบทดสอบสภาพสมองฉบับย่อ (ภาษาไทย)',
-    sub:'แบบทดสอบสภาพสมองฉบับย่อภาษาไทย คะแนนเต็ม 30 คะแนน ใช้คัดกรองภาวะสมองเสื่อมเบื้องต้น',
-    type:'sum', staffOnly:true,
-    items: TMSE_ITEMS,
-    bands:[
-      {min:0,max:19,label:'สงสัยภาวะสมองเสื่อม',color:'var(--coral)',
-        advice:'คะแนนต่ำกว่าเกณฑ์ปกติค่อนข้างมาก ควรส่งพบแพทย์เพื่อประเมินภาวะสมองเสื่อมอย่างละเอียดต่อไป'},
-      {min:20,max:24,label:'สงสัยบกพร่องทางปัญญาระดับเล็กน้อย',color:'var(--gold)',
-        advice:'คะแนนอยู่ในเกณฑ์ที่ควรติดตาม แนะนำให้ประเมินซ้ำใน 3-6 เดือน และสังเกตการดำเนินชีวิตประจำวัน หากมีอาการอื่นร่วมด้วยควรปรึกษาแพทย์'},
-      {min:25,max:30,label:'อยู่ในเกณฑ์ปกติ',color:'var(--teal)',
-        advice:'คะแนนอยู่ในเกณฑ์ปกติ ควรดูแลสุขภาพสมองต่อเนื่อง เช่น ฝึกใช้ความคิด เข้าสังคม และออกกำลังกายสม่ำเสมอ'}
+  mmse: { code: 'MMSE', title: 'MMSE', full: 'ประเมินภาวะสมองเสื่อมเบื้องต้น', type: 'info' },
+  tmse: {
+    code: 'TMSE', title: 'TMSE', full: 'แบบทดสอบสภาพสมองฉบับย่อ (ภาษาไทย)',
+    sub: 'แบบทดสอบสภาพสมองฉบับย่อภาษาไทย คะแนนเต็ม 30 คะแนน ใช้คัดกรองภาวะสมองเสื่อมเบื้องต้น',
+    type: 'sum', staffOnly: true, items: TMSE_ITEMS,
+    bands: [
+      { min: 0, max: 19, label: 'สงสัยภาวะสมองเสื่อม', color: 'var(--coral)', advice: 'คะแนนต่ำกว่าเกณฑ์ปกติค่อนข้างมาก ควรส่งพบแพทย์เพื่อประเมินภาวะสมองเสื่อมอย่างละเอียดต่อไป' },
+      { min: 20, max: 24, label: 'สงสัยบกพร่องทางปัญญาระดับเล็กน้อย', color: 'var(--gold)', advice: 'คะแนนอยู่ในเกณฑ์ที่ควรติดตาม แนะนำให้ประเมินซ้ำใน 3-6 เดือน และสังเกตการดำเนินชีวิตประจำวัน หากมีอาการอื่นร่วมด้วยควรปรึกษาแพทย์' },
+      { min: 25, max: 30, label: 'อยู่ในเกณฑ์ปกติ', color: 'var(--teal)', advice: 'คะแนนอยู่ในเกณฑ์ปกติ ควรดูแลสุขภาพสมองต่อเนื่อง เช่น ฝึกใช้ความคิด เข้าสังคม และออกกำลังกายสม่ำเสมอ' }
     ],
-    note:'* เกณฑ์คะแนนอาจต้องปรับตามระดับการศึกษาของผู้รับบริการ ผลคะแนนนี้เป็นการคัดกรองเบื้องต้นเท่านั้น'
+    note: '* เกณฑ์คะแนนอาจต้องปรับตามระดับการศึกษาของผู้รับบริการ ผลคะแนนนี้เป็นการคัดกรองเบื้องต้นเท่านั้น'
   },
-  moca:{
-    code:'MoCA', title:'MoCA', full:'ประเมินความบกพร่องทางปัญญาระดับเล็กน้อย', type:'info'
-  },
-  iq:{
-    code:'IQ', title:'แบบทดสอบเหตุผล', full:'แบบทดสอบการใช้เหตุผลเบื้องต้น',
-    sub:'แบบทดสอบการคิดเชิงเหตุผลและการแก้ปัญหาเบื้องต้น 10 ข้อ (ไม่ใช่แบบทดสอบ IQ มาตรฐานที่ผ่านการรับรอง)',
-    type:'iq', staffOnly:false,
-    items: IQ_ITEMS,
-    bands:[
-      {min:0,max:4,label:'ต่ำกว่าค่าเฉลี่ย',color:'var(--gold)',advice:'ตอบถูกต่ำกว่าค่าเฉลี่ยของแบบทดสอบชุดนี้ ลองฝึกทำโจทย์ปัญหาเชิงตรรกะเพิ่มเติมเพื่อฝึกทักษะการคิด'},
-      {min:5,max:7,label:'ระดับปานกลาง',color:'var(--teal)',advice:'ตอบถูกอยู่ในระดับปานกลาง ถือว่าอยู่ในเกณฑ์ที่ดี'},
-      {min:8,max:10,label:'สูงกว่าค่าเฉลี่ย',color:'var(--teal)',advice:'ตอบถูกสูงกว่าค่าเฉลี่ยของแบบทดสอบชุดนี้ แสดงถึงทักษะการคิดเชิงเหตุผลที่ดี'}
+  moca: { code: 'MoCA', title: 'MoCA', full: 'ประเมินความบกพร่องทางปัญญาระดับเล็กน้อย', type: 'info' },
+  iq: {
+    code: 'IQ', title: 'แบบทดสอบเหตุผล', full: 'แบบทดสอบการใช้เหตุผลเบื้องต้น',
+    sub: 'แบบทดสอบการคิดเชิงเหตุผลและการแก้ปัญหาเบื้องต้น 10 ข้อ (ไม่ใช่แบบทดสอบ IQ มาตรฐานที่ผ่านการรับรอง)',
+    type: 'iq', staffOnly: false, items: IQ_ITEMS,
+    bands: [
+      { min: 0, max: 4, label: 'ต่ำกว่าค่าเฉลี่ย', color: 'var(--gold)', advice: 'ตอบถูกต่ำกว่าค่าเฉลี่ยของแบบทดสอบชุดนี้ ลองฝึกทำโจทย์ปัญหาเชิงตรรกะเพิ่มเติมเพื่อฝึกทักษะการคิด' },
+      { min: 5, max: 7, label: 'ระดับปานกลาง', color: 'var(--teal)', advice: 'ตอบถูกอยู่ในระดับปานกลาง ถือว่าอยู่ในเกณฑ์ที่ดี' },
+      { min: 8, max: 10, label: 'สูงกว่าค่าเฉลี่ย', color: 'var(--teal)', advice: 'ตอบถูกสูงกว่าค่าเฉลี่ยของแบบทดสอบชุดนี้ แสดงถึงทักษะการคิดเชิงเหตุผลที่ดี' }
     ]
   },
-  clock:{
-    code:'CDT', title:'Clock Drawing', full:'ทดสอบการทำงานของสมอง', type:'clock'
-  }
+  clock: { code: 'CDT', title: 'Clock Drawing', full: 'ทดสอบการทำงานของสมอง', type: 'clock' }
 };
 
 let currentId = null;
 let currentAnswers = [];
 let lastResult = null;
 
-function initGrid(){
+function initGrid() {
   const grid = document.getElementById('view-grid');
   grid.innerHTML = '';
-  Object.keys(ASSESSMENTS).forEach(id=>{
+  Object.keys(ASSESSMENTS).forEach(id => {
     const a = ASSESSMENTS[id];
     let qcount = '';
-    if(a.type==='sum') qcount = a.items.length+' ข้อ';
-    else if(a.type==='iq') qcount = a.items.length+' ข้อ';
-    else if(a.type==='clock') qcount = 'วาดภาพ + เกณฑ์ให้คะแนน 4 ข้อ';
+    if (a.type === 'sum' || a.type === 'iq') qcount = a.items.length + ' ข้อ';
+    else if (a.type === 'clock') qcount = 'วาดภาพ + ประเมิน 4 เกณฑ์';
     else qcount = 'ข้อมูลเครื่องมือ';
 
     const card = document.createElement('div');
     card.className = 'card';
-    card.onclick = ()=>openAssessment(id);
+    card.onclick = () => openAssessment(id);
     card.innerHTML = `
-      ${a.type==='info' ? '<div class="info-tag">ข้อมูลเครื่องมือ</div>' : ''}
-      <div class="icon">${a.code.replace('-','').slice(0,6)}</div>
+      ${a.type === 'info' ? '<div class="info-tag">ข้อมูล</div>' : ''}
+      <div class="icon">${a.code.slice(0, 4)}</div>
       <div class="code">${a.title}</div>
       <div class="desc">${a.full}</div>
       <div class="qcount">${qcount}</div>
@@ -278,25 +485,27 @@ function initGrid(){
   });
 }
 
-function showGrid(){
-  ['view-grid','view-quiz','view-info','view-clock','view-result'].forEach(v=>document.getElementById(v).style.display='none');
+function showGrid() {
+  hideAllViews();
   document.getElementById('view-grid').style.display = 'grid';
-  window.scrollTo({top:0,behavior:'smooth'});
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function hideAllViews(){
-  ['view-grid','view-quiz','view-info','view-clock','view-result'].forEach(v=>document.getElementById(v).style.display='none');
+function hideAllViews() {
+  ['view-grid', 'view-quiz', 'view-info', 'view-clock', 'view-result'].forEach(v => {
+    document.getElementById(v).style.display = 'none';
+  });
 }
 
-function openAssessment(id){
+function openAssessment(id) {
   currentId = id;
   const a = ASSESSMENTS[id];
 
-  if(a.type === 'info'){
+  if (a.type === 'info') {
     renderInfo(id);
     hideAllViews();
     document.getElementById('view-info').style.display = 'block';
-  } else if(a.type === 'clock'){
+  } else if (a.type === 'clock') {
     hideAllViews();
     document.getElementById('view-clock').style.display = 'block';
     initClockCanvas();
@@ -309,148 +518,152 @@ function openAssessment(id){
     const list = document.getElementById('questionList');
     list.innerHTML = '';
 
-    if(a.type === 'sum'){
-      currentAnswers = new Array(a.items.length).fill(null);
-      a.items.forEach((it,i)=>{
+    currentAnswers = new Array(a.items.length).fill(null);
+    a.items.forEach((it, i) => {
+      const block = document.createElement('div');
+      block.className = 'question';
+      let optsHtml = '';
+
+      if (a.type === 'sum') {
         const opts = yesNoScale(it.max);
-        const block = document.createElement('div');
-        block.className = 'question';
-        let optsHtml = '';
-        opts.forEach((opt,j)=>{
-          optsHtml += `<label class="opt" id="opt-${i}-${j}"><input type="radio" name="q${i}" value="${opt.score}" onchange="selectOpt(${i},${j},${opt.score})">${opt.label}</label>`;
+        opts.forEach((opt, j) => {
+          optsHtml += `<label class="opt" id="opt-${i}-${j}"><input type="radio" name="q${i}" value="${opt.score}" onchange="selectOpt(${i},${j},${opt.score})"><span>${opt.label}</span></label>`;
         });
-        block.innerHTML = `<div class="qnum">ข้อที่ ${i+1} จาก ${a.items.length} (คะแนนเต็ม ${it.max})</div><div class="qtext">${it.text}</div><div class="options">${optsHtml}</div>`;
-        list.appendChild(block);
-      });
-    } else if(a.type === 'iq'){
-      currentAnswers = new Array(a.items.length).fill(null);
-      a.items.forEach((it,i)=>{
-        const block = document.createElement('div');
-        block.className = 'question';
-        let optsHtml = '';
-        it.options.forEach((label,j)=>{
-          optsHtml += `<label class="opt" id="opt-${i}-${j}"><input type="radio" name="q${i}" value="${j}" onchange="selectOpt(${i},${j},${j})">${label}</label>`;
+        block.innerHTML = `<div class="qnum">ข้อที่ ${i + 1} จาก ${a.items.length} (คะแนนเต็ม ${it.max})</div><div class="qtext">${it.text}</div><div class="options">${optsHtml}</div>`;
+      } else {
+        it.options.forEach((label, j) => {
+          optsHtml += `<label class="opt" id="opt-${i}-${j}"><input type="radio" name="q${i}" value="${j}" onchange="selectOpt(${i},${j},${j})"><span>${label}</span></label>`;
         });
-        block.innerHTML = `<div class="qnum">ข้อที่ ${i+1} จาก ${a.items.length}</div><div class="qtext">${it.text}</div><div class="options">${optsHtml}</div>`;
-        list.appendChild(block);
-      });
-    }
+        block.innerHTML = `<div class="qnum">ข้อที่ ${i + 1} จาก ${a.items.length}</div><div class="qtext">${it.text}</div><div class="options">${optsHtml}</div>`;
+      }
+      list.appendChild(block);
+    });
 
     updateProgress();
     hideAllViews();
     document.getElementById('view-quiz').style.display = 'block';
   }
-  window.scrollTo({top:0,behavior:'smooth'});
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function renderInfo(id){
-  if(id === 'mmse'){
+function renderInfo(id) {
+  if (id === 'mmse') {
     document.getElementById('infoTitle').textContent = 'MMSE — Mini-Mental State Examination';
     document.getElementById('infoBody').innerHTML = `
-      <p>MMSE เป็นแบบทดสอบสภาพสมองเบื้องต้นที่ใช้กันแพร่หลายในระดับสากล ครอบคลุมการประเมินด้านการรับรู้เวลา/สถานที่ (Orientation) ความจำ (Registration & Recall) สมาธิและการคำนวณ (Attention & Calculation) และภาษา (Language) คะแนนเต็ม 30 คะแนน</p>
+      <p>MMSE เป็นแบบทดสอบสภาพสมองเบื้องต้นที่ใช้กันแพร่หลายในระดับสากล ครอบคลุมการประเมินด้านการรับรู้เวลา/สถานที่ ความจำ สมาธิ การคำนวณ และภาษา คะแนนเต็ม 30 คะแนน</p>
       <div class="info-box">
-        <b>⚠ ข้อจำกัดด้านลิขสิทธิ์:</b> ตั้งแต่ปี 2001 เป็นต้นมา MMSE ฉบับต้นฉบับอยู่ภายใต้ลิขสิทธิ์เชิงพาณิชย์ของบริษัท Psychological Assessment Resources (PAR) การทำสำเนาแบบทดสอบฉบับเต็มจึงไม่สามารถทำได้โดยไม่ได้รับอนุญาต ระบบนี้จึงไม่ได้จำลองแบบทดสอบ MMSE ฉบับเต็มไว้
+        <b>⚠ ข้อจำกัดด้านลิขสิทธิ์:</b> MMSE ฉบับต้นฉบับอยู่ภายใต้ลิขสิทธิ์เชิงพาณิชย์ของ Psychological Assessment Resources (PAR) การทำสำเนาฉบับเต็มจึงต้องได้รับอนุญาตอย่างเป็นทางการ ระบบนี้จึงไม่ได้จัดทำแบบทดสอบ MMSE ฉบับเต็มไว้
       </div>
-      <p><b>ทางเลือกที่แนะนำ:</b> สำหรับการใช้งานคัดกรองในระบบสาธารณสุขไทยโดยไม่มีค่าใช้จ่าย แนะนำให้ใช้ <b>TMSE (แบบทดสอบสภาพสมองฉบับย่อภาษาไทย)</b> ซึ่งประเมินโครงสร้างคล้ายกันและเปิดให้ใช้งานได้อย่างอิสระ</p>
+      <p><b>ทางเลือกที่แนะนำ:</b> สำหรับการคัดกรองในระบบสาธารณสุขไทย สามารถใช้ <b>TMSE (แบบทดสอบสภาพสมองฉบับย่อภาษาไทย)</b> ซึ่งมีความแม่นยำและได้รับการยอมรับเช่นกัน</p>
       <div class="submit-row"><button class="btn-primary" onclick="openAssessment('tmse')">ไปที่แบบทดสอบ TMSE</button></div>
     `;
-  } else if(id === 'moca'){
+  } else if (id === 'moca') {
     document.getElementById('infoTitle').textContent = 'MoCA — Montreal Cognitive Assessment';
     document.getElementById('infoBody').innerHTML = `
-      <p>MoCA เป็นเครื่องมือคัดกรองภาวะบกพร่องทางปัญญาระดับเล็กน้อย (Mild Cognitive Impairment) ที่มีความไวสูงกว่า MMSE ในการตรวจจับความผิดปกติระดับเริ่มต้น ครอบคลุมด้าน visuospatial, executive function, ความจำ, ภาษา, สมาธิ และการรับรู้เวลา/สถานที่ คะแนนเต็ม 30 คะแนน</p>
+      <p>MoCA เป็นเครื่องมือคัดกรองภาวะบกพร่องทางปัญญาระดับเล็กน้อย (Mild Cognitive Impairment) ที่มีความไวสูง ตรวจจับความผิดปกติระดับเริ่มต้นได้ดี ครอบคลุมการทำงานของสมองหลากหลายด้าน คะแนนเต็ม 30 คะแนน</p>
       <div class="info-box">
-        <b>⚠ ข้อจำกัดด้านการใช้งาน:</b> ตั้งแต่ปี 2019 ผู้ที่จะใช้ MoCA ในทางคลินิกหรือเชิงพาณิชย์ต้องผ่านการอบรมและได้รับใบรับรองอย่างเป็นทางการจาก MoCA Cognition ก่อน จึงไม่สามารถนำแบบทดสอบฉบับเต็มมาเผยแพร่ในระบบนี้ได้โดยไม่ได้รับอนุญาต
+        <b>⚠ ข้อจำกัดด้านการใช้งาน:</b> ผู้ใช้ MoCA ในทางคลินิกต้องผ่านการอบรมและได้รับใบรับรองจาก MoCA Cognition ก่อน จึงไม่สามารถนำฉบับเต็มมาเผยแพร่ในระบบนี้โดยตรง
       </div>
-      <p><b>ทางเลือกที่แนะนำ:</b> หากหน่วยงานต้องการใช้ MoCA ฉบับเต็มอย่างถูกต้อง สามารถลงทะเบียนขอรับการอบรมฟรีได้ที่เว็บไซต์ mocacognition.com หรือใช้ <b>TMSE</b> เป็นเครื่องมือคัดกรองทดแทนในระบบนี้</p>
+      <p><b>ทางเลือกที่แนะนำ:</b> สามารถลงทะเบียนขอรับการอบรมได้ที่ mocacognition.com หรือใช้ <b>TMSE</b> เป็นเครื่องมือคัดกรองทดแทนในระบบนี้</p>
       <div class="submit-row"><button class="btn-primary" onclick="openAssessment('tmse')">ไปที่แบบทดสอบ TMSE</button></div>
     `;
   }
 }
 
-function selectOpt(i,j,score){
+function selectOpt(i, j, score) {
   currentAnswers[i] = score;
-  document.querySelectorAll(`[id^="opt-${i}-"]`).forEach(el=>el.classList.remove('selected'));
+  document.querySelectorAll(`[id^="opt-${i}-"]`).forEach(el => el.classList.remove('selected'));
   document.getElementById(`opt-${i}-${j}`).classList.add('selected');
   updateProgress();
 }
 
-function updateProgress(){
+function updateProgress() {
   const total = currentAnswers.length;
-  const answered = currentAnswers.filter(v=>v!==null).length;
-  const pct = total? Math.round((answered/total)*100) : 0;
-  document.getElementById('progressFill').style.width = pct+'%';
+  const answered = currentAnswers.filter(v => v !== null).length;
+  const pct = total ? Math.round((answered / total) * 100) : 0;
+  document.getElementById('progressFill').style.width = pct + '%';
   document.getElementById('progressHint').textContent = `ตอบแล้ว ${answered} จาก ${total} ข้อ`;
   document.getElementById('submitBtn').disabled = answered < total;
 }
 
-function submitQuiz(){
+function submitQuiz() {
   const a = ASSESSMENTS[currentId];
+  let scoreText = '', band = null;
 
-  if(a.type === 'sum'){
-    const score = currentAnswers.reduce((s,v)=>s+v,0);
-    const band = a.bands.find(b=>score>=b.min && score<=b.max) || a.bands[a.bands.length-1];
-    document.getElementById('resultCode').textContent = a.code;
-    document.getElementById('resultTitle').textContent = a.full;
-    document.getElementById('resultScore').textContent = score+'/30';
-    document.getElementById('resultScore').style.color = band.color;
+  if (a.type === 'sum') {
+    const score = currentAnswers.reduce((s, v) => s + v, 0);
+    band = a.bands.find(b => score >= b.min && score <= b.max) || a.bands[a.bands.length - 1];
+    scoreText = score + '/30';
     document.getElementById('resultScoreLabel').textContent = 'คะแนนรวม';
-    document.getElementById('resultBadgeWrap').innerHTML = `<span class="level-badge" style="background:${band.color}">${band.label}</span>`;
-    document.getElementById('resultAdvice').innerHTML = `<b>คำแนะนำ:</b> ${band.advice}${a.note? '<br><br><i>'+a.note+'</i>':''}`;
-    lastResult = {code:a.code, full:a.full, score:score+'/30', levelLabel:band.label,
-      dateStr:new Date().toLocaleDateString('th-TH',{year:'numeric',month:'long',day:'numeric'})};
-  } else if(a.type === 'iq'){
+    document.getElementById('resultAdvice').innerHTML = `<b>คำแนะนำ:</b> ${band.advice}${a.note ? '<br><br><i>' + a.note + '</i>' : ''}`;
+  } else if (a.type === 'iq') {
     let correct = 0;
-    a.items.forEach((it,i)=>{ if(currentAnswers[i] === it.answer) correct++; });
-    const band = a.bands.find(b=>correct>=b.min && correct<=b.max) || a.bands[a.bands.length-1];
-    document.getElementById('resultCode').textContent = a.code;
-    document.getElementById('resultTitle').textContent = a.full;
-    document.getElementById('resultScore').textContent = correct+'/10';
-    document.getElementById('resultScore').style.color = band.color;
+    a.items.forEach((it, i) => { if (currentAnswers[i] === it.answer) correct++; });
+    band = a.bands.find(b => correct >= b.min && correct <= b.max) || a.bands[a.bands.length - 1];
+    scoreText = correct + '/10';
     document.getElementById('resultScoreLabel').textContent = 'จำนวนข้อที่ตอบถูก';
-    document.getElementById('resultBadgeWrap').innerHTML = `<span class="level-badge" style="background:${band.color}">${band.label}</span>`;
-    document.getElementById('resultAdvice').innerHTML = `<b>คำแนะนำ:</b> ${band.advice}<br><br><i>หมายเหตุ: แบบทดสอบชุดนี้จัดทำขึ้นเพื่อความเพลิดเพลินและฝึกทักษะการคิดเบื้องต้นเท่านั้น ไม่ใช่แบบทดสอบ IQ มาตรฐานที่ผ่านการรับรองทางจิตวิทยา หากต้องการผลที่แม่นยำควรทดสอบกับนักจิตวิทยา</i>`;
-    lastResult = {code:a.code, full:a.full, score:correct+'/10', levelLabel:band.label,
-      dateStr:new Date().toLocaleDateString('th-TH',{year:'numeric',month:'long',day:'numeric'})};
+    document.getElementById('resultAdvice').innerHTML = `<b>คำแนะนำ:</b> ${band.advice}<br><br><i>หมายเหตุ: แบบทดสอบชุดนี้จัดทำขึ้นเพื่อฝึกทักษะการคิดเบื้องต้นเท่านั้น ไม่ใช่แบบทดสอบ IQ มาตรฐานทางจิตวิทยา</i>`;
   }
+
+  document.getElementById('resultCode').textContent = a.code;
+  document.getElementById('resultTitle').textContent = a.full;
+  document.getElementById('resultScore').textContent = scoreText;
+  document.getElementById('resultScore').style.color = band.color;
+  document.getElementById('resultBadgeWrap').innerHTML = `<span class="level-badge" style="background:${band.color}">${band.label}</span>`;
+
+  lastResult = {
+    code: a.code, full: a.full, score: scoreText, levelLabel: band.label,
+    dateStr: new Date().toLocaleDateString('th-TH', { year: 'numeric', month: 'long', day: 'numeric' })
+  };
 
   hideAllViews();
   document.getElementById('view-result').style.display = 'block';
-  window.scrollTo({top:0,behavior:'smooth'});
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-/* ---------------- Clock Drawing Test ---------------- */
-let canvas, ctx, drawing=false;
-function initClockCanvas(){
+/* Clock Drawing Canvas & Evaluation */
+let canvas, ctx, drawing = false;
+
+function initClockCanvas() {
   canvas = document.getElementById('clockCanvas');
   ctx = canvas.getContext('2d');
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  ctx.lineWidth = 2.5;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.lineWidth = 3;
   ctx.lineCap = 'round';
   ctx.strokeStyle = '#2B3A2E';
 
-  canvas.onpointerdown = (e)=>{ drawing = true; const p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x,p.y); };
-  canvas.onpointermove = (e)=>{ if(!drawing) return; const p = getPos(e); ctx.lineTo(p.x,p.y); ctx.stroke(); };
-  canvas.onpointerup = ()=>{ drawing = false; };
-  canvas.onpointerleave = ()=>{ drawing = false; };
+  const getPos = (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    return { x: clientX - rect.left, y: clientY - rect.top };
+  };
+
+  const startDraw = (e) => { drawing = true; const p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); };
+  const moveDraw = (e) => { if (!drawing) return; const p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); };
+  const stopDraw = () => { drawing = false; };
+
+  canvas.onpointerdown = startDraw;
+  canvas.onpointermove = moveDraw;
+  canvas.onpointerup = stopDraw;
+  canvas.onpointerleave = stopDraw;
 }
-function getPos(e){
-  const rect = canvas.getBoundingClientRect();
-  return { x: e.clientX-rect.left, y: e.clientY-rect.top };
-}
-function clearCanvas(){ ctx.clearRect(0,0,canvas.width,canvas.height); }
+
+function clearCanvas() { ctx.clearRect(0, 0, canvas.width, canvas.height); }
 
 const CLOCK_CRITERIA = [
-  {key:'contour', label:'วาดวงกลม/เส้นขอบหน้าปัดนาฬิกาได้ครบถ้วน'},
-  {key:'numbers', label:'ใส่ตัวเลข 1–12 ครบถ้วนและอยู่ในตำแหน่งที่ถูกต้อง'},
-  {key:'hands', label:'วาดเข็มนาฬิกาสองเข็ม (เข็มสั้น-เข็มยาว) ครบถ้วน'},
-  {key:'time', label:'เข็มนาฬิกาชี้เวลา 11 นาฬิกา 10 นาที ถูกต้อง'}
+  { key: 'contour', label: 'วาดวงกลม / เส้นขอบหน้าปัดนาฬิกาได้สมบูรณ์' },
+  { key: 'numbers', label: 'วางตำแหน่งตัวเลข 1–12 ครบถ้วนและถูกต้อง' },
+  { key: 'hands', label: 'วาดเข็มนาฬิกาครบ 2 เข็ม (เข็มสั้นและเข็มยาว)' },
+  { key: 'time', label: 'เข็มนาฬิกาชี้เวลา 11 นาฬิกา 10 นาที ได้ถูกต้อง' }
 ];
 let clockScores = {};
-function renderClockChecklist(){
+
+function renderClockChecklist() {
   clockScores = {};
   const wrap = document.getElementById('clockChecklist');
   wrap.innerHTML = '';
-  CLOCK_CRITERIA.forEach(c=>{
+  CLOCK_CRITERIA.forEach(c => {
     clockScores[c.key] = null;
     const row = document.createElement('div');
     row.className = 'checklist-item';
@@ -463,61 +676,71 @@ function renderClockChecklist(){
     wrap.appendChild(row);
   });
 }
-function setClockScore(key,val){
+
+function setClockScore(key, val) {
   clockScores[key] = val;
-  document.getElementById('yes-'+key).classList.toggle('active-yes', val===1);
-  document.getElementById('no-'+key).classList.toggle('active-no', val===0);
+  document.getElementById('yes-' + key).classList.toggle('active-yes', val === 1);
+  document.getElementById('no-' + key).classList.toggle('active-no', val === 0);
 }
-function submitClock(){
+
+function submitClock() {
   const values = Object.values(clockScores);
-  if(values.some(v=>v===null)){ alert('กรุณาให้คะแนนครบทั้ง 4 ข้อก่อนดูผล'); return; }
-  const score = values.reduce((s,v)=>s+v,0);
-  let band;
-  if(score===4) band = {label:'ปกติ',color:'var(--teal)',advice:'วาดนาฬิกาได้ถูกต้องครบทุกองค์ประกอบ แสดงถึงการทำงานของสมองด้าน visuospatial และ executive function ที่ปกติ'};
-  else if(score>=2) band = {label:'ควรติดตาม',color:'var(--gold)',advice:'วาดนาฬิกาได้บางส่วน ควรประเมินร่วมกับแบบทดสอบอื่น เช่น TMSE เพื่อดูภาพรวมการทำงานของสมอง'};
-  else band = {label:'ควรพบแพทย์เพื่อประเมินเพิ่มเติม',color:'var(--coral)',advice:'วาดนาฬิกาได้ไม่ถูกต้องเป็นส่วนใหญ่ ควรส่งพบแพทย์เพื่อประเมินภาวะสมองเสื่อมอย่างละเอียดร่วมกับแบบทดสอบอื่น'};
+  if (values.some(v => v === null)) {
+    alert('กรุณาประเมินผลให้ครบทั้ง 4 ข้อก่อนดูผลลัพธ์');
+    return;
+  }
+  const score = values.reduce((s, v) => s + v, 0);
+  let band = score === 4
+    ? { label: 'ปกติ', color: 'var(--teal)', advice: 'วาดนาฬิกาได้ถูกต้องครบทุกองค์ประกอบ แสดงถึงการทำงานของสมองด้าน Visuospatial และ Executive function ที่ปกติ' }
+    : score >= 2
+    ? { label: 'ควรติดตามใกล้ชิด', color: 'var(--gold)', advice: 'วาดนาฬิกาได้บางส่วน ควรประเมินร่วมกับแบบทดสอบอื่น เช่น TMSE เพื่อดูภาพรวมการทำงานของสมอง' }
+    : { label: 'ควรพบแพทย์เพื่อประเมินเพิ่มเติม', color: 'var(--coral)', advice: 'วาดนาฬิกาไม่ถูกต้องเป็นส่วนใหญ่ ควรส่งพบแพทย์เพื่อประเมินภาวะสมองเสื่อมอย่างละเอียด' };
 
   document.getElementById('resultCode').textContent = 'CDT';
   document.getElementById('resultTitle').textContent = 'Clock Drawing Test';
-  document.getElementById('resultScore').textContent = score+'/4';
+  document.getElementById('resultScore').textContent = score + '/4';
   document.getElementById('resultScore').style.color = band.color;
   document.getElementById('resultScoreLabel').textContent = 'จำนวนเกณฑ์ที่ผ่าน';
   document.getElementById('resultBadgeWrap').innerHTML = `<span class="level-badge" style="background:${band.color}">${band.label}</span>`;
   document.getElementById('resultAdvice').innerHTML = `<b>คำแนะนำ:</b> ${band.advice}`;
 
-  lastResult = {code:'CDT', full:'Clock Drawing Test', score:score+'/4', levelLabel:band.label,
-    dateStr:new Date().toLocaleDateString('th-TH',{year:'numeric',month:'long',day:'numeric'})};
+  lastResult = {
+    code: 'CDT', full: 'Clock Drawing Test', score: score + '/4', levelLabel: band.label,
+    dateStr: new Date().toLocaleDateString('th-TH', { year: 'numeric', month: 'long', day: 'numeric' })
+  };
 
   hideAllViews();
   document.getElementById('view-result').style.display = 'block';
-  window.scrollTo({top:0,behavior:'smooth'});
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function reopenLast(){
-  if(currentId) openAssessment(currentId);
+function reopenLast() {
+  if (currentId) openAssessment(currentId);
   else showGrid();
 }
 
-function emailResult(){
-  if(!lastResult) return;
+function emailResult() {
+  if (!lastResult) return;
   const to = document.getElementById('emailTo').value.trim();
-  if(!to){ alert('กรุณากรอกอีเมลผู้รับ'); return; }
-  const {code, full, score, levelLabel, dateStr} = lastResult;
-  const subject = `ผลแบบทดสอบ ${code} — ${full}`;
-  const body =
-`ผลแบบทดสอบสติปัญญาและความสามารถทางปัญญา (Mental Health Cyber-Care)
+  if (!to) { alert('กรุณากรอกอีเมลผู้รับ'); return; }
+
+  const { code, full, score, levelLabel, dateStr } = lastResult;
+  const subject = `ผลการประเมินแบบทดสอบ ${code} — ${full}`;
+  const body = `ผลการประเมินสติปัญญาและความสามารถทางปัญญา (Mental Health Cyber-Care)
 
 แบบทดสอบ: ${code} (${full})
 วันที่ทำแบบทดสอบ: ${dateStr}
 ผลคะแนน: ${score}
-ระดับผล: ${levelLabel}
+ระดับผลการประเมิน: ${levelLabel}
 
-หมายเหตุ: ผลนี้เป็นการคัดกรองเบื้องต้นเท่านั้น ไม่ใช่การวินิจฉัยโรค ควรใช้ร่วมกับดุลยพินิจของแพทย์
-สายด่วนสุขภาพจิต 1323 (ฟรี ตลอด 24 ชม.)`;
+หมายเหตุ: ผลประเมินนี้เป็นการคัดกรองเบื้องต้นเท่านั้น ไม่ใช่การวินิจฉัยโรค ควรใช้ร่วมกับดุลยพินิจของแพทย์
+สายด่วนสุขภาพจิต 1323 ให้บริการฟรีตลอด 24 ชั่วโมง`;
+
   const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   window.open(gmailUrl, '_blank');
 }
 
+// Start App
 initGrid();
 showGrid();
 </script>
