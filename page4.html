@@ -3,336 +3,514 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ระบบประเมินพัฒนาการและสุขภาพจิตเด็กและวัยรุ่น</title>
+<title>แบบประเมินพัฒนาการและสุขภาพจิตเด็ก - Mental Health Cyber-Care</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 <style>
   :root {
-    --bg-main: linear-gradient(180deg, #A3B899 0%, #839E78 100%);
-    --surface: #FCFBF7;
-    --surface-sub: #F2EFE6;
-    --border: #D8DEC9;
-    --text-primary: #2C382B;
-    --text-secondary: #5C6B5B;
-    --brand: #2E6B62;
-    --brand-dark: #1E4943;
-    --brand-light: #E5EFEA;
-    --gold: #C08A28;
-    --coral: #C75238;
-    --coral-light: #F8E8E4;
-    --radius: 16px;
-    --shadow: 0 10px 25px rgba(35, 48, 34, 0.12);
+    --brand-dark: #1E293B;
+    --teal-dark: #2563A8;
+    --teal-main: #4A90C4;
+    --teal-soft: #A9CDE8;
+    --teal-light: #E8F1FA;
+    --page-bg: #F4F8FC;
+    --cream: #FBFCFE;
+
+    --primary-grad: linear-gradient(135deg, #5BA3D0 0%, #2563A8 100%);
+    --primary-hover: linear-gradient(135deg, #4790BE 0%, #1D4F86 100%);
+    --accent-grad: linear-gradient(135deg, #C9A227 0%, #E8C468 100%);
+
+    --text-main: #1E293B;
+    --text-muted: #64748B;
+    --border: #D6E4F0;
+    --border-light: rgba(214, 228, 240, 0.8);
+
+    --success: #4C9A7E;
+    --warning: #C9922E;
+    --danger: #C1654A;
+
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --radius-sm: 12px;
+    --shadow-sm: 0 4px 14px rgba(37, 99, 168, 0.10);
+    --shadow-md: 0 16px 32px -6px rgba(37, 99, 168, 0.14), 0 6px 12px -4px rgba(37, 99, 168, 0.07);
+    --shadow-hover: 0 22px 40px -10px rgba(37, 99, 168, 0.26);
   }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
   body {
+    margin: 0;
+    background: var(--page-bg);
     font-family: 'Sarabun', sans-serif;
-    background: var(--bg-main);
-    color: var(--text-primary);
+    color: var(--text-main);
     min-height: 100vh;
-    padding-bottom: 40px;
-  }
-  h1, h2, h3, .font-heading { font-family: 'Kanit', sans-serif; }
-
-  /* Hotline Bar */
-  .hotline-bar {
-    background: var(--brand-dark);
-    color: #FFF;
-    text-align: center;
-    padding: 10px 16px;
-    font-size: 13.5px;
-  }
-  .hotline-bar b { color: #F7D594; }
-
-  /* Header */
-  header.app-header {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 32px 20px 16px;
-    text-align: center;
-  }
-  header.app-header .eyebrow {
-    font-size: 12px;
-    letter-spacing: 2px;
-    color: var(--brand-dark);
-    font-weight: 700;
-    margin-bottom: 6px;
-    text-transform: uppercase;
-  }
-  header.app-header h1 { font-size: 26px; color: var(--text-primary); margin-bottom: 8px; }
-  header.app-header p { font-size: 14.5px; color: var(--text-secondary); max-width: 640px; margin: 0 auto; line-height: 1.6; }
-
-  /* Container */
-  main { max-width: 900px; margin: 0 auto; padding: 10px 20px; }
-
-  /* Cards Grid */
-  .grid-assessment {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 16px;
-    margin-top: 16px;
-  }
-  .assessment-card {
-    background: var(--surface);
-    border-radius: var(--radius);
-    padding: 24px 20px;
-    box-shadow: var(--shadow);
-    border: 2px solid transparent;
-    cursor: pointer;
-    transition: all 0.2s ease;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    overflow-x: hidden;
+    position: relative;
   }
-  .assessment-card:hover {
-    transform: translateY(-3px);
-    border-color: var(--brand);
-  }
-  .card-top .badge-icon {
-    width: 52px;
-    height: 52px;
+
+  /* Background Floating Blobs */
+  .bg-blob {
+    position: fixed;
     border-radius: 50%;
-    background: var(--brand);
-    color: #FFF;
+    filter: blur(90px);
+    z-index: -1;
+    opacity: 0.55;
+    animation: floatBlob 18s infinite alternate ease-in-out;
+  }
+  .blob-1 { width: 420px; height: 420px; background: #CFE2F5; top: -110px; left: -110px; }
+  .blob-2 { width: 460px; height: 460px; background: #E3EDF7; bottom: -160px; right: -110px; animation-delay: -6s; }
+  .blob-3 { width: 320px; height: 320px; background: #D8E9F7; top: 40%; left: 50%; transform: translate(-50%, -50%); animation-delay: -12s; }
+
+  @keyframes floatBlob {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(60px, 40px) scale(1.15); }
+    100% { transform: translate(-40px, 80px) scale(0.9); }
+  }
+
+  h1, h2, h3, .font-title { font-family: 'Kanit', sans-serif; }
+
+  /* Header Navigation */
+  header.nav-header {
+    background: rgba(251, 250, 243, 0.9);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border-light);
+    padding: 14px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+  }
+
+  header.nav-header .logo {
     display: flex;
     align-items: center;
-    justify-content: center;
+    gap: 12px;
     font-family: 'Kanit', sans-serif;
     font-weight: 700;
-    font-size: 13px;
-    margin-bottom: 14px;
+    font-size: 1.1rem;
+    color: var(--teal-dark);
+    text-decoration: none;
   }
-  .card-top h3 { font-size: 18px; margin-bottom: 6px; }
-  .card-top p { font-size: 13px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 16px; }
-  .card-bottom .meta-tag {
-    display: inline-block;
-    font-size: 12px;
-    color: var(--brand-dark);
-    background: var(--brand-light);
-    border-radius: 20px;
-    padding: 4px 12px;
-    font-weight: 600;
+  header.nav-header .logo .badge {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--primary-grad); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 12px rgba(37, 99, 168, 0.35);
+    animation: pulseIcon 3s infinite ease-in-out;
   }
+  @keyframes pulseIcon {
+    0%, 100% { transform: scale(1); box-shadow: 0 4px 12px rgba(37, 99, 168, 0.35); }
+    50% { transform: scale(1.08); box-shadow: 0 8px 20px rgba(37, 99, 168, 0.55); }
+  }
+  header.nav-header .logo small { display: block; font-family: 'Sarabun', sans-serif; font-weight: 400; font-size: 0.72rem; color: var(--text-muted); }
 
-  /* Universal Panel */
-  .panel-box {
-    background: var(--surface);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    padding: 28px;
-    margin-top: 16px;
-  }
+  .nav-actions { display: flex; align-items: center; gap: 12px; }
 
-  /* Back Button */
-  .btn-back {
-    background: none;
-    border: none;
-    color: var(--brand-dark);
-    font-family: 'Sarabun', sans-serif;
-    font-size: 14px;
-    font-weight: 700;
+  .btn-nav-prev {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--primary-grad); color: #ffffff;
+    padding: 10px 20px; border-radius: 30px;
+    font-size: 14px; font-weight: 600; text-decoration: none; cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 4px 14px rgba(37, 99, 168, 0.3);
+  }
+  .btn-nav-prev:hover { background: var(--primary-hover); transform: translateY(-3px) scale(1.03); box-shadow: 0 8px 20px rgba(37, 99, 168, 0.42); }
+
+  .btn-nav-back {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1.5px solid var(--teal-soft); color: var(--teal-dark);
+    padding: 9px 18px; border-radius: 30px;
+    font-size: 13.5px; font-weight: 600; cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 2px 10px rgba(37, 99, 168, 0.12);
+  }
+  .btn-nav-back:hover { background: var(--teal-light); border-color: var(--teal-dark); transform: translateY(-2px) scale(1.03); }
+
+  /* Hero Banner */
+  header.hero { max-width: 900px; margin: 0 auto; padding: 40px 20px 10px; text-align: center; animation: fadeInUp 0.8s ease-out; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 18px; background: rgba(232, 241, 250, 0.9); color: var(--teal-dark);
+    border-radius: 20px; font-size: 12px; font-weight: 700; letter-spacing: 0.5px;
+    margin-bottom: 16px; border: 1px solid var(--teal-soft);
+  }
+  header.hero h1 {
+    font-size: clamp(26px, 4.5vw, 38px); margin: 0 0 14px; line-height: 1.25;
+    background: linear-gradient(135deg, #1E293B 0%, #2563A8 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  header.hero p { font-size: 15.5px; color: var(--text-muted); max-width: 680px; margin: 0 auto; line-height: 1.65; }
+
+  .staff-global-alert { max-width: 900px; margin: 18px auto 0; padding: 0 20px; }
+  .staff-global-box {
+    background: rgba(255, 251, 235, 0.9); border: 1.5px dashed var(--warning);
+    border-radius: var(--radius-md); padding: 14px 20px; font-size: 13.5px;
+    color: #854D0E; line-height: 1.6; display: flex; align-items: flex-start; gap: 12px;
+  }
+  .staff-global-box i { font-size: 18px; color: var(--warning); margin-top: 2px; flex-shrink: 0; }
+
+  .feature-strip {
+    max-width: 900px; margin: 24px auto 6px; padding: 0 20px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  }
+  @media (max-width: 640px) { .feature-strip { grid-template-columns: 1fr; } }
+  .feature-item {
+    background: rgba(255,255,255,0.75); border: 1px solid var(--border-light);
+    border-radius: var(--radius-md); padding: 18px 16px; text-align: center;
+    box-shadow: var(--shadow-sm);
+  }
+  .feature-item i { font-size: 22px; color: var(--teal-dark); margin-bottom: 8px; display:block; }
+  .feature-item .ftitle { font-family:'Kanit',sans-serif; font-weight:600; font-size: 14.5px; margin-bottom: 4px; }
+  .feature-item .fdesc { font-size: 12.5px; color: var(--text-muted); line-height: 1.5; }
+
+  /* Content & Grid Layout */
+  main { max-width: 900px; width: 100%; margin: 0 auto; padding: 10px 20px 50px; flex: 1; }
+
+  .view-container { animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px);} to { opacity: 1; transform: translateY(0);} }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; margin-top: 10px; }
+  .card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    border-radius: var(--radius-lg);
+    padding: 26px;
+    border: 1.5px solid var(--border-light);
+    box-shadow: var(--shadow-md);
     cursor: pointer;
-    margin-bottom: 16px;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
+    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: flex; flex-direction: column; position: relative; overflow: hidden;
+  }
+  .card::after { content:''; position:absolute; inset:0; border-radius: var(--radius-lg); border: 2px solid transparent; transition: border-color 0.3s ease; }
+  .card:hover { transform: translateY(-8px) scale(1.02); box-shadow: var(--shadow-hover); background: rgba(255,255,255,0.97); }
+  .card:hover::after { border-color: var(--teal-main); }
+
+  .card .icon {
+    width: 56px; height: 56px; border-radius: var(--radius-md);
+    background: var(--primary-grad); color: #fff;
+    display: flex; align-items: center; justify-content: center; font-size: 22px;
+    margin-bottom: 18px; box-shadow: 0 8px 16px rgba(37, 99, 168, 0.3);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .card:hover .icon { transform: scale(1.12) rotate(6deg); }
+
+  .card .code { font-size: 20px; font-weight: 700; margin-bottom: 6px; color: var(--brand-dark); }
+  .card .desc { font-size: 14px; color: var(--text-muted); line-height: 1.55; margin-bottom: 22px; flex: 1; }
+  .card .card-footer { display: flex; align-items: center; justify-content: space-between; }
+  .card .qcount { font-size: 12.5px; font-weight: 600; color: var(--teal-dark); background: var(--teal-light); border-radius: 20px; padding: 5px 14px; }
+  .card .btn-start-text { font-size: 13.5px; color: var(--teal-dark); font-weight: 700; display: flex; align-items: center; gap: 4px; transition: gap 0.2s ease; }
+  .card:hover .btn-start-text { gap: 8px; color: var(--teal-main); }
+
+  /* Panels */
+  .panel {
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(16px);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    border: 1.5px solid var(--border-light);
+    padding: 36px;
+  }
+  @media (max-width: 600px) {
+    .panel { padding: 22px 18px; }
+    header.nav-header { flex-direction: column; gap: 14px; padding: 14px 4%; text-align: center; }
+    .nav-actions { width: 100%; justify-content: center; flex-wrap: wrap; }
   }
 
-  /* Group / Target Selector */
-  .target-select-wrap { margin-bottom: 24px; }
-  .section-label {
-    font-family: 'Kanit', sans-serif;
-    font-size: 14px;
-    color: var(--brand-dark);
-    margin-bottom: 10px;
-    font-weight: 600;
+  .panel-header-actions { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; padding-bottom: 16px; border-bottom: 1px solid var(--border-light); }
+  .quiz-title { font-size: 24px; margin: 0 0 6px; color: var(--brand-dark); }
+  .quiz-sub { font-size: 14.5px; color: var(--text-muted); margin: 0 0 20px; line-height: 1.6; }
+
+  /* Group / Target Chip Selector */
+  .target-select-wrap {
+    background: var(--teal-light);
+    border-radius: var(--radius-md);
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    border: 1px solid var(--teal-soft);
   }
-  .target-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .target-select-wrap .section-label { font-family: 'Kanit', sans-serif; font-size: 14px; font-weight: 600; color: var(--teal-dark); margin-bottom: 10px; }
+  .target-chips { display: flex; flex-wrap: wrap; gap: 10px; }
   .chip-btn {
     border: 1.5px solid var(--border);
     background: #FFF;
-    padding: 8px 16px;
+    color: var(--text-main);
+    padding: 8px 18px;
     border-radius: 20px;
     font-size: 13.5px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.15s ease;
+    transition: all 0.25s ease;
   }
-  .chip-btn:hover { border-color: var(--brand); }
-  .chip-btn.selected { background: var(--brand-dark); color: #FFF; border-color: var(--brand-dark); }
+  .chip-btn:hover { border-color: var(--teal-main); background: #FFF; }
+  .chip-btn.selected { background: var(--primary-grad); color: #FFF; border-color: transparent; box-shadow: 0 4px 12px rgba(37, 99, 168, 0.25); }
 
   /* Progress Bar */
-  .progress-bar-container {
-    background: var(--surface-sub);
-    border-radius: 10px;
-    height: 8px;
-    overflow: hidden;
-    margin-bottom: 24px;
+  .progress-wrap { background: var(--teal-light); border-radius: 12px; height: 12px; overflow: hidden; margin-bottom: 30px; position: relative; }
+  .progress-fill { background: var(--primary-grad); height: 100%; width: 0%; transition: width 0.4s cubic-bezier(0.4,0,0.2,1); position: relative; border-radius: 12px; }
+  .progress-fill::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+    animation: shimmer 2s infinite;
   }
-  .progress-fill { background: var(--brand); height: 100%; width: 0%; transition: width 0.3s ease; }
+  @keyframes shimmer { 0% { transform: translateX(-100%);} 100% { transform: translateX(100%);} }
 
-  /* Questions */
-  .question-item { padding: 14px 0; border-bottom: 1px solid var(--border); }
-  .question-item:last-child { border-bottom: none; }
-  .question-text { font-size: 15px; line-height: 1.6; margin-bottom: 12px; }
-  .options-group { display: flex; gap: 8px; flex-wrap: wrap; }
-  .opt-label {
-    flex: 1;
-    min-width: 120px;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 10px 14px;
-    font-size: 13.5px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    background: #FFF;
-    transition: all 0.15s ease;
+  /* Questions & Option Styling */
+  .question { padding: 22px 0; border-bottom: 1px dashed var(--border); animation: fadeInUp 0.4s ease; }
+  .question:last-child { border-bottom: none; }
+  .question .qnum { font-size: 13.5px; font-weight: 700; color: var(--teal-dark); margin-bottom: 8px; }
+  .question .qtext { font-size: 16.5px; font-weight: 600; line-height: 1.55; margin-bottom: 16px; color: var(--brand-dark); }
+  .options { display: flex; flex-direction: column; gap: 10px; }
+
+  .opt {
+    display: flex; align-items: center; gap: 14px;
+    border: 1.5px solid var(--border-light); border-radius: var(--radius-md);
+    padding: 14px 18px; cursor: pointer; font-size: 15px;
+    background: rgba(255, 255, 255, 0.8);
+    transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+    user-select: none; min-height: 48px; position: relative;
   }
-  .opt-label:hover { border-color: var(--brand); }
-  .opt-label input { accent-color: var(--brand); width: 16px; height: 16px; }
-  .opt-label.selected { border-color: var(--brand); background: var(--brand-light); font-weight: 600; }
+  .opt:hover { border-color: var(--teal-main); background: var(--teal-light); transform: translateX(4px); }
+  .opt input { accent-color: var(--teal-dark); width: 19px; height: 19px; flex-shrink: 0; }
+  .opt.selected {
+    border-color: var(--teal-dark);
+    background: linear-gradient(90deg, var(--teal-light) 0%, #D6EAE2 100%);
+    font-weight: 600; color: var(--teal-dark);
+    transform: translateX(6px);
+    box-shadow: 0 4px 14px rgba(37, 99, 168, 0.16);
+  }
 
-  /* Buttons */
-  .action-row { margin-top: 28px; text-align: center; }
+  /* Buttons & Action Controls */
   .btn-primary {
-    background: var(--brand-dark);
-    color: #FFF;
-    border: none;
-    padding: 12px 32px;
-    border-radius: 30px;
-    font-family: 'Sarabun', sans-serif;
-    font-size: 15px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background 0.15s ease;
+    background: var(--primary-grad); color: #fff; border: none;
+    padding: 15px 38px; border-radius: 30px;
+    font-size: 15.5px; font-weight: 700; cursor: pointer;
+    box-shadow: 0 6px 20px rgba(37, 99, 168, 0.32);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    width: 100%; max-width: 320px;
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
   }
-  .btn-primary:hover { background: var(--brand); }
-  .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+  .btn-primary:hover:not(:disabled) { background: var(--primary-hover); transform: translateY(-3px) scale(1.02); box-shadow: 0 10px 25px rgba(37, 99, 168, 0.42); }
+  .btn-primary:disabled { opacity: 0.45; cursor: not-allowed; transform: none; box-shadow: none; }
+
   .btn-secondary {
-    background: transparent;
-    border: 1.5px solid var(--brand-dark);
-    color: var(--brand-dark);
-    padding: 11px 28px;
-    border-radius: 30px;
-    font-family: 'Sarabun', sans-serif;
-    font-size: 14.5px;
-    font-weight: 600;
-    cursor: pointer;
+    background: #fff; border: 1.5px solid var(--teal-soft); color: var(--teal-dark);
+    padding: 13px 26px; border-radius: 30px;
+    font-size: 14.5px; font-weight: 600; cursor: pointer;
+    transition: all 0.25s ease;
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
   }
-  .status-hint { font-size: 12.5px; color: var(--text-secondary); margin-top: 8px; }
+  .btn-secondary:hover { background: var(--teal-light); border-color: var(--teal-dark); transform: translateY(-2px); }
+
+  .submit-row { margin-top: 32px; text-align: center; }
+  .hint { text-align: center; font-size: 13.5px; color: var(--text-muted); margin-top: 12px; }
 
   /* Result Screen */
-  .result-header { text-align: center; margin-bottom: 12px; }
-  .score-display { font-family: 'Kanit', sans-serif; font-size: 42px; font-weight: 700; text-align: center; }
-  .score-sub { text-align: center; font-size: 13px; color: var(--text-secondary); margin-bottom: 16px; }
-  .result-badge { display: inline-block; padding: 6px 20px; border-radius: 20px; color: #FFF; font-family: 'Kanit', sans-serif; font-weight: 600; font-size: 14px; }
-  
-  .breakdown-card { background: var(--surface-sub); border-radius: 12px; padding: 16px; margin: 20px 0; }
-  .breakdown-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px dashed var(--border); font-size: 14px; }
+  .result-head { text-align: center; margin-bottom: 16px; }
+  .score-big {
+    font-size: 60px; font-weight: 700; text-align: center; line-height: 1; margin: 12px 0 6px;
+    background: var(--primary-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    animation: popScore 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  @keyframes popScore { 0% { transform: scale(0.5); opacity: 0;} 100% { transform: scale(1); opacity: 1;} }
+
+  .score-label { text-align: center; font-size: 14.5px; color: var(--text-muted); margin-bottom: 22px; }
+  .level-badge { display: inline-block; padding: 8px 26px; border-radius: 30px; font-size: 15.5px; font-weight: 700; color: #fff; box-shadow: var(--shadow-sm); animation: zoomIn 0.5s ease; }
+  @keyframes zoomIn { from { transform: scale(0.8); opacity: 0;} to { transform: scale(1); opacity: 1;} }
+
+  .breakdown-box {
+    background: rgba(232, 241, 250, 0.5);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 20px; margin: 24px 0 16px;
+  }
+  .breakdown-title { font-family: 'Kanit', sans-serif; font-size: 15px; font-weight: 600; color: var(--teal-dark); margin-bottom: 12px; }
+  .breakdown-item { display: flex; justify-content: space-between; align-items: center; padding: 9px 0; border-bottom: 1px dashed var(--border); font-size: 14px; }
   .breakdown-item:last-child { border-bottom: none; }
-  .breakdown-tag { font-size: 12px; padding: 3px 10px; border-radius: 12px; color: #FFF; font-weight: 600; font-family: 'Kanit', sans-serif; }
+  .breakdown-tag { font-size: 12.5px; padding: 3px 12px; border-radius: 14px; color: #FFF; font-weight: 600; background: var(--teal-dark); font-family: 'Kanit', sans-serif; }
 
-  .advice-card { background: var(--surface-sub); border-radius: 12px; padding: 18px; font-size: 14px; line-height: 1.7; margin-bottom: 20px; }
-  .advice-card b { color: var(--brand-dark); }
+  .advice-box {
+    background: rgba(232, 241, 250, 0.7);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 24px; font-size: 15.5px; line-height: 1.75; margin: 16px 0 24px;
+    box-shadow: inset 0 2px 6px rgba(37, 99, 168, 0.05);
+  }
+  .advice-box b { color: var(--teal-dark); }
 
-  .email-section { background: var(--surface-sub); border-radius: 12px; padding: 18px; margin-bottom: 20px; }
-  .email-section label { display: block; font-size: 13px; font-weight: 700; color: var(--brand-dark); margin-bottom: 8px; }
-  .email-form { display: flex; gap: 10px; flex-wrap: wrap; }
-  .email-form input { flex: 1; min-width: 220px; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border); font-size: 14px; }
+  .email-box { background: rgba(251,250,243,0.9); border: 1.5px solid var(--border-light); border-radius: var(--radius-md); padding: 22px; margin-top: 26px; }
+  .email-box label { display: block; font-size: 14px; font-weight: 700; margin-bottom: 12px; color: var(--brand-dark); }
+  .email-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .email-row input { flex: 1; min-width: 240px; padding: 13px 18px; border-radius: var(--radius-sm); border: 1.5px solid var(--border); font-family: inherit; font-size: 14.5px; outline: none; transition: all 0.25s ease; }
+  .email-row input:focus { border-color: var(--teal-dark); box-shadow: 0 0 0 4px rgba(37, 99, 168, 0.18); background: #fff; }
+
+  .result-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 32px; }
+
+  footer.note { max-width: 900px; margin: 24px auto 30px; padding: 0 20px; text-align: center; font-size: 13px; color: var(--text-muted); line-height: 1.6; }
 </style>
 </head>
 <body>
 
-<div class="hotline-bar">ปรึกษาปัญหาพัฒนาการและพฤติกรรม สายด่วนสุขภาพจิต <b>1323</b> ฟรี 24 ชั่วโมง</div>
+<div class="bg-blob blob-1"></div>
+<div class="bg-blob blob-2"></div>
+<div class="bg-blob blob-3"></div>
 
-<header class="app-header">
-  <div class="eyebrow">Standardized Screening Tools</div>
-  <h1>แบบประเมินพัฒนาการและพฤติกรรมเด็ก</h1>
-  <p>เครื่องมือคัดกรองมาตรฐานสำหรับผู้ปกครอง ครู และ อสม. เพื่อประเมินความเสี่ยงด้านพัฒนาการ พฤติกรรม และสุขภาพจิตเบื้องต้น</p>
+<!-- Header Navigation -->
+<header class="nav-header">
+  <a href="#" onclick="showGrid()" class="logo">
+    <span class="badge"><i class="fa-solid fa-child-reaching"></i></span>
+    <span>MENTAL HEALTH CYBER-CARE<small>โครงการ อสม. ฮีลใจ &bull; เด็กและวัยรุ่น</small></span>
+  </a>
+  <div class="nav-actions">
+    <a href="#" class="btn-nav-prev" onclick="showGrid()">
+      <i class="fa-solid fa-arrow-left"></i> ย้อนกลับหน้าหลัก
+    </a>
+    <button class="btn-nav-back" id="navBackBtn" style="display:none;" onclick="showGrid()">
+      <i class="fa-solid fa-grip"></i> เลือกแบบประเมิน
+    </button>
+  </div>
 </header>
 
+<!-- Hero Section Wrapper -->
+<div id="heroWrapper">
+  <header class="hero">
+    <span class="hero-badge"><i class="fa-solid fa-clipboard-check"></i> DEVELOPMENT & BEHAVIOR SCREENING</span>
+    <h1>แบบประเมินพัฒนาการและพฤติกรรมเด็ก</h1>
+    <p>เครื่องมือคัดกรองมาตรฐานสำหรับผู้ปกครอง ครู และ อสม. เพื่อประเมินความเสี่ยงด้านพัฒนาการ พฤติกรรม และสุขภาพจิตเด็กเบื้องต้น</p>
+  </header>
+
+  <div class="staff-global-alert">
+    <div class="staff-global-box">
+      <i class="fa-solid fa-circle-exclamation"></i>
+      <div>
+        <b>ข้อแนะนำในการใช้งาน:</b> แบบประเมินชุดนี้ออกแบบเพื่อใช้ประเมินพัฒนาการและสังเกตพฤติกรรมเด็กอย่างครอบคลุม หากพบข้อสงสัยหรือพัฒนาการล่าช้า ควรได้รับการตรวจประเมินยืนยันโดยกุมารแพทย์หรือผู้เชี่ยวชาญเพิ่มเติม
+      </div>
+    </div>
+  </div>
+
+  <div class="feature-strip">
+    <div class="feature-item">
+      <i class="fa-solid fa-phone-volume"></i>
+      <div class="ftitle">สายด่วน 1323</div>
+      <div class="fdesc">ปรึกษาปัญหาสุขภาพจิตและพัฒนาการเด็ก ฟรี 24 ชม.</div>
+    </div>
+    <div class="feature-item">
+      <i class="fa-solid fa-scale-balanced"></i>
+      <div class="ftitle">เกณฑ์มาตรฐาน</div>
+      <div class="fdesc">อิงตามมาตรฐาน DSPM, Denver II, SDQ, SNAP-IV และ M-CHAT</div>
+    </div>
+    <div class="feature-item">
+      <i class="fa-solid fa-user-shield"></i>
+      <div class="ftitle">ปลอดภัยเป็นความลับ</div>
+      <div class="fdesc">ไม่มีการจัดเก็บข้อมูลส่วนบุคคลลงเซิร์ฟเวอร์ใด ๆ</div>
+    </div>
+  </div>
+</div>
+
 <main>
-  <!-- Main Grid -->
-  <section id="viewGrid" class="grid-assessment"></section>
+  <!-- Main Grid Cards View -->
+  <section id="view-grid" class="grid view-container"></section>
 
-  <!-- Quiz Form Panel -->
-  <section id="viewQuiz" class="panel-box" style="display: none;">
-    <button class="btn-back" onclick="showGrid()">← กลับหน้าหลัก</button>
-    <h2 id="quizTitle" class="font-heading" style="font-size: 22px; margin-bottom: 4px;"></h2>
-    <p id="quizSub" style="font-size: 13.5px; color: var(--text-secondary); margin-bottom: 18px;"></p>
+  <!-- Assessment Quiz View -->
+  <section id="view-quiz" class="panel view-container" style="display:none;">
+    <div class="panel-header-actions">
+      <button class="btn-nav-back" onclick="showGrid()"><i class="fa-solid fa-arrow-left"></i> ย้อนกลับไปหน้าเลือกแบบประเมิน</button>
+    </div>
+    <h2 class="quiz-title" id="quizTitle"></h2>
+    <p class="quiz-sub" id="quizSub"></p>
 
-    <div id="targetWrap" class="target-select-wrap" style="display: none;">
+    <div id="targetWrap" class="target-select-wrap" style="display:none;">
       <div id="targetLabel" class="section-label"></div>
       <div id="targetChips" class="target-chips"></div>
     </div>
 
-    <div class="progress-bar-container">
-      <div id="progressFill" class="progress-fill"></div>
+    <div class="progress-wrap">
+      <div class="progress-fill" id="progressFill"></div>
     </div>
 
-    <div id="questionContainer"></div>
+    <div id="questionList"></div>
 
-    <div class="action-row">
-      <button id="submitBtn" class="btn-primary" disabled onclick="processResults()">ดูผลการประเมิน</button>
-      <div id="progressHint" class="status-hint"></div>
+    <div class="submit-row">
+      <button class="btn-primary" id="submitBtn" disabled onclick="processResults()">
+        <i class="fa-solid fa-paper-plane"></i> ประมวลผลการประเมิน
+      </button>
+      <div class="hint" id="progressHint"></div>
     </div>
   </section>
 
-  <!-- Result Panel -->
-  <section id="viewResult" class="panel-box" style="display: none;">
-    <button class="btn-back" onclick="showGrid()">← กลับหน้าหลัก</button>
+  <!-- Result Screen View -->
+  <section id="view-result" class="panel view-container" style="display:none;">
+    <div class="panel-header-actions">
+      <button class="btn-nav-back" onclick="showGrid()"><i class="fa-solid fa-house"></i> กลับสู่หน้าหลักแบบประเมิน</button>
+    </div>
     
-    <div class="result-header">
-      <div id="resCode" style="font-size: 12px; letter-spacing: 1.5px; font-weight: 700; color: var(--brand-dark);"></div>
-      <h2 id="resTitle" class="font-heading" style="font-size: 22px; margin-top: 2px;"></h2>
+    <div class="result-head">
+      <div class="hero-badge" id="resultCode"></div>
+      <h2 class="quiz-title" id="resultTitle" style="margin-top:4px;"></h2>
     </div>
 
-    <div id="resScore" class="score-display"></div>
-    <div id="resScoreLabel" class="score-sub"></div>
-
-    <div style="text-align: center; margin-bottom: 20px;">
-      <span id="resBadge" class="result-badge"></span>
+    <div class="score-big" id="resultScore"></div>
+    <div class="score-label" id="resultScoreLabel">คะแนนรวมการประเมิน</div>
+    
+    <div id="resultBadgeWrap" style="text-align:center;">
+      <span id="resultBadge" class="level-badge"></span>
     </div>
 
-    <div id="resBreakdown" class="breakdown-card" style="display: none;"></div>
-    <div id="resAdvice" class="advice-card"></div>
+    <div id="resultBreakdown" class="breakdown-box" style="display:none;"></div>
+    <div class="advice-box" id="resultAdvice"></div>
 
-    <div class="email-section">
-      <label for="emailTo">ส่งรายงานผลเข้าอีเมล</label>
-      <div class="email-form">
+    <div class="email-box">
+      <label for="emailTo"><i class="fa-solid fa-envelope-open-text"></i> ส่งสรุปผลการประเมินเข้าสู่อีเมล</label>
+      <div class="email-row">
         <input type="email" id="emailTo" value="67319100012@Aitc.ac.th">
-        <button class="btn-secondary" onclick="sendGmail()">✉ ส่งผลเข้า Gmail</button>
+        <button class="btn-secondary" onclick="sendGmail()"><i class="fa-solid fa-paper-plane"></i> ส่งผลทาง Gmail</button>
       </div>
-      <div class="status-hint">ระบบจะเปิด Gmail ในแท็บใหม่พร้อมลงข้อมูลสรุปให้อัตโนมัติ</div>
+      <div class="hint">ระบบจะเปิดหน้าแต่งอีเมล Gmail พร้อมกรอกสรุปผลการประเมินให้อัตโนมัติ</div>
     </div>
 
-    <div class="action-row" style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
-      <button class="btn-secondary" onclick="startAssessment(activeId)">ประเมินอีกครั้ง</button>
-      <button class="btn-primary" onclick="showGrid()">เลือกแบบประเมินอื่น</button>
+    <div class="result-actions">
+      <button class="btn-secondary" onclick="startAssessment(activeId)"><i class="fa-solid fa-rotate-left"></i> ทำแบบประเมินนี้อีกครั้ง</button>
+      <button class="btn-primary" onclick="showGrid()"><i class="fa-solid fa-grip"></i> เลือกแบบประเมินอื่น</button>
     </div>
   </section>
 </main>
 
+<footer class="note">
+  <i class="fa-solid fa-circle-info"></i> แบบประเมินเหล่านี้เป็นเครื่องมือคัดกรองเบื้องต้นเพื่อส่งเสริมพัฒนาการและเฝ้าระวังพฤติกรรมเด็ก ผลคะแนนไม่ได้เป็นคำวินิจฉัยทางการแพทย์โดยตรง
+</footer>
+
 <script>
-// Master Options Schemas
+// Options Schemas
 const OPT_YN = [{label:'ผ่าน / ใช่', score:1}, {label:'ไม่ผ่าน / ไม่ใช่', score:0}];
 const OPT_SCALE4 = [
-  {label:'ไม่ค่อยพบ', score:0}, {label:'บางครั้ง', score:1},
-  {label:'บ่อยครั้ง', score:2}, {label:'ตลอดเวลา', score:3}
+  {label:'ไม่ค่อยพบ (0-1 ครั้ง/สัปดาห์)', score:0},
+  {label:'บางครั้ง (2-3 ครั้ง/สัปดาห์)', score:1},
+  {label:'บ่อยครั้ง (4-5 ครั้ง/สัปดาห์)', score:2},
+  {label:'ตลอดเวลา (เกือบทุกวัน)', score:3}
 ];
 const OPT_SDQ = (rev) => rev 
   ? [{label:'ไม่จริง', score:2}, {label:'ค่อนข้างจริง', score:1}, {label:'จริงแน่นอน', score:0}]
   : [{label:'ไม่จริง', score:0}, {label:'ค่อนข้างจริง', score:1}, {label:'จริงแน่นอน', score:2}];
 
-// Standardized Database
+// Standardized Assessment Database
 const TOOLS = {
   dspm: {
     code: 'DSPM',
     title: 'DSPM พัฒนาการตามวัย',
     desc: 'คัดกรองพัฒนาการ 5 ด้านหลักสำหรับเด็กแรกเกิด - 5 ปี',
+    icon: 'fa-child-reaching',
     targetTitle: 'เลือกช่วงอายุของเด็ก',
     groups: [
       { id: '9m', name: '9 เดือน', items: [
@@ -362,7 +540,8 @@ const TOOLS = {
   denver: {
     code: 'DENVER-II',
     title: 'Denver II คัดกรองพัฒนาการ',
-    desc: 'การคัดกรองละเอียดด้านร่างกาย ภาษา และสังคม',
+    desc: 'การคัดกรองรายละเอียดด้านร่างกาย ภาษา และสังคม',
+    icon: 'fa-baby',
     targetTitle: 'เลือกช่วงอายุประเมิน',
     groups: [
       { id: '12m', name: '12 เดือน', items: [
@@ -384,6 +563,7 @@ const TOOLS = {
     code: 'SDQ',
     title: 'SDQ พฤติกรรมและอารมณ์',
     desc: 'ประเมินจุดแข็งและจุดอ่อนพฤติกรรม 5 ด้านสำหรับเด็ก 4-16 ปี',
+    icon: 'fa-masks-theater',
     targetTitle: 'กลุ่มผู้ให้ข้อมูล',
     groups: [
       { id: 'parent', name: 'ฉบับผู้ปกครองประเมิน', items: [
@@ -398,9 +578,10 @@ const TOOLS = {
     ]
   },
   adhd: {
-    code: 'ADHD',
-    title: 'SNAP-IV สมาธิสั้น',
+    code: 'SNAP-IV',
+    title: 'SNAP-IV คัดกรองสมาธิสั้น',
     desc: 'แบบคัดกรองอาการขาดสมาธิ ซน ซ่า หุนหันพลันแล่น',
+    icon: 'fa-bolt',
     targetTitle: 'กลุ่มผู้ประเมิน',
     groups: [
       { id: 'standard', name: 'ประเมินพฤติกรรมทั่วไป', items: [
@@ -416,8 +597,9 @@ const TOOLS = {
   },
   mchat: {
     code: 'M-CHAT',
-    title: 'M-CHAT-R ออทิสติก',
+    title: 'M-CHAT-R คัดกรองออทิสติก',
     desc: 'คัดกรองความเสี่ยงภาวะออทิสติกสเปกตรัม (16-30 เดือน)',
+    icon: 'fa-puzzle-piece',
     targetTitle: 'ช่วงอายุเด็ก',
     groups: [
       { id: 'toddler', name: 'เด็กอายุ 16-30 เดือน', items: [
@@ -438,21 +620,21 @@ let userAnswers = [];
 let lastReport = null;
 
 function initApp() {
-  const grid = document.getElementById('viewGrid');
+  const grid = document.getElementById('view-grid');
   grid.innerHTML = '';
   Object.keys(TOOLS).forEach(id => {
     const item = TOOLS[id];
+    const totalQ = item.groups[0].items.length;
     const card = document.createElement('div');
-    card.className = 'assessment-card';
+    card.className = 'card';
     card.onclick = () => startAssessment(id);
     card.innerHTML = `
-      <div class="card-top">
-        <div class="badge-icon">${item.code}</div>
-        <h3>${item.title}</h3>
-        <p>${item.desc}</p>
-      </div>
-      <div class="card-bottom">
-        <span class="meta-tag">มาตรฐานสากล</span>
+      <div class="icon"><i class="fa-solid ${item.icon}"></i></div>
+      <div class="code font-title">${item.code}</div>
+      <div class="desc">${item.desc}</div>
+      <div class="card-footer">
+        <span class="qcount"><i class="fa-regular fa-circle-question"></i> ${totalQ} ข้อประเมิน</span>
+        <span class="btn-start-text">เริ่มประเมิน <i class="fa-solid fa-arrow-right"></i></span>
       </div>
     `;
     grid.appendChild(card);
@@ -460,9 +642,11 @@ function initApp() {
 }
 
 function showGrid() {
-  document.getElementById('viewGrid').style.display = 'grid';
-  document.getElementById('viewQuiz').style.display = 'none';
-  document.getElementById('viewResult').style.display = 'none';
+  document.getElementById('heroWrapper').style.display = 'block';
+  document.getElementById('view-grid').style.display = 'grid';
+  document.getElementById('view-quiz').style.display = 'none';
+  document.getElementById('view-result').style.display = 'none';
+  document.getElementById('navBackBtn').style.display = 'none';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -470,10 +654,12 @@ function startAssessment(id) {
   activeId = id;
   const data = TOOLS[id];
 
+  document.getElementById('heroWrapper').style.display = 'none';
   document.getElementById('quizTitle').textContent = data.title;
   document.getElementById('quizSub').textContent = data.desc;
   document.getElementById('targetLabel').textContent = data.targetTitle;
   document.getElementById('targetWrap').style.display = 'block';
+  document.getElementById('navBackBtn').style.display = 'inline-flex';
   
   const chipsContainer = document.getElementById('targetChips');
   chipsContainer.innerHTML = '';
@@ -488,9 +674,9 @@ function startAssessment(id) {
 
   loadGroupQuestions(data.groups[0]);
 
-  document.getElementById('viewGrid').style.display = 'none';
-  document.getElementById('viewResult').style.display = 'none';
-  document.getElementById('viewQuiz').style.display = 'block';
+  document.getElementById('view-grid').style.display = 'none';
+  document.getElementById('view-result').style.display = 'none';
+  document.getElementById('view-quiz').style.display = 'block';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -501,13 +687,13 @@ function loadGroupQuestions(group) {
   });
 
   const tool = TOOLS[activeId];
-  const container = document.getElementById('questionContainer');
+  const container = document.getElementById('questionList');
   container.innerHTML = '';
   userAnswers = new Array(group.items.length).fill(null);
 
   group.items.forEach((item, qIdx) => {
     const qDiv = document.createElement('div');
-    qDiv.className = 'question-item';
+    qDiv.className = 'question';
 
     let options = tool.options;
     if (activeId === 'sdq') options = OPT_SDQ(item.rev);
@@ -517,16 +703,17 @@ function loadGroupQuestions(group) {
     options.forEach((opt, oIdx) => {
       const val = (activeId === 'mchat') ? (opt.score === item.riskVal ? 1 : 0) : opt.score;
       optsHtml += `
-        <label class="opt-label" id="opt-lbl-${qIdx}-${oIdx}">
+        <label class="opt" id="opt-lbl-${qIdx}-${oIdx}">
           <input type="radio" name="q_${qIdx}" value="${val}" onchange="selectAnswer(${qIdx}, ${oIdx}, ${val})">
-          ${opt.label}
+          <span>${opt.label}</span>
         </label>
       `;
     });
 
     qDiv.innerHTML = `
-      <div class="question-text"><b>ข้อที่ ${qIdx + 1}:</b> ${item.text} <span style="font-size:12px; color:var(--text-secondary);">[${item.domain}]</span></div>
-      <div class="options-group">${optsHtml}</div>
+      <div class="qnum">ข้อที่ ${qIdx + 1} &bull; <span style="font-weight:400; color:var(--text-muted);">${item.domain}</span></div>
+      <div class="qtext">${item.text}</div>
+      <div class="options">${optsHtml}</div>
     `;
     container.appendChild(qDiv);
   });
@@ -544,7 +731,9 @@ function selectAnswer(qIdx, oIdx, val) {
     if (el) el.classList.remove('selected');
   });
   
-  document.getElementById(`opt-lbl-${qIdx}-${oIdx}`).classList.add('selected');
+  const selectedEl = document.getElementById(`opt-lbl-${qIdx}-${oIdx}`);
+  if (selectedEl) selectedEl.classList.add('selected');
+
   updateProgress();
 }
 
@@ -554,7 +743,7 @@ function updateProgress() {
   const pct = total > 0 ? Math.round((answered / total) * 100) : 0;
 
   document.getElementById('progressFill').style.width = pct + '%';
-  document.getElementById('progressHint').textContent = `ตอบแล้ว ${answered} จาก ${total} ข้อ`;
+  document.getElementById('progressHint').textContent = `ทำไปแล้ว ${answered} จาก ${total} ข้อ (${pct}%)`;
   document.getElementById('submitBtn').disabled = answered < total;
 }
 
@@ -563,7 +752,7 @@ function processResults() {
   const totalScore = userAnswers.reduce((a, b) => a + b, 0);
   const items = activeGroup.items;
 
-  // Domain score grouping
+  // Domain Score Grouping
   const domainMap = {};
   items.forEach((it, idx) => {
     if (!domainMap[it.domain]) domainMap[it.domain] = { score: 0, total: 0 };
@@ -579,55 +768,54 @@ function processResults() {
     const passCount = totalScore;
     const isAllPass = passCount === items.length;
     statusLabel = isAllPass ? 'พัฒนาการสมวัย' : 'ควรได้รับการกระตุ้นพัฒนาการ';
-    statusColor = isAllPass ? 'var(--brand)' : 'var(--coral)';
+    statusColor = isAllPass ? 'var(--success)' : 'var(--danger)';
     adviceText = isAllPass 
-      ? '<b>ข้อแนะนำ:</b> เด็กมีพัฒนาการสมวัยในกลุ่มหัวข้อที่ทดสอบ ควรส่งเสริมกิจกรรมการเล่นและการเรียนรู้อย่างต่อเนื่อง'
-      : '<b>ข้อแนะนำ:</b> พบหัวข้อพัฒนาการที่ยังไม่ผ่าน แนะนำให้ผู้ปกครองฝึกทักษะเฉพาะด้านต่อเนื่อง 1 เดือน และประเมินซ้ำ';
+      ? '<b>ข้อแนะนำ:</b> เด็กมีพัฒนาการสมวัยตามเกณฑ์ที่ประเมิน ควรส่งเสริมกิจกรรมการเรียนรู้ ความคิดสร้างสรรค์ และโภชนาการอย่างต่อเนื่อง'
+      : '<b>ข้อแนะนำ:</b> พบทักษะบางด้านที่ยังไม่ผ่านเกณฑ์ แนะนำให้ผู้ปกครองฝึกทักษะเฉพาะด้านต่อเนื่องอย่างน้อย 1 เดือน และเข้ารับการประเมินซ้ำ';
   } else if (activeId === 'sdq') {
-    statusLabel = totalScore <= 6 ? 'ปกติ' : (totalScore <= 9 ? 'เสี่ยง/ก้ำกึ่ง' : 'มีปัญหาพฤติกรรม');
-    statusColor = totalScore <= 6 ? 'var(--brand)' : (totalScore <= 9 ? 'var(--gold)' : 'var(--coral)');
-    adviceText = `<b>ข้อแนะนำ:</b> คะแนนรวมความยากลำบากอยู่ในเกณฑ์ ${statusLabel} ควรดูแลสนับสนุนด้านอารมณ์และสังคมเสริมเพิ่มเติม`;
+    statusLabel = totalScore <= 6 ? 'ปกติ' : (totalScore <= 9 ? 'เสี่ยง / ก้ำกึ่ง' : 'มีปัญหาพฤติกรรม');
+    statusColor = totalScore <= 6 ? 'var(--success)' : (totalScore <= 9 ? 'var(--warning)' : 'var(--danger)');
+    adviceText = `<b>ข้อแนะนำ:</b> คะแนนรวมความยากลำบากจัดอยู่ในเกณฑ์ <b>${statusLabel}</b> ควรเสริมสร้างความสัมพันธ์ในครอบครัวและดูแลสนับสนุนอารมณ์เด็กอย่างอบอุ่น`;
   } else if (activeId === 'adhd') {
     statusLabel = totalScore >= 9 ? 'มีความเสี่ยงสมาธิสั้นสูง' : 'ไม่พบความเสี่ยงชัดเจน';
-    statusColor = totalScore >= 9 ? 'var(--coral)' : 'var(--brand)';
+    statusColor = totalScore >= 9 ? 'var(--danger)' : 'var(--success)';
     adviceText = totalScore >= 9 
-      ? '<b>ข้อแนะนำ:</b> พบพฤติกรรมเข้าข่ายความเสี่ยงสมาธิสั้น ควรปรึกษากุมารแพทย์หรือแพทย์จิตเวชเด็กเพื่อประเมินละเอียด'
-      : '<b>ข้อแนะนำ:</b> พฤติกรรมทั่วไปอยู่ในเกณฑ์ปกติ';
+      ? '<b>ข้อแนะนำ:</b> พฤติกรรมเข้าข่ายความเสี่ยงสมาธิสั้น ควรปรึกษากุมารแพทย์ด้านพัฒนาการหรือจิตแพทย์เด็กเพื่อประเมินและวางแผนดูแลอย่างเหมาะสม'
+      : '<b>ข้อแนะนำ:</b> พฤติกรรมและสมาธิของเด็กอยู่ในเกณฑ์ปกติ';
   } else if (activeId === 'mchat') {
     statusLabel = totalScore >= 2 ? 'มีความเสี่ยงภาวะออทิสติก' : 'ความเสี่ยงต่ำ';
-    statusColor = totalScore >= 2 ? 'var(--coral)' : 'var(--brand)';
+    statusColor = totalScore >= 2 ? 'var(--danger)' : 'var(--success)';
     adviceText = totalScore >= 2 
-      ? '<b>ข้อแนะนำ:</b> ผลคัดกรองจัดอยู่ในกลุ่มมีความเสี่ยง ควรส่งต่อเด็กเข้ารับการตรวจวินิจฉัยโดยแพทย์ผู้เชี่ยวชาญ'
-      : '<b>ข้อแนะนำ:</b> พัฒนาการด้านการสื่อสารและสังคมอยู่ในเกณฑ์ปกติ';
+      ? '<b>ข้อแนะนำ:</b> ผลคัดกรองพบสัญญาณความเสี่ยงภาวะออทิสติก ควรประสานงานส่งต่อเด็กเข้ารับการตรวจวินิจฉัยโดยแพทย์ผู้เชี่ยวชาญอย่างสม่ำเสมอ'
+      : '<b>ข้อแนะนำ:</b> พัฒนาการด้านการสื่อสารและปฏิสัมพันธ์ทางสังคมอยู่ในเกณฑ์ปกติ';
   }
 
-  // Display UI
-  document.getElementById('resCode').textContent = tool.code;
-  document.getElementById('resTitle').textContent = `${tool.title} (${activeGroup.name})`;
-  document.getElementById('resScore').textContent = totalScore;
-  document.getElementById('resScore').style.color = statusColor;
-  document.getElementById('resScoreLabel').textContent = 'คะแนนประเมินรวม';
+  // Render Result UI
+  document.getElementById('resultCode').textContent = tool.code;
+  document.getElementById('resultTitle').textContent = `${tool.title} (${activeGroup.name})`;
+  document.getElementById('resultScore').textContent = totalScore;
+  document.getElementById('resultScoreLabel').textContent = 'คะแนนรวมการประเมิน';
   
-  const badge = document.getElementById('resBadge');
+  const badge = document.getElementById('resultBadge');
   badge.textContent = statusLabel;
   badge.style.background = statusColor;
 
-  // Breakdown Card
-  const bdContainer = document.getElementById('resBreakdown');
-  bdContainer.innerHTML = '<div class="section-label" style="margin-bottom:8px;">สรุปคะแนนแยกตามรายด้าน:</div>';
+  // Render Domain Breakdown Card
+  const bdContainer = document.getElementById('resultBreakdown');
+  bdContainer.innerHTML = '<div class="breakdown-title"><i class="fa-solid fa-list-check"></i> สรุปผลการประเมินแยกรายด้าน</div>';
   Object.keys(domainMap).forEach(dKey => {
     const dObj = domainMap[dKey];
     const row = document.createElement('div');
     row.className = 'breakdown-item';
     row.innerHTML = `
       <span>${dKey}</span>
-      <span class="breakdown-tag" style="background:var(--brand-dark);">${dObj.score} / ${dObj.total}</span>
+      <span class="breakdown-tag">${dObj.score} / ${dObj.total}</span>
     `;
     bdContainer.appendChild(row);
   });
   bdContainer.style.display = 'block';
 
-  document.getElementById('resAdvice').innerHTML = adviceText;
+  document.getElementById('resultAdvice').innerHTML = adviceText;
 
   lastReport = {
     title: `${tool.title} (${activeGroup.name})`,
@@ -637,19 +825,19 @@ function processResults() {
     date: new Date().toLocaleDateString('th-TH')
   };
 
-  document.getElementById('viewQuiz').style.display = 'none';
-  document.getElementById('viewResult').style.display = 'block';
+  document.getElementById('view-quiz').style.display = 'none';
+  document.getElementById('view-result').style.display = 'block';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function sendGmail() {
   if (!lastReport) return;
   const mailTo = document.getElementById('emailTo').value.trim();
-  if (!mailTo) { alert('กรุณากรอกระบุอีเมลผู้รับ'); return; }
+  if (!mailTo) { alert('กรุณาระบุอีเมลผู้รับ'); return; }
 
   const subject = encodeURIComponent(`[รายงานผลประเมิน] ${lastReport.code} - ${lastReport.title}`);
   const body = encodeURIComponent(
-    `รายงานผลการประเมินพัฒนาการและพฤติกรรม\n` +
+    `รายงานผลการประเมินพัฒนาการและพฤติกรรมเด็ก\n` +
     `-------------------------------------\n` +
     `แบบประเมิน: ${lastReport.title}\n` +
     `วันที่ทำการประเมิน: ${lastReport.date}\n` +
@@ -661,7 +849,7 @@ function sendGmail() {
   window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(mailTo)}&su=${subject}&body=${body}`, '_blank');
 }
 
-// Start App
+// Start Application
 initApp();
 </script>
 </body>
