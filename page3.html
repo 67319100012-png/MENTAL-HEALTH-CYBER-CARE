@@ -229,7 +229,7 @@
   @media (max-width: 600px) {
     .panel { padding: 22px 18px; }
     header.nav-header { flex-direction: column; gap: 14px; padding: 14px 4%; text-align: center; }
-    .nav-actions { width: 100%; justify-content: center; }
+    .nav-actions { width: 100%; justify-content: center; flex-wrap: wrap; }
   }
 
   .panel-header-actions { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; padding-bottom: 16px; border-bottom: 1px solid var(--border-light); }
@@ -350,7 +350,15 @@
     <span>MENTAL HEALTH CYBER-CARE<small>โครงการ อสม. ฮีลใจ &bull; Clinical Rating Scales</small></span>
   </a>
   <div class="nav-actions">
-    <button class="btn-nav-back" id="navBackBtn" style="display:none;" onclick="showGrid()"><i class="fa-solid fa-grip"></i> เลือกแบบประเมิน</button>
+    <!-- ปุ่มย้อนกลับไปหน้าหลักระบบใหญ่ -->
+    <a href="../index.html" class="btn-nav-prev">
+      <i class="fa-solid fa-arrow-left"></i> กลับหน้าหลักระบบ
+    </a>
+    
+    <!-- ปุ่มย้อนกลับหน้าเลือกแบบประเมิน (แสดงเมื่อทำแบบประเมิน) -->
+    <button class="btn-nav-back" id="navBackBtn" style="display:none;" onclick="showGrid()">
+      <i class="fa-solid fa-grip"></i> เลือกแบบประเมิน
+    </button>
   </div>
 </header>
 
@@ -414,7 +422,7 @@
 
   <section id="view-result" class="panel view-container" style="display:none;">
     <div class="panel-header-actions">
-      <button class="btn-nav-back" onclick="showGrid()"><i class="fa-solid fa-house"></i> กลับสู่หน้าหลัก</button>
+      <button class="btn-nav-back" onclick="showGrid()"><i class="fa-solid fa-house"></i> กลับสู่หน้าหลักแบบประเมิน</button>
     </div>
     <div class="result-head">
       <div class="hero-badge" id="resultCode"></div>
