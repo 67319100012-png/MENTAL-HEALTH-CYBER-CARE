@@ -8,7 +8,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
 <style>
   :root {
     --brand-dark: #1E293B;
@@ -18,19 +17,15 @@
     --teal-light: #E8F1FA;
     --page-bg: #F4F8FC;
     --cream: #FBFCFE;
-
     --primary-grad: linear-gradient(135deg, #5BA3D0 0%, #2563A8 100%);
     --primary-hover: linear-gradient(135deg, #4790BE 0%, #1D4F86 100%);
-
     --text-main: #1E293B;
     --text-muted: #64748B;
     --border: #D6E4F0;
     --border-light: rgba(214, 228, 240, 0.8);
-
     --success: #4C9A7E;
     --warning: #C9922E;
     --danger: #C1654A;
-
     --radius-lg: 24px;
     --radius-md: 16px;
     --radius-sm: 12px;
@@ -38,9 +33,7 @@
     --shadow-md: 0 16px 32px -6px rgba(37, 99, 168, 0.14), 0 6px 12px -4px rgba(37, 99, 168, 0.07);
     --shadow-hover: 0 22px 40px -10px rgba(37, 99, 168, 0.26);
   }
-
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-
   body {
     margin: 0;
     background: var(--page-bg);
@@ -52,7 +45,6 @@
     overflow-x: hidden;
     position: relative;
   }
-
   .bg-blob { position: fixed; border-radius: 50%; filter: blur(90px); z-index: -1; opacity: 0.55; animation: floatBlob 18s infinite alternate ease-in-out; }
   .blob-1 { width: 420px; height: 420px; background: #CFE2F5; top: -110px; left: -110px; }
   .blob-2 { width: 460px; height: 460px; background: #E3EDF7; bottom: -160px; right: -110px; animation-delay: -6s; }
@@ -62,10 +54,7 @@
     50% { transform: translate(60px, 40px) scale(1.15); }
     100% { transform: translate(-40px, 80px) scale(0.9); }
   }
-
   h1, h2, h3, .font-title { font-family: 'Kanit', sans-serif; }
-
-  /* ---- Header Nav ---- */
   header.nav-header {
     background: rgba(251, 252, 254, 0.9);
     backdrop-filter: blur(16px);
@@ -97,7 +86,6 @@
     50% { transform: scale(1.08); box-shadow: 0 8px 20px rgba(37,99,168,0.55); }
   }
   header.nav-header .logo small { display: block; font-family: 'Sarabun', sans-serif; font-weight: 400; font-size: 0.68rem; color: var(--text-muted); }
-
   nav { display: flex; align-items: center; gap: 22px; }
   nav a.nav-cta {
     background: var(--primary-grad); color: #fff; padding: 9px 20px; border-radius: 30px; font-weight: 600;
@@ -109,14 +97,10 @@
     background: var(--primary-hover); transform: translateY(-2px);
     box-shadow: 0 6px 18px rgba(37,99,168,0.4);
   }
-
   @media (max-width: 768px) {
     header.nav-header { flex-direction: row; gap: 12px; padding: 12px 5%; }
   }
-
-  /* ---- Page Hero ---- */
   header.hero { max-width: 900px; margin: 0 auto; padding: 34px 24px 8px; text-align: center; animation: fadeInUp 0.8s ease-out; }
-
   .hero-badge {
     display: inline-flex; align-items: center; gap: 6px;
     padding: 6px 18px; background: rgba(232, 241, 250, 0.9); color: var(--teal-dark);
@@ -129,20 +113,15 @@
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   }
   header.hero p { font-size: 15px; color: var(--text-muted); max-width: 660px; margin: 0 auto; line-height: 1.7; }
-
-  /* ---- Feature Strip ---- */
   .feature-strip { max-width: 900px; margin: 24px auto 6px; padding: 0 20px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
   @media (max-width: 640px) { .feature-strip { grid-template-columns: 1fr; } }
   .feature-item { background: rgba(255,255,255,0.75); border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 18px 16px; text-align: center; box-shadow: var(--shadow-sm); }
   .feature-item i { font-size: 22px; color: var(--teal-dark); margin-bottom: 8px; display: block; }
   .feature-item .ftitle { font-family: 'Kanit', sans-serif; font-weight: 600; font-size: 14.5px; margin-bottom: 4px; }
   .feature-item .fdesc { font-size: 12.5px; color: var(--text-muted); line-height: 1.5; }
-
   main { max-width: 900px; width: 100%; margin: 0 auto; padding: 10px 20px 50px; flex: 1; }
   .view-container { animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
   @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px);} to { opacity: 1; transform: translateY(0);} }
-
-  /* ---- Card Grid ---- */
   .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; margin-top: 10px; }
   .card {
     background: rgba(255, 255, 255, 0.85);
@@ -158,7 +137,6 @@
   .card::after { content:''; position:absolute; inset:0; border-radius: var(--radius-lg); border: 2px solid transparent; transition: border-color 0.3s ease; }
   .card:hover { transform: translateY(-8px) scale(1.02); box-shadow: var(--shadow-hover); background: rgba(255,255,255,0.97); }
   .card:hover::after { border-color: var(--teal-main); }
-
   .card .icon {
     width: 56px; height: 56px; border-radius: var(--radius-md);
     background: var(--primary-grad); color: #fff;
@@ -167,18 +145,14 @@
     transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
   .card:hover .icon { transform: scale(1.12) rotate(6deg); }
-
   .card .code { font-size: 19px; font-weight: 700; margin-bottom: 6px; color: var(--brand-dark); font-family:'Kanit',sans-serif; }
   .card .desc { font-size: 14px; color: var(--text-muted); line-height: 1.55; margin-bottom: 22px; flex: 1; }
   .card .card-footer { display: flex; align-items: center; justify-content: space-between; }
   .card .qcount { font-size: 12.5px; font-weight: 600; color: var(--teal-dark); background: var(--teal-light); border-radius: 20px; padding: 5px 14px; }
   .card .btn-start-text { font-size: 13.5px; color: var(--teal-dark); font-weight: 700; display: flex; align-items: center; gap: 4px; transition: gap 0.2s ease; }
   .card:hover .btn-start-text { gap: 8px; color: var(--teal-main); }
-
-  /* ---- Panels ---- */
   .panel { background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(16px); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); border: 1.5px solid var(--border-light); padding: 36px; margin-top: 18px; }
   @media (max-width: 600px) { .panel { padding: 22px 18px; } }
-
   .btn-ghost {
     display: inline-flex; align-items: center; gap: 8px;
     background: rgba(255,255,255,0.9); border: 1.5px solid var(--teal-soft); color: var(--teal-dark);
@@ -187,10 +161,9 @@
     transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
   .btn-ghost:hover { background: var(--teal-light); border-color: var(--teal-dark); transform: translateY(-2px); }
-
+  .btn-ghost:disabled { opacity: 0.6; cursor: not-allowed; }
   .quiz-title { font-size: 23px; margin: 0 0 6px; color: var(--brand-dark); }
   .quiz-sub { font-size: 14px; color: var(--text-muted); margin: 0 0 22px; line-height: 1.6; }
-
   .progress-wrap { background: var(--teal-light); border-radius: 12px; height: 12px; overflow: hidden; margin-bottom: 28px; position: relative; }
   .progress-fill { background: var(--primary-grad); height: 100%; width: 0%; transition: width 0.4s cubic-bezier(0.4,0,0.2,1); position: relative; border-radius: 12px; }
   .progress-fill::after {
@@ -199,13 +172,11 @@
     animation: shimmer 2s infinite;
   }
   @keyframes shimmer { 0% { transform: translateX(-100%);} 100% { transform: translateX(100%);} }
-
   .question { padding: 20px 0; border-bottom: 1px dashed var(--border); animation: fadeInUp 0.4s ease; }
   .question:last-of-type { border-bottom: none; }
   .question .qnum { font-size: 13px; font-weight: 700; color: var(--teal-dark); margin-bottom: 8px; }
   .question .qtext { font-size: 16px; font-weight: 600; line-height: 1.55; margin-bottom: 14px; color: var(--brand-dark); }
   .options { display: flex; flex-direction: column; gap: 10px; }
-
   .opt {
     display: flex; align-items: center; gap: 12px;
     border: 1.5px solid var(--border-light); border-radius: var(--radius-md);
@@ -223,7 +194,6 @@
     transform: translateX(6px);
     box-shadow: 0 4px 14px rgba(37,99,168,0.16);
   }
-
   .submit-row { margin-top: 28px; text-align: center; }
   .btn-primary {
     background: var(--primary-grad); color: #fff; border: none;
@@ -236,10 +206,7 @@
   }
   .btn-primary:hover:not(:disabled) { background: var(--primary-hover); transform: translateY(-3px) scale(1.02); box-shadow: 0 10px 25px rgba(37,99,168,0.42); }
   .btn-primary:disabled { opacity: 0.45; cursor: not-allowed; transform: none; box-shadow: none; }
-
   .hint { text-align: center; font-size: 13px; color: var(--text-muted); margin-top: 12px; }
-
-  /* ---- Result View & Sub-dimension Bars ---- */
   .result-head { text-align: center; margin-bottom: 14px; }
   .score-big {
     font-size: 58px; font-weight: 700; text-align: center; line-height: 1; margin: 10px 0 6px;
@@ -248,11 +215,9 @@
     font-family: 'Kanit', sans-serif;
   }
   @keyframes popScore { 0% { transform: scale(0.5); opacity: 0;} 100% { transform: scale(1); opacity: 1;} }
-
   .score-label { text-align: center; font-size: 14px; color: var(--text-muted); margin-bottom: 20px; }
   .level-badge { display: inline-block; padding: 8px 24px; border-radius: 30px; font-size: 15px; font-weight: 700; color: #fff; box-shadow: var(--shadow-sm); animation: zoomIn 0.5s ease; font-family: 'Kanit', sans-serif; }
   @keyframes zoomIn { from { transform: scale(0.8); opacity: 0;} to { transform: scale(1); opacity: 1;} }
-
   .dim-bars { margin: 20px 0; background: rgba(232, 241, 250, 0.5); border: 1.5px solid var(--border-light); padding: 20px; border-radius: var(--radius-md); }
   .dim-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; font-size: 14px; }
   .dim-row:last-child { margin-bottom: 0; }
@@ -260,7 +225,6 @@
   .dim-row .bar-track { flex: 1; height: 10px; background: var(--teal-light); border-radius: 10px; overflow: hidden; position: relative; }
   .dim-row .bar-fill { height: 100%; background: var(--primary-grad); border-radius: 10px; transition: width 0.6s cubic-bezier(0.4,0,0.2,1); }
   .dim-row .dval { width: 50px; flex: none; text-align: right; font-weight: 700; font-family: 'Kanit', sans-serif; color: var(--teal-dark); }
-
   .advice-box {
     background: rgba(232, 241, 250, 0.7);
     border: 1.5px solid var(--border);
@@ -269,20 +233,26 @@
     box-shadow: inset 0 2px 6px rgba(37,99,168,0.05);
   }
   .advice-box b { color: var(--teal-dark); }
-
   .email-box { background: rgba(251,252,254,0.9); border: 1.5px solid var(--border-light); border-radius: var(--radius-md); padding: 22px; margin-top: 8px; }
   .email-box label { display: block; font-size: 14px; font-weight: 700; margin-bottom: 12px; color: var(--brand-dark); }
-  .email-row { display: flex; gap: 12px; flex-wrap: wrap; }
-  .email-row input { flex: 1; min-width: 220px; padding: 13px 16px; border-radius: var(--radius-sm); border: 1.5px solid var(--border); font-family: inherit; font-size: 14.5px; outline: none; transition: all 0.25s ease; }
+  .email-row { display: flex; gap: 12px; flex-wrap: wrap; flex-direction: column; }
+  .email-row input { 
+    flex: 1; 
+    min-width: 220px; 
+    padding: 13px 16px; 
+    border-radius: var(--radius-sm); 
+    border: 1.5px solid var(--border); 
+    font-family: inherit; 
+    font-size: 14.5px; 
+    outline: none; 
+    transition: all 0.25s ease; 
+  }
   .email-row input:focus { border-color: var(--teal-dark); box-shadow: 0 0 0 4px rgba(37,99,168,0.18); background: #fff; }
-
   .result-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 28px; }
-
   footer.note { max-width: 900px; margin: 24px auto 30px; padding: 0 20px; text-align: center; font-size: 12.5px; color: var(--text-muted); line-height: 1.7; }
 </style>
 </head>
 <body>
-
 <div class="bg-blob blob-1"></div>
 <div class="bg-blob blob-2"></div>
 <div class="bg-blob blob-3"></div>
@@ -324,7 +294,6 @@
 <main>
   <section id="view-grid" class="grid view-container"></section>
 
-  <!-- Quiz Panel -->
   <section id="view-quiz" class="panel view-container" style="display:none;">
     <button class="btn-ghost" onclick="showGrid()" style="margin-bottom:18px;"><i class="fa-solid fa-grip"></i> เลือกแบบประเมินอื่นในหมวดนี้</button>
     <h2 class="quiz-title" id="quizTitle"></h2>
@@ -337,7 +306,6 @@
     </div>
   </section>
 
-  <!-- Result View Panel -->
   <section id="view-result" class="panel view-container" style="display:none;">
     <button class="btn-ghost" onclick="showGrid()" style="margin-bottom:18px;"><i class="fa-solid fa-grip"></i> เลือกแบบประเมินอื่นในหมวดนี้</button>
     <div class="result-head">
@@ -350,13 +318,17 @@
     <div id="dimBarsWrap"></div>
     <div class="advice-box" id="resultAdvice"></div>
 
+    <!-- ส่วนกรอกชื่อ + เบอร์ (ชื่อตัวเอง) -->
     <div class="email-box">
-      <label for="emailTo"><i class="fa-solid fa-envelope-open-text"></i> ส่งผลไปที่อีเมล</label>
+      <label><i class="fa-solid fa-user-pen"></i> บันทึกชื่อและเบอร์โทรเพื่อส่งผลประเมิน</label>
       <div class="email-row">
-        <input type="email" id="emailTo" value="67319100012@Aitc.ac.th" placeholder="กรอกอีเมลปลายทาง">
-        <button class="btn-ghost" onclick="emailResult()"><i class="fa-solid fa-paper-plane"></i> ส่งผลทางอีเมล</button>
+        <input type="text" id="senderName" placeholder="ชื่อ-นามสกุล (ชื่อตัวเอง)">
+        <input type="tel" id="senderPhone" placeholder="เบอร์โทรศัพท์">
+        <button class="btn-ghost" id="sendEmailBtn" onclick="emailResult()" style="align-self: flex-start;">
+          <i class="fa-solid fa-paper-plane"></i> ส่งผลประเมิน
+        </button>
       </div>
-      <div class="hint">จะเปิดหน้าเขียนอีเมลของ Gmail ในแท็บใหม่ พร้อมกรอกผลให้อัตโนมัติ ท่านเพียงกดส่ง (ต้องเข้าสู่ระบบ Gmail ไว้ก่อน)</div>
+      <div class="hint" id="emailHint">ระบบจะส่งผลประเมินพร้อมชื่อและเบอร์โทรไปยังระบบ Formspree</div>
     </div>
 
     <div class="result-actions">
@@ -389,7 +361,6 @@ const burnoutScale = (reverse)=> reverse ? [
 const agree4 = [
   {label:'ไม่เห็นด้วยเลย', score:0}, {label:'ไม่ค่อยเห็นด้วย', score:1}, {label:'ค่อนข้างเห็นด้วย', score:2}, {label:'เห็นด้วยอย่างยิ่ง', score:3}
 ];
-
 const WHOQOL_ITEMS = [
   {text:'ท่านให้คะแนนคุณภาพชีวิตโดยรวมของท่านอย่างไร', domain:'ทั่วไป', rev:false},
   {text:'ท่านพึงพอใจกับสุขภาพของตนเองมากน้อยเพียงใด', domain:'ทั่วไป', rev:false},
@@ -418,7 +389,6 @@ const WHOQOL_ITEMS = [
   {text:'ท่านสามารถเข้าถึงบริการสาธารณสุขเมื่อจำเป็นได้มากน้อยเพียงใด', domain:'สิ่งแวดล้อม', rev:false},
   {text:'ท่านพึงพอใจกับการเดินทาง/คมนาคมในพื้นที่ของท่านมากน้อยเพียงใด', domain:'สิ่งแวดล้อม', rev:false}
 ];
-
 const HAPPY_ITEMS = [
   {label:'Happy Body', text:'ท่านรู้สึกว่าร่างกายของท่านแข็งแรงเพียงพอสำหรับการดำเนินชีวิตประจำวัน'},
   {label:'Happy Relax', text:'ท่านมีเวลาพักผ่อนคลายเครียดเพียงพอในแต่ละวัน'},
@@ -430,7 +400,6 @@ const HAPPY_ITEMS = [
   {label:'Happy Money', text:'ท่านรู้สึกมั่นคงทางการเงินเพียงพอสำหรับการดำรงชีวิต'},
   {label:'Happy Work', text:'ท่านพึงพอใจกับงานหรือกิจกรรมหลักที่ทำอยู่ในปัจจุบัน'}
 ];
-
 const APGAR_ITEMS = [
   'ฉันพึงพอใจที่สามารถขอความช่วยเหลือจากครอบครัวได้เมื่อมีปัญหา',
   'ฉันพึงพอใจกับวิธีที่ครอบครัวพูดคุยและแบ่งปันปัญหาร่วมกัน',
@@ -438,7 +407,6 @@ const APGAR_ITEMS = [
   'ฉันพึงพอใจกับวิธีที่ครอบครัวแสดงความรักและตอบสนองต่ออารมณ์ของฉัน เช่น ความโกรธ ความเศร้า ความรัก',
   'ฉันพึงพอใจกับเวลาที่ฉันและครอบครัวใช้ร่วมกัน'
 ];
-
 const BURNOUT_ITEMS = [
   {text:'รู้สึกหมดแรงทางอารมณ์จากการทำงาน', rev:false},
   {text:'รู้สึกเหนื่อยล้าตั้งแต่ตื่นนอนเมื่อต้องไปทำงาน', rev:false},
@@ -453,7 +421,6 @@ const BURNOUT_ITEMS = [
   {text:'รู้สึกว่าตนเองสามารถช่วยเหลือผู้อื่นได้ดีผ่านงานที่ทำ', rev:true},
   {text:'รู้สึกมีพลังงานและแรงจูงใจในการทำงาน', rev:true}
 ];
-
 const SOCSUP_ITEMS = [
   {text:'ครอบครัวของฉันพยายามช่วยเหลือฉันอย่างแท้จริง', sub:'ครอบครัว'},
   {text:'ฉันได้รับความช่วยเหลือทางอารมณ์และการสนับสนุนจากครอบครัวเมื่อต้องการ', sub:'ครอบครัว'},
@@ -468,7 +435,6 @@ const SOCSUP_ITEMS = [
   {text:'มีบุคคลที่ใส่ใจความรู้สึกของฉัน', sub:'บุคคลใกล้ชิด'},
   {text:'ฉันมีคนที่ช่วยเหลือฉันได้เมื่อมีปัญหา', sub:'บุคคลใกล้ชิด'}
 ];
-
 const ASSESSMENTS = {
   whoqol:{
     code:'WHOQOL-BREF', icon:'fa-seedling', title:'WHOQOL-BREF', full:'แบบประเมินคุณภาพชีวิต',
@@ -533,7 +499,6 @@ function initGrid(){
     if(a.type==='whoqol') qcount = WHOQOL_ITEMS.length+' ข้อ';
     else if(a.type==='custom') qcount = a.items.length+' ข้อ';
     else qcount = a.questions.length+' ข้อ';
-
     const card = document.createElement('div');
     card.className = 'card';
     card.onclick = ()=>openAssessment(id);
@@ -577,13 +542,10 @@ function openAssessment(id){
   const a = ASSESSMENTS[id];
   document.getElementById('heroHeader').style.display = 'none';
   document.getElementById('featureStrip').style.display = 'none';
-
   document.getElementById('quizTitle').textContent = `${a.title} — ${a.full}`;
   document.getElementById('quizSub').textContent = a.sub;
-
   const list = document.getElementById('questionList');
   list.innerHTML = '';
-
   let qs;
   if(a.type === 'whoqol'){
     qs = WHOQOL_ITEMS.map(it=>({text:it.text, options:scale5}));
@@ -592,7 +554,6 @@ function openAssessment(id){
   } else {
     qs = a.questions.map(t=>({text:t, options:a.options}));
   }
-
   currentAnswers = new Array(qs.length).fill(null);
   qs.forEach((q,i)=>{
     const block = document.createElement('div');
@@ -605,7 +566,6 @@ function openAssessment(id){
     block.innerHTML = `<div class="qnum">ข้อที่ ${i+1} จาก ${qs.length}</div><div class="qtext">${q.text}</div><div class="options">${optsHtml}</div>`;
     list.appendChild(block);
   });
-
   updateProgress();
   hideAllViews();
   document.getElementById('view-quiz').style.display = 'block';
@@ -635,7 +595,6 @@ function updateProgress(){
 function submitQuiz(){
   const a = ASSESSMENTS[currentId];
   document.getElementById('dimBarsWrap').innerHTML = '';
-
   if(a.type === 'whoqol'){
     renderWhoqolResult(a);
   } else if(currentId === 'socsupport'){
@@ -653,7 +612,6 @@ function submitQuiz(){
     lastResult = {code:a.code, full:a.full, score:score, levelLabel:band.label,
       dateStr:new Date().toLocaleDateString('th-TH',{year:'numeric',month:'long',day:'numeric'})};
   }
-
   hideAllViews();
   document.getElementById('view-result').style.display = 'block';
   triggerAnimation('view-result');
@@ -674,18 +632,16 @@ function renderWhoqolResult(a){
   let barsHtml = '';
   domainOrder.forEach(d=>{
     if(!domainTotals[d]) return;
-    const avg = domainTotals[d]/domainCounts[d]; // 1-5
+    const avg = domainTotals[d]/domainCounts[d];
     const pct = Math.round((avg/5)*100);
     overallSum += domainTotals[d]; overallCount += domainCounts[d];
     barsHtml += `<div class="dim-row"><span class="dname">${d}</span><div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div><span class="dval">${pct}%</span></div>`;
   });
   const overallPct = Math.round((overallSum/overallCount/5)*100);
-
   let band;
   if(overallPct < 50) band = {label:'ควรปรับปรุงคุณภาพชีวิต',color:'var(--danger)'};
   else if(overallPct < 70) band = {label:'คุณภาพชีวิตระดับปานกลาง',color:'var(--warning)'};
   else band = {label:'คุณภาพชีวิตระดับดี',color:'var(--success)'};
-
   document.getElementById('resultCode').textContent = a.code;
   document.getElementById('resultTitle').textContent = a.full;
   document.getElementById('resultScore').textContent = overallPct;
@@ -694,7 +650,6 @@ function renderWhoqolResult(a){
   document.getElementById('resultBadgeWrap').innerHTML = `<span class="level-badge" style="background:${band.color}">${band.label}</span>`;
   document.getElementById('dimBarsWrap').innerHTML = `<div class="dim-bars">${barsHtml}</div>`;
   document.getElementById('resultAdvice').innerHTML = `<b>คำแนะนำ:</b> พิจารณาแถบคะแนนแต่ละด้านด้านบน ด้านที่มีคะแนนต่ำสุดคือด้านที่ควรให้ความสำคัญเป็นพิเศษก่อน หากคุณภาพชีวิตโดยรวมอยู่ในระดับต่ำต่อเนื่อง ควรปรึกษา อสม. หรือเจ้าหน้าที่สาธารณสุขในพื้นที่`;
-
   lastResult = {code:a.code, full:a.full, score:overallPct+'/100', levelLabel:band.label,
     dateStr:new Date().toLocaleDateString('th-TH',{year:'numeric',month:'long',day:'numeric'})};
 }
@@ -704,14 +659,12 @@ function renderSocSupportResult(a){
   SOCSUP_ITEMS.forEach((it,i)=>{ subTotals[it.sub] += currentAnswers[i]; });
   const total = currentAnswers.reduce((s,v)=>s+v,0);
   const band = a.bands.find(b=>total>=b.min && total<=b.max) || a.bands[a.bands.length-1];
-
   document.getElementById('resultCode').textContent = a.code;
   document.getElementById('resultTitle').textContent = a.full;
   document.getElementById('resultScore').textContent = total;
   document.getElementById('resultScore').style.color = band.color;
   document.getElementById('resultScoreLabel').textContent = 'คะแนนรวม';
   document.getElementById('resultBadgeWrap').innerHTML = `<span class="level-badge" style="background:${band.color}">${band.label}</span>`;
-
   let barsHtml = '';
   Object.keys(subTotals).forEach(k=>{
     const pct = Math.round((subTotals[k]/12)*100);
@@ -719,29 +672,65 @@ function renderSocSupportResult(a){
   });
   document.getElementById('dimBarsWrap').innerHTML = `<div class="dim-bars">${barsHtml}</div>`;
   document.getElementById('resultAdvice').innerHTML = `<b>คำแนะนำ:</b> ${band.advice}`;
-
   lastResult = {code:a.code, full:a.full, score:total, levelLabel:band.label,
     dateStr:new Date().toLocaleDateString('th-TH',{year:'numeric',month:'long',day:'numeric'})};
 }
 
-function emailResult(){
+async function emailResult(){
   if(!lastResult) return;
-  const to = document.getElementById('emailTo').value.trim();
-  if(!to){ alert('กรุณากรอกอีเมลผู้รับ'); return; }
+
+  const name = document.getElementById('senderName').value.trim();
+  const phone = document.getElementById('senderPhone').value.trim();
+
+  if(!name){ alert('กรุณากรอกชื่อ-นามสกุล'); return; }
+  if(!phone){ alert('กรุณากรอกเบอร์โทรศัพท์'); return; }
+
+  const btn = document.getElementById('sendEmailBtn');
+  const hint = document.getElementById('emailHint');
+
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> กำลังส่ง...';
+  hint.textContent = 'กำลังส่งข้อมูลผ่าน Formspree...';
+
   const {code, full, score, levelLabel, dateStr} = lastResult;
-  const subject = `ผลแบบประเมิน ${code} — ${full}`;
-  const body =
-`ผลแบบประเมินด้านจิตสังคมและความเป็นอยู่ที่ดี (Mental Health Cyber-Care)
 
-แบบประเมิน: ${code} (${full})
-วันที่ทำแบบประเมิน: ${dateStr}
-ผลคะแนน: ${score}
-ระดับผล: ${levelLabel}
+  const formData = new FormData();
+  formData.append('ชื่อ-นามสกุล', name);
+  formData.append('เบอร์โทรศัพท์', phone);
+  formData.append('_subject', `ผลแบบประเมิน ${code} — ${full}`);
+  formData.append('แบบประเมิน', `${code} (${full})`);
+  formData.append('วันที่ทำแบบประเมิน', dateStr);
+  formData.append('ผลคะแนน', score);
+  formData.append('ระดับผล', levelLabel);
+  formData.append('หมายเหตุ', 'ผลนี้เป็นการคัดกรองเบื้องต้นเท่านั้น ไม่ใช่การวินิจฉัยโรค');
+  formData.append('สายด่วน', 'สายด่วนสุขภาพจิต 1323 (ฟรี ตลอด 24 ชม.)');
 
-หมายเหตุ: ผลนี้เป็นการคัดกรองเบื้องต้นเท่านั้น ไม่ใช่การวินิจฉัยโรค
-สายด่วนสุขภาพจิต 1323 (ฟรี ตลอด 24 ชม.)`;
-  const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  window.open(gmailUrl, '_blank');
+  try {
+    const response = await fetch('https://formspree.io/f/xdenprjw', {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'Accept': 'application/json'
+      }
+    });
+
+    if (response.ok) {
+      hint.innerHTML = '<span style="color: var(--success);"><i class="fa-solid fa-circle-check"></i> ส่งผลประเมินเรียบร้อยแล้ว!</span>';
+      btn.innerHTML = '<i class="fa-solid fa-check"></i> ส่งสำเร็จ';
+      
+      setTimeout(() => {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> ส่งผลประเมิน';
+      }, 3000);
+    } else {
+      throw new Error('ส่งไม่สำเร็จ');
+    }
+  } catch (error) {
+    console.error(error);
+    hint.innerHTML = '<span style="color: var(--danger);"><i class="fa-solid fa-circle-exclamation"></i> เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง</span>';
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> ส่งผลประเมิน';
+  }
 }
 
 initGrid();
