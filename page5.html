@@ -8,7 +8,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
 <style>
   :root {
     --brand-dark: #1E293B;
@@ -18,20 +17,16 @@
     --teal-light: #E8F1FA;
     --page-bg: #F4F8FC;
     --cream: #FBFCFE;
-
     --primary-grad: linear-gradient(135deg, #5BA3D0 0%, #2563A8 100%);
     --primary-hover: linear-gradient(135deg, #4790BE 0%, #1D4F86 100%);
-
     --text-main: #1E293B;
     --text-muted: #64748B;
     --border: #D6E4F0;
     --border-light: rgba(214, 228, 240, 0.8);
-
     --success: #4C9A7E;
     --warning: #C9922E;
     --danger: #C1654A;
     --danger-soft: #FBE7E1;
-
     --radius-lg: 24px;
     --radius-md: 16px;
     --radius-sm: 12px;
@@ -39,9 +34,7 @@
     --shadow-md: 0 16px 32px -6px rgba(37, 99, 168, 0.14), 0 6px 12px -4px rgba(37, 99, 168, 0.07);
     --shadow-hover: 0 22px 40px -10px rgba(37, 99, 168, 0.26);
   }
-
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-
   body {
     margin: 0;
     background: var(--page-bg);
@@ -53,7 +46,6 @@
     overflow-x: hidden;
     position: relative;
   }
-
   .bg-blob { position: fixed; border-radius: 50%; filter: blur(90px); z-index: -1; opacity: 0.55; animation: floatBlob 18s infinite alternate ease-in-out; }
   .blob-1 { width: 420px; height: 420px; background: #CFE2F5; top: -110px; left: -110px; }
   .blob-2 { width: 460px; height: 460px; background: #E3EDF7; bottom: -160px; right: -110px; animation-delay: -6s; }
@@ -63,10 +55,7 @@
     50% { transform: translate(60px, 40px) scale(1.15); }
     100% { transform: translate(-40px, 80px) scale(0.9); }
   }
-
   h1, h2, h3, .font-title { font-family: 'Kanit', sans-serif; }
-
-  /* ---- Header ---- */
   header.nav-header {
     background: rgba(251, 252, 254, 0.9);
     backdrop-filter: blur(16px);
@@ -98,7 +87,6 @@
     50% { transform: scale(1.08); box-shadow: 0 8px 20px rgba(37,99,168,0.55); }
   }
   header.nav-header .logo small { display: block; font-family: 'Sarabun', sans-serif; font-weight: 400; font-size: 0.68rem; color: var(--text-muted); }
-
   nav { display: flex; align-items: center; gap: 22px; }
   nav a.nav-cta {
     background: var(--primary-grad); color: #fff; padding: 9px 20px; border-radius: 30px; font-weight: 600;
@@ -110,14 +98,10 @@
     background: var(--primary-hover); transform: translateY(-2px);
     box-shadow: 0 6px 18px rgba(37,99,168,0.4);
   }
-
   @media (max-width: 768px) {
     header.nav-header { flex-direction: row; gap: 12px; padding: 12px 5%; }
   }
-
-  /* ---- Page Hero ---- */
   header.hero { max-width: 900px; margin: 0 auto; padding: 34px 24px 8px; text-align: center; animation: fadeInUp 0.8s ease-out; }
-
   .hero-badge {
     display: inline-flex; align-items: center; gap: 6px;
     padding: 6px 18px; background: rgba(232, 241, 250, 0.9); color: var(--teal-dark);
@@ -130,20 +114,15 @@
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   }
   header.hero p { font-size: 15px; color: var(--text-muted); max-width: 660px; margin: 0 auto; line-height: 1.7; }
-
-  /* ---- Feature Strip ---- */
   .feature-strip { max-width: 900px; margin: 24px auto 6px; padding: 0 20px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
   @media (max-width: 640px) { .feature-strip { grid-template-columns: 1fr; } }
   .feature-item { background: rgba(255,255,255,0.75); border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 18px 16px; text-align: center; box-shadow: var(--shadow-sm); }
   .feature-item i { font-size: 22px; color: var(--teal-dark); margin-bottom: 8px; display: block; }
   .feature-item .ftitle { font-family: 'Kanit', sans-serif; font-weight: 600; font-size: 14.5px; margin-bottom: 4px; }
   .feature-item .fdesc { font-size: 12.5px; color: var(--text-muted); line-height: 1.5; }
-
   main { max-width: 900px; width: 100%; margin: 0 auto; padding: 10px 20px 50px; flex: 1; }
   .view-container { animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
   @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px);} to { opacity: 1; transform: translateY(0);} }
-
-  /* ---- Card Grid ---- */
   .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; margin-top: 10px; }
   .card {
     background: rgba(255, 255, 255, 0.85);
@@ -159,7 +138,6 @@
   .card::after { content:''; position:absolute; inset:0; border-radius: var(--radius-lg); border: 2px solid transparent; transition: border-color 0.3s ease; }
   .card:hover { transform: translateY(-8px) scale(1.02); box-shadow: var(--shadow-hover); background: rgba(255,255,255,0.97); }
   .card:hover::after { border-color: var(--teal-main); }
-
   .card .icon {
     width: 56px; height: 56px; border-radius: var(--radius-md);
     background: var(--primary-grad); color: #fff;
@@ -169,18 +147,14 @@
     transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
   .card:hover .icon { transform: scale(1.12) rotate(6deg); }
-
   .card .code { font-size: 19px; font-weight: 700; margin-bottom: 6px; color: var(--brand-dark); font-family:'Kanit',sans-serif; }
   .card .desc { font-size: 14px; color: var(--text-muted); line-height: 1.55; margin-bottom: 22px; flex: 1; }
   .card .card-footer { display: flex; align-items: center; justify-content: space-between; }
   .card .qcount { font-size: 12.5px; font-weight: 600; color: var(--teal-dark); background: var(--teal-light); border-radius: 20px; padding: 5px 14px; }
   .card .btn-start-text { font-size: 13.5px; color: var(--teal-dark); font-weight: 700; display: flex; align-items: center; gap: 4px; transition: gap 0.2s ease; }
   .card:hover .btn-start-text { gap: 8px; color: var(--teal-main); }
-
-  /* ---- Panels ---- */
   .panel { background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(16px); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); border: 1.5px solid var(--border-light); padding: 36px; margin-top: 18px; }
   @media (max-width: 600px) { .panel { padding: 22px 18px; } }
-
   .btn-ghost {
     display: inline-flex; align-items: center; gap: 8px;
     background: rgba(255,255,255,0.9); border: 1.5px solid var(--teal-soft); color: var(--teal-dark);
@@ -189,10 +163,9 @@
     transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
   .btn-ghost:hover { background: var(--teal-light); border-color: var(--teal-dark); transform: translateY(-2px); }
-
+  .btn-ghost:disabled { opacity: 0.6; cursor: not-allowed; }
   .quiz-title { font-size: 23px; margin: 0 0 6px; color: var(--brand-dark); }
   .quiz-sub { font-size: 14px; color: var(--text-muted); margin: 0 0 22px; line-height: 1.6; }
-
   .staff-banner {
     background: rgba(254, 243, 199, 0.85);
     border: 1.5px solid #F59E0B;
@@ -203,7 +176,6 @@
     margin-bottom: 22px;
     line-height: 1.6;
   }
-
   .progress-wrap { background: var(--teal-light); border-radius: 12px; height: 12px; overflow: hidden; margin-bottom: 28px; position: relative; }
   .progress-fill { background: var(--primary-grad); height: 100%; width: 0%; transition: width 0.4s cubic-bezier(0.4,0,0.2,1); position: relative; border-radius: 12px; }
   .progress-fill::after {
@@ -212,13 +184,11 @@
     animation: shimmer 2s infinite;
   }
   @keyframes shimmer { 0% { transform: translateX(-100%);} 100% { transform: translateX(100%);} }
-
   .question { padding: 20px 0; border-bottom: 1px dashed var(--border); animation: fadeInUp 0.4s ease; }
   .question:last-of-type { border-bottom: none; }
   .question .qnum { font-size: 13px; font-weight: 700; color: var(--teal-dark); margin-bottom: 8px; }
   .question .qtext { font-size: 16px; font-weight: 600; line-height: 1.55; margin-bottom: 14px; color: var(--brand-dark); }
   .options { display: flex; flex-direction: column; gap: 10px; }
-
   .opt {
     display: flex; align-items: center; gap: 12px;
     border: 1.5px solid var(--border-light); border-radius: var(--radius-md);
@@ -236,7 +206,6 @@
     transform: translateX(6px);
     box-shadow: 0 4px 14px rgba(37,99,168,0.16);
   }
-
   .submit-row { margin-top: 28px; text-align: center; }
   .btn-primary {
     background: var(--primary-grad); color: #fff; border: none;
@@ -249,10 +218,7 @@
   }
   .btn-primary:hover:not(:disabled) { background: var(--primary-hover); transform: translateY(-3px) scale(1.02); box-shadow: 0 10px 25px rgba(37,99,168,0.42); }
   .btn-primary:disabled { opacity: 0.45; cursor: not-allowed; transform: none; box-shadow: none; }
-
   .hint { text-align: center; font-size: 13px; color: var(--text-muted); margin-top: 12px; }
-
-  /* ---- Info & Clock Canvas Special Styling ---- */
   .info-body { font-size: 15px; line-height: 1.8; color: var(--text-main); margin-top: 16px; }
   .info-box {
     background: rgba(232, 241, 250, 0.8);
@@ -260,10 +226,8 @@
     border-radius: var(--radius-md);
     padding: 20px; margin: 18px 0; font-size: 14.5px; line-height: 1.65;
   }
-
   .clock-wrap { display: flex; flex-direction: column; align-items: center; gap: 16px; margin: 22px 0; }
   canvas { background: #fff; border: 2px solid var(--border); border-radius: 20px; touch-action: none; cursor: crosshair; box-shadow: var(--shadow-sm); }
-  
   .checklist-item {
     display: flex; align-items: center; justify-content: space-between;
     border: 1.5px solid var(--border-light); border-radius: var(--radius-md);
@@ -276,8 +240,6 @@
   }
   .toggle button.active-yes { background: var(--success); border-color: var(--success); color: #fff; box-shadow: 0 3px 10px rgba(76,154,126,0.3); }
   .toggle button.active-no { background: var(--danger); border-color: var(--danger); color: #fff; box-shadow: 0 3px 10px rgba(193,101,74,0.3); }
-
-  /* ---- Result View ---- */
   .result-head { text-align: center; margin-bottom: 14px; }
   .score-big {
     font-size: 58px; font-weight: 700; text-align: center; line-height: 1; margin: 10px 0 6px;
@@ -286,11 +248,9 @@
     font-family: 'Kanit', sans-serif;
   }
   @keyframes popScore { 0% { transform: scale(0.5); opacity: 0;} 100% { transform: scale(1); opacity: 1;} }
-
   .score-label { text-align: center; font-size: 14px; color: var(--text-muted); margin-bottom: 20px; }
   .level-badge { display: inline-block; padding: 8px 24px; border-radius: 30px; font-size: 15px; font-weight: 700; color: #fff; box-shadow: var(--shadow-sm); animation: zoomIn 0.5s ease; font-family: 'Kanit', sans-serif; }
   @keyframes zoomIn { from { transform: scale(0.8); opacity: 0;} to { transform: scale(1); opacity: 1;} }
-
   .advice-box {
     background: rgba(232, 241, 250, 0.7);
     border: 1.5px solid var(--border);
@@ -299,20 +259,26 @@
     box-shadow: inset 0 2px 6px rgba(37,99,168,0.05);
   }
   .advice-box b { color: var(--teal-dark); }
-
   .email-box { background: rgba(251,252,254,0.9); border: 1.5px solid var(--border-light); border-radius: var(--radius-md); padding: 22px; margin-top: 8px; }
   .email-box label { display: block; font-size: 14px; font-weight: 700; margin-bottom: 12px; color: var(--brand-dark); }
-  .email-row { display: flex; gap: 12px; flex-wrap: wrap; }
-  .email-row input { flex: 1; min-width: 220px; padding: 13px 16px; border-radius: var(--radius-sm); border: 1.5px solid var(--border); font-family: inherit; font-size: 14.5px; outline: none; transition: all 0.25s ease; }
+  .email-row { display: flex; gap: 12px; flex-wrap: wrap; flex-direction: column; }
+  .email-row input { 
+    flex: 1; 
+    min-width: 220px; 
+    padding: 13px 16px; 
+    border-radius: var(--radius-sm); 
+    border: 1.5px solid var(--border); 
+    font-family: inherit; 
+    font-size: 14.5px; 
+    outline: none; 
+    transition: all 0.25s ease; 
+  }
   .email-row input:focus { border-color: var(--teal-dark); box-shadow: 0 0 0 4px rgba(37,99,168,0.18); background: #fff; }
-
   .result-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 28px; }
-
   footer.note { max-width: 900px; margin: 24px auto 30px; padding: 0 20px; text-align: center; font-size: 12.5px; color: var(--text-muted); line-height: 1.7; }
 </style>
 </head>
 <body>
-
 <div class="bg-blob blob-1"></div>
 <div class="bg-blob blob-2"></div>
 <div class="bg-blob blob-3"></div>
@@ -354,7 +320,6 @@
 <main>
   <section id="view-grid" class="grid view-container"></section>
 
-  <!-- Quiz Panel -->
   <section id="view-quiz" class="panel view-container" style="display:none;">
     <button class="btn-ghost" onclick="showGrid()" style="margin-bottom:18px;"><i class="fa-solid fa-grip"></i> เลือกแบบประเมินอื่นในหมวดนี้</button>
     <h2 class="quiz-title" id="quizTitle"></h2>
@@ -370,19 +335,17 @@
     </div>
   </section>
 
-  <!-- Copyright Info Panel -->
   <section id="view-info" class="panel view-container" style="display:none;">
     <button class="btn-ghost" onclick="showGrid()" style="margin-bottom:18px;"><i class="fa-solid fa-grip"></i> เลือกแบบประเมินอื่นในหมวดนี้</button>
     <h2 class="quiz-title" id="infoTitle"></h2>
     <div class="info-body" id="infoBody"></div>
   </section>
 
-  <!-- Clock Drawing Panel -->
   <section id="view-clock" class="panel view-container" style="display:none;">
     <button class="btn-ghost" onclick="showGrid()" style="margin-bottom:18px;"><i class="fa-solid fa-grip"></i> เลือกแบบประเมินอื่นในหมวดนี้</button>
     <h2 class="quiz-title">Clock Drawing Test — ทดสอบการทำงานของสมอง</h2>
     <p class="quiz-sub">ผู้ประเมินขอให้ผู้รับบริการ <b>วาดหน้าปัดนาฬิกาให้ครบ 12 ตัวเลข แล้ววาดเข็มนาฬิกาให้ชี้เวลา 11 นาฬิกา 10 นาที</b> ในกรอบด้านล่าง</p>
-    
+   
     <div class="clock-wrap">
       <canvas id="clockCanvas" width="300" height="300"></canvas>
       <button class="btn-ghost" onclick="clearCanvas()"><i class="fa-solid fa-eraser"></i> ล้างภาพวาด</button>
@@ -393,7 +356,6 @@
     </div>
   </section>
 
-  <!-- Result View Panel -->
   <section id="view-result" class="panel view-container" style="display:none;">
     <button class="btn-ghost" onclick="showGrid()" style="margin-bottom:18px;"><i class="fa-solid fa-grip"></i> เลือกแบบประเมินอื่นในหมวดนี้</button>
     <div class="result-head">
@@ -405,13 +367,17 @@
     <div id="resultBadgeWrap" style="text-align:center;"></div>
     <div class="advice-box" id="resultAdvice"></div>
 
+    <!-- ส่วนกรอกชื่อ + เบอร์ (ชื่อตัวเอง) -->
     <div class="email-box">
-      <label for="emailTo"><i class="fa-solid fa-envelope-open-text"></i> ส่งผลไปที่อีเมล</label>
+      <label><i class="fa-solid fa-user-pen"></i> บันทึกชื่อและเบอร์โทรเพื่อส่งผลประเมิน</label>
       <div class="email-row">
-        <input type="email" id="emailTo" value="67319100012@Aitc.ac.th" placeholder="กรอกอีเมลปลายทาง">
-        <button class="btn-ghost" onclick="emailResult()"><i class="fa-solid fa-paper-plane"></i> ส่งผลทางอีเมล</button>
+        <input type="text" id="senderName" placeholder="ชื่อ-นามสกุล (ชื่อตัวเอง)">
+        <input type="tel" id="senderPhone" placeholder="เบอร์โทรศัพท์">
+        <button class="btn-ghost" id="sendEmailBtn" onclick="emailResult()" style="align-self: flex-start;">
+          <i class="fa-solid fa-paper-plane"></i> ส่งผลประเมิน
+        </button>
       </div>
-      <div class="hint">จะเปิดหน้าเขียนอีเมลของ Gmail ในแท็บใหม่ พร้อมกรอกผลให้อัตโนมัติ ท่านเพียงกดส่ง (ต้องเข้าสู่ระบบ Gmail ไว้ก่อน)</div>
+      <div class="hint" id="emailHint">ระบบจะส่งผลประเมินพร้อมชื่อและเบอร์โทรไปยังระบบ Formspree</div>
     </div>
 
     <div class="result-actions">
@@ -433,7 +399,6 @@ const yesNoScale = (max) => [
   ...(max > 1 ? [{ label: 'ถูกเล็กน้อย (1 คะแนน)', score: 1 }] : []),
   { label: 'ตอบผิด / ทำไม่ได้ (0 คะแนน)', score: 0 }
 ];
-
 const TMSE_ITEMS = [
   { text: 'บอกวัน เดือน ปี ฤดูกาล และวันในสัปดาห์ปัจจุบันได้ถูกต้อง (Orientation: Time)', max: 6 },
   { text: 'บอกสถานที่ปัจจุบัน จังหวัด อำเภอ ตำบล และสถานที่ที่อยู่ได้ถูกต้อง (Orientation: Place)', max: 6 },
@@ -444,7 +409,6 @@ const TMSE_ITEMS = [
   { text: 'ทำตามคำสั่ง 3 ขั้นตอนได้ถูกต้อง (Command)', max: 3 },
   { text: 'วาดรูปห้าเหลี่ยม 2 รูปซ้อนทับกันตามแบบที่กำหนดได้ (Visuospatial)', max: 2 }
 ];
-
 const IQ_ITEMS = [
   { text: 'อนุกรมตัวเลข: 2, 4, 6, 8, ? ตัวถัดไปคือเลขอะไร', options: ['9', '10', '11', '12'], answer: 1 },
   { text: 'อนุกรมตัวอักษร: A, C, E, G, ? ตัวถัดไปคือตัวอะไร', options: ['H', 'I', 'J', 'F'], answer: 1 },
@@ -457,14 +421,12 @@ const IQ_ITEMS = [
   { text: 'อนุกรมตัวเลข: 1, 1, 2, 3, 5, 8, ? ตัวถัดไปคือเลขอะไร', options: ['10', '11', '13', '15'], answer: 2 },
   { text: 'ถ้าพับกระดาษสี่เหลี่ยมครึ่งหนึ่งสองครั้ง จะได้กระดาษกี่ส่วน', options: ['2', '3', '4', '8'], answer: 2 }
 ];
-
 const CLOCK_CRITERIA = [
   { id: 0, text: 'วาดวงกลมหรือโครงสร้างหน้าปัดได้สมบูรณ์ใกล้เคียงวงกลม' },
   { id: 1, text: 'มีตัวเลข 1-12 ครบถ้วนและวางอยู่ในตำแหน่งที่เหมาะสม' },
   { id: 2, text: 'มีเข็มนาฬิกา 2 เล่ม (สั้นและยาว) จุดศูนย์กลางชัดเจน' },
   { id: 3, text: 'เข็มชี้บอกเวลา 11 นาฬิกา 10 นาที ได้ถูกต้อง' }
 ];
-
 const ASSESSMENTS = {
   tmse: {
     code: 'TMSE', title: 'TMSE', full: 'แบบทดสอบสภาพสมองฉบับย่อ (Thai Mini-Mental State Examination)',
@@ -505,7 +467,6 @@ function initGrid() {
     if (a.type === 'sum' || a.type === 'iq') qcount = a.items.length + ' ข้อ';
     else if (a.type === 'clock') qcount = 'วาดภาพ + 4 เกณฑ์';
     else qcount = 'ข้อมูลเครื่องมือ';
-
     const card = document.createElement('div');
     card.className = 'card';
     card.onclick = () => openAssessment(id);
@@ -549,7 +510,6 @@ function openAssessment(id) {
   const a = ASSESSMENTS[id];
   document.getElementById('heroHeader').style.display = 'none';
   document.getElementById('featureStrip').style.display = 'none';
-
   if (a.type === 'info') {
     renderInfo(id);
     hideAllViews();
@@ -565,17 +525,14 @@ function openAssessment(id) {
     document.getElementById('quizTitle').textContent = `${a.title} — ${a.full}`;
     document.getElementById('quizSub').textContent = a.sub;
     document.getElementById('quizStaffBanner').style.display = a.staffOnly ? 'block' : 'none';
-
     const list = document.getElementById('questionList');
     list.innerHTML = '';
     currentAnswers = new Array(a.items.length).fill(null);
-
     a.items.forEach((it, i) => {
       const block = document.createElement('div');
       block.className = 'question';
       block.style.animationDelay = `${i * 0.04}s`;
       let optsHtml = '';
-
       if (a.type === 'sum') {
         const opts = yesNoScale(it.max);
         opts.forEach((opt, j) => {
@@ -590,7 +547,6 @@ function openAssessment(id) {
       }
       list.appendChild(block);
     });
-
     updateProgress();
     hideAllViews();
     document.getElementById('view-quiz').style.display = 'block';
@@ -628,7 +584,6 @@ function submitQuiz() {
       if (ans === a.items[i].answer) score++;
     });
   }
-
   const band = a.bands.find(b => score >= b.min && score <= b.max) || a.bands[0];
   showResult(score, a.type === 'sum' ? 30 : 10, band);
 }
@@ -658,24 +613,20 @@ function renderInfo(id) {
   }
 }
 
-/* ---- Clock Canvas Logic ---- */
 let canvas, ctx, isDrawing = false;
 function initClockCanvas() {
   canvas = document.getElementById('clockCanvas');
   ctx = canvas.getContext('2d');
   clearCanvas();
-
   const getPos = (e) => {
     const rect = canvas.getBoundingClientRect();
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
     const clientY = e.touches ? e.touches[0].clientY : e.clientY;
     return { x: clientX - rect.left, y: clientY - rect.top };
   };
-
   const startDraw = (e) => { isDrawing = true; const p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); };
   const draw = (e) => { if (!isDrawing) return; e.preventDefault(); const p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); };
   const stopDraw = () => { isDrawing = false; };
-
   canvas.onmousedown = startDraw; canvas.onmousemove = draw; canvas.onmouseup = stopDraw;
   canvas.ontouchstart = startDraw; canvas.ontouchmove = draw; canvas.ontouchend = stopDraw;
 }
@@ -726,24 +677,19 @@ function submitClock() {
   let band = { label: 'อยู่ในเกณฑ์ปกติ', color: 'var(--success)', advice: 'ผู้รับบริการสามารถวาดรูปนาฬิกาได้ถูกต้อง สะท้อนการทำงานของสมองในเกณฑ์ปกติ' };
   if (score <= 2) band = { label: 'บกพร่องชัดเจน', color: 'var(--danger)', advice: 'พบความบกพร่องในการวาดนาฬิกา ควรส่งพบแพทย์เพื่อตรวจประเมินสมองอย่างละเอียด' };
   else if (score === 3) band = { label: 'บกพร่องเล็กน้อย', color: 'var(--warning)', advice: 'วาดภาพได้สมบูรณ์บางส่วน ควรติดตามผลประเมินเพิ่มเติม' };
-
   showResult(score, 4, band);
 }
 
 function showResult(score, maxScore, band) {
   const a = ASSESSMENTS[currentId];
   lastResult = { score, maxScore, band, code: a.code, title: a.full };
-
   document.getElementById('resultCode').textContent = `RESULT: ${a.code}`;
   document.getElementById('resultTitle').textContent = a.full;
   document.getElementById('resultScore').textContent = `${score} / ${maxScore}`;
   document.getElementById('resultScoreLabel').textContent = `คะแนนที่ได้ (จากคะแนนเต็ม ${maxScore} คะแนน)`;
-
   const badgeWrap = document.getElementById('resultBadgeWrap');
   badgeWrap.innerHTML = `<span class="level-badge" style="background:${band.color}">${band.label}</span>`;
-
   document.getElementById('resultAdvice').innerHTML = `<b><i class="fa-solid fa-comment-medical"></i> คำแนะนำ:</b> ${band.advice}`;
-
   hideAllViews();
   document.getElementById('view-result').style.display = 'block';
   triggerAnimation('view-result');
@@ -755,24 +701,59 @@ function reopenLast() {
   else showGrid();
 }
 
-function emailResult() {
+async function emailResult() {
   if (!lastResult) return;
-  const email = document.getElementById('emailTo').value.trim();
-  if (!email) { alert('กรุณากรอกอีเมลปลายทาง'); return; }
 
-  const subject = encodeURIComponent(`ผลการประเมิน ${lastResult.code} - โครงการ อสม. ฮีลใจ`);
-  const body = encodeURIComponent(
-    `ผลการประเมินสุขภาพปัญญาและสติปัญญา\n` +
-    `--------------------------------------\n` +
-    `แบบประเมิน: ${lastResult.title} (${lastResult.code})\n` +
-    `คะแนนที่ได้: ${lastResult.score} / ${lastResult.maxScore}\n` +
-    `ผลการประเมิน: ${lastResult.band.label}\n` +
-    `คำแนะนำ: ${lastResult.band.advice.replace(/<[^>]*>?/gm, '')}\n\n` +
-    `ประเมินเมื่อ: ${new Date().toLocaleString('th-TH')}\n` +
-    `ระบบ Mental Health Cyber-Care - โครงการ อสม. ฮีลใจ`
-  );
+  const name = document.getElementById('senderName').value.trim();
+  const phone = document.getElementById('senderPhone').value.trim();
 
-  window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${subject}&body=${body}`, '_blank');
+  if (!name) { alert('กรุณากรอกชื่อ-นามสกุล'); return; }
+  if (!phone) { alert('กรุณากรอกเบอร์โทรศัพท์'); return; }
+
+  const btn = document.getElementById('sendEmailBtn');
+  const hint = document.getElementById('emailHint');
+
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> กำลังส่ง...';
+  hint.textContent = 'กำลังส่งข้อมูลผ่าน Formspree...';
+
+  const formData = new FormData();
+  formData.append('ชื่อ-นามสกุล', name);
+  formData.append('เบอร์โทรศัพท์', phone);
+  formData.append('_subject', `ผลการประเมิน ${lastResult.code} - โครงการ อสม. ฮีลใจ`);
+  formData.append('แบบประเมิน', `${lastResult.title} (${lastResult.code})`);
+  formData.append('คะแนนที่ได้', `${lastResult.score} / ${lastResult.maxScore}`);
+  formData.append('ผลการประเมิน', lastResult.band.label);
+  formData.append('คำแนะนำ', lastResult.band.advice.replace(/<[^>]*>?/gm, ''));
+  formData.append('ประเมินเมื่อ', new Date().toLocaleString('th-TH'));
+  formData.append('ระบบ', 'Mental Health Cyber-Care - โครงการ อสม. ฮีลใจ');
+
+  try {
+    const response = await fetch('https://formspree.io/f/xdenprjw', {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'Accept': 'application/json'
+      }
+    });
+
+    if (response.ok) {
+      hint.innerHTML = '<span style="color: var(--success);"><i class="fa-solid fa-circle-check"></i> ส่งผลประเมินเรียบร้อยแล้ว!</span>';
+      btn.innerHTML = '<i class="fa-solid fa-check"></i> ส่งสำเร็จ';
+      
+      setTimeout(() => {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> ส่งผลประเมิน';
+      }, 3000);
+    } else {
+      throw new Error('ส่งไม่สำเร็จ');
+    }
+  } catch (error) {
+    console.error(error);
+    hint.innerHTML = '<span style="color: var(--danger);"><i class="fa-solid fa-circle-exclamation"></i> เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง</span>';
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> ส่งผลประเมิน';
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
