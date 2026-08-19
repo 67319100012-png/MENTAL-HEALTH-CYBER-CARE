@@ -1,1 +1,855 @@
-afagfaf
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>แบบประเมินภาวะซึมเศร้าหลังคลอด EPDS - Mental Health Cyber-Care</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+  :root {
+    --brand-dark: #1E293B;
+    --teal-dark: #2563A8;
+    --teal-main: #4A90C4;
+    --teal-soft: #A9CDE8;
+    --teal-light: #E8F1FA;
+    --page-bg: #F4F8FC;
+    --cream: #FBFCFE;
+
+    --primary-grad: linear-gradient(135deg, #5BA3D0 0%, #2563A8 100%);
+    --primary-hover: linear-gradient(135deg, #4790BE 0%, #1D4F86 100%);
+    --accent-grad: linear-gradient(135deg, #C9A227 0%, #E8C468 100%);
+
+    --text-main: #1E293B;
+    --text-muted: #64748B;
+    --border: #D6E4F0;
+    --border-light: rgba(214, 228, 240, 0.8);
+
+    --success: #4C9A7E;
+    --warning: #C9922E;
+    --danger: #C1654A;
+
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --radius-sm: 12px;
+    --shadow-sm: 0 4px 14px rgba(37, 99, 168, 0.10);
+    --shadow-md: 0 16px 32px -6px rgba(37, 99, 168, 0.14), 0 6px 12px -4px rgba(37, 99, 168, 0.07);
+    --shadow-hover: 0 22px 40px -10px rgba(37, 99, 168, 0.26);
+  }
+
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    margin: 0;
+    background: var(--page-bg);
+    font-family: 'Sarabun', sans-serif;
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  .bg-blob {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(90px);
+    z-index: -1;
+    opacity: 0.55;
+    animation: floatBlob 18s infinite alternate ease-in-out;
+  }
+  .blob-1 { width: 420px; height: 420px; background: #CFE2F5; top: -110px; left: -110px; }
+  .blob-2 { width: 460px; height: 460px; background: #E3EDF7; bottom: -160px; right: -110px; animation-delay: -6s; }
+  .blob-3 { width: 320px; height: 320px; background: #D8E9F7; top: 40%; left: 50%; transform: translate(-50%, -50%); animation-delay: -12s; }
+
+  @keyframes floatBlob {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(60px, 40px) scale(1.15); }
+    100% { transform: translate(-40px, 80px) scale(0.9); }
+  }
+
+  h1, h2, h3, .font-title { font-family: 'Kanit', sans-serif; }
+
+  header.nav-header {
+    background: rgba(251, 250, 243, 0.9);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border-light);
+    padding: 14px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+  }
+
+  header.nav-header .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Kanit', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--teal-dark);
+    text-decoration: none;
+  }
+  header.nav-header .logo .badge {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--primary-grad); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 12px rgba(37, 99, 168, 0.35);
+    animation: pulseIcon 3s infinite ease-in-out;
+  }
+  @keyframes pulseIcon {
+    0%, 100% { transform: scale(1); box-shadow: 0 4px 12px rgba(37, 99, 168, 0.35); }
+    50% { transform: scale(1.08); box-shadow: 0 8px 20px rgba(37, 99, 168, 0.55); }
+  }
+  header.nav-header .logo small { display: block; font-family: 'Sarabun', sans-serif; font-weight: 400; font-size: 0.72rem; color: var(--text-muted); }
+
+  .nav-actions { display: flex; align-items: center; gap: 12px; }
+
+  .btn-nav-prev {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--primary-grad); color: #ffffff;
+    padding: 10px 20px; border-radius: 30px;
+    font-size: 14px; font-weight: 600; text-decoration: none; cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 4px 14px rgba(37, 99, 168, 0.3);
+  }
+  .btn-nav-prev:hover { background: var(--primary-hover); transform: translateY(-3px) scale(1.03); box-shadow: 0 8px 20px rgba(37, 99, 168, 0.42); }
+
+  .btn-nav-back {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1.5px solid var(--teal-soft); color: var(--teal-dark);
+    padding: 9px 18px; border-radius: 30px;
+    font-size: 13.5px; font-weight: 600; cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 2px 10px rgba(37, 99, 168, 0.12);
+  }
+  .btn-nav-back:hover { background: var(--teal-light); border-color: var(--teal-dark); transform: translateY(-2px) scale(1.03); }
+
+  header.hero { max-width: 900px; margin: 0 auto; padding: 40px 20px 10px; text-align: center; animation: fadeInUp 0.8s ease-out; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 18px; background: rgba(232, 241, 250, 0.9); color: var(--teal-dark);
+    border-radius: 20px; font-size: 12px; font-weight: 700; letter-spacing: 0.5px;
+    margin-bottom: 16px; border: 1px solid var(--teal-soft);
+  }
+  header.hero h1 {
+    font-size: clamp(28px, 4.5vw, 40px); margin: 0 0 14px; line-height: 1.25;
+    background: linear-gradient(135deg, #1E293B 0%, #2563A8 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  header.hero p { font-size: 15.5px; color: var(--text-muted); max-width: 680px; margin: 0 auto; line-height: 1.65; }
+
+  .staff-global-alert {
+    max-width: 900px; margin: 18px auto 0; padding: 0 20px;
+  }
+  .staff-global-box {
+    background: rgba(255, 251, 235, 0.9); border: 1.5px dashed var(--warning);
+    border-radius: var(--radius-md); padding: 14px 20px; font-size: 13.5px;
+    color: #854D0E; line-height: 1.6; display: flex; align-items: flex-start; gap: 12px;
+  }
+  .staff-global-box i { font-size: 18px; color: var(--warning); margin-top: 2px; flex-shrink: 0; }
+
+  .feature-strip {
+    max-width: 900px; margin: 24px auto 6px; padding: 0 20px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  }
+  @media (max-width: 640px) { .feature-strip { grid-template-columns: 1fr; } }
+  .feature-item {
+    background: rgba(255,255,255,0.75); border: 1px solid var(--border-light);
+    border-radius: var(--radius-md); padding: 18px 16px; text-align: center;
+    box-shadow: var(--shadow-sm);
+  }
+  .feature-item i { font-size: 22px; color: var(--teal-dark); margin-bottom: 8px; display:block; }
+  .feature-item .ftitle { font-family:'Kanit',sans-serif; font-weight:600; font-size: 14.5px; margin-bottom: 4px; }
+  .feature-item .fdesc { font-size: 12.5px; color: var(--text-muted); line-height: 1.5; }
+
+  main { max-width: 900px; width: 100%; margin: 0 auto; padding: 10px 20px 50px; flex: 1; }
+
+  .view-container { animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px);} to { opacity: 1; transform: translateY(0);} }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; margin-top: 10px; }
+  .card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    border-radius: var(--radius-lg);
+    padding: 26px;
+    border: 1.5px solid var(--border-light);
+    box-shadow: var(--shadow-md);
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: flex; flex-direction: column; position: relative; overflow: hidden;
+  }
+  .card::after { content:''; position:absolute; inset:0; border-radius: var(--radius-lg); border: 2px solid transparent; transition: border-color 0.3s ease; }
+  .card:hover { transform: translateY(-8px) scale(1.02); box-shadow: var(--shadow-hover); background: rgba(255,255,255,0.97); }
+  .card:hover::after { border-color: var(--teal-main); }
+
+  .card .icon {
+    width: 56px; height: 56px; border-radius: var(--radius-md);
+    background: var(--primary-grad); color: #fff;
+    display: flex; align-items: center; justify-content: center; font-size: 22px;
+    margin-bottom: 18px; box-shadow: 0 8px 16px rgba(37, 99, 168, 0.3);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .card:hover .icon { transform: scale(1.12) rotate(6deg); }
+
+  .card .staff-badge {
+    position: absolute; top: 16px; right: 16px;
+    background: rgba(201, 146, 46, 0.15); border: 1px solid var(--warning);
+    color: #9A6500; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px;
+  }
+
+  .card .code { font-size: 20px; font-weight: 700; margin-bottom: 6px; color: var(--brand-dark); font-family: 'Kanit', sans-serif; }
+  .card .desc { font-size: 14px; color: var(--text-muted); line-height: 1.55; margin-bottom: 22px; flex: 1; }
+  .card .card-footer { display: flex; align-items: center; justify-content: space-between; }
+  .card .qcount { font-size: 12.5px; font-weight: 600; color: var(--teal-dark); background: var(--teal-light); border-radius: 20px; padding: 5px 14px; }
+  .card .btn-start-text { font-size: 13.5px; color: var(--teal-dark); font-weight: 700; display: flex; align-items: center; gap: 4px; transition: gap 0.2s ease; }
+  .card:hover .btn-start-text { gap: 8px; color: var(--teal-main); }
+
+  .panel {
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(16px);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    border: 1.5px solid var(--border-light);
+    padding: 36px;
+  }
+  @media (max-width: 600px) {
+    .panel { padding: 22px 18px; }
+    header.nav-header { flex-direction: column; gap: 14px; padding: 14px 4%; text-align: center; }
+    .nav-actions { width: 100%; justify-content: center; flex-wrap: wrap; }
+  }
+
+  .panel-header-actions { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; padding-bottom: 16px; border-bottom: 1px solid var(--border-light); }
+
+  .quiz-title { font-size: 24px; margin: 0 0 6px; color: var(--brand-dark); }
+  .quiz-sub { font-size: 14.5px; color: var(--text-muted); margin: 0 0 20px; line-height: 1.6; }
+
+  .staff-banner-panel {
+    background: rgba(254, 243, 199, 0.7); border: 1.5px dashed #D97706;
+    border-radius: var(--radius-md); padding: 14px 18px; font-size: 13.5px;
+    color: #92400E; margin-bottom: 22px; line-height: 1.6; display: flex; gap: 12px; align-items: center;
+  }
+
+  .progress-wrap { background: var(--teal-light); border-radius: 12px; height: 12px; overflow: hidden; margin-bottom: 30px; position: relative; }
+  .progress-fill { background: var(--primary-grad); height: 100%; width: 0%; transition: width 0.4s cubic-bezier(0.4,0,0.2,1); position: relative; border-radius: 12px; }
+  .progress-fill::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+    animation: shimmer 2s infinite;
+  }
+  @keyframes shimmer { 0% { transform: translateX(-100%);} 100% { transform: translateX(100%);} }
+
+  .question { padding: 22px 0; border-bottom: 1px dashed var(--border); animation: fadeInUp 0.4s ease; }
+  .question:last-child { border-bottom: none; }
+  .question .qnum { font-size: 13.5px; font-weight: 700; color: var(--teal-dark); margin-bottom: 8px; }
+  .question .qtext { font-size: 16.5px; font-weight: 600; line-height: 1.55; margin-bottom: 16px; color: var(--brand-dark); }
+  .options { display: flex; flex-direction: column; gap: 12px; }
+
+  .opt {
+    display: flex; align-items: center; gap: 14px;
+    border: 1.5px solid var(--border-light); border-radius: var(--radius-md);
+    padding: 15px 18px; cursor: pointer; font-size: 15px;
+    background: rgba(255, 255, 255, 0.8);
+    transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+    user-select: none; min-height: 52px; position: relative;
+  }
+  .opt:hover { border-color: var(--teal-main); background: var(--teal-light); transform: translateX(4px); }
+  .opt input { accent-color: var(--teal-dark); width: 19px; height: 19px; flex-shrink: 0; }
+  .opt.selected {
+    border-color: var(--teal-dark);
+    background: linear-gradient(90deg, var(--teal-light) 0%, #D6EAE2 100%);
+    font-weight: 600; color: var(--teal-dark);
+    transform: translateX(6px);
+    box-shadow: 0 4px 14px rgba(37, 99, 168, 0.16);
+  }
+
+  .btn-primary {
+    background: var(--primary-grad); color: #fff; border: none;
+    padding: 15px 38px; border-radius: 30px;
+    font-size: 15.5px; font-weight: 700; cursor: pointer;
+    box-shadow: 0 6px 20px rgba(37, 99, 168, 0.32);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    width: 100%; max-width: 320px;
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  }
+  .btn-primary:hover:not(:disabled) { background: var(--primary-hover); transform: translateY(-3px) scale(1.02); box-shadow: 0 10px 25px rgba(37, 99, 168, 0.42); }
+  .btn-primary:disabled { opacity: 0.45; cursor: not-allowed; transform: none; box-shadow: none; }
+
+  .btn-secondary {
+    background: #fff; border: 1.5px solid var(--teal-soft); color: var(--teal-dark);
+    padding: 13px 26px; border-radius: 30px;
+    font-size: 14.5px; font-weight: 600; cursor: pointer;
+    transition: all 0.25s ease;
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .btn-secondary:hover { background: var(--teal-light); border-color: var(--teal-dark); transform: translateY(-2px); }
+
+  .submit-row { margin-top: 32px; text-align: center; }
+  .hint { text-align: center; font-size: 13.5px; color: var(--text-muted); margin-top: 12px; }
+
+  .result-head { text-align: center; margin-bottom: 16px; }
+  .score-big {
+    font-size: 64px; font-weight: 700; text-align: center; line-height: 1; margin: 12px 0 6px;
+    background: var(--primary-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    animation: popScore 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  @keyframes popScore { 0% { transform: scale(0.5); opacity: 0;} 100% { transform: scale(1); opacity: 1;} }
+
+  .score-label { text-align: center; font-size: 14.5px; color: var(--text-muted); margin-bottom: 22px; }
+  .level-badge { display: inline-block; padding: 8px 26px; border-radius: 30px; font-size: 15.5px; font-weight: 700; color: #fff; box-shadow: var(--shadow-sm); animation: zoomIn 0.5s ease; }
+  @keyframes zoomIn { from { transform: scale(0.8); opacity: 0;} to { transform: scale(1); opacity: 1;} }
+
+  .advice-box {
+    background: rgba(232, 241, 250, 0.7);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 24px; font-size: 15.5px; line-height: 1.75; margin: 24px 0 16px;
+    box-shadow: inset 0 2px 6px rgba(37, 99, 168, 0.05);
+  }
+  .advice-box b { color: var(--teal-dark); }
+
+  .crisis-box {
+    background: rgba(254, 226, 226, 0.8); border: 1.5px solid var(--danger);
+    border-radius: var(--radius-md); padding: 22px; font-size: 15px; line-height: 1.7; margin-bottom: 24px; color: #991B1B;
+  }
+  .crisis-box .crisis-title { font-family: 'Kanit', sans-serif; font-size: 17px; font-weight: 700; color: #7F1D1D; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+
+  .email-box { background: rgba(251,250,243,0.9); border: 1.5px solid var(--border-light); border-radius: var(--radius-md); padding: 22px; margin-top: 26px; }
+  .email-box label { display: block; font-size: 14px; font-weight: 700; margin-bottom: 12px; color: var(--brand-dark); }
+  .email-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .email-row input { flex: 1; min-width: 240px; padding: 13px 18px; border-radius: var(--radius-sm); border: 1.5px solid var(--border); font-family: inherit; font-size: 14.5px; outline: none; transition: all 0.25s ease; }
+  .email-row input:focus { border-color: var(--teal-dark); box-shadow: 0 0 0 4px rgba(37, 99, 168, 0.18); background: #fff; }
+
+  .result-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 32px; }
+
+  footer.note { max-width: 900px; margin: 24px auto 30px; padding: 0 20px; text-align: center; font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<div class="bg-blob blob-1"></div>
+<div class="bg-blob blob-2"></div>
+<div class="bg-blob blob-3"></div>
+
+<header class="nav-header">
+  <a href="#" onclick="showGrid()" class="logo">
+    <span class="badge"><i class="fa-solid fa-baby-carriage"></i></span>
+    <span>MENTAL HEALTH CYBER-CARE<small>โครงการ อสม. ฮีลใจ &bull; Postnatal Care EPDS</small></span>
+  </a>
+  <div class="nav-actions">
+    <a href="assessment.html" class="btn-nav-prev">
+      <i class="fa-solid fa-arrow-left"></i> ย้อนกลับหน้าหลัก
+    </a>
+    
+    <button class="btn-nav-back" id="navBackBtn" style="display:none;" onclick="showGrid()">
+      <i class="fa-solid fa-grip"></i> เลือกแบบประเมิน
+    </button>
+  </div>
+</header>
+
+<div id="heroWrapper">
+  <header class="hero">
+    <span class="hero-badge"><i class="fa-solid fa-heart-pulse"></i> EPDS ASSESSMENT</span>
+    <h1>แบบประเมินภาวะซึมเศร้าหลังคลอด EPDS</h1>
+    <p>แบบประเมินภาวะซึมเศร้าหลังคลอด EPDS (Edinburgh Postnatal Depression Scale) เป็นเครื่องมือคัดกรองมาตรฐานสากลที่ใช้ประเมินความรู้สึกของคุณแม่ในช่วง 7 วันที่ผ่านมา</p>
+  </header>
+
+  <div class="staff-global-alert">
+    <div class="staff-global-box">
+      <i class="fa-solid fa-circle-exclamation"></i>
+      <div>
+        <b>ข้อแนะนำในการใช้งาน:</b> โปรดเลือกคำตอบที่ตรงกับความรู้สึกที่แท้จริงของคุณแม่มากที่สุดในระยะ <b>7 วันที่ผ่านมา</b> หาก อสม. หรือเจ้าหน้าที่สาธารณสุขเป็นผู้ประเมิน กรุณาซักถามอย่างนุ่มนวลและรับฟังอย่างเข้าใจ
+      </div>
+    </div>
+  </div>
+
+  <div class="feature-strip">
+    <div class="feature-item">
+      <i class="fa-solid fa-calendar-week"></i>
+      <div class="ftitle">ประเมินย้อนหลัง 7 วัน</div>
+      <div class="fdesc">สะท้อนสภาวะอารมณ์และจิตใจของคุณแม่ในสัปดาห์ที่ผ่านมา</div>
+    </div>
+    <div class="feature-item">
+      <i class="fa-solid fa-clipboard-check"></i>
+      <div class="ftitle">เกณฑ์มาตรฐาน EPDS</div>
+      <div class="fdesc">10 ข้อคำถาม คัดกรองความเสี่ยงภาวะซึมเศร้าหลังคลอดสากล</div>
+    </div>
+    <div class="feature-item">
+      <i class="fa-solid fa-user-shield"></i>
+      <div class="ftitle">ปลอดภัยเป็นความลับ</div>
+      <div class="fdesc">ไม่มีการจัดเก็บข้อมูลส่วนบุคคลลงเซิร์ฟเวอร์ใด ๆ</div>
+    </div>
+  </div>
+</div>
+
+<main>
+  <section id="view-grid" class="grid view-container"></section>
+
+  <section id="view-quiz" class="panel view-container" style="display:none;">
+    <div class="panel-header-actions">
+      <button class="btn-nav-back" onclick="showGrid()"><i class="fa-solid fa-arrow-left"></i> ย้อนกลับไปหน้าเลือกแบบประเมิน</button>
+    </div>
+    <h2 class="quiz-title" id="quizTitle"></h2>
+    <p class="quiz-sub" id="quizSub"></p>
+    
+    <div id="quizStaffBanner" class="staff-banner-panel" style="display:none;">
+      <i class="fa-solid fa-user-doctor"></i>
+      <div><b>สำหรับ อสม. / ผู้ประเมิน:</b> กรุณาทำการสัมภาษณ์และสอบถามความรู้สึกของคุณแม่อย่างเป็นกันเอง แล้วจึงประเมินลงคะแนนในแต่ละข้อ</div>
+    </div>
+
+    <div class="progress-wrap"><div class="progress-fill" id="progressFill"></div></div>
+    <div id="questionList"></div>
+    <div class="submit-row">
+      <button class="btn-primary" id="submitBtn" disabled onclick="submitQuiz()"><i class="fa-solid fa-paper-plane"></i> ประมวลผลการประเมิน</button>
+      <div class="hint" id="progressHint"></div>
+    </div>
+  </section>
+
+  <section id="view-result" class="panel view-container" style="display:none;">
+    <div class="panel-header-actions">
+      <button class="btn-nav-back" onclick="showGrid()"><i class="fa-solid fa-house"></i> กลับสู่หน้าหลักแบบประเมิน</button>
+    </div>
+    <div class="result-head">
+      <div class="hero-badge" id="resultCode"></div>
+      <h2 class="quiz-title" id="resultTitle" style="margin-top:4px;"></h2>
+    </div>
+    <div class="score-big" id="resultScore"></div>
+    <div class="score-label" id="resultScoreLabel">คะแนนรวมทั้งหมด (เต็ม 30 คะแนน)</div>
+    <div id="resultBadgeWrap" style="text-align:center;"></div>
+    
+    <div class="advice-box" id="resultAdvice"></div>
+    
+    <div class="crisis-box" id="resultCrisis" style="display:none;">
+      <div class="crisis-title"><i class="fa-solid fa-triangle-exclamation"></i> แจ้งเตือนความเสี่ยงฉุกเฉิน</div>
+      พบดัชนีบ่งชี้ความเสี่ยงเกี่ยวกับการทำร้ายตนเอง โปรดอย่าปล่อยให้คุณแม่อยู่ตามลำพัง คอยดูแลอย่างใกล้ชิดด้วยความเข้าใจ และติดต่อทีมสุขภาพจิต อสม. หรือสายด่วนสุขภาพจิต <b>1323</b> โดยเร็วที่สุด
+    </div>
+
+    <div class="email-box">
+      <label for="emailTo"><i class="fa-solid fa-envelope-open-text"></i> ส่งสรุปผลการประเมินเข้าสู่อีเมล</label>
+      <div class="email-row">
+        <input type="email" id="emailTo" value="67319100012@Aitc.ac.th">
+        <button class="btn-secondary" onclick="emailResult()"><i class="fa-solid fa-paper-plane"></i> ส่งผลทาง Gmail</button>
+      </div>
+      <div class="hint">ระบบจะเปิดหน้าแต่งอีเมล Gmail พร้อมกรอกสรุปผลการประเมินให้อัตโนมัติ</div>
+    </div>
+
+    <div class="result-actions">
+      <button class="btn-secondary" onclick="openAssessment(currentId)"><i class="fa-solid fa-rotate-left"></i> ทำแบบประเมินนี้อีกครั้ง</button>
+      <button class="btn-primary" onclick="showGrid()"><i class="fa-solid fa-grip"></i> เลือกแบบประเมินอื่น</button>
+    </div>
+  </section>
+</main>
+
+<footer class="note">
+  <i class="fa-solid fa-circle-info"></i> แบบประเมิน EPDS เป็นเครื่องมือคัดกรองเบื้องต้นสำหรับภาวะซึมเศร้าหลังคลอด ผลคะแนนไม่ได้เป็นคำวินิจฉัยทางการแพทย์โดยตรง และควรใช้ร่วมกับดุลยพินิจของบุคลากรทางการแพทย์เสมอ
+</footer>
+
+<script>
+const ASSESSMENTS = {
+  epds: {
+    code: 'EPDS',
+    title: 'แบบประเมิน EPDS คุณแม่ทำเอง',
+    full: 'แบบประเมินภาวะซึมเศร้าหลังคลอด EPDS (Edinburgh Postnatal Depression Scale)',
+    icon: 'fa-baby-carriage',
+    sub: 'แบบประเมินสำหรับคุณแม่ประเมินความรู้สึกของตนเองย้อนหลังในช่วง 7 วันที่ผ่านมา (10 ข้อ)',
+    staffOnly: false,
+    selfHarmIndex: 9,
+    questions: [
+      {
+        text: '1. ฉันสามารถหัวเราะและมองเห็นข้อขำขันของเรื่องต่าง ๆ ได้',
+        options: [
+          { label: 'มากเท่าที่เคยทำได้', score: 0 },
+          { label: 'ไม่ค่อยได้แล้ว', score: 1 },
+          { label: 'น้อยลงมากอย่างเห็นได้ชัด', score: 2 },
+          { label: 'ไม่ได้เลย', score: 3 }
+        ]
+      },
+      {
+        text: '2. ฉันมองอนาคตด้วยความรู้สึกเพลิดเพลินและมีความสุข',
+        options: [
+          { label: 'มากเท่าที่เคยรู้สึก', score: 0 },
+          { label: 'น้อยกว่าที่เคยรู้สึกเล็กน้อย', score: 1 },
+          { label: 'น้อยกว่าที่เคยรู้สึกอย่างชัดเจน', score: 2 },
+          { label: 'แทบจะไม่รู้สึกเลย', score: 3 }
+        ]
+      },
+      {
+        text: '3. ฉันโทษตัวเองโดยไม่จำเป็น เมื่อมีสิ่งผิดพลาดเกิดขึ้น',
+        options: [
+          { label: 'ใช่ เกือบตลอดเวลา', score: 3 },
+          { label: 'ใช่ ในบางครั้ง', score: 2 },
+          { label: 'ไม่ค่อยบ่อยนัก', score: 1 },
+          { label: 'ไม่เคยเลย', score: 0 }
+        ]
+      },
+      {
+        text: '4. ฉันรู้สึกวิตกกังวลหรือตื่นตระหนกโดยไม่มีเหตุผลอันควร',
+        options: [
+          { label: 'ไม่เลย', score: 0 },
+          { label: 'แทบจะไม่เคย', score: 1 },
+          { label: 'ใช่ เป็นบางครั้ง', score: 2 },
+          { label: 'ใช่ บ่อยมาก', score: 3 }
+        ]
+      },
+      {
+        text: '5. ฉันรู้สึกหวาดกลัวหรือตื่นตกใจโดยไม่มีเหตุผลสมควร',
+        options: [
+          { label: 'ใช่ ค่อนข้างมาก', score: 3 },
+          { label: 'ใช่ เป็นบางครั้ง', score: 2 },
+          { label: 'ไม่ค่อยมี', score: 1 },
+          { label: 'ไม่เลย', score: 0 }
+        ]
+      },
+      {
+        text: '6. ฉันรู้สึกว่าสิ่งต่าง ๆ รุมเร้าจนจัดการไม่ไหว',
+        options: [
+          { label: 'ใช่ ส่วนใหญ่จัดการไม่ไหวเลย', score: 3 },
+          { label: 'ใช่ บางครั้งก็รับมือไม่ไหว', score: 2 },
+          { label: 'ไม่ ส่วนใหญ่ยังจัดการได้ดี', score: 1 },
+          { label: 'ไม่ จัดการได้ดีตามปกติ', score: 0 }
+        ]
+      },
+      {
+        text: '7. ฉันรู้สึกไม่เป็นสุขจนนอนไม่หลับ',
+        options: [
+          { label: 'ใช่ ส่วนใหญ่เป็นแบบนั้น', score: 3 },
+          { label: 'ใช่ เป็นบางครั้ง', score: 2 },
+          { label: 'ไม่ค่อยเป็น', score: 1 },
+          { label: 'ไม่เลย', score: 0 }
+        ]
+      },
+      {
+        text: '8. ฉันรู้สึกเศร้าหรือเป็นทุกข์',
+        options: [
+          { label: 'ใช่ ส่วนใหญ่เป็นเช่นนั้น', score: 3 },
+          { label: 'ใช่ ค่อนข้างบ่อย', score: 2 },
+          { label: 'ไม่บ่อยนัก', score: 1 },
+          { label: 'ไม่เลย', score: 0 }
+        ]
+      },
+      {
+        text: '9. ฉันรู้สึกไม่เป็นสุขจนต้องร้องไห้',
+        options: [
+          { label: 'ใช่ ส่วนใหญ่เป็นแบบนั้น', score: 3 },
+          { label: 'ใช่ บ่อยครั้ง', score: 2 },
+          { label: 'เพียงบางครั้งเท่านั้น', score: 1 },
+          { label: 'ไม่เคยเลย', score: 0 }
+        ]
+      },
+      {
+        text: '10. มีความคิดที่จะทำร้ายตนเองผุดขึ้นมาในหัว',
+        options: [
+          { label: 'ใช่ ค่อนข้างบ่อย', score: 3 },
+          { label: 'เป็นบางครั้ง', score: 2 },
+          { label: 'แทบจะไม่เคย', score: 1 },
+          { label: 'ไม่เคยเลย', score: 0 }
+        ]
+      }
+    ],
+    bands: [
+      { min: 0, max: 9, label: 'ปกติ / ความเสี่ยงต่ำ', color: 'var(--success)',
+        advice: '<b>สภาวะอารมณ์อยู่ในเกณฑ์ปกติ:</b> ไม่พบสัญญาณความเสี่ยงของภาวะซึมเศร้าหลังคลอดที่มีนัยสำคัญ แนะนำให้คุณแม่พักผ่อนให้เพียงพอ ทำกิจกรรมผ่อนคลาย และเปิดใจพูดคุยกับครอบครัวเพื่อรับการสนับสนุนต่อเนื่อง' },
+      { min: 10, max: 12, label: 'เสี่ยงภาวะซึมเศร้าหลังคลอดระดับน้อย', color: 'var(--warning)',
+        advice: '<b>มีความเสี่ยงระดับเล็กน้อย:</b> คุณแม่เริ่มมีสัญญาณความเครียด วิตกกังวล หรืออารมณ์เศร้าหลังคลอด ควรหาเวลาพักผ่อนเพิ่มขึ้น ระบายความรู้สึกกับคนใกล้ชิด และให้ อสม. หรือเจ้าหน้าที่ติดตามประเมินซ้ำใน 1-2 สัปดาห์' },
+      { min: 13, max: 30, label: 'เสี่ยงสูงต่อภาวะซึมเศร้าหลังคลอด', color: 'var(--danger)',
+        advice: '<b>มีความเสี่ยงสูงต่อภาวะซึมเศร้าหลังคลอด:</b> คะแนนอยู่ในเกณฑ์ที่ควรได้รับการดูแลเฉพาะทาง แนะนำให้ส่งต่อคุณแม่เพื่อพบแพทย์ จิตแพทย์ หรือบุคลากรสาธารณสุขเพื่อประเมินและรับการช่วยเหลืออย่างเหมาะสมโดยเร็ว' }
+    ]
+  },
+  epds_staff: {
+    code: 'EPDS-Staff',
+    title: 'EPDS (สำหรับ อสม. / เจ้าหน้าที่)',
+    full: 'แบบประเมิน EPDS โดย อสม. หรือเจ้าหน้าที่เยี่ยมบ้าน',
+    icon: 'fa-user-nurse',
+    sub: 'ฉบับซักถามและประเมินคุณแม่หลังคลอดในพื้นที่โดย อสม. หรือบุคลากรสาธารณสุข',
+    staffOnly: true,
+    selfHarmIndex: 9,
+    questions: [
+      {
+        text: '1. คุณแม่หัวเราะและเห็นข้อขำขันของเรื่องต่าง ๆ ได้มากน้อยเพียงใด',
+        options: [
+          { label: 'มากเท่าที่เคยทำได้ปกติ', score: 0 },
+          { label: 'ไม่ค่อยได้แล้ว', score: 1 },
+          { label: 'น้อยลงมากอย่างเห็นได้ชัด', score: 2 },
+          { label: 'ไม่ได้เลย', score: 3 }
+        ]
+      },
+      {
+        text: '2. คุณแม่มองอนาคตด้วยความรู้สึกเพลิดเพลินและมีความสุข',
+        options: [
+          { label: 'มากเท่าที่เคยรู้สึก', score: 0 },
+          { label: 'น้อยกว่าที่เคยรู้สึกเล็กน้อย', score: 1 },
+          { label: 'น้อยกว่าที่เคยรู้สึกอย่างชัดเจน', score: 2 },
+          { label: 'แทบจะไม่รู้สึกเลย', score: 3 }
+        ]
+      },
+      {
+        text: '3. คุณแม่โทษตัวเองโดยไม่จำเป็นเมื่อมีสิ่งผิดพลาดเกิดขึ้น',
+        options: [
+          { label: 'ใช่ เกือบตลอดเวลา', score: 3 },
+          { label: 'ใช่ ในบางครั้ง', score: 2 },
+          { label: 'ไม่ค่อยบ่อยนัก', score: 1 },
+          { label: 'ไม่เคยเลย', score: 0 }
+        ]
+      },
+      {
+        text: '4. คุณแม่รู้สึกวิตกกังวลหรือตื่นตระหนกโดยไม่มีเหตุผลอันควร',
+        options: [
+          { label: 'ไม่เลย', score: 0 },
+          { label: 'แทบจะไม่เคย', score: 1 },
+          { label: 'ใช่ เป็นบางครั้ง', score: 2 },
+          { label: 'ใช่ บ่อยมาก', score: 3 }
+        ]
+      },
+      {
+        text: '5. คุณแม่รู้สึกหวาดกลัวหรือตื่นตกใจโดยไม่มีเหตุผลสมควร',
+        options: [
+          { label: 'ใช่ ค่อนข้างมาก', score: 3 },
+          { label: 'ใช่ เป็นบางครั้ง', score: 2 },
+          { label: 'ไม่ค่อยมี', score: 1 },
+          { label: 'ไม่เลย', score: 0 }
+        ]
+      },
+      {
+        text: '6. คุณแม่รู้สึกว่าสิ่งต่าง ๆ รุมเร้าจนจัดการไม่ไหว',
+        options: [
+          { label: 'ใช่ ส่วนใหญ่จัดการไม่ไหวเลย', score: 3 },
+          { label: 'ใช่ บางครั้งก็รับมือไม่ไหว', score: 2 },
+          { label: 'ไม่ ส่วนใหญ่ยังจัดการได้ดี', score: 1 },
+          { label: 'ไม่ จัดการได้ดีตามปกติ', score: 0 }
+        ]
+      },
+      {
+        text: '7. คุณแม่รู้สึกไม่เป็นสุขจนนอนไม่หลับ',
+        options: [
+          { label: 'ใช่ ส่วนใหญ่เป็นแบบนั้น', score: 3 },
+          { label: 'ใช่ เป็นบางครั้ง', score: 2 },
+          { label: 'ไม่ค่อยเป็น', score: 1 },
+          { label: 'ไม่เลย', score: 0 }
+        ]
+      },
+      {
+        text: '8. คุณแม่รู้สึกเศร้าหรือเป็นทุกข์',
+        options: [
+          { label: 'ใช่ ส่วนใหญ่เป็นเช่นนั้น', score: 3 },
+          { label: 'ใช่ ค่อนข้างบ่อย', score: 2 },
+          { label: 'ไม่บ่อยนัก', score: 1 },
+          { label: 'ไม่เลย', score: 0 }
+        ]
+      },
+      {
+        text: '9. คุณแม่รู้สึกไม่เป็นสุขจนต้องร้องไห้',
+        options: [
+          { label: 'ใช่ ส่วนใหญ่เป็นแบบนั้น', score: 3 },
+          { label: 'ใช่ บ่อยครั้ง', score: 2 },
+          { label: 'เพียงบางครั้งเท่านั้น', score: 1 },
+          { label: 'ไม่เคยเลย', score: 0 }
+        ]
+      },
+      {
+        text: '10. คุณแม่มีความคิดที่จะทำร้ายตนเองผุดขึ้นมาในหัว',
+        options: [
+          { label: 'ใช่ ค่อนข้างบ่อย', score: 3 },
+          { label: 'เป็นบางครั้ง', score: 2 },
+          { label: 'แทบจะไม่เคย', score: 1 },
+          { label: 'ไม่เคยเลย', score: 0 }
+        ]
+      }
+    ],
+    bands: [
+      { min: 0, max: 9, label: 'ปกติ / ความเสี่ยงต่ำ', color: 'var(--success)',
+        advice: '<b>ผลการสัมภาษณ์อยู่ในเกณฑ์ปกติ:</b> ให้คำแนะนำคุณแม่และครอบครัวเกี่ยวกับการดูแลสุขภาพกายจิต การพักผ่อน และนัดติดตามตามรอบเยี่ยมบ้านปกติ' },
+      { min: 10, max: 12, label: 'เสี่ยงภาวะซึมเศร้าหลังคลอดระดับน้อย', color: 'var(--warning)',
+        advice: '<b>พบความเสี่ยงระดับเล็กน้อย:</b> ให้ อสม. ประสานเคส วางแผนเข้าเยี่ยมติดตามอาการภายใน 1 สัปดาห์ พร้อมให้คำแนะนำแก่ครอบครัวในการช่วยแบ่งเบาภาระการเลี้ยงดูบุตร' },
+      { min: 13, max: 30, label: 'เสี่ยงสูงต่อภาวะซึมเศร้าหลังคลอด', color: 'var(--danger)',
+        advice: '<b>มีความเสี่ยงสูง:</b> ต้องประสานงานส่งต่อข้อมูลให้พยาบาลวิชาชีพ หรือบุคลากรประจำ รพ.สต. / โรงพยาบาล เพื่อวางแผนการดูแลทางคลินิกอย่างเร่งด่วน' }
+    ]
+  }
+};
+
+let currentId = null;
+let currentAnswers = [];
+let lastResult = null;
+
+function initGrid(){
+  const grid = document.getElementById('view-grid');
+  grid.innerHTML = '';
+  Object.keys(ASSESSMENTS).forEach(id => {
+    const a = ASSESSMENTS[id];
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.onclick = () => openAssessment(id);
+    card.innerHTML = `
+      ${a.staffOnly ? '<div class="staff-badge"><i class="fa-solid fa-user-gear"></i> สำหรับ อสม./เจ้าหน้าที่</div>' : ''}
+      <div class="icon"><i class="fa-solid ${a.icon}"></i></div>
+      <div class="code font-title">${a.code}</div>
+      <div class="desc">${a.sub}</div>
+      <div class="card-footer">
+        <span class="qcount">${a.questions.length} ข้อคำถาม</span>
+        <span class="btn-start-text">เริ่มประเมิน <i class="fa-solid fa-chevron-right"></i></span>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function showGrid(){
+  document.getElementById('view-grid').style.display = 'grid';
+  document.getElementById('heroWrapper').style.display = 'block';
+  document.getElementById('view-quiz').style.display = 'none';
+  document.getElementById('view-result').style.display = 'none';
+  document.getElementById('navBackBtn').style.display = 'none';
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function openAssessment(id){
+  currentId = id;
+  const a = ASSESSMENTS[id];
+  currentAnswers = new Array(a.questions.length).fill(null);
+
+  document.getElementById('view-grid').style.display = 'none';
+  document.getElementById('heroWrapper').style.display = 'none';
+  document.getElementById('view-result').style.display = 'none';
+  document.getElementById('view-quiz').style.display = 'block';
+  document.getElementById('navBackBtn').style.display = 'inline-flex';
+
+  document.getElementById('quizTitle').innerText = a.full;
+  document.getElementById('quizSub').innerText = a.sub;
+  document.getElementById('quizStaffBanner').style.display = a.staffOnly ? 'flex' : 'none';
+
+  renderQuestions();
+  updateProgress();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function renderQuestions(){
+  const a = ASSESSMENTS[currentId];
+  const list = document.getElementById('questionList');
+  list.innerHTML = '';
+
+  a.questions.forEach((q, idx) => {
+    const qDiv = document.createElement('div');
+    qDiv.className = 'question';
+    
+    let optionsHtml = '';
+    q.options.forEach((opt, oIdx) => {
+      optionsHtml += `
+        <div class="opt" onclick="selectOption(${idx}, ${opt.score}, this)">
+          <input type="radio" name="q_${idx}" value="${opt.score}">
+          <span>${opt.label}</span>
+        </div>
+      `;
+    });
+
+    qDiv.innerHTML = `
+      <div class="qnum">คำถามข้อที่ ${idx + 1} จาก ${a.questions.length}</div>
+      <div class="qtext">${q.text}</div>
+      <div class="options">${optionsHtml}</div>
+    `;
+    list.appendChild(qDiv);
+  });
+}
+
+function selectOption(qIdx, score, optElem){
+  currentAnswers[qIdx] = score;
+  const parent = optElem.parentElement;
+  parent.querySelectorAll('.opt').forEach(el => el.classList.remove('selected'));
+  optElem.classList.add('selected');
+  const radio = optElem.querySelector('input');
+  if(radio) radio.checked = true;
+
+  updateProgress();
+}
+
+function updateProgress(){
+  const total = currentAnswers.length;
+  const answered = currentAnswers.filter(v => v !== null).length;
+  const pct = Math.round((answered / total) * 100);
+
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressHint').innerText = `ตอบแล้ว ${answered} จาก ${total} ข้อ (${pct}%)`;
+
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = answered < total;
+}
+
+function submitQuiz(){
+  const a = ASSESSMENTS[currentId];
+  const score = currentAnswers.reduce((sum, v) => sum + (v || 0), 0);
+
+  let band = a.bands[a.bands.length - 1];
+  for(let b of a.bands){
+    if(score >= b.min && score <= b.max){
+      band = b;
+      break;
+    }
+  }
+
+  const selfHarmScore = currentAnswers[a.selfHarmIndex] || 0;
+  const hasSelfHarmRisk = selfHarmScore > 0;
+
+  lastResult = {
+    code: a.code,
+    title: a.title,
+    full: a.full,
+    score: score,
+    band: band,
+    hasSelfHarmRisk: hasSelfHarmRisk
+  };
+
+  document.getElementById('view-quiz').style.display = 'none';
+  document.getElementById('view-result').style.display = 'block';
+
+  document.getElementById('resultCode').innerText = a.code;
+  document.getElementById('resultTitle').innerText = a.full;
+  document.getElementById('resultScore').innerText = score;
+  
+  const badgeWrap = document.getElementById('resultBadgeWrap');
+  badgeWrap.innerHTML = `<span class="level-badge" style="background:${band.color}">${band.label}</span>`;
+
+  document.getElementById('resultAdvice').innerHTML = band.advice;
+  document.getElementById('resultCrisis').style.display = hasSelfHarmRisk ? 'block' : 'none';
+
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function emailResult(){
+  if(!lastResult) return;
+  const email = document.getElementById('emailTo').value;
+  const subject = encodeURIComponent(`[Mental Health Cyber-Care] สรุปผลการประเมิน ${lastResult.code} - ${lastResult.title}`);
+  
+  let bodyText = `สรุปผลการประเมินภาวะซึมเศร้าหลังคลอด EPDS\n`;
+  bodyText += `-----------------------------------\n`;
+  bodyText += `แบบประเมิน: ${lastResult.full} (${lastResult.code})\n`;
+  bodyText += `คะแนนรวม: ${lastResult.score} / 30 คะแนน\n`;
+  bodyText += `ผลการประเมิน: ${lastResult.band.label}\n`;
+  bodyText += `ข้อแนะนำ: ${lastResult.band.advice.replace(/<[^>]*>?/gm, '')}\n`;
+  if(lastResult.hasSelfHarmRisk){
+    bodyText += `\n*** แจ้งเตือน: พบดัชนีบ่งชี้ความเสี่ยงเกี่ยวกับการทำร้ายตนเอง ควรได้รับการดูแลอย่างใกล้ชิด ***\n`;
+  }
+  bodyText += `\nวันที่ประเมิน: ${new Date().toLocaleDateString('th-TH')}\n`;
+  bodyText += `-----------------------------------\n`;
+  bodyText += `ระบบ Mental Health Cyber-Care - โครงการ อสม. ฮีลใจ`;
+
+  const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}&su=${subject}&body=${encodeURIComponent(bodyText)}`;
+  window.open(gmailUrl, '_blank');
+}
+
+window.onload = function(){
+  initGrid();
+};
+</script>
+</body>
+</html>
