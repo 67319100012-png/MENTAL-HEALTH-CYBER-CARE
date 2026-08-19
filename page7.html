@@ -3,229 +3,338 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>แบบคัดกรองการใช้สารเสพติด — Mental Health Cyber-Care</title>
+<title>แบบคัดกรองการใช้สารเสพติด - โครงการ อสม. ฮีลใจ</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Kanit:wght@400;500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 <style>
   :root {
-    --bg-sage: #AFC4A2;
-    --bg-sage-deep: #8FAA82;
-    --surface: #FBFAF5;
-    --surface-alt: #F1EEE3;
-    --ink: #2B3A2E;
-    --ink-soft: #5B6B5A;
-    --teal: #357B72;
-    --teal-deep: #245A53;
-    --gold: #B98A2E;
-    --coral: #C85A3F;
-    --coral-soft: #F3DCD3;
-    --line: #D9DFCE;
-    --radius: 18px;
-    --shadow: 0 10px 30px rgba(40, 58, 42, 0.14);
-  }
+    /* Theme Colors From Main System */
+    --forest: #1E4A34;
+    --forest-deep: #123324;
+    --sage: #8FAE86;
+    --sage-soft: #E4EEDD;
+    --marigold: #E8A23C;
+    --marigold-deep: #C8801F;
+    --ink-main: #24301F;
+    
+    /* System & Card Specific Colors */
+    --sky: #BFE6F5;
+    --mint: #CDEEDB;
+    --surface: #FFFFFF;
+    --surface-alt: #F4F8F5;
+    --ink: #1A2B27;
+    --ink-soft: #4B615B;
+    --teal: #2E9C8F;
+    --coral: #D35400;
+    --coral-soft: #FBEFE8;
+    --danger: #C0392B;
+    --line: #E3F1F5;
+    --radius: 24px;
+    --shadow: 0 12px 28px rgba(30,80,90,0.12);
+    --font-scale: 1;
 
-  * { box-sizing: border-box; }
+    --display-font: 'Kanit', sans-serif;
+    --body-font: 'Sarabun', sans-serif;
+  }
   
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: calc(16px * var(--font-scale)); scroll-behavior: smooth; }
   body {
-    margin: 0;
-    background: linear-gradient(180deg, var(--bg-sage) 0%, var(--bg-sage-deep) 100%);
-    font-family: 'Sarabun', sans-serif;
+    background:
+      radial-gradient(circle at 12% 8%, rgba(255,255,255,0.55), transparent 40%),
+      radial-gradient(circle at 90% 85%, rgba(255,255,255,0.4), transparent 45%),
+      linear-gradient(180deg, var(--sky) 0%, var(--mint) 100%);
+    font-family: var(--body-font);
     color: var(--ink);
     min-height: 100vh;
-    padding-bottom: 40px;
+    padding-bottom: 50px;
   }
 
-  h1, h2, h3, .display { font-family: 'Kanit', sans-serif; }
-
-  /* Top Hotline Bar */
+  /* ---------------- Hotline Bar ---------------- */
   .hotline-bar {
-    background: var(--teal-deep);
+    background: var(--forest-deep);
     color: #fff;
     text-align: center;
-    padding: 10px 16px;
-    font-size: 14px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 8px 16px;
+    font-size: 0.85rem;
+    font-family: var(--body-font);
   }
-  .hotline-bar b { color: #F4D8A8; }
+  .hotline-bar b { color: var(--marigold); }
 
-  /* Header Section */
+  /* ---------------- Navbar ---------------- */
+  header.nav-header {
+    background: rgba(251,247,238,0.86);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(30,74,52,0.08);
+    padding: 16px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  header.nav-header .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--display-font);
+    font-weight: 700;
+    font-size: 1.02rem;
+    color: var(--forest);
+    text-decoration: none;
+  }
+  header.nav-header .logo .badge {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: linear-gradient(150deg, var(--sage), var(--forest));
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.05rem;
+    box-shadow: 0 4px 10px rgba(30,74,52,0.25);
+  }
+  header.nav-header .logo small {
+    display: block;
+    font-family: var(--body-font);
+    font-weight: 400;
+    font-size: 0.68rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.03em;
+  }
+  nav { display: flex; align-items: center; gap: 28px; }
+  nav a {
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--ink-main);
+    position: relative;
+    padding-bottom: 3px;
+  }
+  nav a::after {
+    content: "";
+    position: absolute; left: 0; bottom: 0;
+    width: 0; height: 2px;
+    background: var(--marigold);
+    transition: width 0.25s ease;
+  }
+  nav a:hover::after { width: 100%; }
+  nav a.nav-cta {
+    background: var(--forest);
+    color: #fff;
+    padding: 9px 20px;
+    border-radius: 30px;
+    font-weight: 600;
+  }
+  nav a.nav-cta::after { display: none; }
+  nav a.nav-cta:hover { background: var(--forest-deep); }
+
+  @media (max-width: 768px) {
+    header.nav-header { flex-direction: column; gap: 12px; padding: 14px 6%; }
+    nav { gap: 14px; flex-wrap: wrap; justify-content: center; }
+  }
+
+  /* ---------------- Content Header ---------------- */
   header.top {
     max-width: 920px;
     margin: 0 auto;
-    padding: 36px 24px 18px;
+    padding: 36px 24px 16px;
     text-align: center;
   }
-  header.top .eyebrow {
-    font-size: 13px;
-    letter-spacing: 2px;
-    color: var(--teal-deep);
-    font-weight: 700;
+  header.top .mascot {
+    font-size: 3.2rem;
+    line-height: 1;
     margin-bottom: 8px;
-    text-transform: uppercase;
   }
   header.top h1 {
-    font-size: 28px;
-    margin: 0 0 10px;
-    color: var(--ink);
+    font-family: var(--display-font);
+    font-size: 2.1rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--forest-deep);
   }
   header.top p {
-    font-size: 15px;
+    font-family: var(--body-font);
+    font-size: 1.02rem;
     color: var(--ink-soft);
     max-width: 680px;
     margin: 0 auto;
     line-height: 1.7;
   }
 
-  /* Main Container */
   main {
-    max-width: 920px;
+    max-width: 1040px;
     margin: 0 auto;
-    padding: 10px 20px 20px;
+    padding: 20px 20px 10px;
   }
 
-  /* Grid View */
+  /* ---------------- Grid View Cards ---------------- */
   .grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-    margin-top: 22px;
+    gap: 24px;
   }
-  @media (max-width: 720px) { .grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 460px) { .grid { grid-template-columns: 1fr; } }
+  @media (max-width: 860px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .grid { grid-template-columns: 1fr; } }
 
   .card {
     background: var(--surface);
     border-radius: var(--radius);
-    padding: 24px 20px;
+    padding: 28px 20px;
     text-align: center;
     box-shadow: var(--shadow);
+    border: 2px solid transparent;
+    transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     cursor: pointer;
-    border: 1px solid transparent;
-    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
   }
   .card:hover {
-    transform: translateY(-4px);
-    border-color: var(--teal);
-    box-shadow: 0 14px 36px rgba(40, 58, 42, 0.2);
+    transform: translateY(-6px);
+    border-color: var(--accent, var(--coral));
+    box-shadow: 0 18px 36px rgba(30,80,90,0.18);
   }
-  .card .icon {
-    width: 60px;
-    height: 60px;
+  .card .emoji-badge {
+    width: 76px; height: 76px;
     border-radius: 50%;
-    background: var(--teal);
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 14px;
-    font-family: 'Kanit', sans-serif;
-    font-weight: 700;
-    font-size: 13px;
-    letter-spacing: 0.5px;
+    background: var(--accent-soft, var(--coral-soft));
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 18px;
+    font-size: 2.3rem;
+    box-shadow: inset 0 0 0 3px var(--accent, var(--coral));
+    flex-shrink: 0;
   }
   .card .code {
-    font-family: 'Kanit', sans-serif;
+    font-family: var(--display-font);
     font-weight: 600;
-    font-size: 18px;
-    margin-bottom: 6px;
+    font-size: 1.15rem;
+    line-height: 1.4;
     color: var(--ink);
+    margin-bottom: 6px;
   }
   .card .desc {
-    font-size: 13px;
+    font-family: var(--body-font);
+    font-size: 0.88rem;
+    font-weight: 400;
     color: var(--ink-soft);
     line-height: 1.5;
-    margin-bottom: 14px;
+    margin-bottom: 20px;
   }
-  .card .qcount {
+  .card .tag {
+    margin-top: auto;
     display: inline-block;
-    font-size: 12px;
+    font-family: var(--body-font);
+    font-size: 0.85rem;
     font-weight: 600;
-    color: var(--teal-deep);
-    background: #E4EFE0;
+    color: #fff;
+    background: var(--accent, var(--coral));
     border-radius: 20px;
-    padding: 4px 12px;
+    padding: 5px 16px;
   }
 
-  /* Panel Sections */
+  /* ---------------- Panel Containers ---------------- */
   .panel {
     background: var(--surface);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
-    padding: 32px 28px;
-    margin-top: 20px;
+    padding: 36px 30px;
+    margin-top: 10px;
   }
-  
-  .btn-ghost-back {
+
+  .btn-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     background: none;
-    border: 1.5px solid var(--teal-deep);
-    color: var(--teal-deep);
-    padding: 8px 20px;
+    border: 1.5px solid var(--forest);
+    color: var(--forest);
+    padding: 8px 18px;
     border-radius: 30px;
-    font-family: 'Sarabun', sans-serif;
-    font-size: 14px;
+    font-family: var(--body-font);
+    font-size: 0.9rem;
     font-weight: 600;
     cursor: pointer;
-    margin-bottom: 20px;
-    transition: background 0.15s, color 0.15s;
+    margin-bottom: 22px;
+    transition: all 0.2s ease;
   }
-  .btn-ghost-back:hover {
-    background: var(--teal-deep);
+  .btn-back-link:hover {
+    background: var(--forest);
     color: #fff;
   }
 
-  .quiz-title { font-size: 24px; margin: 0 0 6px; color: var(--ink); }
-  .quiz-sub { font-size: 14px; color: var(--ink-soft); margin: 0 0 20px; line-height: 1.6; }
-  
+  .quiz-title {
+    font-family: var(--display-font);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--forest-deep);
+    margin-bottom: 6px;
+  }
+  .quiz-sub {
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+
   .staff-banner {
-    background: #EFE6CF;
-    border: 1px solid var(--gold);
-    border-radius: 12px;
+    background: var(--sage-soft);
+    border: 1px solid var(--sage);
+    border-radius: 14px;
     padding: 12px 18px;
-    font-size: 13.5px;
-    line-height: 1.7;
-    color: #5C470F;
-    margin-bottom: 22px;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--forest-deep);
+    margin-bottom: 24px;
     font-weight: 500;
   }
 
-  /* Substance Checklist Chips */
+  /* ASSIST Substance Chips */
   .substance-select {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
-    margin-bottom: 26px;
+    margin-bottom: 28px;
   }
   .substance-chip {
     border: 1.5px solid var(--line);
-    border-radius: 14px;
-    padding: 12px 18px;
-    font-size: 14.5px;
+    border-radius: 16px;
+    padding: 12px 20px;
+    font-size: 0.95rem;
     cursor: pointer;
     background: #fff;
-    font-family: 'Sarabun', sans-serif;
+    font-family: var(--body-font);
     font-weight: 600;
-    transition: all 0.18s ease;
+    transition: all 0.2s ease;
     user-select: none;
+    color: var(--ink);
   }
-  .substance-chip:hover { border-color: var(--teal); background: #F7FAF6; }
+  .substance-chip:hover {
+    border-color: var(--coral);
+    background: var(--coral-soft);
+  }
   .substance-chip.selected {
-    background: var(--teal-deep);
-    border-color: var(--teal-deep);
+    background: var(--coral);
+    border-color: var(--coral);
     color: #fff;
-    box-shadow: 0 4px 12px rgba(36, 90, 83, 0.25);
+    box-shadow: 0 4px 12px rgba(211, 84, 0, 0.25);
   }
-  .substance-next-row { text-align: center; margin-bottom: 10px; }
 
-  /* Question & Options */
+  /* Question Lists & Options */
   .progress-wrap {
     background: var(--surface-alt);
     border-radius: 20px;
     height: 10px;
     overflow: hidden;
-    margin-bottom: 26px;
+    margin-bottom: 28px;
   }
   .progress-fill {
-    background: var(--teal);
+    background: var(--forest);
     height: 100%;
     width: 0%;
     transition: width 0.25s ease;
@@ -233,11 +342,11 @@
 
   .question {
     border-top: 1px solid var(--line);
-    padding: 20px 0;
+    padding: 22px 0;
   }
   .question:first-of-type { border-top: none; }
   .question .qtext {
-    font-size: 16px;
+    font-size: 1.02rem;
     font-weight: 600;
     line-height: 1.6;
     margin-bottom: 14px;
@@ -249,87 +358,91 @@
     align-items: center;
     gap: 12px;
     border: 1.5px solid var(--line);
-    border-radius: 12px;
-    padding: 12px 16px;
+    border-radius: 14px;
+    padding: 12px 18px;
     cursor: pointer;
-    font-size: 14.5px;
+    font-size: 0.95rem;
     background: #fff;
-    transition: all 0.15s ease;
+    transition: all 0.18s ease;
   }
-  .opt:hover { border-color: var(--teal); background: #F7FAF6; }
-  .opt input { accent-color: var(--teal); width: 18px; height: 18px; flex: none; }
+  .opt:hover {
+    border-color: var(--forest);
+    background: var(--surface-alt);
+  }
+  .opt input { accent-color: var(--forest); width: 18px; height: 18px; flex: none; }
   .opt.selected {
-    border-color: var(--teal);
-    background: #EAF3E9;
+    border-color: var(--forest);
+    background: var(--sage-soft);
     font-weight: 600;
   }
 
-  /* Submit & Buttons */
-  .submit-row { margin-top: 26px; text-align: center; }
+  /* Buttons & Actions */
+  .submit-row { margin-top: 28px; text-align: center; }
   .btn-primary {
-    background: var(--teal-deep);
+    background: var(--forest);
     color: #fff;
     border: none;
-    padding: 14px 34px;
+    padding: 13px 36px;
     border-radius: 30px;
-    font-family: 'Sarabun', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background 0.15s, opacity 0.15s, transform 0.15s;
-    box-shadow: 0 4px 14px rgba(36, 90, 83, 0.25);
-  }
-  .btn-primary:hover:not(:disabled) {
-    background: var(--teal);
-    transform: translateY(-1px);
-  }
-  .btn-primary:disabled { opacity: 0.45; cursor: not-allowed; box-shadow: none; }
-  
-  .btn-ghost {
-    background: none;
-    border: 1.5px solid var(--teal-deep);
-    color: var(--teal-deep);
-    padding: 11px 26px;
-    border-radius: 30px;
-    font-family: 'Sarabun', sans-serif;
-    font-size: 14.5px;
+    font-family: var(--display-font);
+    font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.15s ease;
+    transition: background 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 4px 14px rgba(30, 74, 52, 0.25);
   }
-  .btn-ghost:hover { background: var(--teal-deep); color: #fff; }
+  .btn-primary:hover:not(:disabled) {
+    background: var(--forest-deep);
+    transform: translateY(-2px);
+  }
+  .btn-primary:disabled { opacity: 0.45; cursor: not-allowed; box-shadow: none; }
 
-  .hint { text-align: center; font-size: 13px; color: var(--ink-soft); margin-top: 12px; }
+  .btn-ghost {
+    background: transparent;
+    border: 1.5px solid var(--forest);
+    color: var(--forest);
+    padding: 10px 24px;
+    border-radius: 30px;
+    font-family: var(--body-font);
+    font-size: 0.92rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .btn-ghost:hover { background: var(--forest); color: #fff; }
 
-  /* Results Display */
-  .result-head { text-align: center; margin-bottom: 8px; }
+  .hint { text-align: center; font-size: 0.85rem; color: var(--ink-soft); margin-top: 12px; }
+
+  /* ---------------- Result Page ---------------- */
+  .result-head { text-align: center; margin-bottom: 10px; }
   .score-big {
-    font-family: 'Kanit', sans-serif;
-    font-size: 46px;
+    font-family: var(--display-font);
+    font-size: 3rem;
     font-weight: 700;
     text-align: center;
-    margin: 4px 0 0;
+    margin: 6px 0 0;
     line-height: 1;
   }
-  .score-label { text-align: center; font-size: 14px; color: var(--ink-soft); margin-bottom: 18px; }
+  .score-label { text-align: center; font-size: 0.9rem; color: var(--ink-soft); margin-bottom: 20px; }
   
   .level-badge {
     display: inline-block;
-    padding: 8px 22px;
+    padding: 8px 24px;
     border-radius: 30px;
-    font-family: 'Kanit', sans-serif;
+    font-family: var(--display-font);
     font-weight: 600;
-    font-size: 15px;
+    font-size: 1rem;
     color: #fff;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   }
-  
-  .substance-results { margin: 20px 0; }
+
+  .substance-results { margin: 24px 0; }
   .substance-result-row {
-    padding: 14px 18px;
-    border-radius: 12px;
+    padding: 16px 20px;
+    border-radius: 16px;
     background: var(--surface-alt);
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    border: 1px solid var(--line);
   }
   .substance-result-row .srow-top {
     display: flex;
@@ -337,90 +450,112 @@
     align-items: center;
     margin-bottom: 6px;
   }
-  .substance-result-row .sname { font-weight: 700; font-family: 'Kanit', sans-serif; font-size: 15px; }
+  .substance-result-row .sname { font-weight: 700; font-family: var(--display-font); font-size: 1.05rem; }
   .substance-result-row .tag {
-    font-size: 12px;
+    font-size: 0.82rem;
     font-weight: 700;
-    font-family: 'Kanit', sans-serif;
-    padding: 4px 12px;
+    font-family: var(--display-font);
+    padding: 4px 14px;
     border-radius: 20px;
     color: #fff;
   }
-  .substance-result-row .sdetail { font-size: 13.5px; color: var(--ink-soft); }
+  .substance-result-row .sdetail { font-size: 0.88rem; color: var(--ink-soft); }
 
   .advice-box {
     background: var(--surface-alt);
-    border-radius: 14px;
-    padding: 20px;
-    font-size: 15px;
+    border-radius: 18px;
+    padding: 22px;
+    font-size: 0.98rem;
     line-height: 1.75;
-    margin-top: 20px;
-    margin-bottom: 16px;
+    margin-top: 24px;
+    margin-bottom: 18px;
+    border: 1px solid var(--line);
   }
-  .advice-box b { color: var(--teal-deep); }
-  
+  .advice-box b { color: var(--forest-deep); }
+
   .crisis-box {
     background: var(--coral-soft);
     border: 1.5px solid var(--coral);
-    border-radius: 14px;
-    padding: 20px;
-    font-size: 14.5px;
+    border-radius: 18px;
+    padding: 22px;
+    font-size: 0.95rem;
     line-height: 1.75;
-    margin-bottom: 20px;
+    margin-bottom: 22px;
   }
   .crisis-box .title {
-    font-family: 'Kanit', sans-serif;
+    font-family: var(--display-font);
     font-weight: 700;
     color: var(--coral);
     margin-bottom: 6px;
-    font-size: 16px;
+    font-size: 1.1rem;
   }
 
   .email-box {
     background: var(--surface-alt);
-    border-radius: 14px;
-    padding: 18px 20px;
-    margin-top: 20px;
+    border-radius: 18px;
+    padding: 20px 22px;
+    margin-top: 24px;
+    border: 1px solid var(--line);
+  }
+  .email-box label {
+    display: block;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--forest-deep);
     margin-bottom: 10px;
   }
-  .email-box label { display: block; font-size: 14px; font-weight: 600; color: var(--teal-deep); margin-bottom: 10px; }
-  .email-row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .email-row { display: flex; gap: 12px; flex-wrap: wrap; }
   .email-row input {
     flex: 1;
     min-width: 240px;
-    padding: 11px 16px;
-    border-radius: 10px;
-    border: 1px solid var(--line);
-    font-family: 'Sarabun', sans-serif;
-    font-size: 14.5px;
+    padding: 11px 18px;
+    border-radius: 30px;
+    border: 1.5px solid var(--line);
+    font-family: var(--body-font);
+    font-size: 0.92rem;
     background: #fff;
   }
-  .email-row input:focus { outline: 2px solid var(--teal); border-color: var(--teal); }
+  .email-row input:focus { outline: none; border-color: var(--forest); }
 
-  .result-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 24px; }
-  
+  .result-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 28px; }
+
   footer.note {
     max-width: 920px;
-    margin: 28px auto 0;
+    margin: 40px auto 0;
     padding: 0 24px;
     text-align: center;
-    font-size: 12.5px;
-    color: var(--ink);
-    opacity: 0.8;
+    font-family: var(--body-font);
+    font-size: 0.88rem;
+    color: var(--ink-soft);
     line-height: 1.7;
   }
 </style>
 </head>
 <body>
 
+<!-- Hotline Bar -->
 <div class="hotline-bar">
-  สายด่วนยาเสพติด <b>1165</b> · สายด่วนสุขภาพจิต <b>1323</b> · ให้บริการฟรีตลอด 24 ชั่วโมง
+  <i class="fa-solid fa-phone-volume"></i> สายด่วนยาเสพติด <b>1165</b> · สายด่วนสุขภาพจิต <b>1323</b> · ให้บริการฟรีตลอด 24 ชั่วโมง
 </div>
 
+<!-- Main System Header Navbar -->
+<header class="nav-header">
+  <a href="index.html" class="logo">
+    <span class="badge"><i class="fa-solid fa-heart-pulse"></i></span>
+    <span>MENTAL HEALTH CYBER-CARE<small>โครงการ อสม. ฮีลใจ</small></span>
+  </a>
+  <nav>
+    <a href="index.html#home">หน้าแรก</a>
+    <a href="index.html#about">สุขภาพจิตคืออะไร</a>
+    <a href="index.html#contact">ติดต่อเรา</a>
+    <a href="assessment.html" class="nav-cta">ทำแบบประเมิน</a>
+  </nav>
+</header>
+
 <header class="top">
-  <div class="eyebrow">MENTAL HEALTH CYBER-CARE</div>
+  <div class="mascot">💉🧪</div>
   <h1>แบบคัดกรองการใช้สารเสพติด</h1>
-  <p>Substance Use Screening — เครื่องมือคัดกรองเบื้องต้นสำหรับ อสม./เจ้าหน้าที่สาธารณสุข ใช้ระบุความเสี่ยงและส่งต่อผู้รับบริการเข้าสู่ระบบบำบัดที่เหมาะสม ไม่ใช่เครื่องมือวินิจฉัยและไม่มีการบันทึกข้อมูลส่วนบุคคลไว้ในระบบนี้</p>
+  <p>Substance Use Screening Tools — เครื่องมือคัดกรองเบื้องต้นสำหรับ อสม. และเจ้าหน้าที่สาธารณสุข เพื่อระบุความเสี่ยง ประเมินระดับการติดสาร และส่งต่อผู้รับบริการเข้าสู่ระบบการดูแลที่เหมาะสม</p>
 </header>
 
 <main>
@@ -429,19 +564,19 @@
 
   <!-- ASSIST Substance Selection View -->
   <section id="view-substances" class="panel" style="display:none;">
-    <button class="btn-ghost-back" onclick="showGrid()">← ย้อนกลับ</button>
+    <button class="btn-back-link" onclick="showGrid()"><i class="fa-solid fa-arrow-left"></i> ย้อนกลับ</button>
     <h2 class="quiz-title">ASSIST — คัดกรองการใช้สารเสพติดหลายชนิด</h2>
-    <p class="quiz-sub">เลือกสารที่ผู้รับบริการเคยใช้ในช่วง 3 เดือนที่ผ่านมา (เลือกได้มากกว่า 1 ชนิด) จากนั้นระบบจะแสดงคำถามติดตามสำหรับแต่ละชนิดที่เลือก</p>
-    <div class="staff-banner">💡 ผู้ประเมิน: กรุณาสัมภาษณ์ด้วยท่าทีรับฟังอย่างเข้าใจ ไม่ตัดสิน (non-judgmental) เพื่อให้ได้ข้อมูลตามจริง</div>
+    <p class="quiz-sub">เลือกสารที่ผู้รับบริการเคยใช้ในช่วง 3 เดือนที่ผ่านมา (เลือกได้มากกว่า 1 ชนิด) ระบบจะนำสู่คำถามติดตามรายชนิด</p>
+    <div class="staff-banner"><i class="fa-solid fa-lightbulb"></i> ผู้ประเมิน: กรุณาสัมภาษณ์ด้วยท่าทีรับฟังอย่างเข้าใจ ไม่ตัดสิน (non-judgmental) เพื่อให้ได้ข้อมูลตรงตามจริง</div>
     <div class="substance-select" id="substanceSelect"></div>
-    <div class="substance-next-row">
-      <button class="btn-primary" id="substanceNextBtn" disabled onclick="startAssistQuestions()">ถัดไป</button>
+    <div style="text-align: center;">
+      <button class="btn-primary" id="substanceNextBtn" disabled onclick="startAssistQuestions()">ถัดไป <i class="fa-solid fa-arrow-right"></i></button>
     </div>
   </section>
 
   <!-- Quiz Questions View -->
   <section id="view-quiz" class="panel" style="display:none;">
-    <button class="btn-ghost-back" onclick="showGrid()">← ย้อนกลับ</button>
+    <button class="btn-back-link" onclick="showGrid()"><i class="fa-solid fa-arrow-left"></i> ย้อนกลับ</button>
     <h2 class="quiz-title" id="quizTitle"></h2>
     <p class="quiz-sub" id="quizSub"></p>
     <div id="quizNote" class="staff-banner" style="display:none;"></div>
@@ -455,9 +590,9 @@
 
   <!-- Result View -->
   <section id="view-result" class="panel" style="display:none;">
-    <button class="btn-ghost-back" onclick="showGrid()">← ย้อนกลับ</button>
+    <button class="btn-back-link" onclick="showGrid()"><i class="fa-solid fa-arrow-left"></i> เลือกแบบประเมินอื่น</button>
     <div class="result-head">
-      <div class="eyebrow" id="resultCode" style="color:var(--teal-deep);font-size:13px;letter-spacing:1.5px;font-weight:700;"></div>
+      <div id="resultCode" style="color:var(--forest-deep); font-family:var(--display-font); font-size:0.9rem; font-weight:700; letter-spacing:1px;"></div>
       <h2 class="quiz-title" id="resultTitle" style="margin-top:4px;"></h2>
     </div>
     <div class="score-big" id="resultScore"></div>
@@ -467,31 +602,32 @@
     <div class="advice-box" id="resultAdvice"></div>
     
     <div class="crisis-box" id="resultCrisis" style="display:none;">
-      <div class="title">⚠ ความเสี่ยงสูง / มีประวัติการฉีดสารเสพติด</div>
-      ควรส่งต่อเข้ารับการบำบัดโดยเร็ว และให้ข้อมูลด้านการลดอันตราย (Harm Reduction) เช่น การไม่ใช้เข็มร่วมกัน หากมีความเสี่ยงต่อการใช้ยาเกินขนาด (overdose) ให้แจ้งสายด่วนฉุกเฉิน 1669 ทันที
+      <div class="title"><i class="fa-solid fa-triangle-exclamation"></i> ข้อควรระวัง: ความเสี่ยงสูง / มีประวัติการฉีดสาร</div>
+      ควรส่งต่อเข้ารับการบำบัดรักษาโดยผู้เชี่ยวชาญ และแนะนำการลดอันตราย (Harm Reduction) เช่น ไม่ใช้เข็มร่วมกัน หากสงสัยว่าภาวะยาเกินขนาด (overdose) ให้โทรแจ้งสายด่วนฉุกเฉิน 1669 ทันที
     </div>
     
     <div class="email-box">
-      <label for="emailTo">ส่งผลการประเมินทางอีเมล</label>
+      <label for="emailTo"><i class="fa-regular fa-paper-plane"></i> ส่งผลการประเมินเข้า Gmail</label>
       <div class="email-row">
         <input type="email" id="emailTo" value="67319100012@Aitc.ac.th">
-        <button class="btn-ghost" onclick="emailResult()">✉ ส่งผลทางอีเมล</button>
+        <button class="btn-ghost" onclick="emailResult()"><i class="fa-regular fa-envelope"></i> ส่งอีเมล</button>
       </div>
-      <div class="hint">ระบบจะเปิดหน้าเขียนอีเมลของ Gmail พร้อมกรอกข้อมูลผลการประเมินให้อัตโนมัติ (ต้องเข้าสู่ระบบ Gmail ไว้ก่อน)</div>
+      <div class="hint">ระบบจะเปิดหน้าเขียนอีเมลของ Gmail พร้อมกรอกข้อมูลสรุปให้อัตโนมัติ</div>
     </div>
     
     <div class="result-actions">
-      <button class="btn-ghost" onclick="showGrid()">เลือกแบบประเมินอื่น</button>
+      <button class="btn-primary" onclick="showGrid()">ทำแบบประเมินถัดไป</button>
     </div>
   </section>
 </main>
 
 <footer class="note">
-  แบบประเมินนี้ดัดแปลงจากเครื่องมือคัดกรองมาตรฐานสากลด้านสารเสพติด เพื่อการคัดกรองและส่งต่อเบื้องต้นเท่านั้น ไม่ใช่การวินิจฉัยทางการแพทย์ ข้อมูลของผู้รับบริการควรได้รับการเก็บรักษาเป็นความลับตามหลักจริยธรรม
+  โครงการ "อสม. ฮีลใจ ต้องใช้ผ่านระบบดิจิทัล" (Mental Health Cyber-Care)<br>
+  แบบประเมินทุกชุดเป็นการคัดกรองและประเมินเบื้องต้นเท่านั้น ไม่ใช่การวินิจฉัยทางการแพทย์ ข้อมูลทั้งหมดได้รับการดูแลตามหลักจริยธรรม
 </footer>
 
 <script>
-// Rating Scales
+// Option Scales
 const scaleFreq5 = [
   {label:'ไม่เคยเลย', score:0}, {label:'1-2 ครั้ง', score:1}, {label:'รายเดือน', score:2},
   {label:'รายสัปดาห์', score:3}, {label:'รายวันหรือเกือบทุกวัน', score:4}
@@ -505,7 +641,7 @@ const scale4rev = [
   {label:'มากที่สุด', score:0}, {label:'ค่อนข้างมาก', score:1}, {label:'ค่อนข้างน้อย', score:2}, {label:'น้อยที่สุด/ไม่มีเลย', score:3}
 ];
 
-// Items Data
+// Data Setup
 const SUBSTANCES = [
   'ยาสูบ (บุหรี่ / บุหรี่ไฟฟ้า)', 'กัญชา', 'สารกระตุ้นแอมเฟตามีน (ยาบ้า / ไอซ์)', 'ยาอี / เอ็คซ์ตาซี',
   'สารระเหย (กาว ทินเนอร์)', 'ยากล่อมประสาท/ยานอนหลับ (ไม่ได้ใช้ตามแพทย์สั่ง)', 'สารหลอนประสาท (LSD เห็ดขี้ควาย)',
@@ -562,48 +698,48 @@ const RELAPSE_ITEMS = [
 const ASSESSMENTS = {
   assist: {
     code:'ASSIST', title:'ASSIST', full:'คัดกรองการใช้สารเสพติดหลายชนิด',
-    sub:'ดัดแปลงจาก WHO ASSIST คัดกรองสารเสพติดหลายชนิดพร้อมกันและประเมินระดับความเสี่ยงแยกตามชนิด',
-    type:'assist', staffOnly:true
+    sub:'ดัดแปลงจาก WHO ASSIST คัดกรองสารเสพติดหลายชนิดพร้อมกันและประเมินระดับความเสี่ยงแยกรายชนิด',
+    emoji:'📋', accent:'#D35400', accentSoft:'#FBEFE8', type:'assist', staffOnly:true
   },
   dast: {
     code:'DAST-10', title:'DAST-10', full:'คัดกรองการใช้ยาเสพติดทั่วไป',
-    sub:'แบบคัดกรองการใช้ยาเสพติด 10 ข้อ (Drug Abuse Screening Test)',
-    type:'sum', options:null, items: DAST_ITEMS, staffOnly:false,
+    sub:'แบบคัดกรองปัญหาการใช้ยาเสพติด 10 ข้อ (Drug Abuse Screening Test)',
+    emoji:'🩺', accent:'#2E9C8F', accentSoft:'#E4F7F1', type:'sum', items: DAST_ITEMS, staffOnly:false,
     bands:[
       {min:0, max:0, label:'ไม่พบปัญหา', color:'var(--teal)', advice:'ไม่พบสัญญาณของปัญหาการใช้ยาเสพติดในขณะนี้'},
       {min:1, max:2, label:'ความเสี่ยงต่ำ', color:'var(--teal)', advice:'มีความเสี่ยงระดับต่ำ ควรติดตามและให้ความรู้เชิงป้องกัน'},
-      {min:3, max:5, label:'ความเสี่ยงปานกลาง', color:'var(--gold)', advice:'มีความเสี่ยงระดับปานกลาง แนะนำให้ปรึกษาเจ้าหน้าที่สาธารณสุขเพื่อประเมินเพิ่มเติมและวางแผนดูแล'},
+      {min:3, max:5, label:'ความเสี่ยงปานกลาง', color:'var(--marigold-deep)', advice:'มีความเสี่ยงระดับปานกลาง แนะนำให้ปรึกษาเจ้าหน้าที่สาธารณสุขเพื่อประเมินเพิ่มเติม'},
       {min:6, max:8, label:'ความเสี่ยงสูง', color:'var(--coral)', advice:'มีความเสี่ยงระดับสูง ควรส่งต่อเข้ารับการประเมินและบำบัดโดยผู้เชี่ยวชาญ'},
-      {min:9, max:10, label:'ความเสี่ยงสูงมาก', color:'var(--coral)', advice:'มีความเสี่ยงระดับสูงมาก ควรส่งต่อเข้าสู่ระบบบำบัดยาเสพติดโดยเร็วที่สุด'}
+      {min:9, max:10, label:'ความเสี่ยงสูงมาก', color:'var(--danger)', advice:'มีความเสี่ยงระดับสูงมาก ควรส่งต่อเข้าสู่ระบบบำบัดยาเสพติดโดยเร็วที่สุด'}
     ]
   },
   cageaid: {
     code:'CAGE-AID', title:'CAGE-AID', full:'คัดกรองอย่างรวดเร็ว (4 ข้อ)',
-    sub:'แบบคัดกรองอย่างย่อสำหรับแอลกอฮอล์และยาเสพติด ใช้เวลาไม่ถึง 1 นาที',
-    type:'sum', items: CAGEAID_ITEMS.map(t=>({text:t, options:yesNo})), staffOnly:false,
+    sub:'แบบคัดกรองอย่างย่อสำหรับแอลกอฮอล์และยาเสพติด ประเมินได้ในเวลารวดเร็ว',
+    emoji:'⚡', accent:'#E8A23C', accentSoft:'#FAF2E3', type:'sum', items: CAGEAID_ITEMS.map(t=>({text:t, options:yesNo})), staffOnly:false,
     bands:[
       {min:0, max:1, label:'ผลคัดกรองเป็นลบ', color:'var(--teal)', advice:'ไม่พบสัญญาณเสี่ยงชัดเจนจากแบบคัดกรองย่อนี้'},
-      {min:2, max:4, label:'ผลคัดกรองเป็นบวก ควรประเมินเพิ่มเติม', color:'var(--coral)', advice:'ผลคัดกรองเป็นบวก แนะนำให้ทำแบบประเมิน DAST-10 หรือ ASSIST ต่อเพื่อประเมินรายละเอียดเพิ่มเติม'}
+      {min:2, max:4, label:'ผลคัดกรองเป็นบวก ควรประเมินเพิ่มเติม', color:'var(--coral)', advice:'ผลคัดกรองเป็นบวก แนะนำให้ทำแบบประเมิน DAST-10 หรือ ASSIST เพิ่มเติม'}
     ]
   },
   sds: {
     code:'SDS', title:'SDS', full:'ประเมินความรุนแรงของการติดสาร',
     sub:'Severity of Dependence Scale ประเมินระดับการติดสารเสพติดในเชิงจิตใจ',
-    type:'sum', items: SDS_ITEMS.map(t=>({text:t, options:scale4b})), staffOnly:false,
+    emoji:'🧠', accent:'#8E66BB', accentSoft:'#F2ECF9', type:'sum', items: SDS_ITEMS.map(t=>({text:t, options:scale4b})), staffOnly:false,
     bands:[
       {min:0, max:3, label:'ระดับการติดสารต่ำ', color:'var(--teal)', advice:'ระดับการพึ่งพาทางจิตใจต่อสารเสพติดยังอยู่ในระดับต่ำ'},
-      {min:4, max:8, label:'ระดับการติดสารปานกลาง', color:'var(--gold)', advice:'มีระดับการพึ่งพาทางจิตใจปานกลาง ควรปรึกษาเจ้าหน้าที่เพื่อวางแผนการลดหรือเลิกใช้'},
-      {min:9, max:15, label:'ระดับการติดสารสูง', color:'var(--coral)', advice:'มีระดับการพึ่งพาทางจิตใจสูง ควรส่งต่อเข้ารับการบำบัดโดยผู้เชี่ยวชาญ'}
+      {min:4, max:8, label:'ระดับการติดสารปานกลาง', color:'var(--marigold-deep)', advice:'มีระดับการพึ่งพาทางจิตใจปานกลาง ควรปรึกษาเจ้าหน้าที่เพื่อวางแผนการลดหรือเลิกใช้'},
+      {min:9, max:15, label:'ระดับการติดสารสูง', color:'var(--danger)', advice:'มีระดับการพึ่งพาทางจิตใจสูง ควรส่งต่อเข้ารับการบำบัดโดยผู้เชี่ยวชาญ'}
     ]
   },
   relapse: {
     code:'Relapse Risk', title:'Relapse Risk', full:'ประเมินความเสี่ยงการกลับไปเสพซ้ำ',
-    sub:'ประเมินปัจจัยเสี่ยงและปัจจัยปกป้องที่เกี่ยวข้องกับการกลับไปใช้สารเสพติดซ้ำ สำหรับผู้ที่อยู่ระหว่างหรือหลังการบำบัด',
-    type:'sum', items: RELAPSE_ITEMS, staffOnly:false,
+    sub:'ประเมินปัจจัยเสี่ยงและปัจจัยปกป้อง สำหรับผู้ที่อยู่ระหว่างหรือหลังการบำบัด',
+    emoji:'🛡️', accent:'#1E4A34', accentSoft:'#E4EEDD', type:'sum', items: RELAPSE_ITEMS, staffOnly:false,
     bands:[
-      {min:0, max:6, label:'ความเสี่ยงต่ำ', color:'var(--teal)', advice:'มีปัจจัยปกป้องที่ดีและความเสี่ยงต่อการกลับไปเสพซ้ำอยู่ในระดับต่ำ ควรรักษาปัจจัยสนับสนุนเหล่านี้ไว้'},
-      {min:7, max:13, label:'ความเสี่ยงปานกลาง', color:'var(--gold)', advice:'มีความเสี่ยงต่อการกลับไปเสพซ้ำระดับปานกลาง ควรเสริมสร้างทักษะการปฏิเสธและหากิจกรรมทดแทนเพิ่มเติม'},
-      {min:14, max:18, label:'ความเสี่ยงสูง', color:'var(--coral)', advice:'มีความเสี่ยงต่อการกลับไปเสพซ้ำระดับสูง ควรติดตามอย่างใกล้ชิดและปรึกษาทีมบำบัดเพื่อวางแผนป้องกันการกลับไปเสพซ้ำ'}
+      {min:0, max:6, label:'ความเสี่ยงต่ำ', color:'var(--teal)', advice:'มีปัจจัยปกป้องที่ดีและความเสี่ยงต่อการกลับไปเสพซ้ำอยู่ในระดับต่ำ'},
+      {min:7, max:13, label:'ความเสี่ยงปานกลาง', color:'var(--marigold-deep)', advice:'มีความเสี่ยงปานกลาง ควรเสริมสร้างทักษะการปฏิเสธและกิจกรรมทดแทน'},
+      {min:14, max:18, label:'ความเสี่ยงสูง', color:'var(--danger)', advice:'มีความเสี่ยงต่อการกลับไปเสพซ้ำสูง ควรติดตามอย่างใกล้ชิดและปรึกษาทีมบำบัด'}
     ]
   }
 };
@@ -623,12 +759,14 @@ function initGrid() {
     let qcount = a.type === 'assist' ? 'เลือกสาร + 7 ข้อ/ชนิด' : a.items.length + ' ข้อ';
     const card = document.createElement('div');
     card.className = 'card';
+    card.style.setProperty('--accent', a.accent);
+    card.style.setProperty('--accent-soft', a.accentSoft);
     card.onclick = () => openAssessment(id);
     card.innerHTML = `
-      <div class="icon">${a.code.slice(0,6)}</div>
-      <div class="code">${a.title}</div>
-      <div class="desc">${a.full}</div>
-      <div class="qcount">${qcount}</div>
+      <div class="emoji-badge">${a.emoji}</div>
+      <div class="code">${a.title} — ${a.full}</div>
+      <div class="desc">${a.sub}</div>
+      <span class="tag">${qcount}</span>
     `;
     grid.appendChild(card);
   });
@@ -657,7 +795,6 @@ function openAssessment(id) {
       const chip = document.createElement('div');
       chip.className = 'substance-chip';
       chip.textContent = s;
-      chip.id = 'sub-' + i;
       chip.onclick = () => toggleSubstance(i, s, chip);
       wrap.appendChild(chip);
     });
@@ -668,7 +805,7 @@ function openAssessment(id) {
     document.getElementById('quizTitle').textContent = `${a.title} — ${a.full}`;
     document.getElementById('quizSub').textContent = a.sub;
     document.getElementById('quizNote').style.display = a.staffOnly ? 'block' : 'none';
-    if (a.staffOnly) document.getElementById('quizNote').textContent = '💡 ผู้ประเมิน: กรุณาให้เจ้าหน้าที่สาธารณสุขหรือ อสม. เป็นผู้สัมภาษณ์และบันทึกคะแนน';
+    if (a.staffOnly) document.getElementById('quizNote').innerHTML = '<i class="fa-solid fa-lightbulb"></i> ผู้ประเมิน: กรุณาให้เจ้าหน้าที่สาธารณสุขหรือ อสม. เป็นผู้สัมภาษณ์และบันทึกคะแนน';
     renderQuestionList(a.items);
     hideAll();
     document.getElementById('view-quiz').style.display = 'block';
@@ -701,7 +838,7 @@ function runNextAssistSubstance() {
   document.getElementById('quizTitle').textContent = `ASSIST — ${sub}`;
   document.getElementById('quizSub').textContent = `คำถามติดตามสำหรับ "${sub}" (เหลืออีก ${assistQueue.length} ชนิด รวมชนิดนี้)`;
   document.getElementById('quizNote').style.display = 'block';
-  document.getElementById('quizNote').textContent = '💡 ผู้ประเมิน: กรุณาสัมภาษณ์ด้วยท่าทีไม่ตัดสิน';
+  document.getElementById('quizNote').innerHTML = '<i class="fa-solid fa-lightbulb"></i> ผู้ประเมิน: กรุณาสัมภาษณ์ด้วยท่าทีเปิดรับ ไม่ตัดสิน';
   const qs = ASSIST_FOLLOWUP.map(q => ({text: q.text.replace('__SUB__', sub), options: q.options}));
   renderQuestionList(qs);
   window._assistCurrentSub = sub;
@@ -751,9 +888,9 @@ function submitQuiz() {
     const injected = currentAnswers[6] === 1;
     let band;
     if (score <= 3) band = {label:'ความเสี่ยงต่ำ', color:'var(--teal)'};
-    else if (score <= 15) band = {label:'ความเสี่ยงปานกลาง', color:'var(--gold)'};
+    else if (score <= 15) band = {label:'ความเสี่ยงปานกลาง', color:'var(--marigold-deep)'};
     else band = {label:'ความเสี่ยงสูง', color:'var(--coral)'};
-    if (injected) band = {label:'ความเสี่ยงสูง (มีการฉีด)', color:'var(--coral)'};
+    if (injected) band = {label:'ความเสี่ยงสูง (มีประวัติการฉีด)', color:'var(--danger)'};
     assistResults.push({sub, score, band, injected});
 
     assistQueue.shift();
@@ -789,13 +926,13 @@ function finishAssist() {
   const a = ASSESSMENTS['assist'];
   document.getElementById('resultCode').textContent = a.code;
   document.getElementById('resultTitle').textContent = a.full;
-  document.getElementById('resultScoreLabel').textContent = 'ผลประเมินรวมตามประเภทสาร';
+  document.getElementById('resultScoreLabel').textContent = 'ผลประเมินรวมตามประเภทสารที่เลือก';
 
   const highestRisk = assistResults.some(r => r.band.label.includes('สูง'));
   const anyInjected = assistResults.some(r => r.injected);
   document.getElementById('resultScore').textContent = assistResults.length + ' ชนิด';
-  document.getElementById('resultScore').style.color = highestRisk ? 'var(--coral)' : 'var(--teal)';
-  document.getElementById('resultBadgeWrap').innerHTML = `<span class="level-badge" style="background:${highestRisk ? 'var(--coral)' : 'var(--teal)'}">${highestRisk ? 'พบสารที่มีความเสี่ยงสูง' : 'ความเสี่ยงโดยรวมต่ำ-ปานกลาง'}</span>`;
+  document.getElementById('resultScore').style.color = highestRisk ? 'var(--danger)' : 'var(--teal)';
+  document.getElementById('resultBadgeWrap').innerHTML = `<span class="level-badge" style="background:${highestRisk ? 'var(--danger)' : 'var(--teal)'}">${highestRisk ? 'พบสารที่มีความเสี่ยงสูง' : 'ความเสี่ยงโดยรวมต่ำ-ปานกลาง'}</span>`;
 
   let rowsHtml = '';
   assistResults.forEach(r => {
@@ -810,7 +947,7 @@ function finishAssist() {
   });
   document.getElementById('substanceResultsWrap').innerHTML = `<div class="substance-results">${rowsHtml}</div>`;
 
-  document.getElementById('resultAdvice').innerHTML = `<b>คำแนะนำ:</b> สารที่มีความเสี่ยงระดับปานกลางขึ้นไปควรได้รับการดูแลและให้คำปรึกษาแบบสั้น (Brief Intervention) จากเจ้าหน้าที่สาธารณสุข ส่วนสารที่มีความเสี่ยงสูงควรส่งต่อเข้าสู่ระบบบำบัดรักษาทันที`;
+  document.getElementById('resultAdvice').innerHTML = `<b>คำแนะนำ:</b> สารที่มีความเสี่ยงระดับปานกลางขึ้นไปควรได้รับการดูแลและให้คำปรึกษาแบบสั้น (Brief Intervention) จากเจ้าหน้าที่สาธารณสุข ส่วนสารที่มีความเสี่ยงสูงควรส่งต่อเข้าสู่ระบบบำบัดรักษาโดยทันที`;
   document.getElementById('resultCrisis').style.display = (highestRisk || anyInjected) ? 'block' : 'none';
 
   lastResult = {
@@ -830,7 +967,7 @@ function emailResult() {
   if (!to) { alert('กรุณากรอกอีเมลผู้รับ'); return; }
   
   const {code, full, score, levelLabel, dateStr} = lastResult;
-  const subject = `ผลแบบประเมิน ${code} — ${full}`;
+  const subject = `ผลแบบประเมิน ${code} — ${full} (อสม. ฮีลใจ)`;
   
   let extra = '';
   if (currentId === 'assist' && assistResults.length) {
@@ -838,21 +975,21 @@ function emailResult() {
   }
   
   const body = 
-`ผลแบบคัดกรองการใช้สารเสพติด (Mental Health Cyber-Care)
+`ผลแบบคัดกรองการใช้สารเสพติด (โครงการ อสม. ฮีลใจ)
 
 แบบประเมิน: ${code} (${full})
 วันที่ทำแบบประเมิน: ${dateStr}
 ผลคะแนน: ${score}
-ระดับผล: ${levelLabel}${extra}
+ระดับผลประเมิน: ${levelLabel}${extra}
 
-หมายเหตุ: ผลนี้เป็นการคัดกรองเบื้องต้นเท่านั้น ไม่ใช่การวินิจฉัยทางการแพทย์ ข้อมูลนี้เป็นความลับ
+หมายเหตุ: ผลประเมินนี้เป็นการคัดกรองเบื้องต้นเพื่อดูแลสุขภาพใจ ไม่ใช่การวินิจฉัยทางการแพทย์ ข้อมูลนี้เป็นความลับ
 สายด่วนยาเสพติด 1165 · สายด่วนสุขภาพจิต 1323 (ฟรี ตลอด 24 ชม.)`;
 
   const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   window.open(gmailUrl, '_blank');
 }
 
-// Start app
+// Initialize System
 initGrid();
 showGrid();
 </script>
