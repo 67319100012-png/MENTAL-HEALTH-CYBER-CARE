@@ -78,6 +78,11 @@
             position: sticky;
             top:0;
             z-index: 1000;
+            transition: box-shadow .3s ease, padding .3s ease;
+        }
+        header.scrolled{
+            box-shadow: 0 8px 24px rgba(18,51,36,0.10);
+            padding: 11px 6%;
         }
         header .logo{
             display:flex;
@@ -96,7 +101,9 @@
             display:flex; align-items:center; justify-content:center;
             font-size: 1.05rem;
             box-shadow: 0 4px 10px rgba(30,74,52,0.25);
+            transition: transform .35s cubic-bezier(.34,1.56,.64,1);
         }
+        header .logo:hover .badge{ transform: rotate(-8deg) scale(1.08); }
         header .logo small{
             display:block;
             font-family: var(--body);
@@ -139,20 +146,162 @@
             text-align:center;
             overflow: hidden;
         }
+
+        /* soft drifting color fields, now animated */
         .hero-blob{
             position:absolute;
             border-radius: 50%;
             filter: blur(2px);
             opacity: 0.55;
             z-index: 0;
+            animation: blobDrift 14s ease-in-out infinite;
         }
-        .hero-blob.b1{ width:340px; height:340px; background: var(--sage-soft); top:-120px; left:-90px; }
-        .hero-blob.b2{ width:260px; height:260px; background: var(--sky-soft); bottom:-90px; right:-60px; }
-        .hero-blob.b3{ width:120px; height:120px; background: rgba(232,162,60,0.18); top:40%; right:8%; }
+        .hero-blob.b1{ width:340px; height:340px; background: var(--sage-soft); top:-120px; left:-90px; animation-duration: 16s; }
+        .hero-blob.b2{ width:260px; height:260px; background: var(--sky-soft); bottom:-90px; right:-60px; animation-duration: 19s; animation-delay: -4s; }
+        .hero-blob.b3{ width:120px; height:120px; background: rgba(232,162,60,0.18); top:40%; right:8%; animation-duration: 12s; animation-delay: -2s; }
+        @keyframes blobDrift{
+            0%, 100%{ transform: translate(0,0) scale(1); }
+            50%{ transform: translate(22px,-18px) scale(1.07); }
+        }
+
+        /* gentle floating leaves/sparkles across the hero */
+        .hero-particles{
+            position:absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .hero-particles i{
+            position:absolute;
+            color: var(--sage);
+            opacity: 0.45;
+            animation: floatUp 9s ease-in-out infinite;
+        }
+        .hero-particles i.p2{ color: var(--marigold); opacity:0.4; }
+        .hero-particles i.p3{ color: var(--sky); opacity:0.4; }
+        .hero-particles i:nth-child(1){ top:18%; left:10%; font-size:1.1rem; animation-duration:8s; }
+        .hero-particles i:nth-child(2){ top:65%; left:16%; font-size:0.85rem; animation-duration:10s; animation-delay:-2s; }
+        .hero-particles i:nth-child(3){ top:24%; right:14%; font-size:1rem; animation-duration:9.5s; animation-delay:-4s; }
+        .hero-particles i:nth-child(4){ top:72%; right:20%; font-size:0.9rem; animation-duration:11s; animation-delay:-1s; }
+        .hero-particles i:nth-child(5){ top:45%; left:6%; font-size:0.75rem; animation-duration:7.5s; animation-delay:-3s; }
+        .hero-particles i:nth-child(6){ top:50%; right:7%; font-size:0.8rem; animation-duration:10.5s; animation-delay:-5s; }
+        @keyframes floatUp{
+            0%, 100%{ transform: translateY(0) rotate(-8deg); }
+            50%{ transform: translateY(-22px) rotate(8deg); }
+        }
 
         .hero-inner{ position: relative; z-index: 1; max-width: 780px; margin: 0 auto; }
         .hero .eyebrow{ margin-bottom: 18px; justify-content:center; }
         .hero-inner .eyebrow::before{ display:none; }
+
+        /* ---- Hero media slot: drop a GIF / APNG / WEBP / short video here ---- */
+        .hero-visual{
+            position: relative;
+            width: min(1040px, 92vw);
+            aspect-ratio: 21 / 8;
+            margin: 8px auto 40px;
+            opacity: 0;
+            animation: riseIn .7s ease forwards;
+            animation-delay: .3s;
+            z-index: 1;
+        }
+        .hero-visual .ring-deco{
+            position:absolute;
+            inset: -10px;
+            border-radius: 30px;
+            border: 2px dashed rgba(30,74,52,0.22);
+        }
+        .hero-visual .frame{
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: 24px;
+            overflow: hidden;
+            background: linear-gradient(120deg, var(--sage-soft), var(--sky-soft));
+            box-shadow: 0 20px 44px rgba(30,74,52,0.18), inset 0 0 0 5px #fff;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+        }
+        /* the actual moving media — swap the <img>/<video> src in the HTML below */
+        .hero-visual .frame img,
+        .hero-visual .frame video{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        /* shown only if no media file has been added yet */
+        .hero-visual .frame .placeholder{
+            display:flex;
+            flex-direction:row;
+            align-items:center;
+            justify-content:center;
+            gap:14px;
+            color: var(--forest);
+            opacity: 0.55;
+            font-family: var(--display);
+            font-size: 0.86rem;
+            text-align:center;
+            padding: 20px;
+        }
+        .hero-visual .frame .placeholder i{
+            font-size: 2rem;
+            animation: coreBreathe 3.6s ease-in-out infinite;
+        }
+        .hero-visual .badge-float{
+            position:absolute;
+            bottom: -14px;
+            right: 22px;
+            width: 52px; height:52px;
+            border-radius:50%;
+            background: #fff;
+            display:flex; align-items:center; justify-content:center;
+            font-size: 1.25rem;
+            color: var(--marigold-deep);
+            box-shadow: 0 10px 22px rgba(0,0,0,0.14);
+            animation: floatUp 5s ease-in-out infinite;
+        }
+
+        /* Animated pulse-ring mark above the headline: a slow "breathing" motif
+           that echoes the program's calming purpose */
+        .hero-mark{
+            position: relative;
+            width: 76px;
+            height: 76px;
+            margin: 0 auto 20px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+        }
+        .hero-mark .ring{
+            position:absolute;
+            inset:0;
+            border-radius:50%;
+            border: 1.5px solid rgba(30,74,52,0.35);
+            animation: ringPulse 3.6s ease-out infinite;
+        }
+        .hero-mark .ring.r2{ animation-delay: 1.2s; }
+        .hero-mark .ring.r3{ animation-delay: 2.4s; }
+        @keyframes ringPulse{
+            0%{ transform: scale(0.55); opacity: 0.75; }
+            100%{ transform: scale(1.6); opacity: 0; }
+        }
+        .hero-mark .core{
+            position: relative;
+            z-index: 1;
+            width: 46px; height:46px;
+            border-radius:50%;
+            background: linear-gradient(150deg, var(--sage), var(--forest));
+            color:#fff;
+            display:flex; align-items:center; justify-content:center;
+            font-size: 1.15rem;
+            box-shadow: 0 6px 16px rgba(30,74,52,0.3);
+            animation: coreBreathe 3.6s ease-in-out infinite;
+        }
+        @keyframes coreBreathe{
+            0%, 100%{ transform: scale(1); }
+            50%{ transform: scale(1.08); }
+        }
 
         .hero h1{
             font-family: var(--display);
@@ -161,6 +310,9 @@
             font-weight: 800;
             line-height: 1.3;
             margin-bottom: 10px;
+            opacity: 0;
+            animation: riseIn .7s ease forwards;
+            animation-delay: .08s;
         }
         .hero h1 .accent{ color: var(--marigold-deep); }
         .hero h2{
@@ -170,18 +322,31 @@
             font-weight: 500;
             letter-spacing: 0.22em;
             margin-bottom: 26px;
+            opacity: 0;
+            animation: riseIn .7s ease forwards;
+            animation-delay: .18s;
         }
         .hero-subtitle{
             max-width: 620px;
             margin: 0 auto 20px;
             color: var(--ink-soft);
             font-size: 1.02rem;
+            opacity: 0;
+            animation: riseIn .7s ease forwards;
+            animation-delay: .28s;
+        }
+        @keyframes riseIn{
+            from{ opacity:0; transform: translateY(14px); }
+            to{ opacity:1; transform: translateY(0); }
         }
 
         .breath-cta{
             position: relative;
             display:inline-flex;
             margin: 28px 0 60px;
+            opacity: 0;
+            animation: riseIn .7s ease forwards;
+            animation-delay: .4s;
         }
         .breath-cta::before{
             content:"";
@@ -214,6 +379,8 @@
             transition: transform 0.2s ease, background 0.2s ease;
         }
         .breath-cta a:hover{ transform: translateY(-2px); background: var(--forest-deep); }
+        .breath-cta a i{ transition: transform .25s ease; }
+        .breath-cta a:hover i{ transform: translateX(4px); }
 
         .hero-cards{
             display:flex;
@@ -236,6 +403,15 @@
             text-align: left;
             box-shadow: 0 12px 30px rgba(30,74,52,0.06);
             transition: transform 0.25s ease, box-shadow 0.25s ease;
+            opacity: 0;
+            transform: translateY(18px);
+            animation: cardRise .6s ease forwards;
+        }
+        .hero-cards .hero-card:nth-child(1){ animation-delay: .5s; }
+        .hero-cards .hero-card:nth-child(2){ animation-delay: .6s; }
+        .hero-cards .hero-card:nth-child(3){ animation-delay: .7s; }
+        @keyframes cardRise{
+            to{ opacity:1; transform: translateY(0); }
         }
         .hero-card:hover{ transform: translateY(-6px); box-shadow: 0 18px 34px rgba(30,74,52,0.12); }
         .hero-card-icon{
@@ -245,7 +421,9 @@
             font-size: 1.35rem;
             color: #fff;
             margin-bottom: 18px;
+            transition: transform .4s cubic-bezier(.34,1.56,.64,1);
         }
+        .hero-card:hover .hero-card-icon{ transform: scale(1.1) rotate(-6deg); }
         .hero-card:nth-child(1) .hero-card-icon{ background: linear-gradient(150deg,#8FAE86,#1E4A34); }
         .hero-card:nth-child(2) .hero-card-icon{ background: linear-gradient(150deg,#89C6D1,#3D7E8C); }
         .hero-card:nth-child(3) .hero-card-icon{ background: linear-gradient(150deg,#F0BE72,#C8801F); }
@@ -300,6 +478,112 @@
             box-shadow: 0 20px 45px rgba(0,0,0,0.35);
         }
         .about-image img{ width:100%; height:100%; object-fit: cover; }
+
+        /* ---------------- Warning Signs Section ---------------- */
+        .signs-section{
+            background: var(--cream);
+            padding: 80px 6%;
+            text-align:center;
+        }
+        .signs-section .eyebrow{ justify-content:center; margin-bottom: 14px; }
+        .signs-section h2{
+            font-family: var(--display);
+            color: var(--forest);
+            font-size: clamp(1.4rem, 3vw, 1.9rem);
+            margin-bottom: 10px;
+        }
+        .signs-section .section-lead{
+            max-width: 600px;
+            margin: 0 auto 42px;
+            color: var(--ink-soft);
+            font-size: 0.98rem;
+        }
+        .signs-grid{
+            display:grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            max-width: 1080px;
+            margin: 0 auto 40px;
+        }
+        .signs-card{
+            background:#fff;
+            border-radius: 18px;
+            padding: 28px 24px;
+            text-align:left;
+            box-shadow: 0 10px 24px rgba(30,74,52,0.06);
+            border-left: 4px solid var(--clay);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .signs-card:hover{ transform: translateY(-5px); box-shadow: 0 14px 30px rgba(30,74,52,0.1); }
+        .signs-card i{ font-size: 1.5rem; color: var(--clay); margin-bottom: 14px; display:block; }
+        .signs-card h3{ font-family: var(--display); font-size: 1rem; color: var(--ink); font-weight: 600; margin-bottom: 6px; }
+        .signs-card p{ font-size: 0.85rem; color: var(--ink-soft); }
+
+        .signs-note{
+            display:inline-flex;
+            align-items:center;
+            gap: 10px;
+            background: var(--sage-soft);
+            color: var(--forest-deep);
+            padding: 14px 26px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            max-width: 620px;
+        }
+        .signs-note i{ color: var(--forest); }
+
+        /* ---------------- Self-Care Section ---------------- */
+        .selfcare-section{
+            background: var(--sage-soft);
+            padding: 80px 6%;
+            text-align:center;
+        }
+        .selfcare-section .eyebrow{ justify-content:center; margin-bottom: 14px; }
+        .selfcare-section h2{
+            font-family: var(--display);
+            color: var(--forest);
+            font-size: clamp(1.4rem, 3vw, 1.9rem);
+            margin-bottom: 10px;
+        }
+        .selfcare-section .section-lead{
+            max-width: 600px;
+            margin: 0 auto 42px;
+            color: var(--ink-soft);
+            font-size: 0.98rem;
+        }
+        .selfcare-grid{
+            display:grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            max-width: 1080px;
+            margin: 0 auto;
+        }
+        .selfcare-card{
+            background:#fff;
+            border-radius: 18px;
+            padding: 30px 24px;
+            text-align:left;
+            box-shadow: 0 10px 24px rgba(30,74,52,0.06);
+            display:flex;
+            gap: 16px;
+            align-items:flex-start;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .selfcare-card:hover{ transform: translateY(-5px); box-shadow: 0 14px 30px rgba(30,74,52,0.1); }
+        .selfcare-card .num{
+            flex-shrink:0;
+            width: 42px; height:42px;
+            border-radius: 12px;
+            background: linear-gradient(150deg, var(--sage), var(--forest));
+            color:#fff;
+            display:flex; align-items:center; justify-content:center;
+            font-family: var(--display);
+            font-weight: 700;
+            font-size: 1rem;
+        }
+        .selfcare-card h3{ font-family: var(--display); font-size: 0.98rem; color: var(--ink); font-weight: 600; margin-bottom: 4px; }
+        .selfcare-card p{ font-size: 0.85rem; color: var(--ink-soft); }
 
         /* ---------------- Infographics ---------------- */
         .infographics-section{
@@ -537,6 +821,7 @@
             header{ flex-direction: column; gap: 12px; padding: 14px 6%; }
             nav{ gap: 14px; flex-wrap: wrap; justify-content:center; }
             .hero{ padding: 60px 6% 50px; }
+            .hero-visual{ aspect-ratio: 4 / 3; width: 94vw; }
             .hero-cards{ gap: 16px; }
             .hero-card{ min-width: 100%; max-width: 100%; }
             .about-section, .infographics-section, .assessment-section, .map-section{ padding: 56px 6%; }
@@ -552,7 +837,7 @@
 </head>
 <body>
 
-    <header>
+    <header id="siteHeader">
         <div class="logo">
             <span class="badge"><i class="fa-solid fa-heart-pulse"></i></span>
             <span>MENTAL HEALTH CYBER-CARE<small>โครงการ อสม. ฮีลใจ</small></span>
@@ -560,6 +845,8 @@
         <nav>
             <a href="#home">หน้าแรก</a>
             <a href="#about">สุขภาพจิตคืออะไร</a>
+            <a href="#signs">สัญญาณเตือน</a>
+            <a href="#selfcare">ดูแลใจ</a>
             <a href="#contact">ติดต่อเรา</a>
             <a href="assessment.html" class="nav-cta">ทำแบบประเมิน</a>
         </nav>
@@ -571,7 +858,25 @@
         <div class="hero-blob b2"></div>
         <div class="hero-blob b3"></div>
 
+        <!-- gently floating leaves/sparkles for ambient motion -->
+        <div class="hero-particles" aria-hidden="true">
+            <i class="fa-solid fa-leaf"></i>
+            <i class="fa-solid fa-seedling p2"></i>
+            <i class="fa-regular fa-heart p3"></i>
+            <i class="fa-solid fa-leaf p3"></i>
+            <i class="fa-solid fa-star p2"></i>
+            <i class="fa-solid fa-seedling"></i>
+        </div>
+
         <div class="hero-inner">
+            <!-- breathing pulse-ring mark: quiet motion that echoes the program's calming purpose -->
+            <div class="hero-mark" aria-hidden="true">
+                <span class="ring r1"></span>
+                <span class="ring r2"></span>
+                <span class="ring r3"></span>
+                <span class="core"><i class="fa-solid fa-heart-pulse"></i></span>
+            </div>
+
             <span class="eyebrow">อำเภออุทัย · พระนครศรีอยุธยา</span>
             <h1>โครงการ "อสม. <span class="accent">ฮีลใจ</span>"<br>ดูแลสุขภาพจิตผ่านระบบดิจิทัล</h1>
             <h2>MENTAL HEALTH CYBER-CARE</h2>
@@ -582,6 +887,35 @@
             <div class="breath-cta">
                 <a href="assessment.html">เริ่มดูแลใจวันนี้ <i class="fa-solid fa-arrow-right"></i></a>
             </div>
+        </div>
+
+        <!--
+            HERO MEDIA SLOT
+            ----------------
+            Drop your own moving image here — a GIF, APNG, WEBP animation, or a short muted video
+            (all work the same way visually; the frame + soft shadow are already styled).
+            This sits outside the narrow text column on purpose, so it can be wider and stay centered.
+
+            OPTION A — GIF / APNG / animated WEBP:
+              <img src="hero-animation.gif" alt="คำอธิบายภาพเคลื่อนไหว">
+
+            OPTION B — short MP4/WEBM video (smaller file size, smoother):
+              <video autoplay loop muted playsinline>
+                <source src="hero-animation.mp4" type="video/mp4">
+              </video>
+
+            Until a real file is added, a gentle placeholder icon is shown so the layout still looks intentional.
+        -->
+        <div class="hero-visual">
+            <span class="ring-deco" aria-hidden="true"></span>
+            <div class="frame">
+                <!-- Replace this block with your <img> or <video> tag, see comment above -->
+                <div class="placeholder">
+                    <i class="fa-solid fa-file-video"></i>
+                    <span>ใส่ไฟล์ภาพเคลื่อนไหว<br>(.gif / .webp / .mp4) ที่นี่</span>
+                </div>
+            </div>
+            <span class="badge-float" aria-hidden="true"><i class="fa-solid fa-leaf"></i></span>
         </div>
 
         <div class="hero-cards">
@@ -617,6 +951,82 @@
                 <div class="about-image">
                     <img src="about-image.jpg" alt="อสม. ดูแลผู้สูงอายุ">
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Warning Signs -->
+    <section class="signs-section" id="signs">
+        <span class="eyebrow">รู้ทันตัวเอง</span>
+        <h2>สัญญาณเตือนที่ควรสังเกต</h2>
+        <p class="section-lead">หากพบสัญญาณเหล่านี้ต่อเนื่องกันหลายวัน อาจเป็นจุดเริ่มต้นที่ควรให้ความใส่ใจกับสุขภาพใจมากขึ้น</p>
+        <div class="signs-grid">
+            <div class="signs-card">
+                <i class="fa-solid fa-bed"></i>
+                <h3>นอนหลับผิดปกติ</h3>
+                <p>นอนไม่หลับ หรือหลับมากเกินไปติดต่อกันหลายวัน</p>
+            </div>
+            <div class="signs-card">
+                <i class="fa-solid fa-utensils"></i>
+                <h3>เบื่ออาหารหรือกินมากขึ้น</h3>
+                <p>น้ำหนักเปลี่ยนแปลงชัดเจนโดยไม่ได้ตั้งใจ</p>
+            </div>
+            <div class="signs-card">
+                <i class="fa-solid fa-door-closed"></i>
+                <h3>แยกตัวจากคนรอบข้าง</h3>
+                <p>ไม่อยากพบปะผู้คน หลีกเลี่ยงกิจกรรมที่เคยชอบทำ</p>
+            </div>
+            <div class="signs-card">
+                <i class="fa-solid fa-face-sad-tear"></i>
+                <h3>อารมณ์แปรปรวนง่าย</h3>
+                <p>หงุดหงิด โกรธง่าย หรือร้องไห้ง่ายกว่าปกติ</p>
+            </div>
+            <div class="signs-card">
+                <i class="fa-solid fa-cloud-rain"></i>
+                <h3>รู้สึกสิ้นหวัง ไร้ค่า</h3>
+                <p>มองไม่เห็นคุณค่าของตัวเอง หรือมองอนาคตในแง่ลบ</p>
+            </div>
+            <div class="signs-card">
+                <i class="fa-solid fa-brain"></i>
+                <h3>สมาธิและความจำลดลง</h3>
+                <p>ทำงานหรือเรียนได้ยากขึ้น ลืมง่าย ตัดสินใจลำบาก</p>
+            </div>
+        </div>
+        <div class="signs-note">
+            <i class="fa-solid fa-phone"></i>
+            หากพบสัญญาณเหล่านี้ในตัวเองหรือคนใกล้ตัว ปรึกษาได้ที่สายด่วนสุขภาพจิต 1323 หรือ อสม. ใกล้บ้าน
+        </div>
+    </section>
+
+    <!-- Self-Care Tips -->
+    <section class="selfcare-section" id="selfcare">
+        <span class="eyebrow">ดูแลใจด้วยตัวเอง</span>
+        <h2>วิธีดูแลสุขภาพจิตเบื้องต้น</h2>
+        <p class="section-lead">การดูแลใจไม่ใช่เรื่องใหญ่ เริ่มได้จากกิจวัตรเล็กๆ ในทุกวัน</p>
+        <div class="selfcare-grid">
+            <div class="selfcare-card">
+                <div class="num">1</div>
+                <div><h3>หายใจลึกๆ ฝึกสติ</h3><p>ใช้เวลา 5–10 นาทีต่อวันเพื่อผ่อนคลายจิตใจ</p></div>
+            </div>
+            <div class="selfcare-card">
+                <div class="num">2</div>
+                <div><h3>ออกกำลังกายสม่ำเสมอ</h3><p>ช่วยลดความเครียดและปรับสมดุลอารมณ์</p></div>
+            </div>
+            <div class="selfcare-card">
+                <div class="num">3</div>
+                <div><h3>พูดคุยกับคนที่ไว้ใจ</h3><p>แบ่งปันความรู้สึกกับครอบครัวหรือเพื่อน</p></div>
+            </div>
+            <div class="selfcare-card">
+                <div class="num">4</div>
+                <div><h3>นอนหลับให้เพียงพอ</h3><p>พักผ่อนอย่างน้อย 7–8 ชั่วโมงต่อคืน</p></div>
+            </div>
+            <div class="selfcare-card">
+                <div class="num">5</div>
+                <div><h3>ใกล้ชิดธรรมชาติ</h3><p>ใช้เวลานอกบ้านและรับแสงแดดยามเช้า</p></div>
+            </div>
+            <div class="selfcare-card">
+                <div class="num">6</div>
+                <div><h3>ลดคาเฟอีนและแอลกอฮอล์</h3><p>ช่วยให้อารมณ์มีเสถียรภาพมากขึ้น</p></div>
             </div>
         </div>
     </section>
@@ -732,6 +1142,17 @@
             <div>©2026 โครงการ อสม. ฮีลใจ ผ่านระบบดิจิทัล</div>
         </div>
     </footer>
+
+    <script>
+        const headerEl = document.getElementById('siteHeader');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 8){
+                headerEl.classList.add('scrolled');
+            } else {
+                headerEl.classList.remove('scrolled');
+            }
+        }, { passive: true });
+    </script>
 
 </body>
 </html>
