@@ -4,15 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>แบบคัดกรองการใช้สารเสพติด - โครงการ อสม. ฮีลใจ</title>
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Kanit:wght@400;500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
 <style>
   :root {
-    /* Theme Colors From Main System */
     --forest: #1E4A34;
     --forest-deep: #123324;
     --sage: #8FAE86;
@@ -20,8 +17,6 @@
     --marigold: #E8A23C;
     --marigold-deep: #C8801F;
     --ink-main: #24301F;
-    
-    /* System & Card Specific Colors */
     --sky: #BFE6F5;
     --mint: #CDEEDB;
     --surface: #FFFFFF;
@@ -36,11 +31,10 @@
     --radius: 24px;
     --shadow: 0 12px 28px rgba(30,80,90,0.12);
     --font-scale: 1;
-
     --display-font: 'Kanit', sans-serif;
     --body-font: 'Sarabun', sans-serif;
   }
-  
+ 
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { font-size: calc(16px * var(--font-scale)); scroll-behavior: smooth; }
   body {
@@ -53,8 +47,6 @@
     min-height: 100vh;
     padding-bottom: 50px;
   }
-
-  /* ---------------- Hotline Bar ---------------- */
   .hotline-bar {
     background: var(--forest-deep);
     color: #fff;
@@ -64,8 +56,6 @@
     font-family: var(--body-font);
   }
   .hotline-bar b { color: var(--marigold); }
-
-  /* ---------------- Navbar ---------------- */
   header.nav-header {
     background: rgba(251,247,238,0.86);
     backdrop-filter: blur(10px);
@@ -132,13 +122,10 @@
   }
   nav a.nav-cta::after { display: none; }
   nav a.nav-cta:hover { background: var(--forest-deep); }
-
   @media (max-width: 768px) {
     header.nav-header { flex-direction: column; gap: 12px; padding: 14px 6%; }
     nav { gap: 14px; flex-wrap: wrap; justify-content: center; }
   }
-
-  /* ---------------- Content Header ---------------- */
   header.top {
     max-width: 920px;
     margin: 0 auto;
@@ -165,14 +152,11 @@
     margin: 0 auto;
     line-height: 1.7;
   }
-
   main {
     max-width: 1040px;
     margin: 0 auto;
     padding: 20px 20px 10px;
   }
-
-  /* ---------------- Grid View Cards ---------------- */
   .grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -180,7 +164,6 @@
   }
   @media (max-width: 860px) { .grid { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 520px) { .grid { grid-template-columns: 1fr; } }
-
   .card {
     background: var(--surface);
     border-radius: var(--radius);
@@ -237,8 +220,6 @@
     border-radius: 20px;
     padding: 5px 16px;
   }
-
-  /* ---------------- Panel Containers ---------------- */
   .panel {
     background: var(--surface);
     border-radius: var(--radius);
@@ -246,7 +227,6 @@
     padding: 36px 30px;
     margin-top: 10px;
   }
-
   .btn-back-link {
     display: inline-flex;
     align-items: center;
@@ -267,7 +247,6 @@
     background: var(--forest);
     color: #fff;
   }
-
   .quiz-title {
     font-family: var(--display-font);
     font-size: 1.5rem;
@@ -281,7 +260,6 @@
     margin-bottom: 20px;
     line-height: 1.6;
   }
-
   .staff-banner {
     background: var(--sage-soft);
     border: 1px solid var(--sage);
@@ -293,8 +271,6 @@
     margin-bottom: 24px;
     font-weight: 500;
   }
-
-  /* ASSIST Substance Chips */
   .substance-select {
     display: flex;
     flex-wrap: wrap;
@@ -324,8 +300,6 @@
     color: #fff;
     box-shadow: 0 4px 12px rgba(211, 84, 0, 0.25);
   }
-
-  /* Question Lists & Options */
   .progress-wrap {
     background: var(--surface-alt);
     border-radius: 20px;
@@ -339,7 +313,6 @@
     width: 0%;
     transition: width 0.25s ease;
   }
-
   .question {
     border-top: 1px solid var(--line);
     padding: 22px 0;
@@ -375,8 +348,6 @@
     background: var(--sage-soft);
     font-weight: 600;
   }
-
-  /* Buttons & Actions */
   .submit-row { margin-top: 28px; text-align: center; }
   .btn-primary {
     background: var(--forest);
@@ -396,7 +367,6 @@
     transform: translateY(-2px);
   }
   .btn-primary:disabled { opacity: 0.45; cursor: not-allowed; box-shadow: none; }
-
   .btn-ghost {
     background: transparent;
     border: 1.5px solid var(--forest);
@@ -410,10 +380,8 @@
     transition: all 0.2s ease;
   }
   .btn-ghost:hover { background: var(--forest); color: #fff; }
-
+  .btn-ghost:disabled { opacity: 0.6; cursor: not-allowed; }
   .hint { text-align: center; font-size: 0.85rem; color: var(--ink-soft); margin-top: 12px; }
-
-  /* ---------------- Result Page ---------------- */
   .result-head { text-align: center; margin-bottom: 10px; }
   .score-big {
     font-family: var(--display-font);
@@ -424,7 +392,7 @@
     line-height: 1;
   }
   .score-label { text-align: center; font-size: 0.9rem; color: var(--ink-soft); margin-bottom: 20px; }
-  
+ 
   .level-badge {
     display: inline-block;
     padding: 8px 24px;
@@ -435,7 +403,6 @@
     color: #fff;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   }
-
   .substance-results { margin: 24px 0; }
   .substance-result-row {
     padding: 16px 20px;
@@ -460,7 +427,6 @@
     color: #fff;
   }
   .substance-result-row .sdetail { font-size: 0.88rem; color: var(--ink-soft); }
-
   .advice-box {
     background: var(--surface-alt);
     border-radius: 18px;
@@ -472,7 +438,6 @@
     border: 1px solid var(--line);
   }
   .advice-box b { color: var(--forest-deep); }
-
   .crisis-box {
     background: var(--coral-soft);
     border: 1.5px solid var(--coral);
@@ -489,7 +454,6 @@
     margin-bottom: 6px;
     font-size: 1.1rem;
   }
-
   .email-box {
     background: var(--surface-alt);
     border-radius: 18px;
@@ -504,7 +468,7 @@
     color: var(--forest-deep);
     margin-bottom: 10px;
   }
-  .email-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .email-row { display: flex; gap: 12px; flex-wrap: wrap; flex-direction: column; }
   .email-row input {
     flex: 1;
     min-width: 240px;
@@ -516,9 +480,7 @@
     background: #fff;
   }
   .email-row input:focus { outline: none; border-color: var(--forest); }
-
   .result-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 28px; }
-
   footer.note {
     max-width: 920px;
     margin: 40px auto 0;
@@ -532,13 +494,10 @@
 </style>
 </head>
 <body>
-
-<!-- Hotline Bar -->
 <div class="hotline-bar">
   <i class="fa-solid fa-phone-volume"></i> สายด่วนยาเสพติด <b>1165</b> · สายด่วนสุขภาพจิต <b>1323</b> · ให้บริการฟรีตลอด 24 ชั่วโมง
 </div>
 
-<!-- Main System Header Navbar -->
 <header class="nav-header">
   <a href="index.html" class="logo">
     <span class="badge"><i class="fa-solid fa-heart-pulse"></i></span>
@@ -559,10 +518,8 @@
 </header>
 
 <main>
-  <!-- Grid View -->
   <section id="view-grid" class="grid"></section>
 
-  <!-- ASSIST Substance Selection View -->
   <section id="view-substances" class="panel" style="display:none;">
     <button class="btn-back-link" onclick="showGrid()"><i class="fa-solid fa-arrow-left"></i> ย้อนกลับ</button>
     <h2 class="quiz-title">ASSIST — คัดกรองการใช้สารเสพติดหลายชนิด</h2>
@@ -574,7 +531,6 @@
     </div>
   </section>
 
-  <!-- Quiz Questions View -->
   <section id="view-quiz" class="panel" style="display:none;">
     <button class="btn-back-link" onclick="showGrid()"><i class="fa-solid fa-arrow-left"></i> ย้อนกลับ</button>
     <h2 class="quiz-title" id="quizTitle"></h2>
@@ -588,7 +544,6 @@
     </div>
   </section>
 
-  <!-- Result View -->
   <section id="view-result" class="panel" style="display:none;">
     <button class="btn-back-link" onclick="showGrid()"><i class="fa-solid fa-arrow-left"></i> เลือกแบบประเมินอื่น</button>
     <div class="result-head">
@@ -600,21 +555,25 @@
     <div id="resultBadgeWrap" style="text-align:center;"></div>
     <div id="substanceResultsWrap"></div>
     <div class="advice-box" id="resultAdvice"></div>
-    
+   
     <div class="crisis-box" id="resultCrisis" style="display:none;">
       <div class="title"><i class="fa-solid fa-triangle-exclamation"></i> ข้อควรระวัง: ความเสี่ยงสูง / มีประวัติการฉีดสาร</div>
       ควรส่งต่อเข้ารับการบำบัดรักษาโดยผู้เชี่ยวชาญ และแนะนำการลดอันตราย (Harm Reduction) เช่น ไม่ใช้เข็มร่วมกัน หากสงสัยว่าภาวะยาเกินขนาด (overdose) ให้โทรแจ้งสายด่วนฉุกเฉิน 1669 ทันที
     </div>
-    
+   
+    <!-- ส่วนกรอกชื่อ + เบอร์ (ชื่อตัวเอง) -->
     <div class="email-box">
-      <label for="emailTo"><i class="fa-regular fa-paper-plane"></i> ส่งผลการประเมินเข้า Gmail</label>
+      <label><i class="fa-solid fa-user-pen"></i> บันทึกชื่อและเบอร์โทรเพื่อส่งผลประเมิน</label>
       <div class="email-row">
-        <input type="email" id="emailTo" value="67319100012@Aitc.ac.th">
-        <button class="btn-ghost" onclick="emailResult()"><i class="fa-regular fa-envelope"></i> ส่งอีเมล</button>
+        <input type="text" id="senderName" placeholder="ชื่อ-นามสกุล (ชื่อตัวเอง)">
+        <input type="tel" id="senderPhone" placeholder="เบอร์โทรศัพท์">
+        <button class="btn-ghost" id="sendEmailBtn" onclick="emailResult()" style="align-self: flex-start;">
+          <i class="fa-solid fa-paper-plane"></i> ส่งผลประเมิน
+        </button>
       </div>
-      <div class="hint">ระบบจะเปิดหน้าเขียนอีเมลของ Gmail พร้อมกรอกข้อมูลสรุปให้อัตโนมัติ</div>
+      <div class="hint" id="emailHint">ระบบจะส่งผลประเมินพร้อมชื่อและเบอร์โทรไปยังระบบ Formspree</div>
     </div>
-    
+   
     <div class="result-actions">
       <button class="btn-primary" onclick="showGrid()">ทำแบบประเมินถัดไป</button>
     </div>
@@ -627,7 +586,6 @@
 </footer>
 
 <script>
-// Option Scales
 const scaleFreq5 = [
   {label:'ไม่เคยเลย', score:0}, {label:'1-2 ครั้ง', score:1}, {label:'รายเดือน', score:2},
   {label:'รายสัปดาห์', score:3}, {label:'รายวันหรือเกือบทุกวัน', score:4}
@@ -641,13 +599,11 @@ const scale4rev = [
   {label:'มากที่สุด', score:0}, {label:'ค่อนข้างมาก', score:1}, {label:'ค่อนข้างน้อย', score:2}, {label:'น้อยที่สุด/ไม่มีเลย', score:3}
 ];
 
-// Data Setup
 const SUBSTANCES = [
   'ยาสูบ (บุหรี่ / บุหรี่ไฟฟ้า)', 'กัญชา', 'สารกระตุ้นแอมเฟตามีน (ยาบ้า / ไอซ์)', 'ยาอี / เอ็คซ์ตาซี',
   'สารระเหย (กาว ทินเนอร์)', 'ยากล่อมประสาท/ยานอนหลับ (ไม่ได้ใช้ตามแพทย์สั่ง)', 'สารหลอนประสาท (LSD เห็ดขี้ควาย)',
   'ฝิ่น / เฮโรอีน / มอร์ฟีน (ไม่ได้ใช้ตามแพทย์สั่ง)', 'สารเสพติดอื่นๆ'
 ];
-
 const ASSIST_FOLLOWUP = [
   {text:'บ่อยเพียงใดที่ใช้ __SUB__ ในช่วง 3 เดือนที่ผ่านมา', options:scaleFreq5},
   {text:'บ่อยเพียงใดที่รู้สึกอยากใช้ __SUB__ อย่างรุนแรง (craving)', options:scaleFreq5},
@@ -657,7 +613,6 @@ const ASSIST_FOLLOWUP = [
   {text:'เคยพยายามลดหรือเลิกใช้ __SUB__ แต่ทำไม่สำเร็จหรือไม่', options:yesNo},
   {text:'เคยฉีด __SUB__ เข้าเส้นเลือดหรือไม่', options:yesNo}
 ];
-
 const DAST_ITEMS = [
   {text:'เคยใช้ยาเสพติดอื่นนอกเหนือจากที่จำเป็นทางการแพทย์หรือไม่', options:yesNo},
   {text:'เคยใช้ยาเสพติดมากกว่าหนึ่งชนิดในคราวเดียวกันหรือไม่', options:yesNo},
@@ -670,14 +625,12 @@ const DAST_ITEMS = [
   {text:'เคยมีอาการถอนยา (withdrawal) เมื่อหยุดใช้ยาเสพติดหรือไม่', options:yesNo},
   {text:'เคยมีปัญหาสุขภาพจากการใช้ยาเสพติดหรือไม่ เช่น ความจำ ตับ ชัก เลือดออก', options:yesNo}
 ];
-
 const CAGEAID_ITEMS = [
   'เคยรู้สึกว่าควรลดการใช้ยาเสพติดหรือแอลกอฮอล์ของตนเองหรือไม่',
   'เคยรู้สึกรำคาญที่คนอื่นวิจารณ์การใช้ยาเสพติดหรือแอลกอฮอล์ของท่านหรือไม่',
   'เคยรู้สึกผิดเกี่ยวกับการใช้ยาเสพติดหรือแอลกอฮอล์ของตนเองหรือไม่',
   'เคยต้องใช้ยาเสพติดหรือแอลกอฮอล์ทันทีที่ตื่นนอนเพื่อให้รู้สึกปกติหรือไม่'
 ];
-
 const SDS_ITEMS = [
   'ท่านรู้สึกว่าควบคุมการใช้สารเสพติดของตนเองไม่ได้มากน้อยเพียงใด',
   'การต้องใช้สารเสพติดทำให้ท่านวิตกกังวลมากน้อยเพียงใด',
@@ -685,7 +638,6 @@ const SDS_ITEMS = [
   'ท่านอยากเลิกใช้สารเสพติดมากน้อยเพียงใด',
   'ท่านคิดว่าการเลิกใช้สารเสพติด (หรือหยุดใช้) เป็นเรื่องยากมากน้อยเพียงใด'
 ];
-
 const RELAPSE_ITEMS = [
   {text:'ท่านยังคบหาหรือใช้เวลากับกลุ่มเพื่อนที่ใช้สารเสพติดอยู่มากน้อยเพียงใด', options:scale4b},
   {text:'ท่านรู้สึกเครียดหรือมีปัญหาชีวิตที่ยังแก้ไม่ได้มากน้อยเพียงใด', options:scale4b},
@@ -744,7 +696,6 @@ const ASSESSMENTS = {
   }
 };
 
-// Global App State
 let currentId = null;
 let currentAnswers = [];
 let selectedSubstances = [];
@@ -785,7 +736,6 @@ function hideAll() {
 function openAssessment(id) {
   currentId = id;
   const a = ASSESSMENTS[id];
-
   if (a.type === 'assist') {
     selectedSubstances = [];
     assistResults = [];
@@ -815,12 +765,12 @@ function openAssessment(id) {
 
 function toggleSubstance(i, name, chip) {
   const idx = selectedSubstances.indexOf(name);
-  if (idx === -1) { 
-    selectedSubstances.push(name); 
-    chip.classList.add('selected'); 
-  } else { 
-    selectedSubstances.splice(idx, 1); 
-    chip.classList.remove('selected'); 
+  if (idx === -1) {
+    selectedSubstances.push(name);
+    chip.classList.add('selected');
+  } else {
+    selectedSubstances.splice(idx, 1);
+    chip.classList.remove('selected');
   }
   document.getElementById('substanceNextBtn').disabled = selectedSubstances.length === 0;
 }
@@ -892,16 +842,14 @@ function submitQuiz() {
     else band = {label:'ความเสี่ยงสูง', color:'var(--coral)'};
     if (injected) band = {label:'ความเสี่ยงสูง (มีประวัติการฉีด)', color:'var(--danger)'};
     assistResults.push({sub, score, band, injected});
-
     assistQueue.shift();
     runNextAssistSubstance();
     return;
   }
-
   const a = ASSESSMENTS[currentId];
   const score = currentAnswers.reduce((s, v) => s + v, 0);
   const band = a.bands.find(b => score >= b.min && score <= b.max) || a.bands[a.bands.length - 1];
-  
+ 
   document.getElementById('resultCode').textContent = a.code;
   document.getElementById('resultTitle').textContent = a.full;
   document.getElementById('resultScore').textContent = score;
@@ -911,12 +859,10 @@ function submitQuiz() {
   document.getElementById('substanceResultsWrap').innerHTML = '';
   document.getElementById('resultAdvice').innerHTML = `<b>คำแนะนำ:</b> ${band.advice}`;
   document.getElementById('resultCrisis').style.display = (currentId === 'dast' && score >= 9) ? 'block' : 'none';
-
   lastResult = {
     code: a.code, full: a.full, score: score, levelLabel: band.label,
     dateStr: new Date().toLocaleDateString('th-TH', {year:'numeric', month:'long', day:'numeric'})
   };
-
   hideAll();
   document.getElementById('view-result').style.display = 'block';
   window.scrollTo({top: 0, behavior: 'smooth'});
@@ -927,13 +873,11 @@ function finishAssist() {
   document.getElementById('resultCode').textContent = a.code;
   document.getElementById('resultTitle').textContent = a.full;
   document.getElementById('resultScoreLabel').textContent = 'ผลประเมินรวมตามประเภทสารที่เลือก';
-
   const highestRisk = assistResults.some(r => r.band.label.includes('สูง'));
   const anyInjected = assistResults.some(r => r.injected);
   document.getElementById('resultScore').textContent = assistResults.length + ' ชนิด';
   document.getElementById('resultScore').style.color = highestRisk ? 'var(--danger)' : 'var(--teal)';
   document.getElementById('resultBadgeWrap').innerHTML = `<span class="level-badge" style="background:${highestRisk ? 'var(--danger)' : 'var(--teal)'}">${highestRisk ? 'พบสารที่มีความเสี่ยงสูง' : 'ความเสี่ยงโดยรวมต่ำ-ปานกลาง'}</span>`;
-
   let rowsHtml = '';
   assistResults.forEach(r => {
     rowsHtml += `
@@ -946,50 +890,81 @@ function finishAssist() {
       </div>`;
   });
   document.getElementById('substanceResultsWrap').innerHTML = `<div class="substance-results">${rowsHtml}</div>`;
-
   document.getElementById('resultAdvice').innerHTML = `<b>คำแนะนำ:</b> สารที่มีความเสี่ยงระดับปานกลางขึ้นไปควรได้รับการดูแลและให้คำปรึกษาแบบสั้น (Brief Intervention) จากเจ้าหน้าที่สาธารณสุข ส่วนสารที่มีความเสี่ยงสูงควรส่งต่อเข้าสู่ระบบบำบัดรักษาโดยทันที`;
   document.getElementById('resultCrisis').style.display = (highestRisk || anyInjected) ? 'block' : 'none';
-
   lastResult = {
-    code: a.code, full: a.full, score: assistResults.length + ' ชนิด', 
+    code: a.code, full: a.full, score: assistResults.length + ' ชนิด',
     levelLabel: highestRisk ? 'พบความเสี่ยงสูง' : 'ความเสี่ยงต่ำ-ปานกลาง',
     dateStr: new Date().toLocaleDateString('th-TH', {year:'numeric', month:'long', day:'numeric'})
   };
-
   hideAll();
   document.getElementById('view-result').style.display = 'block';
   window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
-function emailResult() {
+async function emailResult() {
   if (!lastResult) return;
-  const to = document.getElementById('emailTo').value.trim();
-  if (!to) { alert('กรุณากรอกอีเมลผู้รับ'); return; }
-  
+
+  const name = document.getElementById('senderName').value.trim();
+  const phone = document.getElementById('senderPhone').value.trim();
+
+  if (!name) { alert('กรุณากรอกชื่อ-นามสกุล'); return; }
+  if (!phone) { alert('กรุณากรอกเบอร์โทรศัพท์'); return; }
+
+  const btn = document.getElementById('sendEmailBtn');
+  const hint = document.getElementById('emailHint');
+
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> กำลังส่ง...';
+  hint.textContent = 'กำลังส่งข้อมูลผ่าน Formspree...';
+
   const {code, full, score, levelLabel, dateStr} = lastResult;
-  const subject = `ผลแบบประเมิน ${code} — ${full} (อสม. ฮีลใจ)`;
-  
+
   let extra = '';
   if (currentId === 'assist' && assistResults.length) {
     extra = '\n\nรายละเอียดแยกตามชนิดสาร:\n' + assistResults.map(r => `- ${r.sub}: คะแนน ${r.score}/28 (${r.band.label})${r.injected ? ' [มีประวัติการฉีด]' : ''}`).join('\n');
   }
-  
-  const body = 
-`ผลแบบคัดกรองการใช้สารเสพติด (โครงการ อสม. ฮีลใจ)
 
-แบบประเมิน: ${code} (${full})
-วันที่ทำแบบประเมิน: ${dateStr}
-ผลคะแนน: ${score}
-ระดับผลประเมิน: ${levelLabel}${extra}
+  const formData = new FormData();
+  formData.append('ชื่อ-นามสกุล', name);
+  formData.append('เบอร์โทรศัพท์', phone);
+  formData.append('_subject', `ผลแบบประเมิน ${code} — ${full} (อสม. ฮีลใจ)`);
+  formData.append('แบบประเมิน', `${code} (${full})`);
+  formData.append('วันที่ทำแบบประเมิน', dateStr);
+  formData.append('ผลคะแนน', score);
+  formData.append('ระดับผลประเมิน', levelLabel);
+  if (extra) formData.append('รายละเอียดแยกตามชนิดสาร', extra);
+  formData.append('หมายเหตุ', 'ผลประเมินนี้เป็นการคัดกรองเบื้องต้นเพื่อดูแลสุขภาพใจ ไม่ใช่การวินิจฉัยทางการแพทย์ ข้อมูลนี้เป็นความลับ');
+  formData.append('สายด่วน', 'สายด่วนยาเสพติด 1165 · สายด่วนสุขภาพจิต 1323 (ฟรี ตลอด 24 ชม.)');
 
-หมายเหตุ: ผลประเมินนี้เป็นการคัดกรองเบื้องต้นเพื่อดูแลสุขภาพใจ ไม่ใช่การวินิจฉัยทางการแพทย์ ข้อมูลนี้เป็นความลับ
-สายด่วนยาเสพติด 1165 · สายด่วนสุขภาพจิต 1323 (ฟรี ตลอด 24 ชม.)`;
+  try {
+    const response = await fetch('https://formspree.io/f/xdenprjw', {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'Accept': 'application/json'
+      }
+    });
 
-  const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  window.open(gmailUrl, '_blank');
+    if (response.ok) {
+      hint.innerHTML = '<span style="color: var(--teal);"><i class="fa-solid fa-circle-check"></i> ส่งผลประเมินเรียบร้อยแล้ว!</span>';
+      btn.innerHTML = '<i class="fa-solid fa-check"></i> ส่งสำเร็จ';
+      
+      setTimeout(() => {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> ส่งผลประเมิน';
+      }, 3000);
+    } else {
+      throw new Error('ส่งไม่สำเร็จ');
+    }
+  } catch (error) {
+    console.error(error);
+    hint.innerHTML = '<span style="color: var(--danger);"><i class="fa-solid fa-circle-exclamation"></i> เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง</span>';
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> ส่งผลประเมิน';
+  }
 }
 
-// Initialize System
 initGrid();
 showGrid();
 </script>
