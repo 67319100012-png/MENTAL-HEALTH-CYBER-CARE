@@ -705,9 +705,8 @@ function reopenLast() {
   else showGrid();
 }
 
-async function emailResult() {
+async function sendResultToSheet() {
   if (!lastResult) return;
-
   const name = document.getElementById('senderName').value.trim();
   const phone = document.getElementById('senderPhone').value.trim();
 
@@ -718,48 +717,35 @@ async function emailResult() {
   const hint = document.getElementById('emailHint');
 
   btn.disabled = true;
-  btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> กำลังส่ง...';
-  hint.textContent = 'กำลังบันทึกข้อมูลลง Google Sheets...';
+  btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> กำลังบันทึก...';
 
-  const cleanAdvice = lastResult.band.advice.replace(/<[^>]*>?/gm, '');
-
-  // ใช้ชื่อคีย์ให้ตรงกับที่ Code.gs (เวอร์ชัน CIT) รองรับ:
-  // assessment_type -> คอลัมน์ "ประเภทแบบประเมิน", full_name/phone, total_score, result_text, notes
+  // ปรับ Keys ให้ตรงกับที่ Google Apps Script รอรับ
   const payload = {
-    assessment_type: lastResult.code,
-    full_name: name,
+    fullName: name,
     phone: phone,
-    total_score: `${lastResult.score} / ${lastResult.maxScore}`,
-    result_text: lastResult.band.label,
-    notes: cleanAdvice
+    totalScore: `${lastResult.score} / ${lastResult.maxScore}`,
+    resultText: lastResult.band.label,
+    notes: lastResult.band.advice.replace(/<[^>]*>?/gm, ''), // ลบ HTML tags ออกก่อนส่ง
+    assessmentType: `${lastResult.code} - ${lastResult.title}`
   };
 
   try {
-    // mode: "no-cors" + Content-Type: text/plain จำเป็นสำหรับ Apps Script Web App
-    // ข้อจำกัด: อ่านผลตอบกลับจริงไม่ได้ ถือว่าสำเร็จถ้า fetch ไม่ throw error
     await fetch(WEB_APP_URL, {
       method: 'POST',
       mode: 'no-cors',
-      headers: { 'Content-Type': 'text/plain' },
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // ใช้ text/plain เพื่อผ่าน CORS
       body: JSON.stringify(payload)
     });
 
-    hint.innerHTML = '<span style="color: var(--success);"><i class="fa-solid fa-circle-check"></i> บันทึกผลประเมินเรียบร้อยแล้ว!</span>';
-    btn.innerHTML = '<i class="fa-solid fa-check"></i> ส่งสำเร็จ';
-
-    setTimeout(() => {
-      btn.disabled = false;
-      btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> ส่งผลประเมิน';
-    }, 3000);
-
+    hint.innerHTML = '<span style="color:var(--success); font-weight:600;"><i class="fa-solid fa-circle-check"></i> บันทึกข้อมูลลง Google Sheet เรียบร้อยแล้ว!</span>';
+    btn.innerHTML = '<i class="fa-solid fa-check"></i> บันทึกสำเร็จ';
   } catch (error) {
     console.error(error);
-    hint.innerHTML = '<span style="color: var(--danger);"><i class="fa-solid fa-circle-exclamation"></i> เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง (ตรวจสอบการเชื่อมต่ออินเทอร์เน็ต)</span>';
+    hint.innerHTML = '<span style="color:var(--danger); font-weight:600;"><i class="fa-solid fa-circle-exclamation"></i> เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง</span>';
     btn.disabled = false;
-    btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> ส่งผลประเมิน';
+    btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> บันทึกข้อมูล';
   }
 }
-
 document.addEventListener('DOMContentLoaded', () => {
   initGrid();
   showGrid();
