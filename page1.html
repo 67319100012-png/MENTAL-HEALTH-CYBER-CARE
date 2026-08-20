@@ -337,8 +337,9 @@
 <footer class="note">
   <i class="fa-solid fa-circle-info"></i> แบบประเมินนี้ดัดแปลงจากเครื่องมือคัดกรองมาตรฐานที่ใช้ในระบบสาธารณสุขไทย ผลลัพธ์เป็นเพียงการคัดกรองเบื้องต้น ไม่สามารถใช้แทนการวินิจฉัยของแพทย์หรือผู้เชี่ยวชาญได้ หากมีข้อสงสัยเกี่ยวกับผลประเมิน โปรดปรึกษา อสม. หรือเจ้าหน้าที่สาธารณสุขใกล้บ้าน
 </footer>
+
 <script>
-// ★★★ ใส่ Web App URL ล่าสุดจาก Apps Script ตรงนี้ ★★★
+// Web App URL จาก Apps Script
 const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwgpvO6kPnGfb_GbTApu_XAfqSkI-0seh30qkQitZJ1gWi9rlxptKtSD1bFL1il9xtq/exec";
 
 const scale4 = [
@@ -369,6 +370,7 @@ const auditConcern = [
   {label:'เคย แต่ไม่ใช่ในปีที่ผ่านมา', score:2},
   {label:'เคยในปีที่ผ่านมา', score:4}
 ];
+
 const ASSESSMENTS = {
   '2q':{
     code:'2Q', title:'2Q', full:'คัดกรองภาวะซึมเศร้าเบื้องต้น',
@@ -510,9 +512,11 @@ const ASSESSMENTS = {
     ]
   }
 };
+
 let currentId = null;
 let currentAnswers = [];
 let lastResult = null;
+
 function initGrid(){
   const grid = document.getElementById('view-grid');
   grid.innerHTML = '';
@@ -534,12 +538,14 @@ function initGrid(){
     grid.appendChild(card);
   });
 }
+
 function triggerAnimation(elementId) {
   const el = document.getElementById(elementId);
   el.classList.remove('view-container');
   void el.offsetWidth;
   el.classList.add('view-container');
 }
+
 function showGrid(){
   document.getElementById('view-grid').style.display = 'grid';
   document.getElementById('view-quiz').style.display = 'none';
@@ -549,6 +555,7 @@ function showGrid(){
   triggerAnimation('view-grid');
   window.scrollTo({top:0,behavior:'smooth'});
 }
+
 function openAssessment(id){
   currentId = id;
   const a = ASSESSMENTS[id];
@@ -588,119 +595,134 @@ function openAssessment(id){
   triggerAnimation('view-quiz');
   window.scrollTo({top: 0, behavior: 'smooth'});
 }
+
 function selectOpt(qIndex, optIndex, score) {
   currentAnswers[qIndex] = score;
   const a = ASSESSMENTS[currentId];
-  const qs = a.customQuestions ? a.customQuestions : a.questions;
-  const optionsCount = (qs[qIndex].options || a.options).length;
-  for (let j = 0; j < optionsCount; j++) {
-    const label = document.getElementById(`opt-${qIndex}-${j}`);
-    if (label) {
+  const qs = a.customQuestions
+    ? a.customQuestions
+    : a.questions.map(t => ({ text: t, options: a.options }));
+
+  qs[qIndex].options.forEach((_, j) => {
+    const el = document.getElementById(`opt-${qIndex}-${j}`);
+    if (el) {
       if (j === optIndex) {
-        label.classList.add('selected');
+        el.classList.add('selected');
       } else {
-        label.classList.remove('selected');
+        el.classList.remove('selected');
       }
     }
-  }
+  });
+
   updateProgress();
 }
+
 function updateProgress() {
   const total = currentAnswers.length;
-  const answered = currentAnswers.filter(val => val !== null).length;
+  const answered = currentAnswers.filter(v => v !== null).length;
   const pct = Math.round((answered / total) * 100);
-  document.getElementById('progressFill').style.width = `${pct}%`;
-  document.getElementById('progressHint').textContent = `ตอบแล้ว ${answered} จาก ${total} ข้อ`;
+
+  const fill = document.getElementById('progressFill');
+  if (fill) fill.style.width = `${pct}%`;
+
+  const hint = document.getElementById('progressHint');
   const submitBtn = document.getElementById('submitBtn');
-  submitBtn.disabled = answered < total;
-}
-function getMaxScore(assessment) {
-  if (assessment.customQuestions) {
-    return assessment.customQuestions.reduce((sum, q) => {
-      const maxOpt = Math.max(...q.options.map(o => o.score));
-      return sum + maxOpt;
-    }, 0);
+
+  if (hint) {
+    hint.textContent = `ตอบแล้ว ${answered} จาก ${total} ข้อ (${pct}%)`;
   }
-  const maxOpt = Math.max(...assessment.options.map(o => o.score));
-  return assessment.questions.length * maxOpt;
+
+  if (submitBtn) {
+    submitBtn.disabled = answered < total;
+  }
 }
+
 function submitQuiz() {
-  const totalScore = currentAnswers.reduce((sum, val) => sum + (val || 0), 0);
   const a = ASSESSMENTS[currentId];
-  let matchedBand = a.bands[a.bands.length - 1];
-  for (let band of a.bands) {
-    if (totalScore >= band.min && totalScore <= band.max) {
-      matchedBand = band;
-      break;
-    }
-  }
+  const totalScore = currentAnswers.reduce((sum, val) => sum + (val || 0), 0);
+
+  const band = a.bands.find(b => totalScore >= b.min && totalScore <= b.max) || a.bands[a.bands.length - 1];
+
   lastResult = {
-    code: a.code,
+    id: currentId,
     title: a.title,
     full: a.full,
     score: totalScore,
-    band: matchedBand
+    band: band
   };
-  document.getElementById('resultCode').textContent = `${a.code} SCREENING`;
+
+  document.getElementById('resultCode').textContent = a.code;
   document.getElementById('resultTitle').textContent = a.full;
   document.getElementById('resultScore').textContent = totalScore;
-  document.getElementById('resultScoreLabel').textContent = `คะแนนรวมที่คุณได้ (คะแนนเต็ม ${getMaxScore(a)})`;
+  document.getElementById('resultScoreLabel').textContent = `คะแนนรวม (${a.title})`;
+
   const badgeWrap = document.getElementById('resultBadgeWrap');
-  badgeWrap.innerHTML = `<span class="level-badge" style="background:${matchedBand.color}">${matchedBand.label}</span>`;
-  document.getElementById('resultAdvice').innerHTML = matchedBand.advice;
-  document.getElementById('resultCrisis').style.display = matchedBand.crisis ? 'block' : 'none';
+  badgeWrap.innerHTML = `<span class="level-badge" style="background:${band.color}">${band.label}</span>`;
+
+  document.getElementById('resultAdvice').innerHTML = band.advice;
+
+  const crisisBox = document.getElementById('resultCrisis');
+  if (band.crisis) {
+    crisisBox.style.display = 'block';
+  } else {
+    crisisBox.style.display = 'none';
+  }
+
   document.getElementById('view-quiz').style.display = 'none';
   document.getElementById('view-result').style.display = 'block';
   triggerAnimation('view-result');
-  window.scrollTo({top: 0, behavior: 'smooth'});
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
 async function emailResult() {
-  if (!lastResult) return;
-  const name = document.getElementById('senderName').value.trim();
-  const phone = document.getElementById('senderPhone').value.trim();
-  if (!name) {
-    alert('กรุณากรอกชื่อ-นามสกุล');
-    return;
-  }
-  if (!phone) {
-    alert('กรุณากรอกเบอร์โทรศัพท์');
-    return;
-  }
+  const nameInput = document.getElementById('senderName');
+  const phoneInput = document.getElementById('senderPhone');
   const btn = document.getElementById('sendEmailBtn');
   const hint = document.getElementById('emailHint');
+
+  const name = nameInput.value.trim();
+  const phone = phoneInput.value.trim();
+
+  if (!name || !phone) {
+    alert('กรุณากรอกชื่อ-นามสกุล และเบอร์โทรศัพท์ให้ครบถ้วนก่อนส่งผล');
+    return;
+  }
+
   btn.disabled = true;
-  btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> กำลังส่ง...';
-  hint.textContent = 'กำลังบันทึกข้อมูลลง Google Sheets...';
-  const cleanAdvice = lastResult.band.advice.replace(/<[^>]*>?/gm, '');
+  btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> กำลังบันทึก...';
+
   const payload = {
-    assessment_type: lastResult.code,
-    full_name: name,
-    phone: phone,
-    total_score: `${lastResult.score} / ${getMaxScore(ASSESSMENTS[currentId])}`,
-    result_text: lastResult.band.label,
-    notes: cleanAdvice
+    timestamp: new Date().toLocaleString('th-TH'),
+    assessmentId: lastResult.id,
+    assessmentTitle: lastResult.title,
+    score: lastResult.score,
+    level: lastResult.band.label,
+    name: name,
+    phone: phone
   };
+
   try {
     await fetch(WEB_APP_URL, {
       method: 'POST',
       mode: 'no-cors',
-      headers: { 'Content-Type': 'text/plain' },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
-    hint.innerHTML = '<span style="color: var(--success);"><i class="fa-solid fa-circle-check"></i> บันทึกผลประเมินเรียบร้อยแล้ว!</span>';
-    btn.innerHTML = '<i class="fa-solid fa-check"></i> ส่งสำเร็จ';
-    setTimeout(() => {
-      btn.disabled = false;
-      btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> ส่งผลประเมิน';
-    }, 3000);
-  } catch (error) {
-    console.error(error);
-    hint.innerHTML = '<span style="color: var(--danger);"><i class="fa-solid fa-circle-exclamation"></i> เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง (ตรวจสอบการเชื่อมต่ออินเทอร์เน็ต)</span>';
+
+    hint.style.color = 'var(--success)';
+    hint.textContent = 'บันทึกข้อมูลเรียบร้อยแล้ว!';
+    alert('ส่งและบันทึกผลการประเมินเรียบร้อยแล้ว');
+  } catch (err) {
+    console.error(err);
+    hint.style.color = 'var(--danger)';
+    hint.textContent = 'เกิดข้อผิดพลาดในการส่งข้อมูล กรุณาลองใหม่อีกครั้ง';
+  } finally {
     btn.disabled = false;
     btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> ส่งผลประเมิน';
   }
 }
-document.addEventListener('DOMContentLoaded', () => {
+
+window.addEventListener('DOMContentLoaded', () => {
   initGrid();
 });
 </script>
