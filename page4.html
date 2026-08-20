@@ -307,16 +307,16 @@
   .email-box { background: rgba(251,250,243,0.9); border: 1.5px solid var(--border-light); border-radius: var(--radius-md); padding: 22px; margin-top: 26px; }
   .email-box label { display: block; font-size: 14px; font-weight: 700; margin-bottom: 12px; color: var(--brand-dark); }
   .email-row { display: flex; gap: 12px; flex-wrap: wrap; flex-direction: column; }
-  .email-row input { 
-    flex: 1; 
-    min-width: 240px; 
-    padding: 13px 18px; 
-    border-radius: var(--radius-sm); 
-    border: 1.5px solid var(--border); 
-    font-family: inherit; 
-    font-size: 14.5px; 
-    outline: none; 
-    transition: all 0.25s ease; 
+  .email-row input {
+    flex: 1;
+    min-width: 240px;
+    padding: 13px 18px;
+    border-radius: var(--radius-sm);
+    border: 1.5px solid var(--border);
+    font-family: inherit;
+    font-size: 14.5px;
+    outline: none;
+    transition: all 0.25s ease;
   }
   .email-row input:focus { border-color: var(--teal-dark); box-shadow: 0 0 0 4px rgba(37, 99, 168, 0.18); background: #fff; }
   .result-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 32px; }
@@ -327,7 +327,6 @@
 <div class="bg-blob blob-1"></div>
 <div class="bg-blob blob-2"></div>
 <div class="bg-blob blob-3"></div>
-
 <header class="nav-header">
   <a href="#" onclick="showGrid()" class="logo">
     <span class="badge"><i class="fa-solid fa-child-reaching"></i></span>
@@ -342,7 +341,6 @@
     </button>
   </div>
 </header>
-
 <div id="heroWrapper">
   <header class="hero">
     <span class="hero-badge"><i class="fa-solid fa-clipboard-check"></i> DEVELOPMENT & BEHAVIOR SCREENING</span>
@@ -375,10 +373,8 @@
     </div>
   </div>
 </div>
-
 <main>
   <section id="view-grid" class="grid view-container"></section>
-
   <section id="view-quiz" class="panel view-container" style="display:none;">
     <div class="panel-header-actions">
       <button class="btn-nav-back" onclick="showGrid()"><i class="fa-solid fa-arrow-left"></i> ย้อนกลับไปหน้าเลือกแบบประเมิน</button>
@@ -400,55 +396,47 @@
       <div class="hint" id="progressHint"></div>
     </div>
   </section>
-
   <section id="view-result" class="panel view-container" style="display:none;">
     <div class="panel-header-actions">
       <button class="btn-nav-back" onclick="showGrid()"><i class="fa-solid fa-house"></i> กลับสู่หน้าหลักแบบประเมิน</button>
     </div>
-    
+   
     <div class="result-head">
       <div class="hero-badge" id="resultCode"></div>
       <h2 class="quiz-title" id="resultTitle" style="margin-top:4px;"></h2>
     </div>
     <div class="score-big" id="resultScore"></div>
     <div class="score-label" id="resultScoreLabel">คะแนนรวมการประเมิน</div>
-    
+   
     <div id="resultBadgeWrap" style="text-align:center;">
       <span id="resultBadge" class="level-badge"></span>
     </div>
     <div id="resultBreakdown" class="breakdown-box" style="display:none;"></div>
     <div class="advice-box" id="resultAdvice"></div>
-
     <!-- ส่วนกรอกชื่อ + เบอร์ -->
     <div class="email-box">
       <label><i class="fa-solid fa-user-pen"></i> บันทึกชื่อและเบอร์โทรเพื่อส่งผลประเมิน</label>
       <div class="email-row">
         <input type="text" id="senderName" placeholder="ชื่อ-นามสกุล (ชื่อตัวเอง)">
         <input type="tel" id="senderPhone" placeholder="เบอร์โทรศัพท์">
-        <button class="btn-secondary" id="sendEmailBtn" onclick="sendGmail()" style="align-self: flex-start;">
+        <button class="btn-secondary" id="sendEmailBtn" onclick="sendResultToSheet()" style="align-self: flex-start;">
           <i class="fa-solid fa-paper-plane"></i> ส่งผลประเมิน
         </button>
       </div>
       <div class="hint" id="emailHint">ระบบจะบันทึกผลประเมินพร้อมชื่อและเบอร์โทรศัพท์ลงใน Google Sheets</div>
     </div>
-
     <div class="result-actions">
       <button class="btn-secondary" onclick="startAssessment(activeId)"><i class="fa-solid fa-rotate-left"></i> ทำแบบประเมินนี้อีกครั้ง</button>
       <button class="btn-primary" onclick="showGrid()"><i class="fa-solid fa-grip"></i> เลือกแบบประเมินอื่น</button>
     </div>
   </section>
 </main>
-
 <footer class="note">
   <i class="fa-solid fa-circle-info"></i> แบบประเมินเหล่านี้เป็นเครื่องมือคัดกรองเบื้องต้นเพื่อส่งเสริมพัฒนาการและเฝ้าระวังพฤติกรรมเด็ก ผลคะแนนไม่ได้เป็นคำวินิจฉัยทางการแพทย์โดยตรง
 </footer>
-
 <script>
 // 🔴 ใส่ Web App URL ของ Google Apps Script ที่ Deploy เรียบร้อยแล้วที่นี่
-// (URL นี้เป็นของไฟล์แบบประเมินเด็กเดิม — ถ้าต้องการให้ข้อมูลทุกแบบประเมินของทั้งเว็บไซต์
-//  ไปรวมอยู่ใน Google Sheet เดียวกับแบบประเมินผู้ใหญ่ ให้เปลี่ยน URL นี้ให้ตรงกับไฟล์ screening.html)
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzEWNos4Ve55IHTiRXlkuWwtxPJP_O5d3X2VuwES-gDoQOBBcLv-xttsBq3bbQtQ-swWg/exec';
-
 const OPT_YN = [{label:'ผ่าน / ใช่', score:1}, {label:'ไม่ผ่าน / ไม่ใช่', score:0}];
 const OPT_SCALE4 = [
   {label:'ไม่ค่อยพบ (0-1 ครั้ง/สัปดาห์)', score:0},
@@ -459,7 +447,6 @@ const OPT_SCALE4 = [
 const OPT_SDQ = (rev) => rev
   ? [{label:'ไม่จริง', score:2}, {label:'ค่อนข้างจริง', score:1}, {label:'จริงแน่นอน', score:0}]
   : [{label:'ไม่จริง', score:0}, {label:'ค่อนข้างจริง', score:1}, {label:'จริงแน่นอน', score:2}];
-
 const TOOLS = {
   dspm: {
     code: 'DSPM',
@@ -568,12 +555,10 @@ const TOOLS = {
     ]
   }
 };
-
 let activeId = null;
 let activeGroup = null;
 let userAnswers = [];
 let lastReport = null;
-
 function initApp() {
   const grid = document.getElementById('view-grid');
   grid.innerHTML = '';
@@ -595,7 +580,6 @@ function initApp() {
     grid.appendChild(card);
   });
 }
-
 function showGrid() {
   document.getElementById('heroWrapper').style.display = 'block';
   document.getElementById('view-grid').style.display = 'grid';
@@ -604,7 +588,6 @@ function showGrid() {
   document.getElementById('navBackBtn').style.display = 'none';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-
 function startAssessment(id) {
   activeId = id;
   const data = TOOLS[id];
@@ -614,10 +597,10 @@ function startAssessment(id) {
   document.getElementById('targetLabel').textContent = data.targetTitle;
   document.getElementById('targetWrap').style.display = 'block';
   document.getElementById('navBackBtn').style.display = 'inline-flex';
-  
+ 
   const chipsContainer = document.getElementById('targetChips');
   chipsContainer.innerHTML = '';
-  
+ 
   data.groups.forEach((g, idx) => {
     const btn = document.createElement('button');
     btn.className = `chip-btn ${idx === 0 ? 'selected' : ''}`;
@@ -631,7 +614,6 @@ function startAssessment(id) {
   document.getElementById('view-quiz').style.display = 'block';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-
 function loadGroupQuestions(group) {
   activeGroup = group;
   document.querySelectorAll('.chip-btn').forEach(b => {
@@ -666,22 +648,17 @@ function loadGroupQuestions(group) {
   });
   updateProgress();
 }
-
 function selectAnswer(qIdx, oIdx, val) {
   userAnswers[qIdx] = val;
-  const tool = TOOLS[activeId];
-  let options = tool.options || (activeId === 'sdq' ? OPT_SDQ(false) : OPT_YN);
-  
-  options.forEach((_, idx) => {
-    const el = document.getElementById(`opt-lbl-${qIdx}-${idx}`);
-    if (el) el.classList.remove('selected');
-  });
-  
+  // เคลียร์ selected ของทุกตัวเลือกในข้อนี้ (ปลอดภัยกว่าเดิม)
+  const parent = document.querySelectorAll('#questionList .question')[qIdx];
+  if (parent) {
+    parent.querySelectorAll('.opt').forEach(el => el.classList.remove('selected'));
+  }
   const selectedEl = document.getElementById(`opt-lbl-${qIdx}-${oIdx}`);
   if (selectedEl) selectedEl.classList.add('selected');
   updateProgress();
 }
-
 function updateProgress() {
   const total = userAnswers.length;
   const answered = userAnswers.filter(v => v !== null).length;
@@ -690,7 +667,6 @@ function updateProgress() {
   document.getElementById('progressHint').textContent = `ทำไปแล้ว ${answered} จาก ${total} ข้อ (${pct}%)`;
   document.getElementById('submitBtn').disabled = answered < total;
 }
-
 function processResults() {
   const tool = TOOLS[activeId];
   const totalScore = userAnswers.reduce((a, b) => a + b, 0);
@@ -699,7 +675,11 @@ function processResults() {
   items.forEach((it, idx) => {
     if (!domainMap[it.domain]) domainMap[it.domain] = { score: 0, total: 0 };
     domainMap[it.domain].score += userAnswers[idx];
-    domainMap[it.domain].total += (activeId === 'adhd' ? 3 : 1);
+    // แก้จุดนี้: SDQ คะแนนสูงสุดข้อละ 2, ADHD ข้อละ 3, อื่น ๆ ข้อละ 1
+    let maxPerItem = 1;
+    if (activeId === 'adhd') maxPerItem = 3;
+    else if (activeId === 'sdq') maxPerItem = 2;
+    domainMap[it.domain].total += maxPerItem;
   });
   let statusLabel = '';
   let statusColor = '';
@@ -733,7 +713,7 @@ function processResults() {
   document.getElementById('resultTitle').textContent = `${tool.title} (${activeGroup.name})`;
   document.getElementById('resultScore').textContent = totalScore;
   document.getElementById('resultScoreLabel').textContent = 'คะแนนรวมการประเมิน';
-  
+ 
   const badge = document.getElementById('resultBadge');
   badge.textContent = statusLabel;
   badge.style.background = statusColor;
@@ -762,25 +742,17 @@ function processResults() {
   document.getElementById('view-result').style.display = 'block';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-
-async function sendGmail() {
+async function sendResultToSheet() {
   if (!lastReport) return;
-
   const name = document.getElementById('senderName').value.trim();
   const phone = document.getElementById('senderPhone').value.trim();
-
   if (!name) { alert('กรุณากรอกชื่อ-นามสกุล'); return; }
   if (!phone) { alert('กรุณากรอกเบอร์โทรศัพท์'); return; }
-
   const btn = document.getElementById('sendEmailBtn');
   const hint = document.getElementById('emailHint');
-
   btn.disabled = true;
   btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> กำลังบันทึก...';
   hint.textContent = 'กำลังส่งข้อมูลไปยัง Google Sheets...';
-
-  // assessment_type = รหัสของแบบประเมิน เช่น DSPM, DENVER-II, SDQ, SNAP-IV, M-CHAT
-  // Apps Script (Code.gs เวอร์ชัน getSheetByName) จะใช้ค่านี้สร้าง/หาแท็บที่ตรงกันให้อัตโนมัติ
   const payload = {
     assessment_type: lastReport.code,
     name: name,
@@ -791,7 +763,6 @@ async function sendGmail() {
     status: lastReport.status,
     date: lastReport.date || new Date().toLocaleDateString('th-TH')
   };
-
   try {
     await fetch(GOOGLE_SCRIPT_URL, {
       method: 'POST',
@@ -801,10 +772,9 @@ async function sendGmail() {
       },
       body: JSON.stringify(payload)
     });
-
     hint.innerHTML = '<span style="color: var(--success);"><i class="fa-solid fa-circle-check"></i> บันทึกผลประเมินลง Google Sheets เรียบร้อยแล้ว!</span>';
     btn.innerHTML = '<i class="fa-solid fa-check"></i> บันทึกสำเร็จ';
-    
+   
     setTimeout(() => {
       btn.disabled = false;
       btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> ส่งผลประเมิน';
@@ -816,7 +786,6 @@ async function sendGmail() {
     btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> ส่งผลประเมิน';
   }
 }
-
 initApp();
 </script>
 </body>
