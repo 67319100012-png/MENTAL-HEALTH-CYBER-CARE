@@ -785,57 +785,71 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    async function sendResultToSheet() {
-      if (!lastReport) return;
+async function sendResultToSheet() {
+  if (!lastReport) return;
 
-      const name = document.getElementById('senderName').value.trim();
-      const phone = document.getElementById('senderPhone').value.trim();
+  const name = document.getElementById('senderName').value.trim();
+  const phone = document.getElementById('senderPhone').value.trim();
 
-      if (!name) { alert('กรุณากรอกชื่อ-นามสกุล'); return; }
-      if (!phone) { alert('กรุณากรอกเบอร์โทรศัพท์'); return; }
+  if (!name) {
+    alert('กรุณากรอกชื่อ-นามสกุล');
+    return;
+  }
+  if (!phone) {
+    alert('กรุณากรอกเบอร์โทรศัพท์');
+    return;
+  }
 
-      const btn = document.getElementById('sendEmailBtn');
-      const hint = document.getElementById('emailHint');
-      btn.disabled = true;
-      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> กำลังบันทึก...';
-      hint.textContent = 'กำลังส่งข้อมูลไปยัง Google Sheets...';
+  const btn = document.getElementById('sendEmailBtn');
+  const hint = document.getElementById('emailHint');
 
-      const payload = {
-        assessment_type: lastReport.code,
-        name: name,
-        phone: phone,
-        code: lastReport.code,
-        title: lastReport.title,
-        score: lastReport.score,
-        status: lastReport.status,
-        date: lastReport.date || new Date().toLocaleDateString('th-TH')
-      };
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> กำลังบันทึก...';
+  hint.textContent = 'กำลังส่งข้อมูลไปยัง Google Sheets...';
 
-      try {
-        await fetch(GOOGLE_SCRIPT_URL, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: {
-            'Content-Type': 'text/plain;charset=utf-8'
-          },
-          body: JSON.stringify(payload)
-        });
+  const payload = {
+    assessment_type: lastReport.code,
+    name: name,
+    phone: phone,
+    code: lastReport.code,
+    title: lastReport.title,
+    score: lastReport.score,
+    status: lastReport.status,
+    date: lastReport.date || new Date().toLocaleDateString('th-TH')
+  };
 
-        hint.innerHTML = '<span style="color: var(--success);"><i class="fa-solid fa-circle-check"></i> บันทึกผลประเมินลง Google Sheets เรียบร้อยแล้ว!</span>';
-        btn.innerHTML = '<i class="fa-solid fa-check"></i> บันทึกสำเร็จ';
+  try {
+    // วิธีที่เสถียรที่สุดสำหรับ Google Apps Script
+    const response = await fetch(GOOGLE_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',                 // สำคัญ
+      cache: 'no-cache',
+      headers: {
+        'Content-Type': 'text/plain;charset=utf-8'
+      },
+      body: JSON.stringify(payload)
+    });
 
-        setTimeout(() => {
-          btn.disabled = false;
-          btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> ส่งผลประเมิน';
-        }, 3000);
-      } catch (error) {
-        console.error(error);
-        hint.innerHTML = '<span style="color: var(--danger);"><i class="fa-solid fa-circle-exclamation"></i> เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง</span>';
-        btn.disabled = false;
-        btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> ส่งผลประเมิน';
-      }
-    }
+    // เพราะใช้ no-cors เราอ่าน response ไม่ได้ → ถือว่าสำเร็จถ้าไม่ error
+    hint.innerHTML = '<span style="color: var(--success);"><i class="fa-solid fa-circle-check"></i> บันทึกผลประเมินลง Google Sheets เรียบร้อยแล้ว!</span>';
+    btn.innerHTML = '<i class="fa-solid fa-check"></i> บันทึกสำเร็จ';
 
+    // ล้างฟอร์มหลังส่งสำเร็จ (optional)
+    document.getElementById('senderName').value = '';
+    document.getElementById('senderPhone').value = '';
+
+    setTimeout(() => {
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> ส่งผลประเมิน';
+    }, 3000);
+
+  } catch (error) {
+    console.error('ส่งไม่สำเร็จ:', error);
+    hint.innerHTML = '<span style="color: var(--danger);"><i class="fa-solid fa-circle-exclamation"></i> เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง</span>';
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> ส่งผลประเมิน';
+  }
+}
     initApp();
   </script>
 </body>
