@@ -1,792 +1,842 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>แบบทดสอบสติปัญญาและความสามารถทางปัญญา - Mental Health Cyber-Care</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<style>
-  :root {
-    --brand-dark: #1E293B;
-    --teal-dark: #2563A8;
-    --teal-main: #4A90C4;
-    --teal-soft: #A9CDE8;
-    --teal-light: #E8F1FA;
-    --page-bg: #F4F8FC;
-    --cream: #FBFCFE;
-    --primary-grad: linear-gradient(135deg, #5BA3D0 0%, #2563A8 100%);
-    --primary-hover: linear-gradient(135deg, #4790BE 0%, #1D4F86 100%);
-    --accent-grad: linear-gradient(135deg, #C9A227 0%, #E8C468 100%);
-    --text-main: #1E293B;
-    --text-muted: #64748B;
-    --border: #D6E4F0;
-    --border-light: rgba(214, 228, 240, 0.8);
-    --success: #4C9A7E;
-    --warning: #C9922E;
-    --danger: #C1654A;
-    --radius-lg: 24px;
-    --radius-md: 16px;
-    --radius-sm: 12px;
-    --shadow-sm: 0 4px 14px rgba(37, 99, 168, 0.10);
-    --shadow-md: 0 16px 32px -6px rgba(37, 99, 168, 0.14), 0 6px 12px -4px rgba(37, 99, 168, 0.07);
-    --shadow-hover: 0 22px 40px -10px rgba(37, 99, 168, 0.26);
-  }
-  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-  body {
-    margin: 0;
-    background: var(--page-bg);
-    font-family: 'Sarabun', sans-serif;
-    color: var(--text-main);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    overflow-x: hidden;
-    position: relative;
-  }
-  .bg-blob {
-    position: fixed;
-    border-radius: 50%;
-    filter: blur(90px);
-    z-index: -1;
-    opacity: 0.55;
-    animation: floatBlob 18s infinite alternate ease-in-out;
-  }
-  .blob-1 { width: 420px; height: 420px; background: #CFE2F5; top: -110px; left: -110px; }
-  .blob-2 { width: 460px; height: 460px; background: #E3EDF7; bottom: -160px; right: -110px; animation-delay: -6s; }
-  .blob-3 { width: 320px; height: 320px; background: #D8E9F7; top: 40%; left: 50%; transform: translate(-50%, -50%); animation-delay: -12s; }
-  @keyframes floatBlob {
-    0% { transform: translate(0, 0) scale(1); }
-    50% { transform: translate(60px, 40px) scale(1.15); }
-    100% { transform: translate(-40px, 80px) scale(0.9); }
-  }
-  h1, h2, h3, .font-title { font-family: 'Kanit', sans-serif; }
-  header.nav-header {
-    background: rgba(251, 250, 243, 0.9);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--border-light);
-    padding: 14px 6%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: var(--shadow-sm);
-    transition: all 0.3s ease;
-  }
-  header.nav-header .logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-family: 'Kanit', sans-serif;
-    font-weight: 700;
-    font-size: 1.1rem;
-    color: var(--teal-dark);
-    text-decoration: none;
-  }
-  header.nav-header .logo .badge {
-    width: 44px; height: 44px; border-radius: 50%;
-    background: var(--primary-grad); color: #fff;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.2rem;
-    box-shadow: 0 4px 12px rgba(37, 99, 168, 0.35);
-    animation: pulseIcon 3s infinite ease-in-out;
-  }
-  @keyframes pulseIcon {
-    0%, 100% { transform: scale(1); box-shadow: 0 4px 12px rgba(37, 99, 168, 0.35); }
-    50% { transform: scale(1.08); box-shadow: 0 8px 20px rgba(37, 99, 168, 0.55); }
-  }
-  header.nav-header .logo small { display: block; font-family: 'Sarabun', sans-serif; font-weight: 400; font-size: 0.72rem; color: var(--text-muted); }
-  .nav-actions { display: flex; align-items: center; gap: 12px; }
-  .btn-nav-prev {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: var(--primary-grad); color: #ffffff;
-    padding: 10px 20px; border-radius: 30px;
-    font-size: 14px; font-weight: 600; text-decoration: none; cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    box-shadow: 0 4px 14px rgba(37, 99, 168, 0.3);
-  }
-  .btn-nav-prev:hover { background: var(--primary-hover); transform: translateY(-3px) scale(1.03); box-shadow: 0 8px 20px rgba(37, 99, 168, 0.42); }
-  .btn-nav-back {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(255, 255, 255, 0.9);
-    border: 1.5px solid var(--teal-soft); color: var(--teal-dark);
-    padding: 9px 18px; border-radius: 30px;
-    font-size: 13.5px; font-weight: 600; cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    box-shadow: 0 2px 10px rgba(37, 99, 168, 0.12);
-  }
-  .btn-nav-back:hover { background: var(--teal-light); border-color: var(--teal-dark); transform: translateY(-2px) scale(1.03); }
-  header.hero { max-width: 900px; margin: 0 auto; padding: 40px 20px 10px; text-align: center; animation: fadeInUp 0.8s ease-out; }
-  .hero-badge {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 6px 18px; background: rgba(232, 241, 250, 0.9); color: var(--teal-dark);
-    border-radius: 20px; font-size: 12px; font-weight: 700; letter-spacing: 0.5px;
-    margin-bottom: 16px; border: 1px solid var(--teal-soft);
-  }
-  header.hero h1 {
-    font-size: clamp(26px, 4.5vw, 38px); margin: 0 0 14px; line-height: 1.25;
-    background: linear-gradient(135deg, #1E293B 0%, #2563A8 100%);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  }
-  header.hero p { font-size: 15.5px; color: var(--text-muted); max-width: 680px; margin: 0 auto; line-height: 1.65; }
-  .staff-global-alert { max-width: 900px; margin: 18px auto 0; padding: 0 20px; }
-  .staff-global-box {
-    background: rgba(255, 251, 235, 0.9); border: 1.5px dashed var(--warning);
-    border-radius: var(--radius-md); padding: 14px 20px; font-size: 13.5px;
-    color: #854D0E; line-height: 1.6; display: flex; align-items: flex-start; gap: 12px;
-  }
-  .staff-global-box i { font-size: 18px; color: var(--warning); margin-top: 2px; flex-shrink: 0; }
-  .feature-strip {
-    max-width: 900px; margin: 24px auto 6px; padding: 0 20px;
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
-  }
-  @media (max-width: 640px) { .feature-strip { grid-template-columns: 1fr; } }
-  .feature-item {
-    background: rgba(255,255,255,0.75); border: 1px solid var(--border-light);
-    border-radius: var(--radius-md); padding: 18px 16px; text-align: center;
-    box-shadow: var(--shadow-sm);
-  }
-  .feature-item i { font-size: 22px; color: var(--teal-dark); margin-bottom: 8px; display:block; }
-  .feature-item .ftitle { font-family:'Kanit',sans-serif; font-weight:600; font-size: 14.5px; margin-bottom: 4px; }
-  .feature-item .fdesc { font-size: 12.5px; color: var(--text-muted); line-height: 1.5; }
-  main { max-width: 900px; width: 100%; margin: 0 auto; padding: 10px 20px 50px; flex: 1; }
-  .view-container { animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-  @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px);} to { opacity: 1; transform: translateY(0);} }
-  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; margin-top: 10px; }
-  .card {
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(12px);
-    border-radius: var(--radius-lg);
-    padding: 26px;
-    border: 1.5px solid var(--border-light);
-    box-shadow: var(--shadow-md);
-    cursor: pointer;
-    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-    display: flex; flex-direction: column; position: relative; overflow: hidden;
-  }
-  .card::after { content:''; position:absolute; inset:0; border-radius: var(--radius-lg); border: 2px solid transparent; transition: border-color 0.3s ease; }
-  .card:hover { transform: translateY(-8px) scale(1.02); box-shadow: var(--shadow-hover); background: rgba(255,255,255,0.97); }
-  .card:hover::after { border-color: var(--teal-main); }
-  .card .icon {
-    width: 56px; height: 56px; border-radius: var(--radius-md);
-    background: var(--primary-grad); color: #fff;
-    display: flex; align-items: center; justify-content: center; font-size: 22px;
-    margin-bottom: 18px; box-shadow: 0 8px 16px rgba(37, 99, 168, 0.3);
-    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-  .card:hover .icon { transform: scale(1.12) rotate(6deg); }
-  .card .code { font-size: 20px; font-weight: 700; margin-bottom: 6px; color: var(--brand-dark); }
-  .card .desc { font-size: 14px; color: var(--text-muted); line-height: 1.55; margin-bottom: 22px; flex: 1; }
-  .card .card-footer { display: flex; align-items: center; justify-content: space-between; }
-  .card .qcount { font-size: 12.5px; font-weight: 600; color: var(--teal-dark); background: var(--teal-light); border-radius: 20px; padding: 5px 14px; }
-  .card .btn-start-text { font-size: 13.5px; color: var(--teal-dark); font-weight: 700; display: flex; align-items: center; gap: 4px; transition: gap 0.2s ease; }
-  .card:hover .btn-start-text { gap: 8px; color: var(--teal-main); }
-  .panel {
-    background: rgba(255, 255, 255, 0.92);
-    backdrop-filter: blur(16px);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
-    border: 1.5px solid var(--border-light);
-    padding: 36px;
-  }
-  @media (max-width: 600px) {
-    .panel { padding: 22px 18px; }
-    header.nav-header { flex-direction: column; gap: 14px; padding: 14px 4%; text-align: center; }
-    .nav-actions { width: 100%; justify-content: center; flex-wrap: wrap; }
-  }
-  .panel-header-actions { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; padding-bottom: 16px; border-bottom: 1px solid var(--border-light); }
-  .quiz-title { font-size: 24px; margin: 0 0 6px; color: var(--brand-dark); }
-  .quiz-sub { font-size: 14.5px; color: var(--text-muted); margin: 0 0 20px; line-height: 1.6; }
-  .target-select-wrap {
-    background: var(--teal-light);
-    border-radius: var(--radius-md);
-    padding: 16px 20px;
-    margin-bottom: 24px;
-    border: 1px solid var(--teal-soft);
-  }
-  .target-select-wrap .section-label { font-family: 'Kanit', sans-serif; font-size: 14px; font-weight: 600; color: var(--teal-dark); margin-bottom: 10px; }
-  .target-chips { display: flex; flex-wrap: wrap; gap: 10px; }
-  .chip-btn {
-    border: 1.5px solid var(--border);
-    background: #FFF;
-    color: var(--text-main);
-    padding: 8px 18px;
-    border-radius: 20px;
-    font-size: 13.5px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.25s ease;
-  }
-  .chip-btn:hover { border-color: var(--teal-main); background: #FFF; }
-  .chip-btn.selected { background: var(--primary-grad); color: #FFF; border-color: transparent; box-shadow: 0 4px 12px rgba(37, 99, 168, 0.25); }
-  .progress-wrap { background: var(--teal-light); border-radius: 12px; height: 12px; overflow: hidden; margin-bottom: 30px; position: relative; }
-  .progress-fill { background: var(--primary-grad); height: 100%; width: 0%; transition: width 0.4s cubic-bezier(0.4,0,0.2,1); position: relative; border-radius: 12px; }
-  .progress-fill::after {
-    content: ''; position: absolute; inset: 0;
-    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
-    animation: shimmer 2s infinite;
-  }
-  @keyframes shimmer { 0% { transform: translateX(-100%);} 100% { transform: translateX(100%);} }
-  .question { padding: 22px 0; border-bottom: 1px dashed var(--border); animation: fadeInUp 0.4s ease; }
-  .question:last-child { border-bottom: none; }
-  .question .qnum { font-size: 13.5px; font-weight: 700; color: var(--teal-dark); margin-bottom: 8px; }
-  .question .qtext { font-size: 16.5px; font-weight: 600; line-height: 1.55; margin-bottom: 16px; color: var(--brand-dark); }
-  .options { display: flex; flex-direction: column; gap: 10px; }
-  .opt {
-    display: flex; align-items: center; gap: 14px;
-    border: 1.5px solid var(--border-light); border-radius: var(--radius-md);
-    padding: 14px 18px; cursor: pointer; font-size: 15px;
-    background: rgba(255, 255, 255, 0.8);
-    transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
-    user-select: none; min-height: 48px; position: relative;
-  }
-  .opt:hover { border-color: var(--teal-main); background: var(--teal-light); transform: translateX(4px); }
-  .opt input { accent-color: var(--teal-dark); width: 19px; height: 19px; flex-shrink: 0; }
-  .opt.selected {
-    border-color: var(--teal-dark);
-    background: linear-gradient(90deg, var(--teal-light) 0%, #D6EAE2 100%);
-    font-weight: 600; color: var(--teal-dark);
-    transform: translateX(6px);
-    box-shadow: 0 4px 14px rgba(37, 99, 168, 0.16);
-  }
-  .btn-primary {
-    background: var(--primary-grad); color: #fff; border: none;
-    padding: 15px 38px; border-radius: 30px;
-    font-size: 15.5px; font-weight: 700; cursor: pointer;
-    box-shadow: 0 6px 20px rgba(37, 99, 168, 0.32);
-    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    width: 100%; max-width: 320px;
-    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-  }
-  .btn-primary:hover:not(:disabled) { background: var(--primary-hover); transform: translateY(-3px) scale(1.02); box-shadow: 0 10px 25px rgba(37, 99, 168, 0.42); }
-  .btn-primary:disabled { opacity: 0.45; cursor: not-allowed; transform: none; box-shadow: none; }
-  .btn-secondary {
-    background: #fff; border: 1.5px solid var(--teal-soft); color: var(--teal-dark);
-    padding: 13px 26px; border-radius: 30px;
-    font-size: 14.5px; font-weight: 600; cursor: pointer;
-    transition: all 0.25s ease;
-    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  }
-  .btn-secondary:hover { background: var(--teal-light); border-color: var(--teal-dark); transform: translateY(-2px); }
-  .btn-secondary:disabled { opacity: 0.6; cursor: not-allowed; }
-  .submit-row { margin-top: 32px; text-align: center; }
-  .hint { text-align: center; font-size: 13.5px; color: var(--text-muted); margin-top: 12px; }
-  .result-head { text-align: center; margin-bottom: 16px; }
-  .score-big {
-    font-size: 60px; font-weight: 700; text-align: center; line-height: 1; margin: 12px 0 6px;
-    background: var(--primary-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    animation: popScore 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-  @keyframes popScore { 0% { transform: scale(0.5); opacity: 0;} 100% { transform: scale(1); opacity: 1;} }
-  .score-label { text-align: center; font-size: 14.5px; color: var(--text-muted); margin-bottom: 22px; }
-  .level-badge { display: inline-block; padding: 8px 26px; border-radius: 30px; font-size: 15.5px; font-weight: 700; color: #fff; box-shadow: var(--shadow-sm); animation: zoomIn 0.5s ease; }
-  @keyframes zoomIn { from { transform: scale(0.8); opacity: 0;} to { transform: scale(1); opacity: 1;} }
-  .breakdown-box {
-    background: rgba(232, 241, 250, 0.5);
-    border: 1.5px solid var(--border);
-    border-radius: var(--radius-md);
-    padding: 20px; margin: 24px 0 16px;
-  }
-  .breakdown-title { font-family: 'Kanit', sans-serif; font-size: 15px; font-weight: 600; color: var(--teal-dark); margin-bottom: 12px; }
-  .breakdown-item { display: flex; justify-content: space-between; align-items: center; padding: 9px 0; border-bottom: 1px dashed var(--border); font-size: 14px; }
-  .breakdown-item:last-child { border-bottom: none; }
-  .breakdown-tag { font-size: 12.5px; padding: 3px 12px; border-radius: 14px; color: #FFF; font-weight: 600; background: var(--teal-dark); font-family: 'Kanit', sans-serif; }
-  .advice-box {
-    background: rgba(232, 241, 250, 0.7);
-    border: 1.5px solid var(--border);
-    border-radius: var(--radius-md);
-    padding: 24px; font-size: 15.5px; line-height: 1.75; margin: 16px 0 24px;
-    box-shadow: inset 0 2px 6px rgba(37, 99, 168, 0.05);
-  }
-  .advice-box b { color: var(--teal-dark); }
-  .email-box { background: rgba(251,250,243,0.9); border: 1.5px solid var(--border-light); border-radius: var(--radius-md); padding: 22px; margin-top: 26px; }
-  .email-box label { display: block; font-size: 14px; font-weight: 700; margin-bottom: 12px; color: var(--brand-dark); }
-  .email-row { display: flex; gap: 12px; flex-wrap: wrap; flex-direction: column; }
-  .email-row input {
-    flex: 1;
-    min-width: 240px;
-    padding: 13px 18px;
-    border-radius: var(--radius-sm);
-    border: 1.5px solid var(--border);
-    font-family: inherit;
-    font-size: 14.5px;
-    outline: none;
-    transition: all 0.25s ease;
-  }
-  .email-row input:focus { border-color: var(--teal-dark); box-shadow: 0 0 0 4px rgba(37, 99, 168, 0.18); background: #fff; }
-  .result-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 32px; }
-  footer.note { max-width: 900px; margin: 24px auto 30px; padding: 0 20px; text-align: center; font-size: 13px; color: var(--text-muted); line-height: 1.6; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>แบบทดสอบสติปัญญาและความสามารถทางปัญญา - Mental Health Cyber-Care</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --brand-dark: #1E293B;
+      --teal-dark: #2563A8;
+      --teal-main: #4A90C4;
+      --teal-soft: #A9CDE8;
+      --teal-light: #E8F1FA;
+      --page-bg: #F4F8FC;
+      --cream: #FBFCFE;
+      --primary-grad: linear-gradient(135deg, #5BA3D0 0%, #2563A8 100%);
+      --primary-hover: linear-gradient(135deg, #4790BE 0%, #1D4F86 100%);
+      --accent-grad: linear-gradient(135deg, #C9A227 0%, #E8C468 100%);
+      --text-main: #1E293B;
+      --text-muted: #64748B;
+      --border: #D6E4F0;
+      --border-light: rgba(214, 228, 240, 0.8);
+      --success: #4C9A7E;
+      --warning: #C9922E;
+      --danger: #C1654A;
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+      --shadow-sm: 0 4px 14px rgba(37, 99, 168, 0.10);
+      --shadow-md: 0 16px 32px -6px rgba(37, 99, 168, 0.14), 0 6px 12px -4px rgba(37, 99, 168, 0.07);
+      --shadow-hover: 0 22px 40px -10px rgba(37, 99, 168, 0.26);
+    }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    body {
+      margin: 0;
+      background: var(--page-bg);
+      font-family: 'Sarabun', sans-serif;
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      position: relative;
+    }
+    .bg-blob {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(90px);
+      z-index: -1;
+      opacity: 0.55;
+      animation: floatBlob 18s infinite alternate ease-in-out;
+    }
+    .blob-1 { width: 420px; height: 420px; background: #CFE2F5; top: -110px; left: -110px; }
+    .blob-2 { width: 460px; height: 460px; background: #E3EDF7; bottom: -160px; right: -110px; animation-delay: -6s; }
+    .blob-3 { width: 320px; height: 320px; background: #D8E9F7; top: 40%; left: 50%; transform: translate(-50%, -50%); animation-delay: -12s; }
+    @keyframes floatBlob {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(60px, 40px) scale(1.15); }
+      100% { transform: translate(-40px, 80px) scale(0.9); }
+    }
+    h1, h2, h3, .font-title { font-family: 'Kanit', sans-serif; }
+    header.nav-header {
+      background: rgba(251, 250, 243, 0.9);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-light);
+      padding: 14px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s ease;
+    }
+    header.nav-header .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'Kanit', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--teal-dark);
+      text-decoration: none;
+    }
+    header.nav-header .logo .badge {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--primary-grad); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 12px rgba(37, 99, 168, 0.35);
+      animation: pulseIcon 3s infinite ease-in-out;
+    }
+    @keyframes pulseIcon {
+      0%, 100% { transform: scale(1); box-shadow: 0 4px 12px rgba(37, 99, 168, 0.35); }
+      50% { transform: scale(1.08); box-shadow: 0 8px 20px rgba(37, 99, 168, 0.55); }
+    }
+    header.nav-header .logo small { display: block; font-family: 'Sarabun', sans-serif; font-weight: 400; font-size: 0.72rem; color: var(--text-muted); }
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
+    .btn-nav-prev {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--primary-grad); color: #ffffff;
+      padding: 10px 20px; border-radius: 30px;
+      font-size: 14px; font-weight: 600; text-decoration: none; cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 4px 14px rgba(37, 99, 168, 0.3);
+    }
+    .btn-nav-prev:hover { background: var(--primary-hover); transform: translateY(-3px) scale(1.03); box-shadow: 0 8px 20px rgba(37, 99, 168, 0.42); }
+    .btn-nav-back {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1.5px solid var(--teal-soft); color: var(--teal-dark);
+      padding: 9px 18px; border-radius: 30px;
+      font-size: 13.5px; font-weight: 600; cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 2px 10px rgba(37, 99, 168, 0.12);
+    }
+    .btn-nav-back:hover { background: var(--teal-light); border-color: var(--teal-dark); transform: translateY(-2px) scale(1.03); }
+    header.hero { max-width: 900px; margin: 0 auto; padding: 40px 20px 10px; text-align: center; animation: fadeInUp 0.8s ease-out; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 18px; background: rgba(232, 241, 250, 0.9); color: var(--teal-dark);
+      border-radius: 20px; font-size: 12px; font-weight: 700; letter-spacing: 0.5px;
+      margin-bottom: 16px; border: 1px solid var(--teal-soft);
+    }
+    header.hero h1 {
+      font-size: clamp(26px, 4.5vw, 38px); margin: 0 0 14px; line-height: 1.25;
+      background: linear-gradient(135deg, #1E293B 0%, #2563A8 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    header.hero p { font-size: 15.5px; color: var(--text-muted); max-width: 680px; margin: 0 auto; line-height: 1.65; }
+    .staff-global-alert { max-width: 900px; margin: 18px auto 0; padding: 0 20px; }
+    .staff-global-box {
+      background: rgba(255, 251, 235, 0.9); border: 1.5px dashed var(--warning);
+      border-radius: var(--radius-md); padding: 14px 20px; font-size: 13.5px;
+      color: #854D0E; line-height: 1.6; display: flex; align-items: flex-start; gap: 12px;
+    }
+    .staff-global-box i { font-size: 18px; color: var(--warning); margin-top: 2px; flex-shrink: 0; }
+    .feature-strip {
+      max-width: 900px; margin: 24px auto 6px; padding: 0 20px;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    }
+    @media (max-width: 640px) { .feature-strip { grid-template-columns: 1fr; } }
+    .feature-item {
+      background: rgba(255,255,255,0.75); border: 1px solid var(--border-light);
+      border-radius: var(--radius-md); padding: 18px 16px; text-align: center;
+      box-shadow: var(--shadow-sm);
+    }
+    .feature-item i { font-size: 22px; color: var(--teal-dark); margin-bottom: 8px; display:block; }
+    .feature-item .ftitle { font-family:'Kanit',sans-serif; font-weight:600; font-size: 14.5px; margin-bottom: 4px; }
+    .feature-item .fdesc { font-size: 12.5px; color: var(--text-muted); line-height: 1.5; }
+    main { max-width: 900px; width: 100%; margin: 0 auto; padding: 10px 20px 50px; flex: 1; }
+    .view-container { animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px);} to { opacity: 1; transform: translateY(0);} }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; margin-top: 10px; }
+    .card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      border-radius: var(--radius-lg);
+      padding: 26px;
+      border: 1.5px solid var(--border-light);
+      box-shadow: var(--shadow-md);
+      cursor: pointer;
+      transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      display: flex; flex-direction: column; position: relative; overflow: hidden;
+    }
+    .card::after { content:''; position:absolute; inset:0; border-radius: var(--radius-lg); border: 2px solid transparent; transition: border-color 0.3s ease; }
+    .card:hover { transform: translateY(-8px) scale(1.02); box-shadow: var(--shadow-hover); background: rgba(255,255,255,0.97); }
+    .card:hover::after { border-color: var(--teal-main); }
+    .card .icon {
+      width: 56px; height: 56px; border-radius: var(--radius-md);
+      background: var(--primary-grad); color: #fff;
+      display: flex; align-items: center; justify-content: center; font-size: 22px;
+      margin-bottom: 18px; box-shadow: 0 8px 16px rgba(37, 99, 168, 0.3);
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .card:hover .icon { transform: scale(1.12) rotate(6deg); }
+    .card .code { font-size: 20px; font-weight: 700; margin-bottom: 6px; color: var(--brand-dark); }
+    .card .desc { font-size: 14px; color: var(--text-muted); line-height: 1.55; margin-bottom: 22px; flex: 1; }
+    .card .card-footer { display: flex; align-items: center; justify-content: space-between; }
+    .card .qcount { font-size: 12.5px; font-weight: 600; color: var(--teal-dark); background: var(--teal-light); border-radius: 20px; padding: 5px 14px; }
+    .card .btn-start-text { font-size: 13.5px; color: var(--teal-dark); font-weight: 700; display: flex; align-items: center; gap: 4px; transition: gap 0.2s ease; }
+    .card:hover .btn-start-text { gap: 8px; color: var(--teal-main); }
+    .panel {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(16px);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      border: 1.5px solid var(--border-light);
+      padding: 36px;
+    }
+    @media (max-width: 600px) {
+      .panel { padding: 22px 18px; }
+      header.nav-header { flex-direction: column; gap: 14px; padding: 14px 4%; text-align: center; }
+      .nav-actions { width: 100%; justify-content: center; flex-wrap: wrap; }
+    }
+    .panel-header-actions { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; padding-bottom: 16px; border-bottom: 1px solid var(--border-light); }
+    .quiz-title { font-size: 24px; margin: 0 0 6px; color: var(--brand-dark); }
+    .quiz-sub { font-size: 14.5px; color: var(--text-muted); margin: 0 0 20px; line-height: 1.6; }
+    .target-select-wrap {
+      background: var(--teal-light);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      border: 1px solid var(--teal-soft);
+    }
+    .target-select-wrap .section-label { font-family: 'Kanit', sans-serif; font-size: 14px; font-weight: 600; color: var(--teal-dark); margin-bottom: 10px; }
+    .target-chips { display: flex; flex-wrap: wrap; gap: 10px; }
+    .chip-btn {
+      border: 1.5px solid var(--border);
+      background: #FFF;
+      color: var(--text-main);
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .chip-btn:hover { border-color: var(--teal-main); background: #FFF; }
+    .chip-btn.selected { background: var(--primary-grad); color: #FFF; border-color: transparent; box-shadow: 0 4px 12px rgba(37, 99, 168, 0.25); }
+    .progress-wrap { background: var(--teal-light); border-radius: 12px; height: 12px; overflow: hidden; margin-bottom: 30px; position: relative; }
+    .progress-fill { background: var(--primary-grad); height: 100%; width: 0%; transition: width 0.4s cubic-bezier(0.4,0,0.2,1); position: relative; border-radius: 12px; }
+    .progress-fill::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+      animation: shimmer 2s infinite;
+    }
+    @keyframes shimmer { 0% { transform: translateX(-100%);} 100% { transform: translateX(100%);} }
+    .question { padding: 22px 0; border-bottom: 1px dashed var(--border); animation: fadeInUp 0.4s ease; }
+    .question:last-child { border-bottom: none; }
+    .question .qnum { font-size: 13.5px; font-weight: 700; color: var(--teal-dark); margin-bottom: 8px; }
+    .question .qtext { font-size: 16.5px; font-weight: 600; line-height: 1.55; margin-bottom: 16px; color: var(--brand-dark); }
+    .options { display: flex; flex-direction: column; gap: 10px; }
+    .opt {
+      display: flex; align-items: center; gap: 14px;
+      border: 1.5px solid var(--border-light); border-radius: var(--radius-md);
+      padding: 14px 18px; cursor: pointer; font-size: 15px;
+      background: rgba(255, 255, 255, 0.8);
+      transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+      user-select: none; min-height: 48px; position: relative;
+    }
+    .opt:hover { border-color: var(--teal-main); background: var(--teal-light); transform: translateX(4px); }
+    .opt input { accent-color: var(--teal-dark); width: 19px; height: 19px; flex-shrink: 0; }
+    .opt.selected {
+      border-color: var(--teal-dark);
+      background: linear-gradient(90deg, var(--teal-light) 0%, #D6EAE2 100%);
+      font-weight: 600; color: var(--teal-dark);
+      transform: translateX(6px);
+      box-shadow: 0 4px 14px rgba(37, 99, 168, 0.16);
+    }
+    .btn-primary {
+      background: var(--primary-grad); color: #fff; border: none;
+      padding: 15px 38px; border-radius: 30px;
+      font-size: 15.5px; font-weight: 700; cursor: pointer;
+      box-shadow: 0 6px 20px rgba(37, 99, 168, 0.32);
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      width: 100%; max-width: 320px;
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    }
+    .btn-primary:hover:not(:disabled) { background: var(--primary-hover); transform: translateY(-3px) scale(1.02); box-shadow: 0 10px 25px rgba(37, 99, 168, 0.42); }
+    .btn-primary:disabled { opacity: 0.45; cursor: not-allowed; transform: none; box-shadow: none; }
+    .btn-secondary {
+      background: #fff; border: 1.5px solid var(--teal-soft); color: var(--teal-dark);
+      padding: 13px 26px; border-radius: 30px;
+      font-size: 14.5px; font-weight: 600; cursor: pointer;
+      transition: all 0.25s ease;
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .btn-secondary:hover { background: var(--teal-light); border-color: var(--teal-dark); transform: translateY(-2px); }
+    .btn-secondary:disabled { opacity: 0.6; cursor: not-allowed; }
+    .submit-row { margin-top: 32px; text-align: center; }
+    .hint { text-align: center; font-size: 13.5px; color: var(--text-muted); margin-top: 12px; }
+    .result-head { text-align: center; margin-bottom: 16px; }
+    .score-big {
+      font-size: 60px; font-weight: 700; text-align: center; line-height: 1; margin: 12px 0 6px;
+      background: var(--primary-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      animation: popScore 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    @keyframes popScore { 0% { transform: scale(0.5); opacity: 0;} 100% { transform: scale(1); opacity: 1;} }
+    .score-label { text-align: center; font-size: 14.5px; color: var(--text-muted); margin-bottom: 22px; }
+    .level-badge { display: inline-block; padding: 8px 26px; border-radius: 30px; font-size: 15.5px; font-weight: 700; color: #fff; box-shadow: var(--shadow-sm); animation: zoomIn 0.5s ease; }
+    @keyframes zoomIn { from { transform: scale(0.8); opacity: 0;} to { transform: scale(1); opacity: 1;} }
+    .breakdown-box {
+      background: rgba(232, 241, 250, 0.5);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 20px; margin: 24px 0 16px;
+    }
+    .breakdown-title { font-family: 'Kanit', sans-serif; font-size: 15px; font-weight: 600; color: var(--teal-dark); margin-bottom: 12px; }
+    .breakdown-item { display: flex; justify-content: space-between; align-items: center; padding: 9px 0; border-bottom: 1px dashed var(--border); font-size: 14px; }
+    .breakdown-item:last-child { border-bottom: none; }
+    .breakdown-tag { font-size: 12.5px; padding: 3px 12px; border-radius: 14px; color: #FFF; font-weight: 600; background: var(--teal-dark); font-family: 'Kanit', sans-serif; }
+    .advice-box {
+      background: rgba(232, 241, 250, 0.7);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 24px; font-size: 15.5px; line-height: 1.75; margin: 16px 0 24px;
+      box-shadow: inset 0 2px 6px rgba(37, 99, 168, 0.05);
+    }
+    .advice-box b { color: var(--teal-dark); }
+    .email-box { background: rgba(251,250,243,0.9); border: 1.5px solid var(--border-light); border-radius: var(--radius-md); padding: 22px; margin-top: 26px; }
+    .email-box label { display: block; font-size: 14px; font-weight: 700; margin-bottom: 12px; color: var(--brand-dark); }
+    .email-row { display: flex; gap: 12px; flex-wrap: wrap; flex-direction: column; }
+    .email-row input {
+      flex: 1;
+      min-width: 240px;
+      padding: 13px 18px;
+      border-radius: var(--radius-sm);
+      border: 1.5px solid var(--border);
+      font-family: inherit;
+      font-size: 14.5px;
+      outline: none;
+      transition: all 0.25s ease;
+    }
+    .email-row input:focus { border-color: var(--teal-dark); box-shadow: 0 0 0 4px rgba(37, 99, 168, 0.18); background: #fff; }
+    .result-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 32px; }
+    footer.note { max-width: 900px; margin: 24px auto 30px; padding: 0 20px; text-align: center; font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+  </style>
 </head>
 <body>
-<div class="bg-blob blob-1"></div>
-<div class="bg-blob blob-2"></div>
-<div class="bg-blob blob-3"></div>
-<header class="nav-header">
-  <a href="#" onclick="showGrid()" class="logo">
-    <span class="badge"><i class="fa-solid fa-child-reaching"></i></span>
-    <span>MENTAL HEALTH CYBER-CARE<small>โครงการ อสม. ฮีลใจ &bull; เด็กและวัยรุ่น</small></span>
-  </a>
-  <div class="nav-actions">
-    <a href="assessment.html" class="btn-nav-prev" onclick="showGrid()">
-      <i class="fa-solid fa-arrow-left"></i> ย้อนกลับหน้าหลัก
+  <div class="bg-blob blob-1"></div>
+  <div class="bg-blob blob-2"></div>
+  <div class="bg-blob blob-3"></div>
+
+  <header class="nav-header">
+    <a href="#" onclick="showGrid()" class="logo">
+      <span class="badge"><i class="fa-solid fa-child-reaching"></i></span>
+      <span>MENTAL HEALTH CYBER-CARE<small>โครงการ อสม. ฮีลใจ • เด็กและวัยรุ่น</small></span>
     </a>
-    <button class="btn-nav-back" id="navBackBtn" style="display:none;" onclick="showGrid()">
-      <i class="fa-solid fa-grip"></i> เลือกแบบประเมิน
-    </button>
-  </div>
-</header>
-<div id="heroWrapper">
-  <header class="hero">
-    <span class="hero-badge"><i class="fa-solid fa-clipboard-check"></i> DEVELOPMENT & BEHAVIOR SCREENING</span>
-    <h1>แบบประเมินพัฒนาการและพฤติกรรมเด็ก</h1>
-    <p>เครื่องมือคัดกรองมาตรฐานสำหรับผู้ปกครอง ครู และ อสม. เพื่อประเมินความเสี่ยงด้านพัฒนาการ พฤติกรรม และสุขภาพจิตเด็กเบื้องต้น</p>
-  </header>
-  <div class="staff-global-alert">
-    <div class="staff-global-box">
-      <i class="fa-solid fa-circle-exclamation"></i>
-      <div>
-        <b>ข้อแนะนำในการใช้งาน:</b> แบบประเมินชุดนี้ออกแบบเพื่อใช้ประเมินพัฒนาการและสังเกตพฤติกรรมเด็กอย่างครอบคลุม หากพบข้อสงสัยหรือพัฒนาการล่าช้า ควรได้รับการตรวจประเมินยืนยันโดยกุมารแพทย์หรือผู้เชี่ยวชาญเพิ่มเติม
-      </div>
-    </div>
-  </div>
-  <div class="feature-strip">
-    <div class="feature-item">
-      <i class="fa-solid fa-phone-volume"></i>
-      <div class="ftitle">สายด่วน 1323</div>
-      <div class="fdesc">ปรึกษาปัญหาสุขภาพจิตและพัฒนาการเด็ก ฟรี 24 ชม.</div>
-    </div>
-    <div class="feature-item">
-      <i class="fa-solid fa-scale-balanced"></i>
-      <div class="ftitle">เกณฑ์มาตรฐาน</div>
-      <div class="fdesc">อิงตามมาตรฐาน DSPM, Denver II, SDQ, SNAP-IV และ M-CHAT</div>
-    </div>
-    <div class="feature-item">
-      <i class="fa-solid fa-user-shield"></i>
-      <div class="ftitle">ปลอดภัยเป็นความลับ</div>
-      <div class="fdesc">ไม่มีการจัดเก็บข้อมูลส่วนบุคคลลงเซิร์ฟเวอร์ใด ๆ</div>
-    </div>
-  </div>
-</div>
-<main>
-  <section id="view-grid" class="grid view-container"></section>
-  <section id="view-quiz" class="panel view-container" style="display:none;">
-    <div class="panel-header-actions">
-      <button class="btn-nav-back" onclick="showGrid()"><i class="fa-solid fa-arrow-left"></i> ย้อนกลับไปหน้าเลือกแบบประเมิน</button>
-    </div>
-    <h2 class="quiz-title" id="quizTitle"></h2>
-    <p class="quiz-sub" id="quizSub"></p>
-    <div id="targetWrap" class="target-select-wrap" style="display:none;">
-      <div id="targetLabel" class="section-label"></div>
-      <div id="targetChips" class="target-chips"></div>
-    </div>
-    <div class="progress-wrap">
-      <div class="progress-fill" id="progressFill"></div>
-    </div>
-    <div id="questionList"></div>
-    <div class="submit-row">
-      <button class="btn-primary" id="submitBtn" disabled onclick="processResults()">
-        <i class="fa-solid fa-paper-plane"></i> ประมวลผลการประเมิน
+    <div class="nav-actions">
+      <a href="assessment.html" class="btn-nav-prev" onclick="showGrid()">
+        <i class="fa-solid fa-arrow-left"></i> ย้อนกลับหน้าหลัก
+      </a>
+      <button class="btn-nav-back" id="navBackBtn" style="display:none;" onclick="showGrid()">
+        <i class="fa-solid fa-grip"></i> เลือกแบบประเมิน
       </button>
-      <div class="hint" id="progressHint"></div>
     </div>
-  </section>
-  <section id="view-result" class="panel view-container" style="display:none;">
-    <div class="panel-header-actions">
-      <button class="btn-nav-back" onclick="showGrid()"><i class="fa-solid fa-house"></i> กลับสู่หน้าหลักแบบประเมิน</button>
+  </header>
+
+  <div id="heroWrapper">
+    <header class="hero">
+      <span class="hero-badge"><i class="fa-solid fa-clipboard-check"></i> DEVELOPMENT & BEHAVIOR SCREENING</span>
+      <h1>แบบประเมินพัฒนาการและพฤติกรรมเด็ก</h1>
+      <p>เครื่องมือคัดกรองมาตรฐานสำหรับผู้ปกครอง ครู และ อสม. เพื่อประเมินความเสี่ยงด้านพัฒนาการ พฤติกรรม และสุขภาพจิตเด็กเบื้องต้น</p>
+    </header>
+    <div class="staff-global-alert">
+      <div class="staff-global-box">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <div>
+          <b>ข้อแนะนำในการใช้งาน:</b> แบบประเมินชุดนี้ออกแบบเพื่อใช้ประเมินพัฒนาการและสังเกตพฤติกรรมเด็กอย่างครอบคลุม หากพบข้อสงสัยหรือพัฒนาการล่าช้า ควรได้รับการตรวจประเมินยืนยันโดยกุมารแพทย์หรือผู้เชี่ยวชาญเพิ่มเติม
+        </div>
+      </div>
     </div>
-   
-    <div class="result-head">
-      <div class="hero-badge" id="resultCode"></div>
-      <h2 class="quiz-title" id="resultTitle" style="margin-top:4px;"></h2>
+    <div class="feature-strip">
+      <div class="feature-item">
+        <i class="fa-solid fa-phone-volume"></i>
+        <div class="ftitle">สายด่วน 1323</div>
+        <div class="fdesc">ปรึกษาปัญหาสุขภาพจิตและพัฒนาการเด็ก ฟรี 24 ชม.</div>
+      </div>
+      <div class="feature-item">
+        <i class="fa-solid fa-scale-balanced"></i>
+        <div class="ftitle">เกณฑ์มาตรฐาน</div>
+        <div class="fdesc">อิงตามมาตรฐาน DSPM, Denver II, SDQ, SNAP-IV และ M-CHAT</div>
+      </div>
+      <div class="feature-item">
+        <i class="fa-solid fa-user-shield"></i>
+        <div class="ftitle">ปลอดภัยเป็นความลับ</div>
+        <div class="fdesc">ไม่มีการจัดเก็บข้อมูลส่วนบุคคลลงเซิร์ฟเวอร์ใด ๆ</div>
+      </div>
     </div>
-    <div class="score-big" id="resultScore"></div>
-    <div class="score-label" id="resultScoreLabel">คะแนนรวมการประเมิน</div>
-   
-    <div id="resultBadgeWrap" style="text-align:center;">
-      <span id="resultBadge" class="level-badge"></span>
-    </div>
-    <div id="resultBreakdown" class="breakdown-box" style="display:none;"></div>
-    <div class="advice-box" id="resultAdvice"></div>
-    <!-- ส่วนกรอกชื่อ + เบอร์ -->
-    <div class="email-box">
-      <label><i class="fa-solid fa-user-pen"></i> บันทึกชื่อและเบอร์โทรเพื่อส่งผลประเมิน</label>
-      <div class="email-row">
-        <input type="text" id="senderName" placeholder="ชื่อ-นามสกุล (ชื่อตัวเอง)">
-        <input type="tel" id="senderPhone" placeholder="เบอร์โทรศัพท์">
-        <button class="btn-secondary" id="sendEmailBtn" onclick="sendResultToSheet()" style="align-self: flex-start;">
-          <i class="fa-solid fa-paper-plane"></i> ส่งผลประเมิน
+  </div>
+
+  <main>
+    <section id="view-grid" class="grid view-container"></section>
+
+    <section id="view-quiz" class="panel view-container" style="display:none;">
+      <div class="panel-header-actions">
+        <button class="btn-nav-back" onclick="showGrid()"><i class="fa-solid fa-arrow-left"></i> ย้อนกลับไปหน้าเลือกแบบประเมิน</button>
+      </div>
+      <h2 class="quiz-title" id="quizTitle"></h2>
+      <p class="quiz-sub" id="quizSub"></p>
+      <div id="targetWrap" class="target-select-wrap" style="display:none;">
+        <div id="targetLabel" class="section-label"></div>
+        <div id="targetChips" class="target-chips"></div>
+      </div>
+      <div class="progress-wrap">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div id="questionList"></div>
+      <div class="submit-row">
+        <button class="btn-primary" id="submitBtn" disabled onclick="processResults()">
+          <i class="fa-solid fa-paper-plane"></i> ประมวลผลการประเมิน
         </button>
+        <div class="hint" id="progressHint"></div>
       </div>
-      <div class="hint" id="emailHint">ระบบจะบันทึกผลประเมินพร้อมชื่อและเบอร์โทรศัพท์ลงใน Google Sheets</div>
-    </div>
-    <div class="result-actions">
-      <button class="btn-secondary" onclick="startAssessment(activeId)"><i class="fa-solid fa-rotate-left"></i> ทำแบบประเมินนี้อีกครั้ง</button>
-      <button class="btn-primary" onclick="showGrid()"><i class="fa-solid fa-grip"></i> เลือกแบบประเมินอื่น</button>
-    </div>
-  </section>
-</main>
-<footer class="note">
-  <i class="fa-solid fa-circle-info"></i> แบบประเมินเหล่านี้เป็นเครื่องมือคัดกรองเบื้องต้นเพื่อส่งเสริมพัฒนาการและเฝ้าระวังพฤติกรรมเด็ก ผลคะแนนไม่ได้เป็นคำวินิจฉัยทางการแพทย์โดยตรง
-</footer>
-<script>
-// 🔴 ใส่ Web App URL ของ Google Apps Script ที่ Deploy เรียบร้อยแล้วที่นี่
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyNLRdr-QIC70BWtLM6ooDLFiVJPqu__QyOY-Xy1aQJcQYNaZmLvsSLBTagFMlyG2wYXg/exec';
-const OPT_YN = [{label:'ผ่าน / ใช่', score:1}, {label:'ไม่ผ่าน / ไม่ใช่', score:0}];
-const OPT_SCALE4 = [
-  {label:'ไม่ค่อยพบ (0-1 ครั้ง/สัปดาห์)', score:0},
-  {label:'บางครั้ง (2-3 ครั้ง/สัปดาห์)', score:1},
-  {label:'บ่อยครั้ง (4-5 ครั้ง/สัปดาห์)', score:2},
-  {label:'ตลอดเวลา (เกือบทุกวัน)', score:3}
-];
-const OPT_SDQ = (rev) => rev
-  ? [{label:'ไม่จริง', score:2}, {label:'ค่อนข้างจริง', score:1}, {label:'จริงแน่นอน', score:0}]
-  : [{label:'ไม่จริง', score:0}, {label:'ค่อนข้างจริง', score:1}, {label:'จริงแน่นอน', score:2}];
-const TOOLS = {
-  dspm: {
-    code: 'DSPM',
-    title: 'DSPM พัฒนาการตามวัย',
-    desc: 'คัดกรองพัฒนาการ 5 ด้านหลักสำหรับเด็กแรกเกิด - 5 ปี',
-    icon: 'fa-child-reaching',
-    targetTitle: 'เลือกช่วงอายุของเด็ก',
-    groups: [
-      { id: '9m', name: '9 เดือน', items: [
-        { text: 'นั่งได้เองมั่นคงโดยไม่ต้องพยุง', domain: 'กล้ามเนื้อมัดใหญ่' },
-        { text: 'หยิบของชิ้นเล็กด้วยนิ้วหัวแม่มือและนิ้วชี้', domain: 'กล้ามเนื้อมัดเล็ก' },
-        { text: 'หันมองตามเสียงเรียกชื่อ', domain: 'การเข้าใจภาษา' },
-        { text: 'ส่งเสียงอ้อแอ้เลียนเสียงพูดซ้ำๆ', domain: 'การใช้ภาษา' },
-        { text: 'เล่นจ๊ะเอ๋หรือโบกมือบ๊ายบายได้', domain: 'สังคมและการช่วยเหลือตนเอง' }
-      ]},
-      { id: '18m', name: '18 เดือน', items: [
-        { text: 'เดินได้เองอย่างมั่นคง', domain: 'กล้ามเนื้อมัดใหญ่' },
-        { text: 'ต่อบล็อกไม้ซ้อนกันได้ 2-3 ชั้น', domain: 'กล้ามเนื้อมัดเล็ก' },
-        { text: 'ทำตามคำสั่งง่ายๆ ที่มีคำชี้บอกได้', domain: 'การเข้าใจภาษา' },
-        { text: 'พูดคำที่มีความหมายได้อย่างน้อย 3-5 คำ', domain: 'การใช้ภาษา' },
-        { text: 'ใช้ช้อนตักอาหารเข้าปากเองได้บ้าง', domain: 'สังคมและการช่วยเหลือตนเอง' }
-      ]},
-      { id: '36m', name: '3 ปี', items: [
-        { text: 'กระโดดสองขาพร้อมกันขึ้นจากพื้นได้', domain: 'กล้ามเนื้อมัดใหญ่' },
-        { text: 'วาดเส้นตรงตามแบบได้', domain: 'กล้ามเนื้อมัดเล็ก' },
-        { text: 'เข้าใจคำสั่ง 2 ขั้นตอนต่อเนื่องกัน', domain: 'การเข้าใจภาษา' },
-        { text: 'พูดเป็นประโยคสั้นๆ 3 คำขึ้นไปได้', domain: 'การใช้ภาษา' },
-        { text: 'บอกเมื่อต้องการขับถ่ายได้ก่อนเปียกชื้น', domain: 'สังคมและการช่วยเหลือตนเอง' }
-      ]}
-    ],
-    options: OPT_YN
-  },
-  denver: {
-    code: 'DENVER-II',
-    title: 'Denver II คัดกรองพัฒนาการ',
-    desc: 'การคัดกรองรายละเอียดด้านร่างกาย ภาษา และสังคม',
-    icon: 'fa-baby',
-    targetTitle: 'เลือกช่วงอายุประเมิน',
-    groups: [
-      { id: '12m', name: '12 เดือน', items: [
-        { text: 'ยืนเกาะทรงตัวได้มั่นคง', domain: 'Personal-Social' },
-        { text: 'ใช้นิ้วหยิบวัตถุชิ้นเล็กแบบ Pincer grasp', domain: 'Fine Motor' },
-        { text: 'ตอบสนองต่อคำสั่งห้ามหรือคำว่า "ไม่"', domain: 'Language' },
-        { text: 'ก้าวเดินโดยมีคนช่วยพยุงจับมือ', domain: 'Gross Motor' }
-      ]},
-      { id: '24m', name: '24 เดือน', items: [
-        { text: 'ถอดเสื้อผ้าชิ้นง่ายๆ ได้เอง', domain: 'Personal-Social' },
-        { text: 'ต่อบล็อกไม้ได้ 4-6 ก้อน', domain: 'Fine Motor' },
-        { text: 'ชี้ส่วนประกอบร่างกายได้ 4 จุด', domain: 'Language' },
-        { text: 'เตะลูกบอลไปข้างหน้าโดยไม่ล้ม', domain: 'Gross Motor' }
-      ]}
-    ],
-    options: OPT_YN
-  },
-  sdq: {
-    code: 'SDQ',
-    title: 'SDQ พฤติกรรมและอารมณ์',
-    desc: 'ประเมินจุดแข็งและจุดอ่อนพฤติกรรม 5 ด้านสำหรับเด็ก 4-16 ปี',
-    icon: 'fa-masks-theater',
-    targetTitle: 'กลุ่มผู้ให้ข้อมูล',
-    groups: [
-      { id: 'parent', name: 'ฉบับผู้ปกครองประเมิน', items: [
-        { text: 'ห่วงใยความรู้สึกของผู้อื่น', domain: 'พฤติกรรมเอื้อสังคม', rev: false },
-        { text: 'อยู่ไม่นิ่ง ซุกซนมาก นั่งนานๆ ไม่ได้', domain: 'สมาธิสั้น/อยู่ไม่นิ่ง', rev: false },
-        { text: 'บ่นปวดหัว ปวดท้อง หรือไม่สบายบ่อยๆ', domain: 'อาการทางอารมณ์', rev: false },
-        { text: 'ชอบแบ่งปันสิ่งของให้เพื่อน', domain: 'พฤติกรรมเอื้อสังคม', rev: false },
-        { text: 'มักโมโห ฉุนเฉียวง่าย', domain: 'ปัญหาความประพฤติ', rev: false },
-        { text: 'ชอบอยู่คนเดียว มักเล่นคนเดียว', domain: 'ปัญหาความสัมพันธ์กับเพื่อน', rev: false },
-        { text: 'เชื่อฟัง มักทำตามที่ผู้ใหญ่ขอ', domain: 'ปัญหาความประพฤติ', rev: true }
-      ]}
-    ]
-  },
-  adhd: {
-    code: 'SNAP-IV',
-    title: 'SNAP-IV คัดกรองสมาธิสั้น',
-    desc: 'แบบคัดกรองอาการขาดสมาธิ ซน ซ่า หุนหันพลันแล่น',
-    icon: 'fa-bolt',
-    targetTitle: 'กลุ่มผู้ประเมิน',
-    groups: [
-      { id: 'standard', name: 'ประเมินพฤติกรรมทั่วไป', items: [
-        { text: 'ไม่ค่อยจดจ่อกับรายละเอียด หรือทำผิดพลาดด้วยความประมาท', domain: 'ด้านขาดสมาธิ' },
-        { text: 'มีปัญหาในการรักษาความสนใจในการทำงานหรือการเล่น', domain: 'ด้านขาดสมาธิ' },
-        { text: 'ดูเหมือนไม่ได้ฟังเมื่อมีคนพูดด้วยโดยตรง', domain: 'ด้านขาดสมาธิ' },
-        { text: 'ขยับมือเท้าไปมา หรือนั่งยุกยิกอยู่บนเก้าอี้', domain: 'ด้านซน/หุนหันพลันแล่น' },
-        { text: 'ลุกออกจากที่นั่งในห้องเรียนหรือสถานการณ์ที่ควรรรนั่ง', domain: 'ด้านซน/หุนหันพลันแล่น' },
-        { text: 'พูดโพล่งคำตอบออกมาก่อนฟังคำถามจบ', domain: 'ด้านซน/หุนหันพลันแล่น' }
-      ]}
-    ],
-    options: OPT_SCALE4
-  },
-  mchat: {
-    code: 'M-CHAT',
-    title: 'M-CHAT-R คัดกรองออทิสติก',
-    desc: 'คัดกรองความเสี่ยงภาวะออทิสติกสเปกตรัม (16-30 เดือน)',
-    icon: 'fa-puzzle-piece',
-    targetTitle: 'ช่วงอายุเด็ก',
-    groups: [
-      { id: 'toddler', name: 'เด็กอายุ 16-30 เดือน', items: [
-        { text: 'เมื่อท่านชี้ไปที่สิ่งของ เด็กมองตามสิ่งที่ชี้หรือไม่', domain: 'การตอบสนองร่วม', riskVal: 0 },
-        { text: 'ท่านเคยสงสัยว่าเด็กมีปัญหาการได้ยินหรือไม่', domain: 'การรับรู้ประสาทสัมผัส', riskVal: 1 },
-        { text: 'เด็กเคยเล่นสมมติหรือไม่ เช่น ชงชา ถูบ้าน', domain: 'จินตนาการและการเล่น', riskVal: 0 },
-        { text: 'เด็กชอบปีนป่ายสิ่งของสูงๆ หรือไม่', domain: 'การเคลื่อนไหว', riskVal: 0 },
-        { text: 'เด็กขยับนิ้วมือแปลกๆ ใกล้ตาตนเองหรือไม่', domain: 'พฤติกรรมซ้ำซาก', riskVal: 1 },
-        { text: 'เด็กชี้นิ้วเพื่อบอกสิ่งที่สนใจให้ท่านดูหรือไม่', domain: 'การสื่อสารทางสังคม', riskVal: 0 }
-      ]}
-    ]
-  }
-};
-let activeId = null;
-let activeGroup = null;
-let userAnswers = [];
-let lastReport = null;
-function initApp() {
-  const grid = document.getElementById('view-grid');
-  grid.innerHTML = '';
-  Object.keys(TOOLS).forEach(id => {
-    const item = TOOLS[id];
-    const totalQ = item.groups[0].items.length;
-    const card = document.createElement('div');
-    card.className = 'card';
-    card.onclick = () => startAssessment(id);
-    card.innerHTML = `
-      <div class="icon"><i class="fa-solid ${item.icon}"></i></div>
-      <div class="code font-title">${item.code}</div>
-      <div class="desc">${item.desc}</div>
-      <div class="card-footer">
-        <span class="qcount"><i class="fa-regular fa-circle-question"></i> ${totalQ} ข้อประเมิน</span>
-        <span class="btn-start-text">เริ่มประเมิน <i class="fa-solid fa-arrow-right"></i></span>
+    </section>
+
+    <section id="view-result" class="panel view-container" style="display:none;">
+      <div class="panel-header-actions">
+        <button class="btn-nav-back" onclick="showGrid()"><i class="fa-solid fa-house"></i> กลับสู่หน้าหลักแบบประเมิน</button>
       </div>
-    `;
-    grid.appendChild(card);
-  });
-}
-function showGrid() {
-  document.getElementById('heroWrapper').style.display = 'block';
-  document.getElementById('view-grid').style.display = 'grid';
-  document.getElementById('view-quiz').style.display = 'none';
-  document.getElementById('view-result').style.display = 'none';
-  document.getElementById('navBackBtn').style.display = 'none';
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-function startAssessment(id) {
-  activeId = id;
-  const data = TOOLS[id];
-  document.getElementById('heroWrapper').style.display = 'none';
-  document.getElementById('quizTitle').textContent = data.title;
-  document.getElementById('quizSub').textContent = data.desc;
-  document.getElementById('targetLabel').textContent = data.targetTitle;
-  document.getElementById('targetWrap').style.display = 'block';
-  document.getElementById('navBackBtn').style.display = 'inline-flex';
- 
-  const chipsContainer = document.getElementById('targetChips');
-  chipsContainer.innerHTML = '';
- 
-  data.groups.forEach((g, idx) => {
-    const btn = document.createElement('button');
-    btn.className = `chip-btn ${idx === 0 ? 'selected' : ''}`;
-    btn.textContent = g.name;
-    btn.onclick = () => loadGroupQuestions(g);
-    chipsContainer.appendChild(btn);
-  });
-  loadGroupQuestions(data.groups[0]);
-  document.getElementById('view-grid').style.display = 'none';
-  document.getElementById('view-result').style.display = 'none';
-  document.getElementById('view-quiz').style.display = 'block';
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-function loadGroupQuestions(group) {
-  activeGroup = group;
-  document.querySelectorAll('.chip-btn').forEach(b => {
-    b.classList.toggle('selected', b.textContent === group.name);
-  });
-  const tool = TOOLS[activeId];
-  const container = document.getElementById('questionList');
-  container.innerHTML = '';
-  userAnswers = new Array(group.items.length).fill(null);
-  group.items.forEach((item, qIdx) => {
-    const qDiv = document.createElement('div');
-    qDiv.className = 'question';
-    let options = tool.options;
-    if (activeId === 'sdq') options = OPT_SDQ(item.rev);
-    if (activeId === 'mchat') options = OPT_YN;
-    let optsHtml = '';
-    options.forEach((opt, oIdx) => {
-      const val = (activeId === 'mchat') ? (opt.score === item.riskVal ? 1 : 0) : opt.score;
-      optsHtml += `
-        <label class="opt" id="opt-lbl-${qIdx}-${oIdx}">
-          <input type="radio" name="q_${qIdx}" value="${val}" onchange="selectAnswer(${qIdx}, ${oIdx}, ${val})">
-          <span>${opt.label}</span>
-        </label>
-      `;
-    });
-    qDiv.innerHTML = `
-      <div class="qnum">ข้อที่ ${qIdx + 1} &bull; <span style="font-weight:400; color:var(--text-muted);">${item.domain}</span></div>
-      <div class="qtext">${item.text}</div>
-      <div class="options">${optsHtml}</div>
-    `;
-    container.appendChild(qDiv);
-  });
-  updateProgress();
-}
-function selectAnswer(qIdx, oIdx, val) {
-  userAnswers[qIdx] = val;
-  // เคลียร์ selected ของทุกตัวเลือกในข้อนี้ (ปลอดภัยกว่าเดิม)
-  const parent = document.querySelectorAll('#questionList .question')[qIdx];
-  if (parent) {
-    parent.querySelectorAll('.opt').forEach(el => el.classList.remove('selected'));
-  }
-  const selectedEl = document.getElementById(`opt-lbl-${qIdx}-${oIdx}`);
-  if (selectedEl) selectedEl.classList.add('selected');
-  updateProgress();
-}
-function updateProgress() {
-  const total = userAnswers.length;
-  const answered = userAnswers.filter(v => v !== null).length;
-  const pct = total > 0 ? Math.round((answered / total) * 100) : 0;
-  document.getElementById('progressFill').style.width = pct + '%';
-  document.getElementById('progressHint').textContent = `ทำไปแล้ว ${answered} จาก ${total} ข้อ (${pct}%)`;
-  document.getElementById('submitBtn').disabled = answered < total;
-}
-function processResults() {
-  const tool = TOOLS[activeId];
-  const totalScore = userAnswers.reduce((a, b) => a + b, 0);
-  const items = activeGroup.items;
-  const domainMap = {};
-  items.forEach((it, idx) => {
-    if (!domainMap[it.domain]) domainMap[it.domain] = { score: 0, total: 0 };
-    domainMap[it.domain].score += userAnswers[idx];
-    // แก้จุดนี้: SDQ คะแนนสูงสุดข้อละ 2, ADHD ข้อละ 3, อื่น ๆ ข้อละ 1
-    let maxPerItem = 1;
-    if (activeId === 'adhd') maxPerItem = 3;
-    else if (activeId === 'sdq') maxPerItem = 2;
-    domainMap[it.domain].total += maxPerItem;
-  });
-  let statusLabel = '';
-  let statusColor = '';
-  let adviceText = '';
-  if (activeId === 'dspm' || activeId === 'denver') {
-    const passCount = totalScore;
-    const isAllPass = passCount === items.length;
-    statusLabel = isAllPass ? 'พัฒนาการสมวัย' : 'ควรได้รับการกระตุ้นพัฒนาการ';
-    statusColor = isAllPass ? 'var(--success)' : 'var(--danger)';
-    adviceText = isAllPass
-      ? '<b>ข้อแนะนำ:</b> เด็กมีพัฒนาการสมวัยตามเกณฑ์ที่ประเมิน ควรส่งเสริมกิจกรรมการเรียนรู้ ความคิดสร้างสรรค์ และโภชนาการอย่างต่อเนื่อง'
-      : '<b>ข้อแนะนำ:</b> พบทักษะบางด้านที่ยังไม่ผ่านเกณฑ์ แนะนำให้ผู้ปกครองฝึกทักษะเฉพาะด้านต่อเนื่องอย่างน้อย 1 เดือน และเข้ารับการประเมินซ้ำ';
-  } else if (activeId === 'sdq') {
-    statusLabel = totalScore <= 6 ? 'ปกติ' : (totalScore <= 9 ? 'เสี่ยง / ก้ำกึ่ง' : 'มีปัญหาพฤติกรรม');
-    statusColor = totalScore <= 6 ? 'var(--success)' : (totalScore <= 9 ? 'var(--warning)' : 'var(--danger)');
-    adviceText = `<b>ข้อแนะนำ:</b> คะแนนรวมความยากลำบากจัดอยู่ในเกณฑ์ <b>${statusLabel}</b> ควรเสริมสร้างความสัมพันธ์ในครอบครัวและดูแลสนับสนุนอารมณ์เด็กอย่างอบอุ่น`;
-  } else if (activeId === 'adhd') {
-    statusLabel = totalScore >= 9 ? 'มีความเสี่ยงสมาธิสั้นสูง' : 'ไม่พบความเสี่ยงชัดเจน';
-    statusColor = totalScore >= 9 ? 'var(--danger)' : 'var(--success)';
-    adviceText = totalScore >= 9
-      ? '<b>ข้อแนะนำ:</b> พฤติกรรมเข้าข่ายความเสี่ยงสมาธิสั้น ควรปรึกษากุมารแพทย์ด้านพัฒนาการหรือจิตแพทย์เด็กเพื่อประเมินและวางแผนดูแลอย่างเหมาะสม'
-      : '<b>ข้อแนะนำ:</b> พฤติกรรมและสมาธิของเด็กอยู่ในเกณฑ์ปกติ';
-  } else if (activeId === 'mchat') {
-    statusLabel = totalScore >= 2 ? 'มีความเสี่ยงภาวะออทิสติก' : 'ความเสี่ยงต่ำ';
-    statusColor = totalScore >= 2 ? 'var(--danger)' : 'var(--success)';
-    adviceText = totalScore >= 2
-      ? '<b>ข้อแนะนำ:</b> ผลคัดกรองพบสัญญาณความเสี่ยงภาวะออทิสติก ควรประสานงานส่งต่อเด็กเข้ารับการตรวจวินิจฉัยโดยแพทย์ผู้เชี่ยวชาญอย่างสม่ำเสมอ'
-      : '<b>ข้อแนะนำ:</b> พัฒนาการด้านการสื่อสารและปฏิสัมพันธ์ทางสังคมอยู่ในเกณฑ์ปกติ';
-  }
-  document.getElementById('resultCode').textContent = tool.code;
-  document.getElementById('resultTitle').textContent = `${tool.title} (${activeGroup.name})`;
-  document.getElementById('resultScore').textContent = totalScore;
-  document.getElementById('resultScoreLabel').textContent = 'คะแนนรวมการประเมิน';
- 
-  const badge = document.getElementById('resultBadge');
-  badge.textContent = statusLabel;
-  badge.style.background = statusColor;
-  const bdContainer = document.getElementById('resultBreakdown');
-  bdContainer.innerHTML = '<div class="breakdown-title"><i class="fa-solid fa-list-check"></i> สรุปผลการประเมินแยกรายด้าน</div>';
-  Object.keys(domainMap).forEach(dKey => {
-    const dObj = domainMap[dKey];
-    const row = document.createElement('div');
-    row.className = 'breakdown-item';
-    row.innerHTML = `
-      <span>${dKey}</span>
-      <span class="breakdown-tag">${dObj.score} / ${dObj.total}</span>
-    `;
-    bdContainer.appendChild(row);
-  });
-  bdContainer.style.display = 'block';
-  document.getElementById('resultAdvice').innerHTML = adviceText;
-  lastReport = {
-    title: `${tool.title} (${activeGroup.name})`,
-    code: tool.code,
-    score: totalScore,
-    status: statusLabel,
-    date: new Date().toLocaleDateString('th-TH')
-  };
-  document.getElementById('view-quiz').style.display = 'none';
-  document.getElementById('view-result').style.display = 'block';
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-async function sendResultToSheet() {
-  if (!lastReport) return;
-  const name = document.getElementById('senderName').value.trim();
-  const phone = document.getElementById('senderPhone').value.trim();
-  if (!name) { alert('กรุณากรอกชื่อ-นามสกุล'); return; }
-  if (!phone) { alert('กรุณากรอกเบอร์โทรศัพท์'); return; }
-  const btn = document.getElementById('sendEmailBtn');
-  const hint = document.getElementById('emailHint');
-  btn.disabled = true;
-  btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> กำลังบันทึก...';
-  hint.textContent = 'กำลังส่งข้อมูลไปยัง Google Sheets...';
-  const payload = {
-    assessment_type: lastReport.code,
-    name: name,
-    phone: phone,
-    code: lastReport.code,
-    title: lastReport.title,
-    score: lastReport.score,
-    status: lastReport.status,
-    date: lastReport.date || new Date().toLocaleDateString('th-TH')
-  };
-  try {
-    await fetch(GOOGLE_SCRIPT_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: {
-        'Content-Type': 'text/plain;charset=utf-8'
+      <div class="result-head">
+        <div class="hero-badge" id="resultCode"></div>
+        <h2 class="quiz-title" id="resultTitle" style="margin-top:4px;"></h2>
+      </div>
+      <div class="score-big" id="resultScore"></div>
+      <div class="score-label" id="resultScoreLabel">คะแนนรวมการประเมิน</div>
+      <div id="resultBadgeWrap" style="text-align:center;">
+        <span id="resultBadge" class="level-badge"></span>
+      </div>
+      <div id="resultBreakdown" class="breakdown-box" style="display:none;"></div>
+      <div class="advice-box" id="resultAdvice"></div>
+
+      <div class="email-box">
+        <label><i class="fa-solid fa-user-pen"></i> บันทึกชื่อและเบอร์โทรเพื่อส่งผลประเมิน</label>
+        <div class="email-row">
+          <input type="text" id="senderName" placeholder="ชื่อ-นามสกุล (ชื่อตัวเอง)">
+          <input type="tel" id="senderPhone" placeholder="เบอร์โทรศัพท์">
+          <button class="btn-secondary" id="sendEmailBtn" onclick="sendResultToSheet()" style="align-self: flex-start;">
+            <i class="fa-solid fa-paper-plane"></i> ส่งผลประเมิน
+          </button>
+        </div>
+        <div class="hint" id="emailHint">ระบบจะบันทึกผลประเมินพร้อมชื่อและเบอร์โทรศัพท์ลงใน Google Sheets</div>
+      </div>
+
+      <div class="result-actions">
+        <button class="btn-secondary" onclick="startAssessment(activeId)"><i class="fa-solid fa-rotate-left"></i> ทำแบบประเมินนี้อีกครั้ง</button>
+        <button class="btn-primary" onclick="showGrid()"><i class="fa-solid fa-grip"></i> เลือกแบบประเมินอื่น</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="note">
+    <i class="fa-solid fa-circle-info"></i> แบบประเมินเหล่านี้เป็นเครื่องมือคัดกรองเบื้องต้นเพื่อส่งเสริมพัฒนาการและเฝ้าระวังพฤติกรรมเด็ก ผลคะแนนไม่ได้เป็นคำวินิจฉัยทางการแพทย์โดยตรง
+  </footer>
+
+  <script>
+    // 🔴 ใส่ Web App URL ของ Google Apps Script ที่ Deploy เรียบร้อยแล้วที่นี่
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyNLRdr-QIC70BWtLM6ooDLFiVJPqu__QyOY-Xy1aQJcQYNaZmLvsSLBTagFMlyG2wYXg/exec';
+
+    const OPT_YN = [
+      {label:'ผ่าน / ใช่', score:1},
+      {label:'ไม่ผ่าน / ไม่ใช่', score:0}
+    ];
+
+    const OPT_SCALE4 = [
+      {label:'ไม่ค่อยพบ (0-1 ครั้ง/สัปดาห์)', score:0},
+      {label:'บางครั้ง (2-3 ครั้ง/สัปดาห์)', score:1},
+      {label:'บ่อยครั้ง (4-5 ครั้ง/สัปดาห์)', score:2},
+      {label:'ตลอดเวลา (เกือบทุกวัน)', score:3}
+    ];
+
+    const OPT_SDQ = (rev) => rev
+      ? [{label:'ไม่จริง', score:2}, {label:'ค่อนข้างจริง', score:1}, {label:'จริงแน่นอน', score:0}]
+      : [{label:'ไม่จริง', score:0}, {label:'ค่อนข้างจริง', score:1}, {label:'จริงแน่นอน', score:2}];
+
+    const TOOLS = {
+      dspm: {
+        code: 'DSPM',
+        title: 'DSPM พัฒนาการตามวัย',
+        desc: 'คัดกรองพัฒนาการ 5 ด้านหลักสำหรับเด็กแรกเกิด - 5 ปี',
+        icon: 'fa-child-reaching',
+        targetTitle: 'เลือกช่วงอายุของเด็ก',
+        groups: [
+          { id: '9m', name: '9 เดือน', items: [
+            { text: 'นั่งได้เองมั่นคงโดยไม่ต้องพยุง', domain: 'กล้ามเนื้อมัดใหญ่' },
+            { text: 'หยิบของชิ้นเล็กด้วยนิ้วหัวแม่มือและนิ้วชี้', domain: 'กล้ามเนื้อมัดเล็ก' },
+            { text: 'หันมองตามเสียงเรียกชื่อ', domain: 'การเข้าใจภาษา' },
+            { text: 'ส่งเสียงอ้อแอ้เลียนเสียงพูดซ้ำๆ', domain: 'การใช้ภาษา' },
+            { text: 'เล่นจ๊ะเอ๋หรือโบกมือบ๊ายบายได้', domain: 'สังคมและการช่วยเหลือตนเอง' }
+          ]},
+          { id: '18m', name: '18 เดือน', items: [
+            { text: 'เดินได้เองอย่างมั่นคง', domain: 'กล้ามเนื้อมัดใหญ่' },
+            { text: 'ต่อบล็อกไม้ซ้อนกันได้ 2-3 ชั้น', domain: 'กล้ามเนื้อมัดเล็ก' },
+            { text: 'ทำตามคำสั่งง่ายๆ ที่มีคำชี้บอกได้', domain: 'การเข้าใจภาษา' },
+            { text: 'พูดคำที่มีความหมายได้อย่างน้อย 3-5 คำ', domain: 'การใช้ภาษา' },
+            { text: 'ใช้ช้อนตักอาหารเข้าปากเองได้บ้าง', domain: 'สังคมและการช่วยเหลือตนเอง' }
+          ]},
+          { id: '36m', name: '3 ปี', items: [
+            { text: 'กระโดดสองขาพร้อมกันขึ้นจากพื้นได้', domain: 'กล้ามเนื้อมัดใหญ่' },
+            { text: 'วาดเส้นตรงตามแบบได้', domain: 'กล้ามเนื้อมัดเล็ก' },
+            { text: 'เข้าใจคำสั่ง 2 ขั้นตอนต่อเนื่องกัน', domain: 'การเข้าใจภาษา' },
+            { text: 'พูดเป็นประโยคสั้นๆ 3 คำขึ้นไปได้', domain: 'การใช้ภาษา' },
+            { text: 'บอกเมื่อต้องการขับถ่ายได้ก่อนเปียกชื้น', domain: 'สังคมและการช่วยเหลือตนเอง' }
+          ]}
+        ],
+        options: OPT_YN
       },
-      body: JSON.stringify(payload)
-    });
-    hint.innerHTML = '<span style="color: var(--success);"><i class="fa-solid fa-circle-check"></i> บันทึกผลประเมินลง Google Sheets เรียบร้อยแล้ว!</span>';
-    btn.innerHTML = '<i class="fa-solid fa-check"></i> บันทึกสำเร็จ';
-   
-    setTimeout(() => {
-      btn.disabled = false;
-      btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> ส่งผลประเมิน';
-    }, 3000);
-  } catch (error) {
-    console.error(error);
-    hint.innerHTML = '<span style="color: var(--danger);"><i class="fa-solid fa-circle-exclamation"></i> เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง</span>';
-    btn.disabled = false;
-    btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> ส่งผลประเมิน';
-  }
-}
-initApp();
-</script>
+      denver: {
+        code: 'DENVER-II',
+        title: 'Denver II คัดกรองพัฒนาการ',
+        desc: 'การคัดกรองรายละเอียดด้านร่างกาย ภาษา และสังคม',
+        icon: 'fa-baby',
+        targetTitle: 'เลือกช่วงอายุประเมิน',
+        groups: [
+          { id: '12m', name: '12 เดือน', items: [
+            { text: 'ยืนเกาะทรงตัวได้มั่นคง', domain: 'Personal-Social' },
+            { text: 'ใช้นิ้วหยิบวัตถุชิ้นเล็กแบบ Pincer grasp', domain: 'Fine Motor' },
+            { text: 'ตอบสนองต่อคำสั่งห้ามหรือคำว่า "ไม่"', domain: 'Language' },
+            { text: 'ก้าวเดินโดยมีคนช่วยพยุงจับมือ', domain: 'Gross Motor' }
+          ]},
+          { id: '24m', name: '24 เดือน', items: [
+            { text: 'ถอดเสื้อผ้าชิ้นง่ายๆ ได้เอง', domain: 'Personal-Social' },
+            { text: 'ต่อบล็อกไม้ได้ 4-6 ก้อน', domain: 'Fine Motor' },
+            { text: 'ชี้ส่วนประกอบร่างกายได้ 4 จุด', domain: 'Language' },
+            { text: 'เตะลูกบอลไปข้างหน้าโดยไม่ล้ม', domain: 'Gross Motor' }
+          ]}
+        ],
+        options: OPT_YN
+      },
+      sdq: {
+        code: 'SDQ',
+        title: 'SDQ พฤติกรรมและอารมณ์',
+        desc: 'ประเมินจุดแข็งและจุดอ่อนพฤติกรรม 5 ด้านสำหรับเด็ก 4-16 ปี',
+        icon: 'fa-masks-theater',
+        targetTitle: 'กลุ่มผู้ให้ข้อมูล',
+        groups: [
+          { id: 'parent', name: 'ฉบับผู้ปกครองประเมิน', items: [
+            { text: 'ห่วงใยความรู้สึกของผู้อื่น', domain: 'พฤติกรรมเอื้อสังคม', rev: false },
+            { text: 'อยู่ไม่นิ่ง ซุกซนมาก นั่งนานๆ ไม่ได้', domain: 'สมาธิสั้น/อยู่ไม่นิ่ง', rev: false },
+            { text: 'บ่นปวดหัว ปวดท้อง หรือไม่สบายบ่อยๆ', domain: 'อาการทางอารมณ์', rev: false },
+            { text: 'ชอบแบ่งปันสิ่งของให้เพื่อน', domain: 'พฤติกรรมเอื้อสังคม', rev: false },
+            { text: 'มักโมโห ฉุนเฉียวง่าย', domain: 'ปัญหาความประพฤติ', rev: false },
+            { text: 'ชอบอยู่คนเดียว มักเล่นคนเดียว', domain: 'ปัญหาความสัมพันธ์กับเพื่อน', rev: false },
+            { text: 'เชื่อฟัง มักทำตามที่ผู้ใหญ่ขอ', domain: 'ปัญหาความประพฤติ', rev: true }
+          ]}
+        ]
+      },
+      adhd: {
+        code: 'SNAP-IV',
+        title: 'SNAP-IV คัดกรองสมาธิสั้น',
+        desc: 'แบบคัดกรองอาการขาดสมาธิ ซน ซ่า หุนหันพลันแล่น',
+        icon: 'fa-bolt',
+        targetTitle: 'กลุ่มผู้ประเมิน',
+        groups: [
+          { id: 'standard', name: 'ประเมินพฤติกรรมทั่วไป', items: [
+            { text: 'ไม่ค่อยจดจ่อกับรายละเอียด หรือทำผิดพลาดด้วยความประมาท', domain: 'ด้านขาดสมาธิ' },
+            { text: 'มีปัญหาในการรักษาความสนใจในการทำงานหรือการเล่น', domain: 'ด้านขาดสมาธิ' },
+            { text: 'ดูเหมือนไม่ได้ฟังเมื่อมีคนพูดด้วยโดยตรง', domain: 'ด้านขาดสมาธิ' },
+            { text: 'ขยับมือเท้าไปมา หรือนั่งยุกยิกอยู่บนเก้าอี้', domain: 'ด้านซน/หุนหันพลันแล่น' },
+            { text: 'ลุกออกจากที่นั่งในห้องเรียนหรือสถานการณ์ที่ควรรรนั่ง', domain: 'ด้านซน/หุนหันพลันแล่น' },
+            { text: 'พูดโพล่งคำตอบออกมาก่อนฟังคำถามจบ', domain: 'ด้านซน/หุนหันพลันแล่น' }
+          ]}
+        ],
+        options: OPT_SCALE4
+      },
+      mchat: {
+        code: 'M-CHAT',
+        title: 'M-CHAT-R คัดกรองออทิสติก',
+        desc: 'คัดกรองความเสี่ยงภาวะออทิสติกสเปกตรัม (16-30 เดือน)',
+        icon: 'fa-puzzle-piece',
+        targetTitle: 'ช่วงอายุเด็ก',
+        groups: [
+          { id: 'toddler', name: 'เด็กอายุ 16-30 เดือน', items: [
+            { text: 'เมื่อท่านชี้ไปที่สิ่งของ เด็กมองตามสิ่งที่ชี้หรือไม่', domain: 'การตอบสนองร่วม', riskVal: 0 },
+            { text: 'ท่านเคยสงสัยว่าเด็กมีปัญหาการได้ยินหรือไม่', domain: 'การรับรู้ประสาทสัมผัส', riskVal: 1 },
+            { text: 'เด็กเคยเล่นสมมติหรือไม่ เช่น ชงชา ถูบ้าน', domain: 'จินตนาการและการเล่น', riskVal: 0 },
+            { text: 'เด็กชอบปีนป่ายสิ่งของสูงๆ หรือไม่', domain: 'การเคลื่อนไหว', riskVal: 0 },
+            { text: 'เด็กขยับนิ้วมือแปลกๆ ใกล้ตาตนเองหรือไม่', domain: 'พฤติกรรมซ้ำซาก', riskVal: 1 },
+            { text: 'เด็กชี้นิ้วเพื่อบอกสิ่งที่สนใจให้ท่านดูหรือไม่', domain: 'การสื่อสารทางสังคม', riskVal: 0 }
+          ]}
+        ]
+      }
+    };
+
+    let activeId = null;
+    let activeGroup = null;
+    let userAnswers = [];
+    let lastReport = null;
+
+    function initApp() {
+      const grid = document.getElementById('view-grid');
+      grid.innerHTML = '';
+      Object.keys(TOOLS).forEach(id => {
+        const item = TOOLS[id];
+        const totalQ = item.groups[0].items.length;
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.onclick = () => startAssessment(id);
+        card.innerHTML = `
+          <div class="icon"><i class="fa-solid ${item.icon}"></i></div>
+          <div class="code font-title">${item.code}</div>
+          <div class="desc">${item.desc}</div>
+          <div class="card-footer">
+            <span class="qcount"><i class="fa-regular fa-circle-question"></i> ${totalQ} ข้อประเมิน</span>
+            <span class="btn-start-text">เริ่มประเมิน <i class="fa-solid fa-arrow-right"></i></span>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function showGrid() {
+      document.getElementById('heroWrapper').style.display = 'block';
+      document.getElementById('view-grid').style.display = 'grid';
+      document.getElementById('view-quiz').style.display = 'none';
+      document.getElementById('view-result').style.display = 'none';
+      document.getElementById('navBackBtn').style.display = 'none';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function startAssessment(id) {
+      activeId = id;
+      const data = TOOLS[id];
+      document.getElementById('heroWrapper').style.display = 'none';
+      document.getElementById('quizTitle').textContent = data.title;
+      document.getElementById('quizSub').textContent = data.desc;
+      document.getElementById('targetLabel').textContent = data.targetTitle;
+      document.getElementById('targetWrap').style.display = 'block';
+      document.getElementById('navBackBtn').style.display = 'inline-flex';
+
+      const chipsContainer = document.getElementById('targetChips');
+      chipsContainer.innerHTML = '';
+      data.groups.forEach((g, idx) => {
+        const btn = document.createElement('button');
+        btn.className = `chip-btn ${idx === 0 ? 'selected' : ''}`;
+        btn.textContent = g.name;
+        btn.onclick = () => loadGroupQuestions(g);
+        chipsContainer.appendChild(btn);
+      });
+
+      loadGroupQuestions(data.groups[0]);
+      document.getElementById('view-grid').style.display = 'none';
+      document.getElementById('view-result').style.display = 'none';
+      document.getElementById('view-quiz').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function loadGroupQuestions(group) {
+      activeGroup = group;
+      document.querySelectorAll('.chip-btn').forEach(b => {
+        b.classList.toggle('selected', b.textContent === group.name);
+      });
+
+      const tool = TOOLS[activeId];
+      const container = document.getElementById('questionList');
+      container.innerHTML = '';
+      userAnswers = new Array(group.items.length).fill(null);
+
+      group.items.forEach((item, qIdx) => {
+        const qDiv = document.createElement('div');
+        qDiv.className = 'question';
+
+        let options = tool.options;
+        if (activeId === 'sdq') options = OPT_SDQ(item.rev);
+        if (activeId === 'mchat') options = OPT_YN;
+
+        let optsHtml = '';
+        options.forEach((opt, oIdx) => {
+          // สำหรับ M-CHAT: ถ้าเลือกตรงกับ riskVal จะได้ 1 คะแนน (เสี่ยง)
+          const val = (activeId === 'mchat')
+            ? (opt.score === item.riskVal ? 1 : 0)
+            : opt.score;
+
+          optsHtml += `
+            <label class="opt" id="opt-lbl-${qIdx}-${oIdx}">
+              <input type="radio" name="q_${qIdx}" value="${val}" onchange="selectAnswer(${qIdx}, ${oIdx}, ${val})">
+              <span>${opt.label}</span>
+            </label>
+          `;
+        });
+
+        qDiv.innerHTML = `
+          <div class="qnum">ข้อที่ ${qIdx + 1} • <span style="font-weight:400; color:var(--text-muted);">${item.domain}</span></div>
+          <div class="qtext">${item.text}</div>
+          <div class="options">${optsHtml}</div>
+        `;
+        container.appendChild(qDiv);
+      });
+
+      updateProgress();
+    }
+
+    function selectAnswer(qIdx, oIdx, val) {
+      userAnswers[qIdx] = val;
+
+      // เคลียร์ selected ของทุกตัวเลือกในข้อนี้
+      const parent = document.querySelectorAll('#questionList .question')[qIdx];
+      if (parent) {
+        parent.querySelectorAll('.opt').forEach(el => el.classList.remove('selected'));
+      }
+
+      const selectedEl = document.getElementById(`opt-lbl-${qIdx}-${oIdx}`);
+      if (selectedEl) selectedEl.classList.add('selected');
+
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const total = userAnswers.length;
+      const answered = userAnswers.filter(v => v !== null).length;
+      const pct = total > 0 ? Math.round((answered / total) * 100) : 0;
+      document.getElementById('progressFill').style.width = pct + '%';
+      document.getElementById('progressHint').textContent = `ทำไปแล้ว ${answered} จาก ${total} ข้อ (${pct}%)`;
+      document.getElementById('submitBtn').disabled = answered < total;
+    }
+
+    function processResults() {
+      const tool = TOOLS[activeId];
+      const totalScore = userAnswers.reduce((a, b) => a + b, 0);
+      const items = activeGroup.items;
+      const domainMap = {};
+
+      items.forEach((it, idx) => {
+        if (!domainMap[it.domain]) domainMap[it.domain] = { score: 0, total: 0 };
+        domainMap[it.domain].score += userAnswers[idx];
+
+        let maxPerItem = 1;
+        if (activeId === 'adhd') maxPerItem = 3;
+        else if (activeId === 'sdq') maxPerItem = 2;
+        domainMap[it.domain].total += maxPerItem;
+      });
+
+      let statusLabel = '';
+      let statusColor = '';
+      let adviceText = '';
+
+      if (activeId === 'dspm' || activeId === 'denver') {
+        const passCount = totalScore;
+        const isAllPass = passCount === items.length;
+        statusLabel = isAllPass ? 'พัฒนาการสมวัย' : 'ควรได้รับการกระตุ้นพัฒนาการ';
+        statusColor = isAllPass ? 'var(--success)' : 'var(--danger)';
+        adviceText = isAllPass
+          ? '<b>ข้อแนะนำ:</b> เด็กมีพัฒนาการสมวัยตามเกณฑ์ที่ประเมิน ควรส่งเสริมกิจกรรมการเรียนรู้ ความคิดสร้างสรรค์ และโภชนาการอย่างต่อเนื่อง'
+          : '<b>ข้อแนะนำ:</b> พบทักษะบางด้านที่ยังไม่ผ่านเกณฑ์ แนะนำให้ผู้ปกครองฝึกทักษะเฉพาะด้านต่อเนื่องอย่างน้อย 1 เดือน และเข้ารับการประเมินซ้ำ';
+      } else if (activeId === 'sdq') {
+        statusLabel = totalScore <= 6 ? 'ปกติ' : (totalScore <= 9 ? 'เสี่ยง / ก้ำกึ่ง' : 'มีปัญหาพฤติกรรม');
+        statusColor = totalScore <= 6 ? 'var(--success)' : (totalScore <= 9 ? 'var(--warning)' : 'var(--danger)');
+        adviceText = `<b>ข้อแนะนำ:</b> คะแนนรวมความยากลำบากจัดอยู่ในเกณฑ์ <b>${statusLabel}</b> ควรเสริมสร้างความสัมพันธ์ในครอบครัวและดูแลสนับสนุนอารมณ์เด็กอย่างอบอุ่น`;
+      } else if (activeId === 'adhd') {
+        statusLabel = totalScore >= 9 ? 'มีความเสี่ยงสมาธิสั้นสูง' : 'ไม่พบความเสี่ยงชัดเจน';
+        statusColor = totalScore >= 9 ? 'var(--danger)' : 'var(--success)';
+        adviceText = totalScore >= 9
+          ? '<b>ข้อแนะนำ:</b> พฤติกรรมเข้าข่ายความเสี่ยงสมาธิสั้น ควรปรึกษากุมารแพทย์ด้านพัฒนาการหรือจิตแพทย์เด็กเพื่อประเมินและวางแผนดูแลอย่างเหมาะสม'
+          : '<b>ข้อแนะนำ:</b> พฤติกรรมและสมาธิของเด็กอยู่ในเกณฑ์ปกติ';
+      } else if (activeId === 'mchat') {
+        statusLabel = totalScore >= 2 ? 'มีความเสี่ยงภาวะออทิสติก' : 'ความเสี่ยงต่ำ';
+        statusColor = totalScore >= 2 ? 'var(--danger)' : 'var(--success)';
+        adviceText = totalScore >= 2
+          ? '<b>ข้อแนะนำ:</b> ผลคัดกรองพบสัญญาณความเสี่ยงภาวะออทิสติก ควรประสานงานส่งต่อเด็กเข้ารับการตรวจวินิจฉัยโดยแพทย์ผู้เชี่ยวชาญอย่างสม่ำเสมอ'
+          : '<b>ข้อแนะนำ:</b> พัฒนาการด้านการสื่อสารและปฏิสัมพันธ์ทางสังคมอยู่ในเกณฑ์ปกติ';
+      }
+
+      document.getElementById('resultCode').textContent = tool.code;
+      document.getElementById('resultTitle').textContent = `${tool.title} (${activeGroup.name})`;
+      document.getElementById('resultScore').textContent = totalScore;
+      document.getElementById('resultScoreLabel').textContent = 'คะแนนรวมการประเมิน';
+
+      const badge = document.getElementById('resultBadge');
+      badge.textContent = statusLabel;
+      badge.style.background = statusColor;
+
+      const bdContainer = document.getElementById('resultBreakdown');
+      bdContainer.innerHTML = '<div class="breakdown-title"><i class="fa-solid fa-list-check"></i> สรุปผลการประเมินแยกรายด้าน</div>';
+      Object.keys(domainMap).forEach(dKey => {
+        const dObj = domainMap[dKey];
+        const row = document.createElement('div');
+        row.className = 'breakdown-item';
+        row.innerHTML = `
+          <span>${dKey}</span>
+          <span class="breakdown-tag">${dObj.score} / ${dObj.total}</span>
+        `;
+        bdContainer.appendChild(row);
+      });
+      bdContainer.style.display = 'block';
+
+      document.getElementById('resultAdvice').innerHTML = adviceText;
+
+      lastReport = {
+        title: `${tool.title} (${activeGroup.name})`,
+        code: tool.code,
+        score: totalScore,
+        status: statusLabel,
+        date: new Date().toLocaleDateString('th-TH')
+      };
+
+      document.getElementById('view-quiz').style.display = 'none';
+      document.getElementById('view-result').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    async function sendResultToSheet() {
+      if (!lastReport) return;
+
+      const name = document.getElementById('senderName').value.trim();
+      const phone = document.getElementById('senderPhone').value.trim();
+
+      if (!name) { alert('กรุณากรอกชื่อ-นามสกุล'); return; }
+      if (!phone) { alert('กรุณากรอกเบอร์โทรศัพท์'); return; }
+
+      const btn = document.getElementById('sendEmailBtn');
+      const hint = document.getElementById('emailHint');
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> กำลังบันทึก...';
+      hint.textContent = 'กำลังส่งข้อมูลไปยัง Google Sheets...';
+
+      const payload = {
+        assessment_type: lastReport.code,
+        name: name,
+        phone: phone,
+        code: lastReport.code,
+        title: lastReport.title,
+        score: lastReport.score,
+        status: lastReport.status,
+        date: lastReport.date || new Date().toLocaleDateString('th-TH')
+      };
+
+      try {
+        await fetch(GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'text/plain;charset=utf-8'
+          },
+          body: JSON.stringify(payload)
+        });
+
+        hint.innerHTML = '<span style="color: var(--success);"><i class="fa-solid fa-circle-check"></i> บันทึกผลประเมินลง Google Sheets เรียบร้อยแล้ว!</span>';
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> บันทึกสำเร็จ';
+
+        setTimeout(() => {
+          btn.disabled = false;
+          btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> ส่งผลประเมิน';
+        }, 3000);
+      } catch (error) {
+        console.error(error);
+        hint.innerHTML = '<span style="color: var(--danger);"><i class="fa-solid fa-circle-exclamation"></i> เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง</span>';
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> ส่งผลประเมิน';
+      }
+    }
+
+    initApp();
+  </script>
 </body>
 </html>
