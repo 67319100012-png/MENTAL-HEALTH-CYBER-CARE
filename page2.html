@@ -584,41 +584,88 @@ function selectOpt(i, j, score){
 
 function updateProgress(){
   const total = currentAnswers.length;
-  const answered = currentAnswers.filter(v => v !== null).length;
-  const pct = Math.round((answered / total) * 100);
-  document.getElementById('progressFill').style.width = pct + '%';
-  document.getElementById('progressHint').textContent = `ตอบแล้ว ${answered} จาก ${total} ข้อ`;
-  document.getElementById('submitBtn').disabled = answered < total;
+  const filled = currentAnswers.filter(x => x !== null).length;
+  const pct = Math.round((filled / total) * 100);
+  document.getElementById('progressFill').style.width = `${pct}%`;
+  document.getElementById('progressHint').textContent = `ตอบแล้ว ${filled} จาก ${total} ข้อ`;
+  document.getElementById('submitBtn').disabled = filled < total;
 }
 
 function submitQuiz(){
   const a = ASSESSMENTS[currentId];
-  document.getElementById('dimBarsWrap').innerHTML = '';
-
   if(a.type === 'dichotomy'){
-    renderMbtiResult(a);
-  } else {
-    const score = currentAnswers.reduce((s,v)=>s+v, 0);
-    const band = a.bands.find(b => score >= b.min && score <= b.max) || a.bands[a.bands.length-1];
+    let counts = { E:0, I:0, S:0, N:0, T:0, F:0, J:0, P:0 };
+    mbtiPairs.forEach((p, i) => {
+      const val = currentAnswers[i];
+      if(p.dim === 'EI') val === 1 ? counts.E++ : counts.I++;
+      if(p.dim === 'SN') val === 1 ? counts.S++ : counts.N++;
+      if(p.dim === 'TF') val === 1 ? counts.T++ : counts.F++;
+      if(p.dim === 'JP') val === 1 ? counts.J++ : counts.P++;
+    });
 
-    document.getElementById('resultCode').textContent = a.code;
-    document.getElementById('resultTitle').textContent = a.full;
-    document.getElementById('resultScore').textContent = score;
-    document.getElementById('resultScore').style.color = band.color;
-    document.getElementById('resultScoreLabel').textContent = 'คะแนนรวม';
-    document.getElementById('resultBadgeWrap').innerHTML = `<span class="level-badge" style="background:${band.color}">${band.label}</span>`;
-    document.getElementById('resultAdvice').innerHTML = `<b>คำแนะนำ:</b> ${band.advice}`;
+    const type = (counts.E >= counts.I ? 'E' : 'I') +
+                 (counts.S >= counts.N ? 'S' : 'N') +
+                 (counts.T >= counts.F ? 'T' : 'F') +
+                 (counts.J >= counts.P ? 'J' : 'P');
 
-    const now = new Date();
     lastResult = {
       code: a.code,
+      title: a.title,
       full: a.full,
-      resultValue: score,
-      resultLabel: 'คะแนนรวม: ' + score,
+      resultValue: type,
+      levelLabel: MBTI_DESC[type] || 'บุคลิกภาพเฉพาะตัว',
+      resultLabel: 'ประเภทบุคลิกภาพของคุณ',
+      advice: `บุคลิกภาพแบบ <b>${type}</b>: ${MBTI_DESC[type]}`,
+      counts: counts
+    };
+  } else {
+    const totalScore = currentAnswers.reduce((sum, val) => sum + (val || 0), 0);
+    const band = a.bands.find(b => totalScore >= b.min && totalScore <= b.max) || a.bands[a.bands.length - 1];
+
+    lastResult = {
+      code: a.code,
+      title: a.title,
+      full: a.full,
+      resultValue: `${totalScore} คะแนน`,
       levelLabel: band.label,
-      dateStr: now.toLocaleDateString('th-TH', { year:'numeric', month:'long', day:'numeric' })
+      resultLabel: `ระดับ: ${band.label}`,
+      advice: band.advice,
+      color: band.color
     };
   }
+
+  renderResult();
+}
+
+function renderResult(){
+  document.getElementById('resultCode').innerHTML = `<i class="fa-solid fa-square-poll-vertical"></i> ${lastResult.code}`;
+  document.getElementById('resultTitle').textContent = `${lastResult.title} — ${lastResult.full}`;
+  document.getElementById('resultScore').textContent = lastResult.resultValue;
+  document.getElementById('resultScoreLabel').textContent = lastResult.resultLabel;
+  
+  const badgeWrap = document.getElementById('resultBadgeWrap');
+  if(lastResult.color){
+    badgeWrap.innerHTML = `<span class="level-badge" style="background:${lastResult.color}">${lastResult.levelLabel}</span>`;
+  } else {
+    badgeWrap.innerHTML = '';
+  }
+
+  const dimWrap = document.getElementById('dimBarsWrap');
+  if(lastResult.counts){
+    const c = lastResult.counts;
+    dimWrap.innerHTML = `
+      <div class="dim-bars">
+        <div class="dim-row"><span class="letter">E</span><div class="bar-track"><div class="bar-fill" style="width:${(c.E/3)*100}%"></div></div><span class="letter">I</span></div>
+        <div class="dim-row"><span class="letter">S</span><div class="bar-track"><div class="bar-fill" style="width:${(c.S/3)*100}%"></div></div><span class="letter">N</span></div>
+        <div class="dim-row"><span class="letter">T</span><div class="bar-track"><div class="bar-fill" style="width:${(c.T/3)*100}%"></div></div><span class="letter">F</span></div>
+        <div class="dim-row"><span class="letter">J</span><div class="bar-track"><div class="bar-fill" style="width:${(c.J/3)*100}%"></div></div><span class="letter">P</span></div>
+      </div>
+    `;
+  } else {
+    dimWrap.innerHTML = '';
+  }
+
+  document.getElementById('resultAdvice').innerHTML = lastResult.advice;
 
   document.getElementById('view-quiz').style.display = 'none';
   document.getElementById('view-result').style.display = 'block';
@@ -626,107 +673,57 @@ function submitQuiz(){
   window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
-function renderMbtiResult(a){
-  const dims = { EI:{a:'E',b:'I'}, SN:{a:'S',b:'N'}, TF:{a:'T',b:'F'}, JP:{a:'J',b:'P'} };
-  const tally = { EI:[0,0], SN:[0,0], TF:[0,0], JP:[0,0] };
-
-  a.pairs.forEach((p,i)=>{
-    const val = currentAnswers[i];
-    if(val === 1) tally[p.dim][0]++;
-    else tally[p.dim][1]++;
-  });
-
-  let typeCode = '';
-  let barsHtml = '';
-
-  Object.keys(dims).forEach(dimKey=>{
-    const [countA, countB] = tally[dimKey];
-    const total = countA + countB;
-    const letterA = dims[dimKey].a;
-    const letterB = dims[dimKey].b;
-    const winner = countA >= countB ? letterA : letterB;
-    typeCode += winner;
-
-    const pctA = Math.round((countA / total) * 100);
-    barsHtml += `
-      <div class="dim-row">
-        <span class="letter">${letterA}</span>
-        <div class="bar-track"><div class="bar-fill" style="width:${pctA}%"></div></div>
-        <span class="letter">${letterB}</span>
-      </div>`;
-  });
-
-  document.getElementById('resultCode').textContent = a.code;
-  document.getElementById('resultTitle').textContent = a.full;
-  document.getElementById('resultScore').textContent = typeCode;
-  document.getElementById('resultScore').style.color = 'var(--teal-dark)';
-  document.getElementById('resultScoreLabel').textContent = 'ประเภทบุคลิกภาพของคุณ';
-  document.getElementById('resultBadgeWrap').innerHTML = '';
-  document.getElementById('dimBarsWrap').innerHTML = `<div class="dim-bars">${barsHtml}</div>`;
-  document.getElementById('resultAdvice').innerHTML = `<b>${typeCode}:</b> ${MBTI_DESC[typeCode] || 'ไม่พบคำอธิบายประเภทนี้'}`;
-
-  const now = new Date();
-  lastResult = {
-    code: a.code,
-    full: a.full,
-    resultValue: typeCode,
-    resultLabel: 'ประเภทบุคลิกภาพ: ' + typeCode,
-    levelLabel: MBTI_DESC[typeCode] || '',
-    dateStr: now.toLocaleDateString('th-TH', { year:'numeric', month:'long', day:'numeric' })
-  };
-}
-
 function sendResultToGoogleSheet(){
-  if(!lastResult) return;
-
   const senderName = document.getElementById('senderName').value.trim();
   const senderPhone = document.getElementById('senderPhone').value.trim();
+  const sendBtn = document.getElementById('sendDataBtn');
+  const emailHint = document.getElementById('emailHint');
 
   if(!senderName || !senderPhone){
-    alert('กรุณากรอกชื่อ-นามสกุล และเบอร์โทรศัพท์ให้ครบถ้วนก่อนส่งผล');
+    alert('กรุณากรอกชื่อ-นามสกุล และเบอร์โทรศัพท์ให้ครบถ้วน');
     return;
   }
 
-  const btn = document.getElementById('sendDataBtn');
-  btn.disabled = true;
-  btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> กำลังบันทึก...';
+  sendBtn.disabled = true;
+  sendBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> กำลังส่ง...';
 
-  const data = new URLSearchParams();
-  data.append("name", senderName);
-  data.append("phone", senderPhone);
-  data.append("test", lastResult.code);
-  data.append("title", lastResult.full);
-  data.append("result", lastResult.resultValue);
-  data.append("resultLabel", lastResult.resultLabel);
-  data.append("level", lastResult.levelLabel || "");
-  data.append("date", lastResult.dateStr);
-  data.append("answers", currentAnswers.join(","));
+  const payload = {
+    full_name: senderName,
+    phone: senderPhone,
+    total_score: lastResult ? lastResult.resultValue : '',
+    result_text: lastResult ? lastResult.levelLabel : '',
+    notes: lastResult ? lastResult.advice.replace(/<\/?[^>]+(>|$)/g, "") : '',
+    assessment_type: lastResult ? `${lastResult.code} (${lastResult.title})` : ''
+  };
 
   fetch(GOOGLE_SHEET_URL, {
-    method: "POST",
-    mode: "no-cors",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
-    },
-    body: data.toString()
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify(payload)
   })
-  .then(()=>{
-    alert('บันทึกผลการประเมินเรียบร้อยแล้ว!');
-    document.getElementById('emailHint').textContent = "บันทึกผลสำเร็จลงระบบ Google Sheets เรียบร้อยแล้ว";
-    document.getElementById('emailHint').style.color = "var(--success)";
+  .then(res => res.json())
+  .then(data => {
+    sendBtn.disabled = false;
+    sendBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> ส่งผลประเมิน';
+    if(data.status === 'success'){
+      alert('บันทึกข้อมูลสำเร็จเรียบร้อยแล้ว!');
+      emailHint.textContent = '✅ บันทึกข้อมูลลงระบบเรียบร้อยแล้ว';
+      emailHint.style.color = 'var(--success)';
+    } else {
+      alert('เกิดข้อผิดพลาดจากระบบ: ' + data.message);
+    }
   })
-  .catch(error=>{
-    console.error("เกิดข้อผิดพลาดในการส่งข้อมูล", error);
-    alert('เกิดข้อผิดพลาดในการบันทึกข้อมูล กรุณาลองใหม่อีกครั้ง');
-  })
-  .finally(()=>{
-    btn.disabled = false;
-    btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> ส่งผลประเมิน';
+  .catch(err => {
+    console.error('Fetch error:', err);
+    sendBtn.disabled = false;
+    sendBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> ส่งผลประเมิน';
+    alert('ไม่สามารถเชื่อมต่อกับ Google Sheets ได้');
   });
 }
 
-initGrid();
-showGrid();
+window.addEventListener('DOMContentLoaded', () => {
+  initGrid();
+});
 </script>
 </body>
 </html>
