@@ -445,7 +445,9 @@
 
 <script>
 // 🔴 ใส่ Web App URL ของ Google Apps Script ที่ Deploy เรียบร้อยแล้วที่นี่
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzN1TelljIcLz93qZvCM6wdooz2P4COhrOP_TzlsJPouRwnQ3JZS_CwmHMzQVv3Mmmytw/exec';
+// (URL นี้เป็นของไฟล์แบบประเมินเด็กเดิม — ถ้าต้องการให้ข้อมูลทุกแบบประเมินของทั้งเว็บไซต์
+//  ไปรวมอยู่ใน Google Sheet เดียวกับแบบประเมินผู้ใหญ่ ให้เปลี่ยน URL นี้ให้ตรงกับไฟล์ screening.html)
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw7g_VStvNeloCl0EqWD-8LzkVpjjQD2hBqA-jv-3etg9nhlmPFB2YcrhpHdf2lyDQRFA/exec';
 
 const OPT_YN = [{label:'ผ่าน / ใช่', score:1}, {label:'ไม่ผ่าน / ไม่ใช่', score:0}];
 const OPT_SCALE4 = [
@@ -777,7 +779,10 @@ async function sendGmail() {
   btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> กำลังบันทึก...';
   hint.textContent = 'กำลังส่งข้อมูลไปยัง Google Sheets...';
 
+  // assessment_type = รหัสของแบบประเมิน เช่น DSPM, DENVER-II, SDQ, SNAP-IV, M-CHAT
+  // Apps Script (Code.gs เวอร์ชัน getSheetByName) จะใช้ค่านี้สร้าง/หาแท็บที่ตรงกันให้อัตโนมัติ
   const payload = {
+    assessment_type: lastReport.code,
     name: name,
     phone: phone,
     code: lastReport.code,
