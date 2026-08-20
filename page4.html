@@ -786,7 +786,10 @@
     }
 
 async function sendResultToSheet() {
-  if (!lastReport) return;
+  if (!lastReport) {
+    alert('ยังไม่มีผลประเมิน กรุณาทำแบบประเมินให้เสร็จก่อน');
+    return;
+  }
 
   const name = document.getElementById('senderName').value.trim();
   const phone = document.getElementById('senderPhone').value.trim();
@@ -805,24 +808,23 @@ async function sendResultToSheet() {
 
   btn.disabled = true;
   btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> กำลังบันทึก...';
-  hint.textContent = 'กำลังส่งข้อมูลไปยัง Google Sheets...';
+  hint.innerHTML = 'กำลังส่งข้อมูลไปยัง Google Sheets...';
 
   const payload = {
-    assessment_type: lastReport.code,
+    assessment_type: lastReport.code || '',
     name: name,
     phone: phone,
-    code: lastReport.code,
-    title: lastReport.title,
-    score: lastReport.score,
-    status: lastReport.status,
+    code: lastReport.code || '',
+    title: lastReport.title || '',
+    score: lastReport.score || '',
+    status: lastReport.status || '',
     date: lastReport.date || new Date().toLocaleDateString('th-TH')
   };
 
   try {
-    // วิธีที่เสถียรที่สุดสำหรับ Google Apps Script
-    const response = await fetch(GOOGLE_SCRIPT_URL, {
+    await fetch(GOOGLE_SCRIPT_URL, {
       method: 'POST',
-      mode: 'no-cors',                 // สำคัญ
+      mode: 'no-cors',
       cache: 'no-cache',
       headers: {
         'Content-Type': 'text/plain;charset=utf-8'
@@ -830,18 +832,18 @@ async function sendResultToSheet() {
       body: JSON.stringify(payload)
     });
 
-    // เพราะใช้ no-cors เราอ่าน response ไม่ได้ → ถือว่าสำเร็จถ้าไม่ error
+    // no-cors อ่าน response ไม่ได้ → ถือว่าสำเร็จถ้าไม่มี error
     hint.innerHTML = '<span style="color: var(--success);"><i class="fa-solid fa-circle-check"></i> บันทึกผลประเมินลง Google Sheets เรียบร้อยแล้ว!</span>';
     btn.innerHTML = '<i class="fa-solid fa-check"></i> บันทึกสำเร็จ';
 
-    // ล้างฟอร์มหลังส่งสำเร็จ (optional)
+    // ล้างฟอร์ม
     document.getElementById('senderName').value = '';
     document.getElementById('senderPhone').value = '';
 
     setTimeout(() => {
       btn.disabled = false;
       btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> ส่งผลประเมิน';
-    }, 3000);
+    }, 2500);
 
   } catch (error) {
     console.error('ส่งไม่สำเร็จ:', error);
