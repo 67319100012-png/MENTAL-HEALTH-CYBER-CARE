@@ -134,9 +134,7 @@
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   }
   header.hero p { font-size: 15.5px; color: var(--text-muted); max-width: 680px; margin: 0 auto; line-height: 1.65; }
-  .staff-global-alert {
-    max-width: 900px; margin: 18px auto 0; padding: 0 20px;
-  }
+  .staff-global-alert { max-width: 900px; margin: 18px auto 0; padding: 0 20px; }
   .staff-global-box {
     background: rgba(255, 251, 235, 0.9); border: 1.5px dashed var(--warning);
     border-radius: var(--radius-md); padding: 14px 20px; font-size: 13.5px;
@@ -409,7 +407,7 @@
         <input type="text" id="senderName" placeholder="ชื่อ-นามสกุล (ชื่อตัวเอง)">
         <input type="tel" id="senderPhone" placeholder="เบอร์โทรศัพท์">
         <button class="btn-secondary" id="sendEmailBtn" onclick="emailResult()" style="align-self: flex-start;">
-          <i class="fa-solid fa-paper-plane"></i> ส่งผลประเมิน
+          <i class="fa-solid fa-paper-plane"></i> บันทึกผลประเมิน
         </button>
       </div>
       <div class="hint" id="emailHint">บันทึกผลประเมินลง Google Sheets</div>
@@ -427,7 +425,7 @@
 </footer>
 
 <script>
-// 🔴 นำ URL ที่ได้จากการ Deploy Google Apps Script มาวางแทนที่ตรงนี้
+// URL สำหรับ Google Apps Script
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwvDvEpBLnMF3BV2gGBjuQuiEj5ex_t5K-FuLcnBYDOZas5xjW6eMlMQqD9TDef7HxPmg/exec';
 
 const scale4 = [
@@ -627,6 +625,14 @@ let currentId = null;
 let currentAnswers = [];
 let lastResult = null;
 
+function triggerAnimation(elementId) {
+  const el = document.getElementById(elementId);
+  if(!el) return;
+  el.classList.remove('view-container');
+  void el.offsetWidth;
+  el.classList.add('view-container');
+}
+
 function initGrid(){
   const grid = document.getElementById('view-grid');
   grid.innerHTML = '';
@@ -647,13 +653,6 @@ function initGrid(){
     `;
     grid.appendChild(card);
   });
-}
-
-function triggerAnimation(elementId) {
-  const el = document.getElementById(elementId);
-  el.classList.remove('view-container');
-  void el.offsetWidth;
-  el.classList.add('view-container');
 }
 
 function showGrid(){
@@ -726,28 +725,34 @@ function submitQuiz(){
   document.getElementById('resultCode').textContent = a.code;
   document.getElementById('resultTitle').textContent = a.full;
   document.getElementById('resultScore').textContent = score;
+  document.getElementById('resultScoreLabel').textContent = `คะแนนรวม (เต็ม ${a.questions.length * (a.options.length - 1)} คะแนน)`;
   document.getElementById('resultBadgeWrap').innerHTML = `<span class="level-badge" style="background:${band.color}">${band.label}</span>`;
   document.getElementById('resultAdvice').innerHTML = `<b>คำแนะนำทางคลินิก:</b> ${band.advice}`;
+  
   let forceCrisis = false;
   if(typeof a.selfHarmIndex === 'number' && currentAnswers[a.selfHarmIndex] > 0){
     forceCrisis = true;
   }
   document.getElementById('resultCrisis').style.display = forceCrisis ? 'block' : 'none';
+  
   const now = new Date();
   lastResult = {
     code: a.code,
     full: a.full,
     score: score,
     levelLabel: band.label,
+    hasCrisis: forceCrisis,
     dateStr: now.toLocaleDateString('th-TH', {year:'numeric', month:'long', day:'numeric'})
   };
+  
   document.getElementById('view-quiz').style.display = 'none';
   document.getElementById('view-result').style.display = 'block';
   triggerAnimation('view-result');
   window.scrollTo({top:0, behavior:'smooth'});
 }
-async function sendGmail() {
-  if (!lastReport) {
+
+async function emailResult() {
+  if (!lastResult) {
     alert('ไม่พบผลการประเมิน');
     return;
   }
@@ -767,17 +772,16 @@ async function sendGmail() {
   btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> กำลังบันทึก...';
   hint.textContent = 'กำลังบันทึกข้อมูลไปยัง Google Sheets...';
 
-  // ส่งข้อมูลด้วย URLSearchParams เข้า e.parameter ของ Apps Script โดยตรง
   const params = new URLSearchParams();
   params.append('fullName', name);
   params.append('phone', phone);
-  params.append('totalScore', lastReport.score);
-  params.append('resultText', lastReport.status);
-  params.append('notes', `ประเมินเมื่อ: ${lastReport.date}`);
-  params.append('assessmentType', `${lastReport.code} - ${lastReport.title}`);
+  params.append('totalScore', lastResult.score);
+  params.append('resultText', lastResult.levelLabel);
+  params.append('notes', `ประเมินเมื่อ: ${lastResult.dateStr} | ความเสี่ยงทำร้ายตัวเอง: ${lastResult.hasCrisis ? 'มีความเสี่ยง' : 'ไม่มี'}`);
+  params.append('assessmentType', `${lastResult.code} - ${lastResult.full}`);
 
   try {
-    await fetch(GOOGLE_SHEET_URL, {
+    await fetch(GOOGLE_SCRIPT_URL, {
       method: 'POST',
       mode: 'no-cors',
       headers: {
@@ -786,7 +790,7 @@ async function sendGmail() {
       body: params.toString()
     });
 
-    hint.innerHTML = '<span style="color: var(--success);"><i class="fa-solid fa-circle-check"></i> บันทึกข้อมูลลงชีต CRS เรียบร้อยแล้ว!</span>';
+    hint.innerHTML = '<span style="color: var(--success);"><i class="fa-solid fa-circle-check"></i> บันทึกข้อมูลลงชีตเรียบร้อยแล้ว!</span>';
     btn.innerHTML = '<i class="fa-solid fa-check"></i> บันทึกสำเร็จ';
     
     document.getElementById('senderName').value = '';
