@@ -340,7 +340,7 @@
 
 <script>
 // Web App URL จาก Apps Script
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzyZ8SvUgm1Eco7mvWc6mLzsQPnKxyl6yEnT9b7NO5qqSu-nqar4z2RvHbX4_XkpYKP/exec";
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxo6ApdHZHkBi8hx7C3ZQWLcwz6IydjV9YGf6za1b9ZTUGPWz5MRV0nu1P1BSpGx3eP/exec";
 
 const scale4 = [
   {label:'ไม่มีเลย', score:0},
@@ -679,7 +679,6 @@ function submitQuiz() {
   triggerAnimation('view-result');
   window.scrollTo({top: 0, behavior: 'smooth'});
 }
-
 async function emailResult() {
   const nameInput = document.getElementById('senderName');
   const phoneInput = document.getElementById('senderPhone');
@@ -704,7 +703,7 @@ async function emailResult() {
   }
 
   const payload = {
-    assessment_type: lastResult ? lastResult.title : "2Q",
+    assessment_type: lastResult ? lastResult.title : "",
     full_name: name,
     phone: phone,
     total_score: lastResult ? lastResult.score : "",
@@ -713,27 +712,32 @@ async function emailResult() {
   };
 
   try {
-    await fetch(WEB_APP_URL, {
+    // ใช้ text/plain เพื่อเลี่ยง CORS preflight ของ Apps Script Web App
+    const res = await fetch(WEB_APP_URL, {
       method: 'POST',
-      mode: 'no-cors',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify(payload)
     });
 
-    if (hint) {
-      hint.style.color = 'var(--success)';
-      hint.textContent = 'บันทึกข้อมูลเข้า Google Sheets เรียบร้อยแล้ว!';
+    const result = await res.json();
+
+    if (result.status === 'success') {
+      if (hint) {
+        hint.style.color = 'var(--success)';
+        hint.textContent = 'บันทึกข้อมูลเข้า Google Sheets เรียบร้อยแล้ว!';
+      }
+      alert('ส่งและบันทึกผลการประเมินเรียบร้อยแล้ว');
+    } else {
+      throw new Error(result.message || 'เกิดข้อผิดพลาดที่ไม่ทราบสาเหตุ');
     }
-    alert('ส่งและบันทึกผลการประเมินเรียบร้อยแล้ว');
+
   } catch (err) {
     console.error('Error submitting data:', err);
     if (hint) {
       hint.style.color = 'var(--danger)';
-      hint.textContent = 'เกิดข้อผิดพลาดในการบันทึกข้อมูล กรุณาลองใหม่อีกครั้ง';
+      hint.textContent = 'เกิดข้อผิดพลาดในการบันทึกข้อมูล: ' + err.message;
     }
-    alert('เกิดข้อผิดพลาดในการบันทึกข้อมูล');
+    alert('เกิดข้อผิดพลาดในการบันทึกข้อมูล กรุณาลองใหม่อีกครั้ง');
   } finally {
     if (btn) {
       btn.disabled = false;
@@ -741,8 +745,7 @@ async function emailResult() {
     }
   }
 }
-
-window.onload = function() {
+  window.onload = function() {
   initGrid();
 };
 </script>
