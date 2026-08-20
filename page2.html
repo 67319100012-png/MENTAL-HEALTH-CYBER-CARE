@@ -3,585 +3,344 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>แบบทดสอบบุคลิกภาพ</title>
-
+<title>แบบทดสอบบุคลิกภาพ - โครงการ อสม. ฮีลใจ</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
-
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
-:root{
-  --green:#7FA37A;
-  --green-dark:#527650;
-  --green-light:#EAF2E7;
-  --cream:#F8F6EF;
-  --white:#FFFFFF;
-  --text:#263526;
-  --text-soft:#687568;
-  --border:#D8E0D3;
-  --gold:#B98A2E;
-  --red:#C85A3F;
-  --shadow:0 8px 25px rgba(50,70,50,.12);
-}
-
-*{
-  box-sizing:border-box;
-}
-
-body{
-  margin:0;
-  min-height:100vh;
-  background:var(--cream);
-  font-family:'Sarabun',sans-serif;
-  color:var(--text);
-}
-
-h1,h2,h3{
-  font-family:'Kanit',sans-serif;
-}
-
-.hotline-bar{
-  background:var(--green-dark);
-  color:white;
-  text-align:center;
-  padding:9px 15px;
-  font-size:14px;
-}
-
-.hotline-bar b{
-  color:#FFE3A7;
-}
-
-header.top{
-  background:white;
-  padding:35px 20px 30px;
-  text-align:center;
-  border-bottom:1px solid var(--border);
-}
-
-.eyebrow{
-  color:var(--green-dark);
-  font-size:13px;
-  font-weight:700;
-  letter-spacing:1.8px;
-  margin-bottom:8px;
-}
-
-header.top h1{
-  margin:0 0 10px;
-  font-size:28px;
-}
-
-header.top p{
-  max-width:700px;
-  margin:auto;
-  color:var(--text-soft);
-  font-size:15px;
-  line-height:1.8;
-}
-
-main{
-  max-width:920px;
-  margin:auto;
-  padding:25px 20px 30px;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:18px;
-}
-
-@media(max-width:600px){
-  .grid{
-    grid-template-columns:1fr;
+  :root {
+    --brand-dark: #1E293B;
+    --teal-dark: #2563A8;
+    --teal-main: #4A90C4;
+    --teal-soft: #A9CDE8;
+    --teal-light: #E8F1FA;
+    --page-bg: #F4F8FC;
+    --cream: #FBFCFE;
+    --primary-grad: linear-gradient(135deg, #5BA3D0 0%, #2563A8 100%);
+    --primary-hover: linear-gradient(135deg, #4790BE 0%, #1D4F86 100%);
+    --text-main: #1E293B;
+    --text-muted: #64748B;
+    --border: #D6E4F0;
+    --border-light: rgba(214, 228, 240, 0.8);
+    --success: #4C9A7E;
+    --warning: #C9922E;
+    --danger: #C1654A;
+    --danger-soft: #FBE7E1;
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --radius-sm: 12px;
+    --shadow-sm: 0 4px 14px rgba(37, 99, 168, 0.10);
+    --shadow-md: 0 16px 32px -6px rgba(37, 99, 168, 0.14), 0 6px 12px -4px rgba(37, 99, 168, 0.07);
+    --shadow-hover: 0 22px 40px -10px rgba(37, 99, 168, 0.26);
   }
-}
-
-.card{
-  background:white;
-  border:1px solid var(--border);
-  border-radius:18px;
-  padding:25px 20px;
-  text-align:center;
-  box-shadow:var(--shadow);
-  cursor:pointer;
-  transition:.2s;
-}
-
-.card:hover{
-  transform:translateY(-3px);
-  border-color:var(--green);
-}
-
-.card .icon{
-  width:58px;
-  height:58px;
-  border-radius:50%;
-  background:var(--green);
-  color:white;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  margin:auto;
-  font-family:'Kanit',sans-serif;
-  font-weight:700;
-}
-
-.card .code{
-  font-family:'Kanit',sans-serif;
-  font-size:18px;
-  margin-top:12px;
-}
-
-.card .desc{
-  color:var(--text-soft);
-  font-size:13px;
-  margin:5px 0 12px;
-}
-
-.card .qcount{
-  display:inline-block;
-  padding:4px 12px;
-  border-radius:20px;
-  background:var(--green-light);
-  color:var(--green-dark);
-  font-size:12px;
-}
-
-.panel{
-  background:white;
-  border-radius:18px;
-  padding:28px;
-  box-shadow:var(--shadow);
-}
-
-.back-link{
-  background:none;
-  border:0;
-  color:var(--green-dark);
-  font-family:'Sarabun',sans-serif;
-  font-weight:700;
-  cursor:pointer;
-  padding:0;
-  margin-bottom:15px;
-}
-
-.quiz-title{
-  margin:0;
-  font-size:23px;
-}
-
-.quiz-sub{
-  color:var(--text-soft);
-  line-height:1.7;
-  font-size:14px;
-}
-
-.progress-wrap{
-  height:8px;
-  background:#E7ECE4;
-  border-radius:20px;
-  overflow:hidden;
-  margin:20px 0;
-}
-
-.progress-fill{
-  height:100%;
-  width:0%;
-  background:var(--green);
-  transition:.25s;
-}
-
-.question{
-  border-top:1px solid var(--border);
-  padding:20px 0;
-}
-
-.question:first-child{
-  border-top:0;
-}
-
-.qnum{
-  color:var(--green-dark);
-  font-family:'Kanit',sans-serif;
-  font-size:13px;
-  font-weight:600;
-  margin-bottom:6px;
-}
-
-.qtext{
-  font-size:15px;
-  line-height:1.7;
-  margin-bottom:12px;
-}
-
-.options{
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-}
-
-.opt{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  border:1px solid var(--border);
-  border-radius:12px;
-  padding:11px 14px;
-  cursor:pointer;
-  font-size:14px;
-  transition:.15s;
-}
-
-.opt:hover{
-  border-color:var(--green);
-  background:var(--green-light);
-}
-
-.opt.selected{
-  border-color:var(--green-dark);
-  background:var(--green-light);
-  font-weight:600;
-}
-
-.opt input{
-  width:16px;
-  height:16px;
-  accent-color:var(--green-dark);
-}
-
-.submit-row{
-  text-align:center;
-  margin-top:20px;
-}
-
-.btn-primary{
-  border:0;
-  background:var(--green-dark);
-  color:white;
-  padding:13px 30px;
-  border-radius:30px;
-  font-family:'Sarabun',sans-serif;
-  font-size:15px;
-  font-weight:700;
-  cursor:pointer;
-}
-
-.btn-primary:hover{
-  background:var(--green);
-}
-
-.btn-primary:disabled{
-  opacity:.45;
-  cursor:not-allowed;
-}
-
-.btn-ghost{
-  background:white;
-  border:1.5px solid var(--green-dark);
-  color:var(--green-dark);
-  padding:10px 25px;
-  border-radius:30px;
-  font-family:'Sarabun',sans-serif;
-  font-size:14px;
-  font-weight:600;
-  cursor:pointer;
-}
-
-.btn-ghost:hover{
-  background:var(--green-light);
-}
-
-.hint{
-  text-align:center;
-  color:var(--text-soft);
-  font-size:12.5px;
-  margin-top:10px;
-}
-
-.result-head{
-  text-align:center;
-}
-
-.score-big{
-  text-align:center;
-  font-family:'Kanit',sans-serif;
-  font-size:44px;
-  font-weight:700;
-  margin-top:8px;
-}
-
-.score-label{
-  text-align:center;
-  color:var(--text-soft);
-  font-size:13px;
-}
-
-.level-badge{
-  display:block;
-  width:max-content;
-  margin:18px auto;
-  color:white;
-  padding:7px 18px;
-  border-radius:30px;
-  font-family:'Kanit',sans-serif;
-}
-
-.advice-box{
-  background:#F1F4ED;
-  border-radius:14px;
-  padding:18px;
-  line-height:1.8;
-  font-size:14px;
-}
-
-.advice-box b{
-  color:var(--green-dark);
-}
-
-.dim-bars{
-  margin:20px 0;
-}
-
-.dim-row{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  margin-bottom:10px;
-}
-
-.letter{
-  width:18px;
-  text-align:center;
-  font-family:'Kanit',sans-serif;
-  font-weight:700;
-  color:var(--green-dark);
-}
-
-.bar-track{
-  flex:1;
-  height:10px;
-  background:#E7ECE4;
-  border-radius:10px;
-  overflow:hidden;
-}
-
-.bar-fill{
-  height:100%;
-  background:var(--green);
-}
-
-.email-box{
-  background:#F1F4ED;
-  border-radius:14px;
-  padding:16px;
-  margin-top:15px;
-}
-
-.email-box label{
-  display:block;
-  color:var(--green-dark);
-  font-weight:700;
-  font-size:13px;
-  margin-bottom:8px;
-}
-
-.email-row{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-}
-
-.email-row input{
-  flex:1;
-  min-width:220px;
-  padding:10px 14px;
-  border:1px solid var(--border);
-  border-radius:10px;
-  font-family:'Sarabun',sans-serif;
-}
-
-.result-actions{
-  display:flex;
-  justify-content:center;
-  gap:12px;
-  flex-wrap:wrap;
-  margin-top:20px;
-}
-
-footer.note{
-  max-width:900px;
-  margin:auto;
-  padding:0 20px 35px;
-  text-align:center;
-  color:var(--text-soft);
-  font-size:12px;
-  line-height:1.7;
-}
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    margin: 0;
+    background: var(--page-bg);
+    font-family: 'Sarabun', sans-serif;
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    position: relative;
+  }
+  .bg-blob { position: fixed; border-radius: 50%; filter: blur(90px); z-index: -1; opacity: 0.55; animation: floatBlob 18s infinite alternate ease-in-out; }
+  .blob-1 { width: 420px; height: 420px; background: #CFE2F5; top: -110px; left: -110px; }
+  .blob-2 { width: 460px; height: 460px; background: #E3EDF7; bottom: -160px; right: -110px; animation-delay: -6s; }
+  .blob-3 { width: 320px; height: 320px; background: #D8E9F7; top: 40%; left: 50%; transform: translate(-50%, -50%); animation-delay: -12s; }
+  @keyframes floatBlob {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(60px, 40px) scale(1.15); }
+    100% { transform: translate(-40px, 80px) scale(0.9); }
+  }
+  h1, h2, h3, .font-title { font-family: 'Kanit', sans-serif; }
+  header.nav-header {
+    background: rgba(251, 252, 254, 0.9);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border-light);
+    padding: 14px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: var(--shadow-sm);
+  }
+  header.nav-header .logo {
+    display: flex; align-items: center; gap: 12px;
+    font-family: 'Kanit', sans-serif; font-weight: 700; font-size: 1.05rem;
+    color: var(--teal-dark); text-decoration: none;
+  }
+  header.nav-header .logo .badge {
+    width: 42px; height: 42px; border-radius: 50%;
+    background: var(--primary-grad); color: #fff;
+    display: flex; align-items: center; justify-content: center; font-size: 1.15rem;
+    box-shadow: 0 4px 12px rgba(37,99,168,0.35);
+    animation: pulseIcon 3s infinite ease-in-out;
+  }
+  @keyframes pulseIcon {
+    0%, 100% { transform: scale(1); box-shadow: 0 4px 12px rgba(37,99,168,0.35); }
+    50% { transform: scale(1.08); box-shadow: 0 8px 20px rgba(37,99,168,0.55); }
+  }
+  header.nav-header .logo small { display: block; font-family: 'Sarabun', sans-serif; font-weight: 400; font-size: 0.68rem; color: var(--text-muted); }
+  nav { display: flex; align-items: center; gap: 22px; }
+  nav a.nav-cta {
+    background: var(--primary-grad); color: #fff; padding: 9px 20px; border-radius: 30px; font-weight: 600;
+    box-shadow: 0 4px 14px rgba(37,99,168,0.3); text-decoration: none; font-size: 0.9rem;
+    display: inline-flex; align-items: center; gap: 8px;
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  nav a.nav-cta:hover {
+    background: var(--primary-hover); transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(37,99,168,0.4);
+  }
+  @media (max-width: 768px) {
+    header.nav-header { flex-direction: row; gap: 12px; padding: 12px 5%; }
+  }
+  header.hero { max-width: 900px; margin: 0 auto; padding: 34px 24px 8px; text-align: center; animation: fadeInUp 0.8s ease-out; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 18px; background: rgba(232, 241, 250, 0.9); color: var(--teal-dark);
+    border-radius: 20px; font-size: 12px; font-weight: 700; letter-spacing: 0.5px;
+    margin-bottom: 14px; border: 1px solid var(--teal-soft);
+  }
+  header.hero h1 {
+    font-size: clamp(26px, 4vw, 36px); margin: 0 0 12px; line-height: 1.25;
+    background: linear-gradient(135deg, #1E293B 0%, #2563A8 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  header.hero p { font-size: 15px; color: var(--text-muted); max-width: 620px; margin: 0 auto; line-height: 1.7; }
+  .feature-strip { max-width: 900px; margin: 24px auto 6px; padding: 0 20px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  @media (max-width: 640px) { .feature-strip { grid-template-columns: 1fr; } }
+  .feature-item { background: rgba(255,255,255,0.75); border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 18px 16px; text-align: center; box-shadow: var(--shadow-sm); }
+  .feature-item i { font-size: 22px; color: var(--teal-dark); margin-bottom: 8px; display: block; }
+  .feature-item .ftitle { font-family: 'Kanit', sans-serif; font-weight: 600; font-size: 14.5px; margin-bottom: 4px; }
+  .feature-item .fdesc { font-size: 12.5px; color: var(--text-muted); line-height: 1.5; }
+  main { max-width: 900px; width: 100%; margin: 0 auto; padding: 10px 20px 50px; flex: 1; }
+  .view-container { animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px);} to { opacity: 1; transform: translateY(0);} }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; margin-top: 10px; }
+  .card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    border-radius: var(--radius-lg);
+    padding: 26px;
+    border: 1.5px solid var(--border-light);
+    box-shadow: var(--shadow-md);
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: flex; flex-direction: column; position: relative; overflow: hidden;
+  }
+  .card::after { content:''; position:absolute; inset:0; border-radius: var(--radius-lg); border: 2px solid transparent; transition: border-color 0.3s ease; }
+  .card:hover { transform: translateY(-8px) scale(1.02); box-shadow: var(--shadow-hover); background: rgba(255,255,255,0.97); }
+  .card:hover::after { border-color: var(--teal-main); }
+  .card .icon {
+    width: 56px; height: 56px; border-radius: var(--radius-md);
+    background: var(--primary-grad); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Kanit', sans-serif; font-weight: 700; font-size: 15px;
+    margin-bottom: 18px; box-shadow: 0 8px 16px rgba(37,99,168,0.3);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .card:hover .icon { transform: scale(1.12) rotate(6deg); }
+  .card .code { font-size: 19px; font-weight: 700; margin-bottom: 6px; color: var(--brand-dark); font-family:'Kanit',sans-serif; }
+  .card .desc { font-size: 14px; color: var(--text-muted); line-height: 1.55; margin-bottom: 22px; flex: 1; }
+  .card .card-footer { display: flex; align-items: center; justify-content: space-between; }
+  .card .qcount { font-size: 12.5px; font-weight: 600; color: var(--teal-dark); background: var(--teal-light); border-radius: 20px; padding: 5px 14px; }
+  .card .btn-start-text { font-size: 13.5px; color: var(--teal-dark); font-weight: 700; display: flex; align-items: center; gap: 4px; transition: gap 0.2s ease; }
+  .card:hover .btn-start-text { gap: 8px; color: var(--teal-main); }
+  .panel { background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(16px); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); border: 1.5px solid var(--border-light); padding: 36px; margin-top: 18px; }
+  @media (max-width: 600px) { .panel { padding: 22px 18px; } }
+  .btn-ghost {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.9); border: 1.5px solid var(--teal-soft); color: var(--teal-dark);
+    padding: 9px 20px; border-radius: 30px;
+    font-family: 'Sarabun', sans-serif; font-size: 13.5px; font-weight: 600; cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .btn-ghost:hover { background: var(--teal-light); border-color: var(--teal-dark); transform: translateY(-2px); }
+  .btn-ghost:disabled { opacity: 0.6; cursor: not-allowed; }
+  .quiz-title { font-size: 23px; margin: 0 0 6px; color: var(--brand-dark); }
+  .quiz-sub { font-size: 14px; color: var(--text-muted); margin: 0 0 22px; line-height: 1.6; }
+  .progress-wrap { background: var(--teal-light); border-radius: 12px; height: 12px; overflow: hidden; margin-bottom: 28px; position: relative; }
+  .progress-fill { background: var(--primary-grad); height: 100%; width: 0%; transition: width 0.4s cubic-bezier(0.4,0,0.2,1); position: relative; border-radius: 12px; }
+  .progress-fill::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+    animation: shimmer 2s infinite;
+  }
+  @keyframes shimmer { 0% { transform: translateX(-100%);} 100% { transform: translateX(100%);} }
+  .question { padding: 20px 0; border-bottom: 1px dashed var(--border); animation: fadeInUp 0.4s ease; }
+  .question:last-of-type { border-bottom: none; }
+  .question .qnum { font-size: 13px; font-weight: 700; color: var(--teal-dark); margin-bottom: 8px; }
+  .question .qtext { font-size: 16px; font-weight: 600; line-height: 1.55; margin-bottom: 14px; color: var(--brand-dark); }
+  .options { display: flex; flex-direction: column; gap: 10px; }
+  .opt {
+    display: flex; align-items: center; gap: 12px;
+    border: 1.5px solid var(--border-light); border-radius: var(--radius-md);
+    padding: 13px 16px; cursor: pointer; font-size: 14.5px;
+    background: rgba(255, 255, 255, 0.8);
+    transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+    user-select: none; min-height: 48px; position: relative;
+  }
+  .opt:hover { border-color: var(--teal-main); background: var(--teal-light); transform: translateX(4px); }
+  .opt input { accent-color: var(--teal-dark); width: 18px; height: 18px; flex-shrink: 0; }
+  .opt.selected {
+    border-color: var(--teal-dark);
+    background: linear-gradient(90deg, var(--teal-light) 0%, #D9EAF8 100%);
+    font-weight: 600; color: var(--teal-dark);
+    transform: translateX(6px);
+    box-shadow: 0 4px 14px rgba(37,99,168,0.16);
+  }
+  .submit-row { margin-top: 28px; text-align: center; }
+  .btn-primary {
+    background: var(--primary-grad); color: #fff; border: none;
+    padding: 14px 36px; border-radius: 30px;
+    font-family: 'Sarabun', sans-serif; font-size: 15px; font-weight: 700; cursor: pointer;
+    box-shadow: 0 6px 20px rgba(37,99,168,0.32);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    width: 100%; max-width: 320px;
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  }
+  .btn-primary:hover:not(:disabled) { background: var(--primary-hover); transform: translateY(-3px) scale(1.02); box-shadow: 0 10px 25px rgba(37,99,168,0.42); }
+  .btn-primary:disabled { opacity: 0.45; cursor: not-allowed; transform: none; box-shadow: none; }
+  .hint { text-align: center; font-size: 13px; color: var(--text-muted); margin-top: 12px; }
+  .result-head { text-align: center; margin-bottom: 14px; }
+  .score-big {
+    font-size: 52px; font-weight: 700; text-align: center; line-height: 1; margin: 10px 0 6px;
+    background: var(--primary-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    animation: popScore 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    font-family: 'Kanit', sans-serif;
+  }
+  @keyframes popScore { 0% { transform: scale(0.5); opacity: 0;} 100% { transform: scale(1); opacity: 1;} }
+  .score-label { text-align: center; font-size: 14px; color: var(--text-muted); margin-bottom: 20px; }
+  .level-badge { display: inline-block; padding: 8px 24px; border-radius: 30px; font-size: 15px; font-weight: 700; color: #fff; box-shadow: var(--shadow-sm); animation: zoomIn 0.5s ease; font-family: 'Kanit', sans-serif; }
+  @keyframes zoomIn { from { transform: scale(0.8); opacity: 0;} to { transform: scale(1); opacity: 1;} }
+  .advice-box {
+    background: rgba(232, 241, 250, 0.7);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 22px; font-size: 15px; line-height: 1.75; margin: 22px 0;
+    box-shadow: inset 0 2px 6px rgba(37,99,168,0.05);
+  }
+  .advice-box b { color: var(--teal-dark); }
+  .dim-bars { margin: 20px 0; background: rgba(232, 241, 250, 0.5); padding: 20px; border-radius: var(--radius-md); border: 1.5px solid var(--border); }
+  .dim-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+  .dim-row:last-child { margin-bottom: 0; }
+  .letter { width: 24px; text-align: center; font-family: 'Kanit', sans-serif; font-weight: 700; color: var(--teal-dark); font-size: 16px; }
+  .bar-track { flex: 1; height: 12px; background: var(--teal-light); border-radius: 10px; overflow: hidden; position: relative; }
+  .bar-fill { height: 100%; background: var(--primary-grad); border-radius: 10px; transition: width 0.5s ease; }
+  .email-box { background: rgba(251,252,254,0.9); border: 1.5px solid var(--border-light); border-radius: var(--radius-md); padding: 22px; margin-top: 8px; }
+  .email-box label { display: block; font-size: 14px; font-weight: 700; margin-bottom: 12px; color: var(--brand-dark); }
+  .email-row { display: flex; gap: 12px; flex-wrap: wrap; flex-direction: column; }
+  .email-row input {
+    flex: 1; min-width: 220px; padding: 13px 16px;
+    border-radius: var(--radius-sm); border: 1.5px solid var(--border);
+    font-family: inherit; font-size: 14.5px; outline: none; transition: all 0.25s ease;
+  }
+  .email-row input:focus { border-color: var(--teal-dark); box-shadow: 0 0 0 4px rgba(37,99,168,0.18); background: #fff; }
+  .result-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 28px; }
+  footer.note { max-width: 900px; margin: 24px auto 30px; padding: 0 20px; text-align: center; font-size: 12.5px; color: var(--text-muted); line-height: 1.7; }
 </style>
 </head>
-
 <body>
+<div class="bg-blob blob-1"></div>
+<div class="bg-blob blob-2"></div>
+<div class="bg-blob blob-3"></div>
 
-<div class="hotline-bar">
-  สายด่วนสุขภาพจิต <b>1323</b> ให้บริการฟรีตลอด 24 ชั่วโมง
-</div>
-
-<header class="top">
-
-  <div class="eyebrow">
-    MENTAL HEALTH CYBER-CARE
-  </div>
-
-  <h1>แบบทดสอบบุคลิกภาพ (Personality Tests)</h1>
-
-  <p>
-    เลือกแบบทดสอบที่ต้องการทำ เพื่อสำรวจบุคลิกภาพ ความเห็นคุณค่าในตนเอง
-    ความฉลาดทางอารมณ์ และความสามารถในการปรับตัว
-    ผลลัพธ์เป็นการสำรวจเบื้องต้นเพื่อความเข้าใจตนเอง
-    ไม่ใช่เครื่องมือวินิจฉัยทางจิตวิทยา
-  </p>
-
+<header class="nav-header">
+  <a href="index.html" class="logo">
+    <span class="badge"><i class="fa-solid fa-brain"></i></span>
+    <span>MENTAL HEALTH CYBER-CARE<small>โครงการ อสม. ฮีลใจ</small></span>
+  </a>
+  <nav>
+    <a href="assessment.html" class="nav-cta"><i class="fa-solid fa-arrow-left"></i> ย้อนกลับหน้าหลัก</a>
+  </nav>
 </header>
 
+<header class="hero" id="heroHeader">
+  <div><span class="hero-badge"><i class="fa-solid fa-user-astronaut"></i> PERSONALITY TESTS</span></div>
+  <h1>แบบทดสอบบุคลิกภาพ (Personality Tests)</h1>
+  <p>เลือกแบบทดสอบเพื่อสำรวจบุคลิกภาพ ความเห็นคุณค่าในตนเอง ความฉลาดทางอารมณ์ และความสามารถในการปรับตัว</p>
+</header>
+
+<div class="feature-strip" id="featureStrip">
+  <div class="feature-item">
+    <i class="fa-solid fa-compass"></i>
+    <div class="ftitle">สำรวจตนเอง</div>
+    <div class="fdesc">เข้าใจจุดแข็ง บุคลิกภาพ และมิติทางอารมณ์ของคุณ</div>
+  </div>
+  <div class="feature-item">
+    <i class="fa-solid fa-bolt"></i>
+    <div class="ftitle">ประมวลผลทันที</div>
+    <div class="fdesc">วิเคราะห์คะแนนพร้อมแสดงกราฟสรุปมิติบุคลิกภาพ</div>
+  </div>
+  <div class="feature-item">
+    <i class="fa-solid fa-phone-volume"></i>
+    <div class="ftitle">ปรึกษาผู้เชี่ยวชาญ</div>
+    <div class="fdesc">หากต้องการคำแนะนำเพิ่มเติม สายด่วน 1323 พร้อมดูแล 24 ชม.</div>
+  </div>
+</div>
+
 <main>
+  <section id="view-grid" class="grid view-container"></section>
 
-<section id="view-grid" class="grid"></section>
+  <section id="view-quiz" class="panel view-container" style="display:none;">
+    <button class="btn-ghost" onclick="showGrid()" style="margin-bottom:18px;"><i class="fa-solid fa-grip"></i> เลือกแบบทดสอบอื่นในหมวดนี้</button>
+    <h2 class="quiz-title" id="quizTitle"></h2>
+    <p class="quiz-sub" id="quizSub"></p>
+    <div class="progress-wrap"><div class="progress-fill" id="progressFill"></div></div>
+    <div id="questionList"></div>
+    <div class="submit-row">
+      <button class="btn-primary" id="submitBtn" disabled onclick="submitQuiz()"><i class="fa-solid fa-paper-plane"></i> ดูผลการประเมิน</button>
+      <div class="hint" id="progressHint"></div>
+    </div>
+  </section>
 
-<section id="view-quiz" class="panel" style="display:none;">
+  <section id="view-result" class="panel view-container" style="display:none;">
+    <button class="btn-ghost" onclick="showGrid()" style="margin-bottom:18px;"><i class="fa-solid fa-grip"></i> เลือกแบบทดสอบอื่นในหมวดนี้</button>
+    <div class="result-head">
+      <div class="hero-badge" id="resultCode"></div>
+      <h2 class="quiz-title" id="resultTitle" style="margin-top:6px;"></h2>
+    </div>
+    <div class="score-big" id="resultScore"></div>
+    <div class="score-label" id="resultScoreLabel"></div>
+    <div id="resultBadgeWrap" style="text-align:center;"></div>
+    <div id="dimBarsWrap"></div>
+    <div class="advice-box" id="resultAdvice"></div>
 
-  <button class="back-link" onclick="showGrid()">
-    ← ย้อนกลับ
-  </button>
-
-  <h2 class="quiz-title" id="quizTitle"></h2>
-
-  <p class="quiz-sub" id="quizSub"></p>
-
-  <div class="progress-wrap">
-    <div class="progress-fill" id="progressFill"></div>
-  </div>
-
-  <div id="questionList"></div>
-
-  <div class="submit-row">
-
-    <button
-      class="btn-primary"
-      id="submitBtn"
-      disabled
-      onclick="submitQuiz()">
-      ดูผลการประเมิน
-    </button>
-
-    <div class="hint" id="progressHint"></div>
-
-  </div>
-
-</section>
-
-<section id="view-result" class="panel" style="display:none;">
-
-  <button class="back-link" onclick="showGrid()">
-    ← ย้อนกลับ
-  </button>
-
-  <div class="result-head">
-
-    <div
-      class="eyebrow"
-      id="resultCode">
+    <div class="email-box">
+      <label><i class="fa-solid fa-user-pen"></i> บันทึกชื่อและเบอร์โทรเพื่อส่งผลประเมิน</label>
+      <div class="email-row">
+        <input type="text" id="senderName" placeholder="ชื่อ-นามสกุล (ชื่อตัวเอง)">
+        <input type="tel" id="senderPhone" placeholder="เบอร์โทรศัพท์">
+        <button class="btn-ghost" id="sendDataBtn" onclick="sendResultToGoogleSheet()" style="align-self: flex-start;">
+          <i class="fa-solid fa-paper-plane"></i> ส่งผลประเมิน
+        </button>
+      </div>
+      <div class="hint" id="emailHint">ระบบจะบันทึกผลประเมินพร้อมชื่อและเบอร์โทรลง Google Sheets ของหน่วยงาน</div>
     </div>
 
-    <h2
-      class="quiz-title"
-      id="resultTitle">
-    </h2>
-
-  </div>
-
-  <div
-    class="score-big"
-    id="resultScore">
-  </div>
-
-  <div
-    class="score-label"
-    id="resultScoreLabel">
-  </div>
-
-  <div id="resultBadgeWrap"></div>
-
-  <div id="dimBarsWrap"></div>
-
-  <div
-    class="advice-box"
-    id="resultAdvice">
-  </div>
-
-  <div class="email-box">
-
-    <label for="emailTo">
-      ส่งผลไปที่อีเมล
-    </label>
-
-    <div class="email-row">
-
-      <input
-        type="email"
-        id="emailTo"
-        value="67319100012@Aitc.ac.th">
-
-      <button
-        class="btn-ghost"
-        onclick="emailResult()">
-        ✉ ส่งผลทางอีเมล
-      </button>
-
+    <div class="result-actions">
+      <button class="btn-ghost" onclick="openAssessment(currentId)"><i class="fa-solid fa-rotate-left"></i> ทำแบบทดสอบนี้อีกครั้ง</button>
+      <button class="btn-primary" onclick="showGrid()" style="width:auto;padding:12px 26px;"><i class="fa-solid fa-grip"></i> เลือกแบบทดสอบอื่นในหมวดนี้</button>
+      <a href="assessment.html" class="btn-ghost" style="text-decoration:none;"><i class="fa-solid fa-house"></i> ไปหน้าเลือกประเภทแบบประเมินหลัก</a>
     </div>
-
-    <div class="hint">
-      จะเปิดหน้าเขียนอีเมลของ Gmail ในแท็บใหม่
-      พร้อมกรอกผลให้อัตโนมัติ ท่านเพียงกดส่ง
-      (ต้องเข้าสู่ระบบ Gmail ไว้ก่อน)
-    </div>
-
-  </div>
-
-  <div class="result-actions">
-
-    <button
-      class="btn-ghost"
-      onclick="openAssessment(currentId)">
-      ทำแบบทดสอบนี้อีกครั้ง
-    </button>
-
-    <button
-      class="btn-primary"
-      onclick="showGrid()">
-      เลือกแบบทดสอบอื่น
-    </button>
-
-  </div>
-
-</section>
-
+  </section>
 </main>
 
 <footer class="note">
-
-  แบบทดสอบนี้เป็นเครื่องมือสำรวจตนเองเบื้องต้น
-  เพื่อความเข้าใจบุคลิกภาพของตนเองเท่านั้น
-  ไม่ใช่แบบทดสอบทางจิตวิทยาที่ได้มาตรฐานทางคลินิกอย่างสมบูรณ์
-  และไม่สามารถใช้แทนการประเมินโดยนักจิตวิทยาได้
-  หากต้องการทราบผลที่แม่นยำยิ่งขึ้น โปรดปรึกษาผู้เชี่ยวชาญ
-
+  <i class="fa-solid fa-circle-info"></i> แบบทดสอบนี้เป็นเครื่องมือสำรวจตนเองเบื้องต้น เพื่อความเข้าใจบุคลิกภาพของตนเองเท่านั้น ไม่ใช่แบบทดสอบทางจิตวิทยาที่ได้มาตรฐานทางคลินิกอย่างสมบูรณ์ และไม่สามารถใช้แทนการประเมินโดยนักจิตวิทยาได้
 </footer>
 
-
 <script>
-const GOOGLE_SHEET_URL ="https://script.google.com/macros/s/AKfycbwxHLr0AqaU8qgC6JxV0xkZ_Dx0m549GaQLGwUyAbGnrrtYlAgFo-QzV8YDUvV4Z-GpKw/exec";
+// Google Sheet Apps Script URL
+const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbwxHLr0AqaU8qgC6JxV0xkZ_Dx0m549GaQLGwUyAbGnrrtYlAgFo-QzV8YDUvV4Z-GpKw/exec";
+
 const scale4 = [
   {label:'ไม่เคยเลย', score:0},
   {label:'เป็นบางครั้ง', score:1},
@@ -589,107 +348,34 @@ const scale4 = [
   {label:'เป็นประจำ', score:3}
 ];
 
-
 const seAgree4 = (reverse)=> reverse ? [
-
   {label:'เห็นด้วยอย่างยิ่ง', score:0},
   {label:'เห็นด้วย', score:1},
   {label:'ไม่เห็นด้วย', score:2},
   {label:'ไม่เห็นด้วยอย่างยิ่ง', score:3}
-
 ] : [
-
   {label:'เห็นด้วยอย่างยิ่ง', score:3},
   {label:'เห็นด้วย', score:2},
   {label:'ไม่เห็นด้วย', score:1},
   {label:'ไม่เห็นด้วยอย่างยิ่ง', score:0}
-
 ];
-
-
-/* =========================================================
-   MBTI
-   ========================================================= */
 
 const mbtiPairs = [
-
-  {
-    dim:'EI',
-    a:'เมื่ออยู่ในงานสังสรรค์ ฉันมักพูดคุยกับคนหลายคนและรู้สึกมีพลังงานเพิ่มขึ้น',
-    b:'ฉันมักอยู่กับกลุ่มเล็ก ๆ หรือคนสนิท และรู้สึกเหนื่อยง่ายเมื่ออยู่ในที่คนเยอะ'
-  },
-
-  {
-    dim:'EI',
-    a:'เวลาคิดแก้ปัญหา ฉันมักพูดความคิดออกมาระหว่างที่คิด',
-    b:'เวลาคิดแก้ปัญหา ฉันมักคิดในใจให้เรียบร้อยก่อนจึงค่อยพูด'
-  },
-
-  {
-    dim:'EI',
-    a:'หลังทำกิจกรรมร่วมกับคนหมู่มาก ฉันรู้สึกกระปรี้กระเปร่าอยากทำต่อ',
-    b:'หลังทำกิจกรรมร่วมกับคนหมู่มาก ฉันอยากหาเวลาอยู่คนเดียวเพื่อพักผ่อน'
-  },
-
-  {
-    dim:'SN',
-    a:'ฉันให้ความสำคัญกับรายละเอียดและข้อเท็จจริงที่จับต้องได้',
-    b:'ฉันให้ความสำคัญกับภาพรวมและความเป็นไปได้ในอนาคต'
-  },
-
-  {
-    dim:'SN',
-    a:'เวลาเรียนรู้สิ่งใหม่ ฉันชอบขั้นตอนที่ชัดเจนเป็นลำดับ',
-    b:'เวลาเรียนรู้สิ่งใหม่ ฉันชอบแนวคิดและทฤษฎีที่เชื่อมโยงกว้าง ๆ'
-  },
-
-  {
-    dim:'SN',
-    a:'ฉันมักเชื่อในสิ่งที่พิสูจน์ได้จากประสบการณ์ตรง',
-    b:'ฉันมักเชื่อในสัญชาตญาณและจินตนาการของตัวเอง'
-  },
-
-  {
-    dim:'TF',
-    a:'เวลาตัดสินใจ ฉันให้น้ำหนักกับเหตุผลและความถูกต้องเป็นหลัก',
-    b:'เวลาตัดสินใจ ฉันให้น้ำหนักกับความรู้สึกของคนที่เกี่ยวข้องเป็นหลัก'
-  },
-
-  {
-    dim:'TF',
-    a:'เมื่อเพื่อนมาปรึกษาปัญหา ฉันมักช่วยวิเคราะห์หาทางแก้ทันที',
-    b:'เมื่อเพื่อนมาปรึกษาปัญหา ฉันมักรับฟังและให้กำลังใจก่อน'
-  },
-
-  {
-    dim:'TF',
-    a:'ฉันมองว่าตัวเองเป็นคนตรงไปตรงมา ยึดหลักการเป็นสำคัญ',
-    b:'ฉันมองว่าตัวเองเป็นคนเห็นอกเห็นใจ ยึดความรู้สึกของคนเป็นสำคัญ'
-  },
-
-  {
-    dim:'JP',
-    a:'ฉันชอบวางแผนล่วงหน้าและทำตามกำหนดการที่ตั้งไว้',
-    b:'ฉันชอบความยืดหยุ่นและปรับเปลี่ยนไปตามสถานการณ์'
-  },
-
-  {
-    dim:'JP',
-    a:'งานที่ทำ ฉันมักทำให้เสร็จก่อนกำหนดเสมอ',
-    b:'งานที่ทำ ฉันมักทำได้ดีที่สุดภายใต้ความกดดันช่วงใกล้เดดไลน์'
-  },
-
-  {
-    dim:'JP',
-    a:'ฉันรู้สึกสบายใจเมื่อทุกอย่างเป็นระเบียบและตัดสินใจแล้ว',
-    b:'ฉันรู้สึกสบายใจเมื่อยังเปิดโอกาสเลือกได้หลายทาง'
-  }
-
+  { dim:'EI', a:'เมื่ออยู่ในงานสังสรรค์ ฉันมักพูดคุยกับคนหลายคนและรู้สึกมีพลังงานเพิ่มขึ้น', b:'ฉันมักอยู่กับกลุ่มเล็ก ๆ หรือคนสนิท และรู้สึกเหนื่อยง่ายเมื่ออยู่ในที่คนเยอะ' },
+  { dim:'EI', a:'เวลาคิดแก้ปัญหา ฉันมักพูดความคิดออกมาระหว่างที่คิด', b:'เวลาคิดแก้ปัญหา ฉันมักคิดในใจให้เรียบร้อยก่อนจึงค่อยพูด' },
+  { dim:'EI', a:'หลังทำกิจกรรมร่วมกับคนหมู่มาก ฉันรู้สึกกระปรี้กระเปร่าอยากทำต่อ', b:'หลังทำกิจกรรมร่วมกับคนหมู่มาก ฉันอยากหาเวลาอยู่คนเดียวเพื่อพักผ่อน' },
+  { dim:'SN', a:'ฉันให้ความสำคัญกับรายละเอียดและข้อเท็จจริงที่จับต้องได้', b:'ฉันให้ความสำคัญกับภาพรวมและความเป็นไปได้ในอนาคต' },
+  { dim:'SN', a:'เวลาเรียนรู้สิ่งใหม่ ฉันชอบขั้นตอนที่ชัดเจนเป็นลำดับ', b:'เวลาเรียนรู้สิ่งใหม่ ฉันชอบแนวคิดและทฤษฎีที่เชื่อมโยงกว้าง ๆ' },
+  { dim:'SN', a:'ฉันมักเชื่อในสิ่งที่พิสูจน์ได้จากประสบการณ์ตรง', b:'ฉันมักเชื่อในสัญชาตญาณและจินตนาการของตัวเอง' },
+  { dim:'TF', a:'เวลาตัดสินใจ ฉันให้น้ำหนักกับเหตุผลและความถูกต้องเป็นหลัก', b:'เวลาตัดสินใจ ฉันให้น้ำหนักกับความรู้สึกของคนที่เกี่ยวข้องเป็นหลัก' },
+  { dim:'TF', a:'เมื่อเพื่อนมาปรึกษาปัญหา ฉันมักช่วยวิเคราะห์หาทางแก้ทันที', b:'เมื่อเพื่อนมาปรึกษาปัญหา ฉันมักรับฟังและให้กำลังใจก่อน' },
+  { dim:'TF', a:'ฉันมองว่าตัวเองเป็นคนตรงไปตรงมา ยึดหลักการเป็นสำคัญ', b:'ฉันมองว่าตัวเองเป็นคนเห็นอกเห็นใจ ยึดความรู้สึกของคนเป็นสำคัญ' },
+  { dim:'JP', a:'ฉันชอบวางแผนล่วงหน้าและทำตามกำหนดการที่ตั้งไว้', b:'ฉันชอบความยืดหยุ่นและปรับเปลี่ยนไปตามสถานการณ์' },
+  { dim:'JP', a:'งานที่ทำ ฉันมักทำให้เสร็จก่อนกำหนดเสมอ', b:'งานที่ทำ ฉันมักทำได้ดีที่สุดภายใต้ความกดดันช่วงใกล้เดดไลน์' },
+  { dim:'JP', a:'ฉันรู้สึกสบายใจเมื่อทุกอย่างเป็นระเบียบและตัดสินใจแล้ว', b:'ฉันรู้สึกสบายใจเมื่อยังเปิดโอกาสเลือกได้หลายทาง' }
 ];
 
-
 const MBTI_DESC = {
-
   ISTJ:'ผู้รักษาระเบียบ — รับผิดชอบสูง ละเอียดรอบคอบ ชอบทำงานอย่างเป็นระบบตามข้อเท็จจริง',
   ISFJ:'ผู้ดูแลที่อบอุ่น — ใส่ใจผู้อื่น เชื่อถือได้ ทำงานอย่างขยันขันแข็งเพื่อดูแลคนรอบข้าง',
   INFJ:'ผู้ให้คำปรึกษา — มองการณ์ไกล เข้าใจความรู้สึกผู้อื่นลึกซึ้ง มีอุดมคติสูง',
@@ -706,138 +392,41 @@ const MBTI_DESC = {
   ESFJ:'ผู้ดูแลสังคม — ใส่ใจความรู้สึกคนรอบข้าง ชอบช่วยเหลือ สร้างความสัมพันธ์ที่ดีในกลุ่ม',
   ENFJ:'ผู้นำที่เห็นอกเห็นใจ — สร้างแรงบันดาลใจให้ผู้อื่น ใส่ใจการพัฒนาคนรอบข้าง',
   ENTJ:'ผู้นำเชิงกลยุทธ์ — มั่นใจ กล้าตัดสินใจ ชอบวางแผนและผลักดันสู่เป้าหมาย'
-
 };
 
-
-/* =========================================================
-   แบบทดสอบ
-   ========================================================= */
-
 const ASSESSMENTS = {
-
   mbti:{
-    code:'MBTI',
-    title:'MBTI',
-    full:'แบบทดสอบบุคลิกภาพเบื้องต้น',
-
-    sub:'เลือกข้อความที่ตรงกับตัวท่านมากกว่าในแต่ละคู่ ใช้เวลาไม่ถึง 5 นาที (แบบเบื้องต้น ไม่ใช่แบบทดสอบ MBTI ฉบับเต็ม)',
-
-    type:'dichotomy',
-
-    pairs:mbtiPairs
+    code:'MBTI', title:'MBTI', full:'แบบทดสอบบุคลิกภาพเบื้องต้น',
+    sub:'เลือกข้อความที่ตรงกับตัวท่านมากกว่าในแต่ละคู่ (ฉบับประเมินเบื้องต้น)',
+    type:'dichotomy', pairs:mbtiPairs
   },
-
-
   selfesteem:{
-
-    code:'SE',
-    title:'Self-Esteem',
-    full:'แบบประเมินการเห็นคุณค่าในตนเอง',
-
+    code:'SE', title:'Self-Esteem', full:'แบบประเมินการเห็นคุณค่าในตนเอง',
     sub:'ให้คะแนนความเห็นด้วยกับข้อความต่อไปนี้ ตามความรู้สึกที่แท้จริงของท่าน',
-
     type:'sum',
-
     customQuestions:[
-
-      {
-        text:'โดยรวมแล้ว ฉันรู้สึกพึงพอใจในตัวเอง',
-        options:seAgree4(false)
-      },
-
-      {
-        text:'บางครั้งฉันคิดว่าตัวเองไม่ดีเลย',
-        options:seAgree4(true)
-      },
-
-      {
-        text:'ฉันรู้สึกว่าตัวเองมีคุณสมบัติที่ดีอยู่หลายอย่าง',
-        options:seAgree4(false)
-      },
-
-      {
-        text:'ฉันสามารถทำสิ่งต่าง ๆ ได้ดีเทียบเท่าคนส่วนใหญ่',
-        options:seAgree4(false)
-      },
-
-      {
-        text:'ฉันรู้สึกว่าตัวเองไม่ค่อยมีอะไรน่าภาคภูมิใจนัก',
-        options:seAgree4(true)
-      },
-
-      {
-        text:'บางครั้งฉันรู้สึกว่าตัวเองไร้ประโยชน์',
-        options:seAgree4(true)
-      },
-
-      {
-        text:'ฉันรู้สึกว่าตัวเองมีคุณค่าเทียบเท่ากับผู้อื่น',
-        options:seAgree4(false)
-      },
-
-      {
-        text:'ฉันอยากเคารพและนับถือตัวเองให้มากกว่านี้',
-        options:seAgree4(true)
-      },
-
-      {
-        text:'โดยรวมแล้ว ฉันมักรู้สึกว่าตัวเองล้มเหลว',
-        options:seAgree4(true)
-      },
-
-      {
-        text:'ฉันมีทัศนคติที่ดีต่อตัวเอง',
-        options:seAgree4(false)
-      }
-
+      { text:'โดยรวมแล้ว ฉันรู้สึกพึงพอใจในตัวเอง', options:seAgree4(false) },
+      { text:'บางครั้งฉันคิดว่าตัวเองไม่ดีเลย', options:seAgree4(true) },
+      { text:'ฉันรู้สึกว่าตัวเองมีคุณสมบัติที่ดีอยู่หลายอย่าง', options:seAgree4(false) },
+      { text:'ฉันสามารถทำสิ่งต่าง ๆ ได้ดีเทียบเท่าคนส่วนใหญ่', options:seAgree4(false) },
+      { text:'ฉันรู้สึกว่าตัวเองไม่ค่อยมีอะไรน่าภาคภูมิใจนัก', options:seAgree4(true) },
+      { text:'บางครั้งฉันรู้สึกว่าตัวเองไร้ประโยชน์', options:seAgree4(true) },
+      { text:'ฉันรู้สึกว่าตัวเองมีคุณค่าเทียบเท่ากับผู้อื่น', options:seAgree4(false) },
+      { text:'ฉันอยากเคารพและนับถือตัวเองให้มากกว่านี้', options:seAgree4(true) },
+      { text:'โดยรวมแล้ว ฉันมักรู้สึกว่าตัวเองล้มเหลว', options:seAgree4(true) },
+      { text:'ฉันมีทัศนคติที่ดีต่อตัวเอง', options:seAgree4(false) }
     ],
-
     bands:[
-
-      {
-        min:0,
-        max:14,
-        label:'เห็นคุณค่าในตนเองต่ำ',
-        color:'var(--red)',
-        advice:'ผลบ่งชี้ว่าอาจมองเห็นคุณค่าในตนเองค่อนข้างต่ำ ลองเริ่มจากการจดบันทึกสิ่งเล็ก ๆ ที่ทำได้ดีในแต่ละวัน และพูดคุยกับคนที่ไว้ใจ หากรู้สึกไม่ดีต่อเนื่องเป็นเวลานาน ควรปรึกษาเจ้าหน้าที่สาธารณสุขหรือผู้เชี่ยวชาญ'
-      },
-
-      {
-        min:15,
-        max:25,
-        label:'เห็นคุณค่าในตนเองระดับปกติ',
-        color:'var(--gold)',
-        advice:'ระดับการเห็นคุณค่าในตนเองอยู่ในเกณฑ์ปกติ ยังสามารถพัฒนาต่อได้ด้วยการฝึกพูดกับตัวเองในเชิงบวกและตั้งเป้าหมายที่ทำได้จริง'
-      },
-
-      {
-        min:26,
-        max:30,
-        label:'เห็นคุณค่าในตนเองสูง',
-        color:'var(--green)',
-        advice:'มีความมั่นใจและเห็นคุณค่าในตนเองอยู่ในระดับดี รักษาความสมดุลนี้ไว้ และเป็นกำลังใจให้คนรอบข้างต่อไปได้'
-      }
-
+      { min:0, max:14, label:'เห็นคุณค่าในตนเองต่ำ', color:'var(--danger)', advice:'ผลบ่งชี้ว่าอาจมองเห็นคุณค่าในตนเองค่อนข้างต่ำ ลองเริ่มจากการจดบันทึกสิ่งเล็ก ๆ ที่ทำได้ดีในแต่ละวัน และพูดคุยกับคนที่ไว้ใจ' },
+      { min:15, max:25, label:'เห็นคุณค่าในตนเองระดับปกติ', color:'var(--warning)', advice:'ระดับการเห็นคุณค่าในตนเองอยู่ในเกณฑ์ปกติ ยังสามารถพัฒนาต่อได้ด้วยการฝึกพูดกับตัวเองในเชิงบวก' },
+      { min:26, max:30, label:'เห็นคุณค่าในตนเองสูง', color:'var(--success)', advice:'มีความมั่นใจและเห็นคุณค่าในตนเองอยู่ในระดับดี รักษาความสมดุลนี้ไว้ และเป็นกำลังใจให้คนรอบข้างต่อไปได้' }
     ]
-
   },
-
-
   eq:{
-
-    code:'EQ',
-    title:'EQ',
-    full:'แบบประเมินความฉลาดทางอารมณ์',
-
+    code:'EQ', title:'EQ', full:'แบบประเมินความฉลาดทางอารมณ์',
     sub:'ประเมิน 5 ด้าน ได้แก่ การรู้จักอารมณ์ตนเอง การควบคุมอารมณ์ ความเข้าใจผู้อื่น ทักษะสังคม และแรงจูงใจ',
-
-    type:'sum',
-
-    options:scale4,
-
+    type:'sum', options:scale4,
     questions:[
-
       'ฉันรู้เท่าทันอารมณ์ของตัวเองเมื่อเกิดขึ้น',
       'ฉันเข้าใจสาเหตุที่ทำให้ตัวเองรู้สึกดีหรือไม่ดี',
       'ฉันรู้จุดแข็งและจุดอ่อนของตัวเองเป็นอย่างดี',
@@ -853,55 +442,18 @@ const ASSESSMENTS = {
       'ฉันมีเป้าหมายชัดเจนและพยายามไปให้ถึง',
       'ฉันไม่ท้อแท้ง่ายเมื่อเจออุปสรรค',
       'ฉันมองหาโอกาสเรียนรู้สิ่งใหม่อยู่เสมอ'
-
     ],
-
     bands:[
-
-      {
-        min:0,
-        max:15,
-        label:'ควรพัฒนาเพิ่มเติม',
-        color:'var(--red)',
-        advice:'มีโอกาสพัฒนาความฉลาดทางอารมณ์เพิ่มเติม ลองเริ่มจากการฝึกสังเกตอารมณ์ตัวเองในแต่ละวัน และฝึกรับฟังผู้อื่นอย่างตั้งใจมากขึ้น'
-      },
-
-      {
-        min:16,
-        max:30,
-        label:'อยู่ในระดับปานกลาง',
-        color:'var(--gold)',
-        advice:'มีความฉลาดทางอารมณ์ในระดับปานกลาง สามารถพัฒนาต่อได้ด้วยการฝึกควบคุมอารมณ์ในสถานการณ์กดดัน และฝึกเข้าใจมุมมองของผู้อื่นให้มากขึ้น'
-      },
-
-      {
-        min:31,
-        max:45,
-        label:'อยู่ในระดับดี',
-        color:'var(--green)',
-        advice:'มีความฉลาดทางอารมณ์ในระดับดี ทั้งการรู้เท่าทันตนเองและการเข้าใจผู้อื่น รักษาจุดแข็งนี้ไว้และเป็นแบบอย่างที่ดีให้คนรอบข้างได้'
-
-      }
-
+      { min:0, max:15, label:'ควรพัฒนาเพิ่มเติม', color:'var(--danger)', advice:'มีโอกาสพัฒนาความฉลาดทางอารมณ์เพิ่มเติม ลองเริ่มจากการฝึกสังเกตอารมณ์ตัวเองในแต่ละวัน และฝึกรับฟังผู้อื่นอย่างตั้งใจมากขึ้น' },
+      { min:16, max:30, label:'อยู่ในระดับปานกลาง', color:'var(--warning)', advice:'มีความฉลาดทางอารมณ์ในระดับปานกลาง สามารถพัฒนาต่อได้ด้วยการฝึกควบคุมอารมณ์ในสถานการณ์กดดัน' },
+      { min:31, max:45, label:'อยู่ในระดับดี', color:'var(--success)', advice:'มีความฉลาดทางอารมณ์ในระดับดี ทั้งการรู้เท่าทันตนเองและการเข้าใจผู้อื่น รักษาจุดแข็งนี้ไว้' }
     ]
-
   },
-
-
   resilience:{
-
-    code:'RQ',
-    title:'Resilience',
-    full:'แบบประเมินความสามารถในการปรับตัว',
-
+    code:'RQ', title:'Resilience', full:'แบบประเมินความสามารถในการปรับตัว',
     sub:'ประเมินความสามารถในการรับมือและฟื้นตัวจากความยากลำบากหรือการเปลี่ยนแปลง',
-
-    type:'sum',
-
-    options:scale4,
-
+    type:'sum', options:scale4,
     questions:[
-
       'ฉันสามารถปรับตัวได้เมื่อเจอเหตุการณ์ไม่คาดคิด',
       'เมื่อเจอปัญหา ฉันมองหาทางแก้ไขมากกว่าจมอยู่กับปัญหา',
       'ฉันฟื้นตัวจากความผิดหวังได้ค่อนข้างเร็ว',
@@ -912,811 +464,269 @@ const ASSESSMENTS = {
       'ฉันจัดการความเครียดของตัวเองได้อย่างเหมาะสม',
       'ฉันมีคนที่ไว้ใจได้คอยสนับสนุนเมื่อมีปัญหา',
       'ฉันมองโลกในแง่ดีแม้เจอสถานการณ์ที่ยากลำบาก'
-
     ],
-
     bands:[
-
-      {
-        min:0,
-        max:10,
-        label:'ความสามารถในการปรับตัวต่ำ',
-        color:'var(--red)',
-        advice:'ผลบ่งชี้ว่าอาจรับมือกับความเปลี่ยนแปลงหรือความยากลำบากได้ยากในตอนนี้ ลองเริ่มจากการหาคนที่ไว้ใจพูดคุยด้วย และแบ่งปัญหาใหญ่เป็นขั้นตอนเล็ก ๆ ที่จัดการได้ทีละส่วน'
-      },
-
-      {
-        min:11,
-        max:20,
-        label:'ความสามารถในการปรับตัวปานกลาง',
-        color:'var(--gold)',
-        advice:'มีความสามารถในการปรับตัวอยู่ในระดับปานกลาง ลองฝึกมองปัญหาเป็นโอกาสเรียนรู้ และสร้างเครือข่ายคนที่ไว้ใจได้ให้แน่นแฟ้นขึ้น'
-      },
-
-      {
-        min:21,
-        max:30,
-        label:'ความสามารถในการปรับตัวสูง',
-        color:'var(--green)',
-        advice:'มีความสามารถในการฟื้นตัวและปรับตัวอยู่ในระดับดี รักษาความเข้มแข็งนี้ไว้ และสามารถเป็นแรงสนับสนุนให้คนรอบข้างในยามยากได้เช่นกัน'
-      }
-
+      { min:0, max:10, label:'ความสามารถในการปรับตัวต่ำ', color:'var(--danger)', advice:'ผลบ่งชี้ว่าอาจรับมือกับความเปลี่ยนแปลงได้ยากในตอนนี้ ลองเริ่มจากการหาคนที่ไว้ใจพูดคุยด้วย และแบ่งปัญหาใหญ่เป็นขั้นตอนเล็ก ๆ' },
+      { min:11, max:20, label:'ความสามารถในการปรับตัวปานกลาง', color:'var(--warning)', advice:'มีความสามารถในการปรับตัวอยู่ในระดับปานกลาง ลองฝึกมองปัญหาเป็นโอกาสเรียนรู้ และสร้างเครือข่ายคนที่ไว้ใจได้ให้แน่นแฟ้นขึ้น' },
+      { min:21, max:30, label:'ความสามารถในการปรับตัวสูง', color:'var(--success)', advice:'มีความสามารถในการฟื้นตัวและปรับตัวอยู่ในระดับดี รักษาความเข้มแข็งนี้ไว้ และสามารถเป็นแรงสนับสนุนให้คนรอบข้างได้' }
     ]
-
   }
-
 };
-
 
 let currentId = null;
 let currentAnswers = [];
 let lastResult = null;
 
+function initGrid(){
+  const grid = document.getElementById('view-grid');
+  grid.innerHTML = '';
+  Object.keys(ASSESSMENTS).forEach(id=>{
+    const a = ASSESSMENTS[id];
+    const qcount = a.type === 'dichotomy' ? a.pairs.length : (a.customQuestions ? a.customQuestions.length : a.questions.length);
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.onclick = ()=>openAssessment(id);
+    card.innerHTML = `
+      <div class="icon">${a.code}</div>
+      <div class="code">${a.title}</div>
+      <div class="desc">${a.full}</div>
+      <div class="card-footer">
+        <span class="qcount">${qcount} ข้อ</span>
+        <span class="btn-start-text">เริ่มทำ <i class="fa-solid fa-chevron-right"></i></span>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
 
-/* =========================================================
-   ส่งข้อมูลเข้า Google Sheet
-   ========================================================= */
+function triggerAnimation(elementId) {
+  const el = document.getElementById(elementId);
+  el.classList.remove('view-container');
+  void el.offsetWidth;
+  el.classList.add('view-container');
+}
 
-function saveToGoogleSheet(){
+function showGrid(){
+  document.getElementById('view-grid').style.display = 'grid';
+  document.getElementById('view-quiz').style.display = 'none';
+  document.getElementById('view-result').style.display = 'none';
+  document.getElementById('heroHeader').style.display = 'block';
+  document.getElementById('featureStrip').style.display = 'grid';
+  triggerAnimation('view-grid');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
 
-  if(!lastResult){
+function openAssessment(id){
+  currentId = id;
+  const a = ASSESSMENTS[id];
+  document.getElementById('quizTitle').textContent = `${a.title} — ${a.full}`;
+  document.getElementById('quizSub').textContent = a.sub;
+  const list = document.getElementById('questionList');
+  list.innerHTML = '';
+
+  if(a.type === 'dichotomy'){
+    currentAnswers = new Array(a.pairs.length).fill(null);
+    a.pairs.forEach((p,i)=>{
+      const block = document.createElement('div');
+      block.className = 'question';
+      block.style.animationDelay = `${i * 0.04}s`;
+      block.innerHTML = `
+        <div class="qnum">ข้อที่ ${i+1} จาก ${a.pairs.length}</div>
+        <div class="options">
+          <label class="opt" id="opt-${i}-0">
+            <input type="radio" name="q${i}" value="1" onchange="selectOpt(${i},0,1)"> ${p.a}
+          </label>
+          <label class="opt" id="opt-${i}-1">
+            <input type="radio" name="q${i}" value="0" onchange="selectOpt(${i},1,0)"> ${p.b}
+          </label>
+        </div>`;
+      list.appendChild(block);
+    });
+  } else {
+    const qs = a.customQuestions ? a.customQuestions : a.questions.map(t=>({text:t, options:a.options}));
+    currentAnswers = new Array(qs.length).fill(null);
+    qs.forEach((q,i)=>{
+      const block = document.createElement('div');
+      block.className = 'question';
+      block.style.animationDelay = `${i * 0.04}s`;
+      let optsHtml = '';
+      q.options.forEach((opt,j)=>{
+        optsHtml += `
+          <label class="opt" id="opt-${i}-${j}">
+            <input type="radio" name="q${i}" value="${opt.score}" onchange="selectOpt(${i},${j},${opt.score})"> ${opt.label}
+          </label>`;
+      });
+      block.innerHTML = `
+        <div class="qnum">ข้อที่ ${i+1} จาก ${qs.length}</div>
+        <div class="qtext">${q.text}</div>
+        <div class="options">${optsHtml}</div>`;
+      list.appendChild(block);
+    });
+  }
+
+  updateProgress();
+  document.getElementById('heroHeader').style.display = 'none';
+  document.getElementById('featureStrip').style.display = 'none';
+  document.getElementById('view-grid').style.display = 'none';
+  document.getElementById('view-result').style.display = 'none';
+  document.getElementById('view-quiz').style.display = 'block';
+  triggerAnimation('view-quiz');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function selectOpt(i, j, score){
+  currentAnswers[i] = score;
+  document.querySelectorAll(`[id^="opt-${i}-"]`).forEach(el => el.classList.remove('selected'));
+  const target = document.getElementById(`opt-${i}-${j}`);
+  if(target) target.classList.add('selected');
+  updateProgress();
+}
+
+function updateProgress(){
+  const total = currentAnswers.length;
+  const answered = currentAnswers.filter(v => v !== null).length;
+  const pct = Math.round((answered / total) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressHint').textContent = `ตอบแล้ว ${answered} จาก ${total} ข้อ`;
+  document.getElementById('submitBtn').disabled = answered < total;
+}
+
+function submitQuiz(){
+  const a = ASSESSMENTS[currentId];
+  document.getElementById('dimBarsWrap').innerHTML = '';
+
+  if(a.type === 'dichotomy'){
+    renderMbtiResult(a);
+  } else {
+    const score = currentAnswers.reduce((s,v)=>s+v, 0);
+    const band = a.bands.find(b => score >= b.min && score <= b.max) || a.bands[a.bands.length-1];
+
+    document.getElementById('resultCode').textContent = a.code;
+    document.getElementById('resultTitle').textContent = a.full;
+    document.getElementById('resultScore').textContent = score;
+    document.getElementById('resultScore').style.color = band.color;
+    document.getElementById('resultScoreLabel').textContent = 'คะแนนรวม';
+    document.getElementById('resultBadgeWrap').innerHTML = `<span class="level-badge" style="background:${band.color}">${band.label}</span>`;
+    document.getElementById('resultAdvice').innerHTML = `<b>คำแนะนำ:</b> ${band.advice}`;
+
+    const now = new Date();
+    lastResult = {
+      code: a.code,
+      full: a.full,
+      resultValue: score,
+      resultLabel: 'คะแนนรวม: ' + score,
+      levelLabel: band.label,
+      dateStr: now.toLocaleDateString('th-TH', { year:'numeric', month:'long', day:'numeric' })
+    };
+  }
+
+  document.getElementById('view-quiz').style.display = 'none';
+  document.getElementById('view-result').style.display = 'block';
+  triggerAnimation('view-result');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function renderMbtiResult(a){
+  const dims = { EI:{a:'E',b:'I'}, SN:{a:'S',b:'N'}, TF:{a:'T',b:'F'}, JP:{a:'J',b:'P'} };
+  const tally = { EI:[0,0], SN:[0,0], TF:[0,0], JP:[0,0] };
+
+  a.pairs.forEach((p,i)=>{
+    const val = currentAnswers[i];
+    if(val === 1) tally[p.dim][0]++;
+    else tally[p.dim][1]++;
+  });
+
+  let typeCode = '';
+  let barsHtml = '';
+
+  Object.keys(dims).forEach(dimKey=>{
+    const [countA, countB] = tally[dimKey];
+    const total = countA + countB;
+    const letterA = dims[dimKey].a;
+    const letterB = dims[dimKey].b;
+    const winner = countA >= countB ? letterA : letterB;
+    typeCode += winner;
+
+    const pctA = Math.round((countA / total) * 100);
+    barsHtml += `
+      <div class="dim-row">
+        <span class="letter">${letterA}</span>
+        <div class="bar-track"><div class="bar-fill" style="width:${pctA}%"></div></div>
+        <span class="letter">${letterB}</span>
+      </div>`;
+  });
+
+  document.getElementById('resultCode').textContent = a.code;
+  document.getElementById('resultTitle').textContent = a.full;
+  document.getElementById('resultScore').textContent = typeCode;
+  document.getElementById('resultScore').style.color = 'var(--teal-dark)';
+  document.getElementById('resultScoreLabel').textContent = 'ประเภทบุคลิกภาพของคุณ';
+  document.getElementById('resultBadgeWrap').innerHTML = '';
+  document.getElementById('dimBarsWrap').innerHTML = `<div class="dim-bars">${barsHtml}</div>`;
+  document.getElementById('resultAdvice').innerHTML = `<b>${typeCode}:</b> ${MBTI_DESC[typeCode] || 'ไม่พบคำอธิบายประเภทนี้'}`;
+
+  const now = new Date();
+  lastResult = {
+    code: a.code,
+    full: a.full,
+    resultValue: typeCode,
+    resultLabel: 'ประเภทบุคลิกภาพ: ' + typeCode,
+    levelLabel: MBTI_DESC[typeCode] || '',
+    dateStr: now.toLocaleDateString('th-TH', { year:'numeric', month:'long', day:'numeric' })
+  };
+}
+
+function sendResultToGoogleSheet(){
+  if(!lastResult) return;
+
+  const senderName = document.getElementById('senderName').value.trim();
+  const senderPhone = document.getElementById('senderPhone').value.trim();
+
+  if(!senderName || !senderPhone){
+    alert('กรุณากรอกชื่อ-นามสกุล และเบอร์โทรศัพท์ให้ครบถ้วนก่อนส่งผล');
     return;
   }
 
-  const data = new URLSearchParams();
+  const btn = document.getElementById('sendDataBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> กำลังบันทึก...';
 
+  const data = new URLSearchParams();
+  data.append("name", senderName);
+  data.append("phone", senderPhone);
   data.append("test", lastResult.code);
   data.append("title", lastResult.full);
   data.append("result", lastResult.resultValue);
   data.append("resultLabel", lastResult.resultLabel);
   data.append("level", lastResult.levelLabel || "");
   data.append("date", lastResult.dateStr);
-
-  /*
-    เก็บคำตอบทั้งหมดด้วย
-    ตัวอย่าง:
-    3,2,1,3,0,...
-  */
-
-  data.append(
-    "answers",
-    currentAnswers.join(",")
-  );
+  data.append("answers", currentAnswers.join(","));
 
   fetch(GOOGLE_SHEET_URL, {
-
-    method:"POST",
-
-    mode:"no-cors",
-
-    headers:{
-      "Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"
+    method: "POST",
+    mode: "no-cors",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
     },
-
-    body:data.toString()
-
+    body: data.toString()
   })
   .then(()=>{
-
-    console.log("บันทึกข้อมูลลง Google Sheet แล้ว");
-
+    alert('บันทึกผลการประเมินเรียบร้อยแล้ว!');
+    document.getElementById('emailHint').textContent = "บันทึกผลสำเร็จลงระบบ Google Sheets เรียบร้อยแล้ว";
+    document.getElementById('emailHint').style.color = "var(--success)";
   })
   .catch(error=>{
-
-    console.log("เกิดข้อผิดพลาดในการส่งข้อมูล",error);
-
+    console.error("เกิดข้อผิดพลาดในการส่งข้อมูล", error);
+    alert('เกิดข้อผิดพลาดในการบันทึกข้อมูล กรุณาลองใหม่อีกครั้ง');
+  })
+  .finally(()=>{
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> ส่งผลประเมิน';
   });
-
 }
-
-
-/* =========================================================
-   ส่ง Gmail
-   ========================================================= */
-
-function emailResult(){
-
-  if(!lastResult){
-    return;
-  }
-
-  const to =
-    document.getElementById('emailTo').value.trim();
-
-  if(!to){
-
-    alert('กรุณากรอกอีเมลผู้รับ');
-
-    return;
-  }
-
-  const {
-    code,
-    full,
-    resultLabel,
-    levelLabel,
-    dateStr
-  } = lastResult;
-
-  const subject =
-    `ผลแบบทดสอบ ${code} — ${full}`;
-
-  const body =
-
-`ผลแบบทดสอบบุคลิกภาพ (Mental Health Cyber-Care)
-
-แบบทดสอบ: ${code} (${full})
-วันที่ทำแบบทดสอบ: ${dateStr}
-${resultLabel}
-${levelLabel ? 'รายละเอียด: '+levelLabel : ''}
-
-หมายเหตุ: ผลนี้เป็นการสำรวจตนเองเบื้องต้นเพื่อความเข้าใจตนเองเท่านั้น ไม่ใช่แบบทดสอบทางจิตวิทยาที่ได้มาตรฐานทางคลินิกอย่างสมบูรณ์
-สายด่วนสุขภาพจิต 1323 (ฟรี ตลอด 24 ชม.)`;
-
-  const gmailUrl =
-    `https://mail.google.com/mail/?view=cm&fs=1` +
-    `&to=${encodeURIComponent(to)}` +
-    `&su=${encodeURIComponent(subject)}` +
-    `&body=${encodeURIComponent(body)}`;
-
-  window.open(gmailUrl,'_blank');
-
-}
-
-
-/* =========================================================
-   แสดงหน้าเลือกแบบทดสอบ
-   ========================================================= */
-
-function initGrid(){
-
-  const grid =
-    document.getElementById('view-grid');
-
-  grid.innerHTML='';
-
-  Object.keys(ASSESSMENTS).forEach(id=>{
-
-    const a =
-      ASSESSMENTS[id];
-
-    const qcount =
-      a.type === 'dichotomy'
-      ? a.pairs.length
-      : (
-          a.customQuestions
-          ? a.customQuestions.length
-          : a.questions.length
-        );
-
-    const card =
-      document.createElement('div');
-
-    card.className='card';
-
-    card.onclick=()=>{
-      openAssessment(id);
-    };
-
-    card.innerHTML=`
-
-      <div class="icon">
-        ${a.code}
-      </div>
-
-      <div class="code">
-        ${a.title}
-      </div>
-
-      <div class="desc">
-        ${a.full}
-      </div>
-
-      <div class="qcount">
-        ${qcount} ข้อ
-      </div>
-
-    `;
-
-    grid.appendChild(card);
-
-  });
-
-}
-
-
-/* =========================================================
-   กลับหน้าแรก
-   ========================================================= */
-
-function showGrid(){
-
-  document.getElementById('view-grid')
-    .style.display='grid';
-
-  document.getElementById('view-quiz')
-    .style.display='none';
-
-  document.getElementById('view-result')
-    .style.display='none';
-
-  window.scrollTo({
-    top:0,
-    behavior:'smooth'
-  });
-
-}
-
-
-/* =========================================================
-   เปิดแบบทดสอบ
-   ========================================================= */
-
-function openAssessment(id){
-
-  currentId=id;
-
-  const a =
-    ASSESSMENTS[id];
-
-  document.getElementById('quizTitle')
-    .textContent =
-    `${a.title} — ${a.full}`;
-
-  document.getElementById('quizSub')
-    .textContent =
-    a.sub;
-
-  const list =
-    document.getElementById('questionList');
-
-  list.innerHTML='';
-
-
-  /* MBTI */
-
-  if(a.type==='dichotomy'){
-
-    currentAnswers =
-      new Array(a.pairs.length)
-      .fill(null);
-
-    a.pairs.forEach((p,i)=>{
-
-      const block =
-        document.createElement('div');
-
-      block.className='question';
-
-      block.innerHTML=`
-
-        <div class="qnum">
-          ข้อที่ ${i+1} จาก ${a.pairs.length}
-        </div>
-
-        <div class="options">
-
-          <label
-            class="opt"
-            id="opt-${i}-0">
-
-            <input
-              type="radio"
-              name="q${i}"
-              value="1"
-              onchange="selectOpt(${i},0,1)">
-
-            ${p.a}
-
-          </label>
-
-
-          <label
-            class="opt"
-            id="opt-${i}-1">
-
-            <input
-              type="radio"
-              name="q${i}"
-              value="0"
-              onchange="selectOpt(${i},1,0)">
-
-            ${p.b}
-
-          </label>
-
-        </div>
-
-      `;
-
-      list.appendChild(block);
-
-    });
-
-  }
-
-
-  /* แบบคะแนน */
-
-  else{
-
-    const qs =
-      a.customQuestions
-      ? a.customQuestions
-      : a.questions.map(t=>({
-          text:t,
-          options:a.options
-        }));
-
-    currentAnswers =
-      new Array(qs.length)
-      .fill(null);
-
-    qs.forEach((q,i)=>{
-
-      const block =
-        document.createElement('div');
-
-      block.className='question';
-
-      let optsHtml='';
-
-      q.options.forEach((opt,j)=>{
-
-        optsHtml += `
-
-          <label
-            class="opt"
-            id="opt-${i}-${j}">
-
-            <input
-              type="radio"
-              name="q${i}"
-              value="${opt.score}"
-              onchange="selectOpt(${i},${j},${opt.score})">
-
-            ${opt.label}
-
-          </label>
-
-        `;
-
-      });
-
-      block.innerHTML=`
-
-        <div class="qnum">
-          ข้อที่ ${i+1} จาก ${qs.length}
-        </div>
-
-        <div class="qtext">
-          ${q.text}
-        </div>
-
-        <div class="options">
-          ${optsHtml}
-        </div>
-
-      `;
-
-      list.appendChild(block);
-
-    });
-
-  }
-
-
-  updateProgress();
-
-  document.getElementById('view-grid')
-    .style.display='none';
-
-  document.getElementById('view-result')
-    .style.display='none';
-
-  document.getElementById('view-quiz')
-    .style.display='block';
-
-  window.scrollTo({
-    top:0,
-    behavior:'smooth'
-  });
-
-}
-
-
-/* =========================================================
-   เลือกคำตอบ
-   ========================================================= */
-
-function selectOpt(i,j,score){
-
-  currentAnswers[i]=score;
-
-  document
-    .querySelectorAll(`[id^="opt-${i}-"]`)
-    .forEach(el=>{
-      el.classList.remove('selected');
-    });
-
-  document
-    .getElementById(`opt-${i}-${j}`)
-    .classList.add('selected');
-
-  updateProgress();
-
-}
-
-
-/* =========================================================
-   Progress
-   ========================================================= */
-
-function updateProgress(){
-
-  const total =
-    currentAnswers.length;
-
-  const answered =
-    currentAnswers
-      .filter(v=>v!==null)
-      .length;
-
-  const pct =
-    Math.round(
-      (answered/total)*100
-    );
-
-  document.getElementById('progressFill')
-    .style.width =
-    pct+'%';
-
-  document.getElementById('progressHint')
-    .textContent =
-    `ตอบแล้ว ${answered} จาก ${total} ข้อ`;
-
-  document.getElementById('submitBtn')
-    .disabled =
-    answered < total;
-
-}
-
-
-/* =========================================================
-   คำนวณผล
-   ========================================================= */
-
-function submitQuiz(){
-
-  const a =
-    ASSESSMENTS[currentId];
-
-  document.getElementById('dimBarsWrap')
-    .innerHTML='';
-
-
-  /* MBTI */
-
-  if(a.type==='dichotomy'){
-
-    renderMbtiResult(a);
-
-  }
-
-
-  /* SE / EQ / RQ */
-
-  else{
-
-    const score =
-      currentAnswers.reduce(
-        (s,v)=>s+v,
-        0
-      );
-
-    const band =
-      a.bands.find(
-        b =>
-        score>=b.min &&
-        score<=b.max
-      )
-      ||
-      a.bands[a.bands.length-1];
-
-
-    document.getElementById('resultCode')
-      .textContent =
-      a.code;
-
-    document.getElementById('resultTitle')
-      .textContent =
-      a.full;
-
-    document.getElementById('resultScore')
-      .textContent =
-      score;
-
-    document.getElementById('resultScore')
-      .style.color =
-      band.color;
-
-    document.getElementById('resultScoreLabel')
-      .textContent =
-      'คะแนนรวม';
-
-    document.getElementById('resultBadgeWrap')
-      .innerHTML = `
-
-        <span
-          class="level-badge"
-          style="background:${band.color}">
-
-          ${band.label}
-
-        </span>
-
-      `;
-
-    document.getElementById('resultAdvice')
-      .innerHTML = `
-
-        <b>คำแนะนำ:</b>
-        ${band.advice}
-
-      `;
-
-
-    const now =
-      new Date();
-
-
-    lastResult={
-
-      code:a.code,
-
-      full:a.full,
-
-      resultValue:score,
-
-      resultLabel:
-        'คะแนนรวม: '+score,
-
-      levelLabel:
-        band.label,
-
-      dateStr:
-        now.toLocaleDateString(
-          'th-TH',
-          {
-            year:'numeric',
-            month:'long',
-            day:'numeric'
-          }
-        )
-
-    };
-
-  }
-
-
-  /*
-    สำคัญ:
-    หลังจากคำนวณผลแล้ว
-    ให้ส่งข้อมูลเข้า Google Sheet
-  */
-
-  saveToGoogleSheet();
-
-
-  document.getElementById('view-quiz')
-    .style.display='none';
-
-  document.getElementById('view-result')
-    .style.display='block';
-
-  window.scrollTo({
-    top:0,
-    behavior:'smooth'
-  });
-
-}
-
-
-/* =========================================================
-   ผล MBTI
-   ========================================================= */
-
-function renderMbtiResult(a){
-
-  const dims={
-
-    EI:{a:'E',b:'I'},
-    SN:{a:'S',b:'N'},
-    TF:{a:'T',b:'F'},
-    JP:{a:'J',b:'P'}
-
-  };
-
-
-  const tally={
-
-    EI:[0,0],
-    SN:[0,0],
-    TF:[0,0],
-    JP:[0,0]
-
-  };
-
-
-  a.pairs.forEach((p,i)=>{
-
-    const val =
-      currentAnswers[i];
-
-    if(val===1){
-
-      tally[p.dim][0]++;
-
-    }else{
-
-      tally[p.dim][1]++;
-
-    }
-
-  });
-
-
-  let typeCode='';
-
-  let barsHtml='';
-
-
-  Object.keys(dims).forEach(dimKey=>{
-
-    const [
-      countA,
-      countB
-    ] =
-      tally[dimKey];
-
-    const total =
-      countA+countB;
-
-    const letterA =
-      dims[dimKey].a;
-
-    const letterB =
-      dims[dimKey].b;
-
-    const winner =
-      countA>=countB
-      ? letterA
-      : letterB;
-
-    typeCode += winner;
-
-
-    const pctA =
-      Math.round(
-        (countA/total)*100
-      );
-
-
-    barsHtml += `
-
-      <div class="dim-row">
-
-        <span class="letter">
-          ${letterA}
-        </span>
-
-        <div class="bar-track">
-
-          <div
-            class="bar-fill"
-            style="width:${pctA}%">
-          </div>
-
-        </div>
-
-        <span class="letter">
-          ${letterB}
-        </span>
-
-      </div>
-
-    `;
-
-  });
-
-
-  document.getElementById('resultCode')
-    .textContent =
-    a.code;
-
-  document.getElementById('resultTitle')
-    .textContent =
-    a.full;
-
-  document.getElementById('resultScore')
-    .textContent =
-    typeCode;
-
-  document.getElementById('resultScore')
-    .style.color =
-    'var(--green-dark)';
-
-  document.getElementById('resultScoreLabel')
-    .textContent =
-    'ผลบุคลิกภาพเบื้องต้นของท่าน';
-
-  document.getElementById('resultBadgeWrap')
-    .innerHTML='';
-
-  document.getElementById('dimBarsWrap')
-    .innerHTML = `
-
-      <div class="dim-bars">
-        ${barsHtml}
-      </div>
-
-    `;
-
-  document.getElementById('resultAdvice')
-    .innerHTML = `
-
-      <b>${typeCode}:</b>
-      ${
-        MBTI_DESC[typeCode]
-        ||
-        'ไม่พบคำอธิบายประเภทนี้'
-      }
-
-    `;
-
-
-  const now =
-    new Date();
-
-
-  lastResult={
-
-    code:a.code,
-
-    full:a.full,
-
-    resultValue:typeCode,
-
-    resultLabel:
-      'ประเภทบุคลิกภาพ: '+typeCode,
-
-    levelLabel:
-      MBTI_DESC[typeCode] || '',
-
-    dateStr:
-      now.toLocaleDateString(
-        'th-TH',
-        {
-          year:'numeric',
-          month:'long',
-          day:'numeric'
-        }
-      )
-
-  };
-
-}
-
-
-/* =========================================================
-   เริ่มต้น
-   ========================================================= */
 
 initGrid();
-
 showGrid();
-
 </script>
-
 </body>
 </html>
