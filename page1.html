@@ -238,16 +238,16 @@
   .email-box { background: rgba(251,252,254,0.9); border: 1.5px solid var(--border-light); border-radius: var(--radius-md); padding: 22px; margin-top: 8px; }
   .email-box label { display: block; font-size: 14px; font-weight: 700; margin-bottom: 12px; color: var(--brand-dark); }
   .email-row { display: flex; gap: 12px; flex-wrap: wrap; flex-direction: column; }
-  .email-row input { 
-    flex: 1; 
-    min-width: 220px; 
-    padding: 13px 16px; 
-    border-radius: var(--radius-sm); 
-    border: 1.5px solid var(--border); 
-    font-family: inherit; 
-    font-size: 14.5px; 
-    outline: none; 
-    transition: all 0.25s ease; 
+  .email-row input {
+    flex: 1;
+    min-width: 220px;
+    padding: 13px 16px;
+    border-radius: var(--radius-sm);
+    border: 1.5px solid var(--border);
+    font-family: inherit;
+    font-size: 14.5px;
+    outline: none;
+    transition: all 0.25s ease;
   }
   .email-row input:focus { border-color: var(--teal-dark); box-shadow: 0 0 0 4px rgba(37,99,168,0.18); background: #fff; }
   .result-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 28px; }
@@ -258,7 +258,6 @@
 <div class="bg-blob blob-1"></div>
 <div class="bg-blob blob-2"></div>
 <div class="bg-blob blob-3"></div>
-
 <header class="nav-header">
   <a href="index.html" class="logo">
     <span class="badge"><i class="fa-solid fa-heart-pulse"></i></span>
@@ -268,13 +267,11 @@
     <a href="assessment.html" class="nav-cta"><i class="fa-solid fa-arrow-left"></i> ย้อนกลับหน้าหลัก</a>
   </nav>
 </header>
-
 <header class="hero" id="heroHeader">
   <div><span class="hero-badge"><i class="fa-solid fa-clipboard-check"></i> SCREENING TOOLS</span></div>
   <h1>แบบคัดกรองทั่วไป (Screening Tools)</h1>
   <p>เลือกแบบประเมินที่ต้องการทำ แต่ละแบบใช้เวลาไม่กี่นาที ผลที่ได้เป็นการคัดกรองเบื้องต้นเท่านั้น ไม่ใช่การวินิจฉัยโรค</p>
 </header>
-
 <div class="feature-strip" id="featureStrip">
   <div class="feature-item">
     <i class="fa-solid fa-clock"></i>
@@ -292,10 +289,8 @@
     <div class="fdesc">หากพบความเสี่ยง มีเบอร์ 1323 ให้ติดต่อได้ทันทีตลอด 24 ชม.</div>
   </div>
 </div>
-
 <main>
   <section id="view-grid" class="grid view-container"></section>
-
   <section id="view-quiz" class="panel view-container" style="display:none;">
     <button class="btn-ghost" onclick="showGrid()" style="margin-bottom:18px;"><i class="fa-solid fa-grip"></i> เลือกแบบประเมินอื่นในหมวดนี้</button>
     <h2 class="quiz-title" id="quizTitle"></h2>
@@ -307,7 +302,6 @@
       <div class="hint" id="progressHint"></div>
     </div>
   </section>
-
   <section id="view-result" class="panel view-container" style="display:none;">
     <button class="btn-ghost" onclick="showGrid()" style="margin-bottom:18px;"><i class="fa-solid fa-grip"></i> เลือกแบบประเมินอื่นในหมวดนี้</button>
     <div class="result-head">
@@ -322,7 +316,6 @@
       <div class="title"><i class="fa-solid fa-triangle-exclamation"></i> หากมีความคิดทำร้ายตนเองหรือไม่ปลอดภัย</div>
       โปรดติดต่อ อสม. หรือเจ้าหน้าที่สาธารณสุขในพื้นที่โดยทันที หรือโทรสายด่วนสุขภาพจิต <b>1323</b> (ฟรี ตลอด 24 ชั่วโมง) หรือไปโรงพยาบาลที่ใกล้ที่สุด อย่าปล่อยให้ตนเองอยู่ตามลำพัง
     </div>
-
     <!-- ส่วนกรอกชื่อ + เบอร์ (ชื่อตัวเอง) -->
     <div class="email-box">
       <label><i class="fa-solid fa-user-pen"></i> บันทึกชื่อและเบอร์โทรเพื่อส่งผลประเมิน</label>
@@ -335,7 +328,6 @@
       </div>
       <div class="hint" id="emailHint">ระบบจะบันทึกผลประเมินพร้อมชื่อและเบอร์โทรลง Google Sheets ของหน่วยงาน</div>
     </div>
-
     <div class="result-actions">
       <button class="btn-ghost" onclick="openAssessment(currentId)"><i class="fa-solid fa-rotate-left"></i> ทำแบบประเมินนี้อีกครั้ง</button>
       <button class="btn-primary" onclick="showGrid()" style="width:auto;padding:12px 26px;"><i class="fa-solid fa-grip"></i> เลือกแบบประเมินอื่นในหมวดนี้</button>
@@ -343,14 +335,12 @@
     </div>
   </section>
 </main>
-
 <footer class="note">
   <i class="fa-solid fa-circle-info"></i> แบบประเมินนี้ดัดแปลงจากเครื่องมือคัดกรองมาตรฐานที่ใช้ในระบบสาธารณสุขไทย ผลลัพธ์เป็นเพียงการคัดกรองเบื้องต้น ไม่สามารถใช้แทนการวินิจฉัยของแพทย์หรือผู้เชี่ยวชาญได้ หากมีข้อสงสัยเกี่ยวกับผลประเมิน โปรดปรึกษา อสม. หรือเจ้าหน้าที่สาธารณสุขใกล้บ้าน
 </footer>
-
 <script>
-// *** URL ของ Google Apps Script Web App (ใช้ตัวเดียวกันทุกแบบประเมิน) ***
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyc1lh056zuLulorAIMTn-WR3UAd-1oINxx5SODZ0nLwUEUJVXH-xO8JBNU4QIriVUr/exec";
+// *** URL ของ Google Apps Script Web App (อัปเดตเป็นตัวล่าสุดแล้ว) ***
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwU_V6UgZb2stl04MWE2McjuZxPi4NyeghLbNhi6j_4nEc8ztLNAeXjMyyrzTMGfDa6/exec";
 
 const scale4 = [
   {label:'ไม่มีเลย', score:0},
@@ -380,7 +370,6 @@ const auditConcern = [
   {label:'เคย แต่ไม่ใช่ในปีที่ผ่านมา', score:2},
   {label:'เคยในปีที่ผ่านมา', score:4}
 ];
-
 const ASSESSMENTS = {
   '2q':{
     code:'2Q', title:'2Q', full:'คัดกรองภาวะซึมเศร้าเบื้องต้น',
@@ -522,11 +511,9 @@ const ASSESSMENTS = {
     ]
   }
 };
-
 let currentId = null;
 let currentAnswers = [];
 let lastResult = null;
-
 function initGrid(){
   const grid = document.getElementById('view-grid');
   grid.innerHTML = '';
@@ -548,14 +535,12 @@ function initGrid(){
     grid.appendChild(card);
   });
 }
-
 function triggerAnimation(elementId) {
   const el = document.getElementById(elementId);
   el.classList.remove('view-container');
   void el.offsetWidth;
   el.classList.add('view-container');
 }
-
 function showGrid(){
   document.getElementById('view-grid').style.display = 'grid';
   document.getElementById('view-quiz').style.display = 'none';
@@ -565,7 +550,6 @@ function showGrid(){
   triggerAnimation('view-grid');
   window.scrollTo({top:0,behavior:'smooth'});
 }
-
 function openAssessment(id){
   currentId = id;
   const a = ASSESSMENTS[id];
@@ -605,7 +589,6 @@ function openAssessment(id){
   triggerAnimation('view-quiz');
   window.scrollTo({top: 0, behavior: 'smooth'});
 }
-
 function selectOpt(qIndex, optIndex, score) {
   currentAnswers[qIndex] = score;
   const a = ASSESSMENTS[currentId];
@@ -623,7 +606,6 @@ function selectOpt(qIndex, optIndex, score) {
   }
   updateProgress();
 }
-
 function updateProgress() {
   const total = currentAnswers.length;
   const answered = currentAnswers.filter(val => val !== null).length;
@@ -633,7 +615,6 @@ function updateProgress() {
   const submitBtn = document.getElementById('submitBtn');
   submitBtn.disabled = answered < total;
 }
-
 function getMaxScore(assessment) {
   if (assessment.customQuestions) {
     return assessment.customQuestions.reduce((sum, q) => {
@@ -644,7 +625,6 @@ function getMaxScore(assessment) {
   const maxOpt = Math.max(...assessment.options.map(o => o.score));
   return assessment.questions.length * maxOpt;
 }
-
 function submitQuiz() {
   const totalScore = currentAnswers.reduce((sum, val) => sum + (val || 0), 0);
   const a = ASSESSMENTS[currentId];
@@ -675,13 +655,10 @@ function submitQuiz() {
   triggerAnimation('view-result');
   window.scrollTo({top: 0, behavior: 'smooth'});
 }
-
 async function emailResult() {
   if (!lastResult) return;
-
   const name = document.getElementById('senderName').value.trim();
   const phone = document.getElementById('senderPhone').value.trim();
-
   if (!name) {
     alert('กรุณากรอกชื่อ-นามสกุล');
     return;
@@ -690,18 +667,12 @@ async function emailResult() {
     alert('กรุณากรอกเบอร์โทรศัพท์');
     return;
   }
-
   const btn = document.getElementById('sendEmailBtn');
   const hint = document.getElementById('emailHint');
-
   btn.disabled = true;
   btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> กำลังส่ง...';
   hint.textContent = 'กำลังบันทึกข้อมูลลง Google Sheets...';
-
   const cleanAdvice = lastResult.band.advice.replace(/<[^>]*>?/gm, '');
-
-  // ค่า assessment_type จะตรงกับรหัสแบบประเมิน (2Q, 9Q, 8Q, ST-5, GAD-7, AUDIT)
-  // Apps Script (Code.gs) จะใช้ค่านี้เป็นชื่อชีต (tab) แยกให้อัตโนมัติ
   const payload = {
     assessment_type: lastResult.code,
     full_name: name,
@@ -710,26 +681,19 @@ async function emailResult() {
     result_text: lastResult.band.label,
     notes: cleanAdvice
   };
-
   try {
-    // mode: "no-cors" + Content-Type: text/plain จำเป็นสำหรับ Apps Script Web App
-    // เพื่อเลี่ยงปัญหา CORS preflight (Apps Script ไม่รองรับการตั้งค่า CORS header เอง)
-    // ข้อจำกัด: โหมดนี้อ่านผลลัพธ์ตอบกลับไม่ได้ จึงถือว่าสำเร็จถ้า fetch ไม่ throw error
     await fetch(WEB_APP_URL, {
       method: 'POST',
       mode: 'no-cors',
       headers: { 'Content-Type': 'text/plain' },
       body: JSON.stringify(payload)
     });
-
     hint.innerHTML = '<span style="color: var(--success);"><i class="fa-solid fa-circle-check"></i> บันทึกผลประเมินเรียบร้อยแล้ว!</span>';
     btn.innerHTML = '<i class="fa-solid fa-check"></i> ส่งสำเร็จ';
-
     setTimeout(() => {
       btn.disabled = false;
       btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> ส่งผลประเมิน';
     }, 3000);
-
   } catch (error) {
     console.error(error);
     hint.innerHTML = '<span style="color: var(--danger);"><i class="fa-solid fa-circle-exclamation"></i> เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง (ตรวจสอบการเชื่อมต่ออินเทอร์เน็ต)</span>';
@@ -737,7 +701,6 @@ async function emailResult() {
     btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> ส่งผลประเมิน';
   }
 }
-
 document.addEventListener('DOMContentLoaded', () => {
   initGrid();
 });
