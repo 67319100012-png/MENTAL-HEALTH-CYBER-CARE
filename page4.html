@@ -1,868 +1,767 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>แบบทดสอบสติปัญญาและความสามารถทางปัญญา - Mental Health Cyber-Care</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <style>
-    :root {
-      --brand-dark: #1E293B;
-      --teal-dark: #2563A8;
-      --teal-main: #4A90C4;
-      --teal-soft: #A9CDE8;
-      --teal-light: #E8F1FA;
-      --page-bg: #F4F8FC;
-      --cream: #FBFCFE;
-      --primary-grad: linear-gradient(135deg, #5BA3D0 0%, #2563A8 100%);
-      --primary-hover: linear-gradient(135deg, #4790BE 0%, #1D4F86 100%);
-      --accent-grad: linear-gradient(135deg, #C9A227 0%, #E8C468 100%);
-      --text-main: #1E293B;
-      --text-muted: #64748B;
-      --border: #D6E4F0;
-      --border-light: rgba(214, 228, 240, 0.8);
-      --success: #4C9A7E;
-      --warning: #C9922E;
-      --danger: #C1654A;
-      --radius-lg: 24px;
-      --radius-md: 16px;
-      --radius-sm: 12px;
-      --shadow-sm: 0 4px 14px rgba(37, 99, 168, 0.10);
-      --shadow-md: 0 16px 32px -6px rgba(37, 99, 168, 0.14), 0 6px 12px -4px rgba(37, 99, 168, 0.07);
-      --shadow-hover: 0 22px 40px -10px rgba(37, 99, 168, 0.26);
-    }
-    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-    body {
-      margin: 0;
-      background: var(--page-bg);
-      font-family: 'Sarabun', sans-serif;
-      color: var(--text-main);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      overflow-x: hidden;
-      position: relative;
-    }
-    .bg-blob {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(90px);
-      z-index: -1;
-      opacity: 0.55;
-      animation: floatBlob 18s infinite alternate ease-in-out;
-    }
-    .blob-1 { width: 420px; height: 420px; background: #CFE2F5; top: -110px; left: -110px; }
-    .blob-2 { width: 460px; height: 460px; background: #E3EDF7; bottom: -160px; right: -110px; animation-delay: -6s; }
-    .blob-3 { width: 320px; height: 320px; background: #D8E9F7; top: 40%; left: 50%; transform: translate(-50%, -50%); animation-delay: -12s; }
-    @keyframes floatBlob {
-      0% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(60px, 40px) scale(1.15); }
-      100% { transform: translate(-40px, 80px) scale(0.9); }
-    }
-    h1, h2, h3, .font-title { font-family: 'Kanit', sans-serif; }
-    header.nav-header {
-      background: rgba(251, 250, 243, 0.9);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border-light);
-      padding: 14px 6%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: var(--shadow-sm);
-      transition: all 0.3s ease;
-    }
-    header.nav-header .logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-family: 'Kanit', sans-serif;
-      font-weight: 700;
-      font-size: 1.1rem;
-      color: var(--teal-dark);
-      text-decoration: none;
-    }
-    header.nav-header .logo .badge {
-      width: 44px; height: 44px; border-radius: 50%;
-      background: var(--primary-grad); color: #fff;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.2rem;
-      box-shadow: 0 4px 12px rgba(37, 99, 168, 0.35);
-      animation: pulseIcon 3s infinite ease-in-out;
-    }
-    @keyframes pulseIcon {
-      0%, 100% { transform: scale(1); box-shadow: 0 4px 12px rgba(37, 99, 168, 0.35); }
-      50% { transform: scale(1.08); box-shadow: 0 8px 20px rgba(37, 99, 168, 0.55); }
-    }
-    header.nav-header .logo small { display: block; font-family: 'Sarabun', sans-serif; font-weight: 400; font-size: 0.72rem; color: var(--text-muted); }
-    .nav-actions { display: flex; align-items: center; gap: 12px; }
-    .btn-nav-prev {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--primary-grad); color: #ffffff;
-      padding: 10px 20px; border-radius: 30px;
-      font-size: 14px; font-weight: 600; text-decoration: none; cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-      box-shadow: 0 4px 14px rgba(37, 99, 168, 0.3);
-    }
-    .btn-nav-prev:hover { background: var(--primary-hover); transform: translateY(-3px) scale(1.03); box-shadow: 0 8px 20px rgba(37, 99, 168, 0.42); }
-    .btn-nav-back {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(255, 255, 255, 0.9);
-      border: 1.5px solid var(--teal-soft); color: var(--teal-dark);
-      padding: 9px 18px; border-radius: 30px;
-      font-size: 13.5px; font-weight: 600; cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-      box-shadow: 0 2px 10px rgba(37, 99, 168, 0.12);
-    }
-    .btn-nav-back:hover { background: var(--teal-light); border-color: var(--teal-dark); transform: translateY(-2px) scale(1.03); }
-    header.hero { max-width: 900px; margin: 0 auto; padding: 40px 20px 10px; text-align: center; animation: fadeInUp 0.8s ease-out; }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 6px 18px; background: rgba(232, 241, 250, 0.9); color: var(--teal-dark);
-      border-radius: 20px; font-size: 12px; font-weight: 700; letter-spacing: 0.5px;
-      margin-bottom: 16px; border: 1px solid var(--teal-soft);
-    }
-    header.hero h1 {
-      font-size: clamp(26px, 4.5vw, 38px); margin: 0 0 14px; line-height: 1.25;
-      background: linear-gradient(135deg, #1E293B 0%, #2563A8 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    }
-    header.hero p { font-size: 15.5px; color: var(--text-muted); max-width: 680px; margin: 0 auto; line-height: 1.65; }
-    .staff-global-alert { max-width: 900px; margin: 18px auto 0; padding: 0 20px; }
-    .staff-global-box {
-      background: rgba(255, 251, 235, 0.9); border: 1.5px dashed var(--warning);
-      border-radius: var(--radius-md); padding: 14px 20px; font-size: 13.5px;
-      color: #854D0E; line-height: 1.6; display: flex; align-items: flex-start; gap: 12px;
-    }
-    .staff-global-box i { font-size: 18px; color: var(--warning); margin-top: 2px; flex-shrink: 0; }
-    .feature-strip {
-      max-width: 900px; margin: 24px auto 6px; padding: 0 20px;
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
-    }
-    @media (max-width: 640px) { .feature-strip { grid-template-columns: 1fr; } }
-    .feature-item {
-      background: rgba(255,255,255,0.75); border: 1px solid var(--border-light);
-      border-radius: var(--radius-md); padding: 18px 16px; text-align: center;
-      box-shadow: var(--shadow-sm);
-    }
-    .feature-item i { font-size: 22px; color: var(--teal-dark); margin-bottom: 8px; display:block; }
-    .feature-item .ftitle { font-family:'Kanit',sans-serif; font-weight:600; font-size: 14.5px; margin-bottom: 4px; }
-    .feature-item .fdesc { font-size: 12.5px; color: var(--text-muted); line-height: 1.5; }
-    main { max-width: 900px; width: 100%; margin: 0 auto; padding: 10px 20px 50px; flex: 1; }
-    .view-container { animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px);} to { opacity: 1; transform: translateY(0);} }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; margin-top: 10px; }
-    .card {
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(12px);
-      border-radius: var(--radius-lg);
-      padding: 26px;
-      border: 1.5px solid var(--border-light);
-      box-shadow: var(--shadow-md);
-      cursor: pointer;
-      transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-      display: flex; flex-direction: column; position: relative; overflow: hidden;
-    }
-    .card::after { content:''; position:absolute; inset:0; border-radius: var(--radius-lg); border: 2px solid transparent; transition: border-color 0.3s ease; }
-    .card:hover { transform: translateY(-8px) scale(1.02); box-shadow: var(--shadow-hover); background: rgba(255,255,255,0.97); }
-    .card:hover::after { border-color: var(--teal-main); }
-    .card .icon {
-      width: 56px; height: 56px; border-radius: var(--radius-md);
-      background: var(--primary-grad); color: #fff;
-      display: flex; align-items: center; justify-content: center; font-size: 22px;
-      margin-bottom: 18px; box-shadow: 0 8px 16px rgba(37, 99, 168, 0.3);
-      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-    .card:hover .icon { transform: scale(1.12) rotate(6deg); }
-    .card .code { font-size: 20px; font-weight: 700; margin-bottom: 6px; color: var(--brand-dark); }
-    .card .desc { font-size: 14px; color: var(--text-muted); line-height: 1.55; margin-bottom: 22px; flex: 1; }
-    .card .card-footer { display: flex; align-items: center; justify-content: space-between; }
-    .card .qcount { font-size: 12.5px; font-weight: 600; color: var(--teal-dark); background: var(--teal-light); border-radius: 20px; padding: 5px 14px; }
-    .card .btn-start-text { font-size: 13.5px; color: var(--teal-dark); font-weight: 700; display: flex; align-items: center; gap: 4px; transition: gap 0.2s ease; }
-    .card:hover .btn-start-text { gap: 8px; color: var(--teal-main); }
-    .panel {
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(16px);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-md);
-      border: 1.5px solid var(--border-light);
-      padding: 36px;
-    }
-    @media (max-width: 600px) {
-      .panel { padding: 22px 18px; }
-      header.nav-header { flex-direction: column; gap: 14px; padding: 14px 4%; text-align: center; }
-      .nav-actions { width: 100%; justify-content: center; flex-wrap: wrap; }
-    }
-    .panel-header-actions { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; padding-bottom: 16px; border-bottom: 1px solid var(--border-light); }
-    .quiz-title { font-size: 24px; margin: 0 0 6px; color: var(--brand-dark); }
-    .quiz-sub { font-size: 14.5px; color: var(--text-muted); margin: 0 0 20px; line-height: 1.6; }
-    .target-select-wrap {
-      background: var(--teal-light);
-      border-radius: var(--radius-md);
-      padding: 16px 20px;
-      margin-bottom: 24px;
-      border: 1px solid var(--teal-soft);
-    }
-    .target-select-wrap .section-label { font-family: 'Kanit', sans-serif; font-size: 14px; font-weight: 600; color: var(--teal-dark); margin-bottom: 10px; }
-    .target-chips { display: flex; flex-wrap: wrap; gap: 10px; }
-    .chip-btn {
-      border: 1.5px solid var(--border);
-      background: #FFF;
-      color: var(--text-main);
-      padding: 8px 18px;
-      border-radius: 20px;
-      font-size: 13.5px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.25s ease;
-    }
-    .chip-btn:hover { border-color: var(--teal-main); background: #FFF; }
-    .chip-btn.selected { background: var(--primary-grad); color: #FFF; border-color: transparent; box-shadow: 0 4px 12px rgba(37, 99, 168, 0.25); }
-    .progress-wrap { background: var(--teal-light); border-radius: 12px; height: 12px; overflow: hidden; margin-bottom: 30px; position: relative; }
-    .progress-fill { background: var(--primary-grad); height: 100%; width: 0%; transition: width 0.4s cubic-bezier(0.4,0,0.2,1); position: relative; border-radius: 12px; }
-    .progress-fill::after {
-      content: ''; position: absolute; inset: 0;
-      background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
-      animation: shimmer 2s infinite;
-    }
-    @keyframes shimmer { 0% { transform: translateX(-100%);} 100% { transform: translateX(100%);} }
-    .question { padding: 22px 0; border-bottom: 1px dashed var(--border); animation: fadeInUp 0.4s ease; }
-    .question:last-child { border-bottom: none; }
-    .question .qnum { font-size: 13.5px; font-weight: 700; color: var(--teal-dark); margin-bottom: 8px; }
-    .question .qtext { font-size: 16.5px; font-weight: 600; line-height: 1.55; margin-bottom: 16px; color: var(--brand-dark); }
-    .options { display: flex; flex-direction: column; gap: 10px; }
-    .opt {
-      display: flex; align-items: center; gap: 14px;
-      border: 1.5px solid var(--border-light); border-radius: var(--radius-md);
-      padding: 14px 18px; cursor: pointer; font-size: 15px;
-      background: rgba(255, 255, 255, 0.8);
-      transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
-      user-select: none; min-height: 48px; position: relative;
-    }
-    .opt:hover { border-color: var(--teal-main); background: var(--teal-light); transform: translateX(4px); }
-    .opt input { accent-color: var(--teal-dark); width: 19px; height: 19px; flex-shrink: 0; }
-    .opt.selected {
-      border-color: var(--teal-dark);
-      background: linear-gradient(90deg, var(--teal-light) 0%, #D6EAE2 100%);
-      font-weight: 600; color: var(--teal-dark);
-      transform: translateX(6px);
-      box-shadow: 0 4px 14px rgba(37, 99, 168, 0.16);
-    }
-    .btn-primary {
-      background: var(--primary-grad); color: #fff; border: none;
-      padding: 15px 38px; border-radius: 30px;
-      font-size: 15.5px; font-weight: 700; cursor: pointer;
-      box-shadow: 0 6px 20px rgba(37, 99, 168, 0.32);
-      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-      width: 100%; max-width: 320px;
-      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-    }
-    .btn-primary:hover:not(:disabled) { background: var(--primary-hover); transform: translateY(-3px) scale(1.02); box-shadow: 0 10px 25px rgba(37, 99, 168, 0.42); }
-    .btn-primary:disabled { opacity: 0.45; cursor: not-allowed; transform: none; box-shadow: none; }
-    .btn-secondary {
-      background: #fff; border: 1.5px solid var(--teal-soft); color: var(--teal-dark);
-      padding: 13px 26px; border-radius: 30px;
-      font-size: 14.5px; font-weight: 600; cursor: pointer;
-      transition: all 0.25s ease;
-      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-    }
-    .btn-secondary:hover { background: var(--teal-light); border-color: var(--teal-dark); transform: translateY(-2px); }
-    .btn-secondary:disabled { opacity: 0.6; cursor: not-allowed; }
-    .submit-row { margin-top: 32px; text-align: center; }
-    .hint { text-align: center; font-size: 13.5px; color: var(--text-muted); margin-top: 12px; }
-    .result-head { text-align: center; margin-bottom: 16px; }
-    .score-big {
-      font-size: 60px; font-weight: 700; text-align: center; line-height: 1; margin: 12px 0 6px;
-      background: var(--primary-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      animation: popScore 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-    @keyframes popScore { 0% { transform: scale(0.5); opacity: 0;} 100% { transform: scale(1); opacity: 1;} }
-    .score-label { text-align: center; font-size: 14.5px; color: var(--text-muted); margin-bottom: 22px; }
-    .level-badge { display: inline-block; padding: 8px 26px; border-radius: 30px; font-size: 15.5px; font-weight: 700; color: #fff; box-shadow: var(--shadow-sm); animation: zoomIn 0.5s ease; }
-    @keyframes zoomIn { from { transform: scale(0.8); opacity: 0;} to { transform: scale(1); opacity: 1;} }
-    .breakdown-box {
-      background: rgba(232, 241, 250, 0.5);
-      border: 1.5px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 20px; margin: 24px 0 16px;
-    }
-    .breakdown-title { font-family: 'Kanit', sans-serif; font-size: 15px; font-weight: 600; color: var(--teal-dark); margin-bottom: 12px; }
-    .breakdown-item { display: flex; justify-content: space-between; align-items: center; padding: 9px 0; border-bottom: 1px dashed var(--border); font-size: 14px; }
-    .breakdown-item:last-child { border-bottom: none; }
-    .breakdown-tag { font-size: 12.5px; padding: 3px 12px; border-radius: 14px; color: #FFF; font-weight: 600; background: var(--teal-dark); font-family: 'Kanit', sans-serif; }
-    .advice-box {
-      background: rgba(232, 241, 250, 0.7);
-      border: 1.5px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 24px; font-size: 15.5px; line-height: 1.75; margin: 16px 0 24px;
-      box-shadow: inset 0 2px 6px rgba(37, 99, 168, 0.05);
-    }
-    .advice-box b { color: var(--teal-dark); }
-    .email-box { background: rgba(251,250,243,0.9); border: 1.5px solid var(--border-light); border-radius: var(--radius-md); padding: 22px; margin-top: 26px; }
-    .email-box label { display: block; font-size: 14px; font-weight: 700; margin-bottom: 12px; color: var(--brand-dark); }
-    .email-row { display: flex; gap: 12px; flex-wrap: wrap; flex-direction: column; }
-    .email-row input {
-      flex: 1;
-      min-width: 240px;
-      padding: 13px 18px;
-      border-radius: var(--radius-sm);
-      border: 1.5px solid var(--border);
-      font-family: inherit;
-      font-size: 14.5px;
-      outline: none;
-      transition: all 0.25s ease;
-    }
-    .email-row input:focus { border-color: var(--teal-dark); box-shadow: 0 0 0 4px rgba(37, 99, 168, 0.18); background: #fff; }
-    .result-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 32px; }
-    footer.note { max-width: 900px; margin: 24px auto 30px; padding: 0 20px; text-align: center; font-size: 13px; color: var(--text-muted); line-height: 1.6; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>แบบทดสอบสติปัญญาและความสามารถทางปัญญา - โครงการ อสม. ฮีลใจ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root {
+    --brand-dark: #1E293B;
+    --teal-dark: #2563A8;
+    --teal-main: #4A90C4;
+    --teal-soft: #A9CDE8;
+    --teal-light: #E8F1FA;
+    --page-bg: #F4F8FC;
+    --cream: #FBFCFE;
+    --primary-grad: linear-gradient(135deg, #5BA3D0 0%, #2563A8 100%);
+    --primary-hover: linear-gradient(135deg, #4790BE 0%, #1D4F86 100%);
+    --text-main: #1E293B;
+    --text-muted: #64748B;
+    --border: #D6E4F0;
+    --border-light: rgba(214, 228, 240, 0.8);
+    --success: #4C9A7E;
+    --warning: #C9922E;
+    --danger: #C1654A;
+    --danger-soft: #FBE7E1;
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --radius-sm: 12px;
+    --shadow-sm: 0 4px 14px rgba(37, 99, 168, 0.10);
+    --shadow-md: 0 16px 32px -6px rgba(37, 99, 168, 0.14), 0 6px 12px -4px rgba(37, 99, 168, 0.07);
+    --shadow-hover: 0 22px 40px -10px rgba(37, 99, 168, 0.26);
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    margin: 0;
+    background: var(--page-bg);
+    font-family: 'Sarabun', sans-serif;
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    position: relative;
+  }
+  .bg-blob { position: fixed; border-radius: 50%; filter: blur(90px); z-index: -1; opacity: 0.55; animation: floatBlob 18s infinite alternate ease-in-out; }
+  .blob-1 { width: 420px; height: 420px; background: #CFE2F5; top: -110px; left: -110px; }
+  .blob-2 { width: 460px; height: 460px; background: #E3EDF7; bottom: -160px; right: -110px; animation-delay: -6s; }
+  .blob-3 { width: 320px; height: 320px; background: #D8E9F7; top: 40%; left: 50%; transform: translate(-50%, -50%); animation-delay: -12s; }
+  @keyframes floatBlob {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(60px, 40px) scale(1.15); }
+    100% { transform: translate(-40px, 80px) scale(0.9); }
+  }
+  h1, h2, h3, .font-title { font-family: 'Kanit', sans-serif; }
+  header.nav-header {
+    background: rgba(251, 252, 254, 0.9);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border-light);
+    padding: 14px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: var(--shadow-sm);
+  }
+  header.nav-header .logo {
+    display: flex; align-items: center; gap: 12px;
+    font-family: 'Kanit', sans-serif; font-weight: 700; font-size: 1.05rem;
+    color: var(--teal-dark); text-decoration: none;
+  }
+  header.nav-header .logo .badge {
+    width: 42px; height: 42px; border-radius: 50%;
+    background: var(--primary-grad); color: #fff;
+    display: flex; align-items: center; justify-content: center; font-size: 1.15rem;
+    box-shadow: 0 4px 12px rgba(37,99,168,0.35);
+    animation: pulseIcon 3s infinite ease-in-out;
+  }
+  @keyframes pulseIcon {
+    0%, 100% { transform: scale(1); box-shadow: 0 4px 12px rgba(37,99,168,0.35); }
+    50% { transform: scale(1.08); box-shadow: 0 8px 20px rgba(37,99,168,0.55); }
+  }
+  header.nav-header .logo small { display: block; font-family: 'Sarabun', sans-serif; font-weight: 400; font-size: 0.68rem; color: var(--text-muted); }
+  nav { display: flex; align-items: center; gap: 22px; }
+  nav a.nav-cta {
+    background: var(--primary-grad); color: #fff; padding: 9px 20px; border-radius: 30px; font-weight: 600;
+    box-shadow: 0 4px 14px rgba(37,99,168,0.3); text-decoration: none; font-size: 0.9rem;
+    display: inline-flex; align-items: center; gap: 8px;
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  nav a.nav-cta:hover {
+    background: var(--primary-hover); transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(37,99,168,0.4);
+  }
+  @media (max-width: 768px) {
+    header.nav-header { flex-direction: row; gap: 12px; padding: 12px 5%; }
+  }
+  header.hero { max-width: 900px; margin: 0 auto; padding: 34px 24px 8px; text-align: center; animation: fadeInUp 0.8s ease-out; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 18px; background: rgba(232, 241, 250, 0.9); color: var(--teal-dark);
+    border-radius: 20px; font-size: 12px; font-weight: 700; letter-spacing: 0.5px;
+    margin-bottom: 14px; border: 1px solid var(--teal-soft); font-family: 'Kanit', sans-serif;
+  }
+  header.hero h1 {
+    font-size: clamp(26px, 4vw, 36px); margin: 0 0 12px; line-height: 1.25;
+    background: linear-gradient(135deg, #1E293B 0%, #2563A8 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  header.hero p { font-size: 15px; color: var(--text-muted); max-width: 660px; margin: 0 auto; line-height: 1.7; }
+  .feature-strip { max-width: 900px; margin: 24px auto 6px; padding: 0 20px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  @media (max-width: 640px) { .feature-strip { grid-template-columns: 1fr; } }
+  .feature-item { background: rgba(255,255,255,0.75); border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 18px 16px; text-align: center; box-shadow: var(--shadow-sm); }
+  .feature-item i { font-size: 22px; color: var(--teal-dark); margin-bottom: 8px; display: block; }
+  .feature-item .ftitle { font-family: 'Kanit', sans-serif; font-weight: 600; font-size: 14.5px; margin-bottom: 4px; }
+  .feature-item .fdesc { font-size: 12.5px; color: var(--text-muted); line-height: 1.5; }
+  main { max-width: 900px; width: 100%; margin: 0 auto; padding: 10px 20px 50px; flex: 1; }
+  .view-container { animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px);} to { opacity: 1; transform: translateY(0);} }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; margin-top: 10px; }
+  .card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    border-radius: var(--radius-lg);
+    padding: 26px;
+    border: 1.5px solid var(--border-light);
+    box-shadow: var(--shadow-md);
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: flex; flex-direction: column; position: relative; overflow: hidden;
+  }
+  .card::after { content:''; position:absolute; inset:0; border-radius: var(--radius-lg); border: 2px solid transparent; transition: border-color 0.3s ease; }
+  .card:hover { transform: translateY(-8px) scale(1.02); box-shadow: var(--shadow-hover); background: rgba(255,255,255,0.97); }
+  .card:hover::after { border-color: var(--teal-main); }
+  .card .icon {
+    width: 56px; height: 56px; border-radius: var(--radius-md);
+    background: var(--primary-grad); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Kanit', sans-serif; font-weight: 700; font-size: 15px;
+    margin-bottom: 18px; box-shadow: 0 8px 16px rgba(37,99,168,0.3);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .card:hover .icon { transform: scale(1.12) rotate(6deg); }
+  .card .code { font-size: 19px; font-weight: 700; margin-bottom: 6px; color: var(--brand-dark); font-family:'Kanit',sans-serif; }
+  .card .desc { font-size: 14px; color: var(--text-muted); line-height: 1.55; margin-bottom: 22px; flex: 1; }
+  .card .card-footer { display: flex; align-items: center; justify-content: space-between; }
+  .card .qcount { font-size: 12.5px; font-weight: 600; color: var(--teal-dark); background: var(--teal-light); border-radius: 20px; padding: 5px 14px; }
+  .card .btn-start-text { font-size: 13.5px; color: var(--teal-dark); font-weight: 700; display: flex; align-items: center; gap: 4px; transition: gap 0.2s ease; }
+  .card:hover .btn-start-text { gap: 8px; color: var(--teal-main); }
+  .panel { background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(16px); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); border: 1.5px solid var(--border-light); padding: 36px; margin-top: 18px; }
+  @media (max-width: 600px) { .panel { padding: 22px 18px; } }
+  .btn-ghost {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.9); border: 1.5px solid var(--teal-soft); color: var(--teal-dark);
+    padding: 9px 20px; border-radius: 30px;
+    font-family: 'Sarabun', sans-serif; font-size: 13.5px; font-weight: 600; cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .btn-ghost:hover { background: var(--teal-light); border-color: var(--teal-dark); transform: translateY(-2px); }
+  .btn-ghost:disabled { opacity: 0.6; cursor: not-allowed; }
+  .quiz-title { font-size: 23px; margin: 0 0 6px; color: var(--brand-dark); }
+  .quiz-sub { font-size: 14px; color: var(--text-muted); margin: 0 0 22px; line-height: 1.6; }
+  .staff-banner {
+    background: rgba(254, 243, 199, 0.85);
+    border: 1.5px solid #F59E0B;
+    border-radius: var(--radius-md);
+    padding: 14px 18px;
+    font-size: 14px;
+    color: #92400E;
+    margin-bottom: 22px;
+    line-height: 1.6;
+  }
+  .progress-wrap { background: var(--teal-light); border-radius: 12px; height: 12px; overflow: hidden; margin-bottom: 28px; position: relative; }
+  .progress-fill { background: var(--primary-grad); height: 100%; width: 0%; transition: width 0.4s cubic-bezier(0.4,0,0.2,1); position: relative; border-radius: 12px; }
+  .progress-fill::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+    animation: shimmer 2s infinite;
+  }
+  @keyframes shimmer { 0% { transform: translateX(-100%);} 100% { transform: translateX(100%);} }
+  .question { padding: 20px 0; border-bottom: 1px dashed var(--border); animation: fadeInUp 0.4s ease; }
+  .question:last-of-type { border-bottom: none; }
+  .question .qnum { font-size: 13px; font-weight: 700; color: var(--teal-dark); margin-bottom: 8px; }
+  .question .qtext { font-size: 16px; font-weight: 600; line-height: 1.55; margin-bottom: 14px; color: var(--brand-dark); }
+  .options { display: flex; flex-direction: column; gap: 10px; }
+  .opt {
+    display: flex; align-items: center; gap: 12px;
+    border: 1.5px solid var(--border-light); border-radius: var(--radius-md);
+    padding: 13px 16px; cursor: pointer; font-size: 14.5px;
+    background: rgba(255, 255, 255, 0.8);
+    transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+    user-select: none; min-height: 48px; position: relative;
+  }
+  .opt:hover { border-color: var(--teal-main); background: var(--teal-light); transform: translateX(4px); }
+  .opt input { accent-color: var(--teal-dark); width: 18px; height: 18px; flex-shrink: 0; }
+  .opt.selected {
+    border-color: var(--teal-dark);
+    background: linear-gradient(90deg, var(--teal-light) 0%, #D9EAF8 100%);
+    font-weight: 600; color: var(--teal-dark);
+    transform: translateX(6px);
+    box-shadow: 0 4px 14px rgba(37,99,168,0.16);
+  }
+  .submit-row { margin-top: 28px; text-align: center; }
+  .btn-primary {
+    background: var(--primary-grad); color: #fff; border: none;
+    padding: 14px 36px; border-radius: 30px;
+    font-family: 'Sarabun', sans-serif; font-size: 15px; font-weight: 700; cursor: pointer;
+    box-shadow: 0 6px 20px rgba(37,99,168,0.32);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    width: 100%; max-width: 320px;
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  }
+  .btn-primary:hover:not(:disabled) { background: var(--primary-hover); transform: translateY(-3px) scale(1.02); box-shadow: 0 10px 25px rgba(37,99,168,0.42); }
+  .btn-primary:disabled { opacity: 0.45; cursor: not-allowed; transform: none; box-shadow: none; }
+  .hint { text-align: center; font-size: 13px; color: var(--text-muted); margin-top: 12px; }
+  .info-body { font-size: 15px; line-height: 1.8; color: var(--text-main); margin-top: 16px; }
+  .info-box {
+    background: rgba(232, 241, 250, 0.8);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 20px; margin: 18px 0; font-size: 14.5px; line-height: 1.65;
+  }
+  .clock-wrap { display: flex; flex-direction: column; align-items: center; gap: 16px; margin: 22px 0; }
+  canvas { background: #fff; border: 2px solid var(--border); border-radius: 20px; touch-action: none; cursor: crosshair; box-shadow: var(--shadow-sm); }
+  .checklist-item {
+    display: flex; align-items: center; justify-content: space-between;
+    border: 1.5px solid var(--border-light); border-radius: var(--radius-md);
+    padding: 14px 18px; margin-bottom: 10px; background: rgba(255,255,255,0.85);
+  }
+  .toggle button {
+    border: 1.5px solid var(--border); background: #fff; border-radius: 20px;
+    padding: 6px 16px; font-size: 13.5px; cursor: pointer; font-family: 'Sarabun', sans-serif; font-weight: 600;
+    margin-left: 6px; transition: all 0.2s ease;
+  }
+  .toggle button.active-yes { background: var(--success); border-color: var(--success); color: #fff; box-shadow: 0 3px 10px rgba(76,154,126,0.3); }
+  .toggle button.active-no { background: var(--danger); border-color: var(--danger); color: #fff; box-shadow: 0 3px 10px rgba(193,101,74,0.3); }
+  .result-head { text-align: center; margin-bottom: 14px; }
+  .score-big {
+    font-size: 58px; font-weight: 700; text-align: center; line-height: 1; margin: 10px 0 6px;
+    background: var(--primary-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    animation: popScore 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    font-family: 'Kanit', sans-serif;
+  }
+  @keyframes popScore { 0% { transform: scale(0.5); opacity: 0;} 100% { transform: scale(1); opacity: 1;} }
+  .score-label { text-align: center; font-size: 14px; color: var(--text-muted); margin-bottom: 20px; }
+  .level-badge { display: inline-block; padding: 8px 24px; border-radius: 30px; font-size: 15px; font-weight: 700; color: #fff; box-shadow: var(--shadow-sm); animation: zoomIn 0.5s ease; font-family: 'Kanit', sans-serif; }
+  @keyframes zoomIn { from { transform: scale(0.8); opacity: 0;} to { transform: scale(1); opacity: 1;} }
+  .advice-box {
+    background: rgba(232, 241, 250, 0.7);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 22px; font-size: 15px; line-height: 1.75; margin: 22px 0;
+    box-shadow: inset 0 2px 6px rgba(37,99,168,0.05);
+  }
+  .advice-box b { color: var(--teal-dark); }
+  .email-box { background: rgba(251,252,254,0.9); border: 1.5px solid var(--border-light); border-radius: var(--radius-md); padding: 22px; margin-top: 8px; }
+  .email-box label { display: block; font-size: 14px; font-weight: 700; margin-bottom: 12px; color: var(--brand-dark); }
+  .email-row { display: flex; gap: 12px; flex-wrap: wrap; flex-direction: column; }
+  .email-row input { 
+    flex: 1; 
+    min-width: 220px; 
+    padding: 13px 16px; 
+    border-radius: var(--radius-sm); 
+    border: 1.5px solid var(--border); 
+    font-family: inherit; 
+    font-size: 14.5px; 
+    outline: none; 
+    transition: all 0.25s ease; 
+  }
+  .email-row input:focus { border-color: var(--teal-dark); box-shadow: 0 0 0 4px rgba(37,99,168,0.18); background: #fff; }
+  .result-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 28px; }
+  footer.note { max-width: 900px; margin: 24px auto 30px; padding: 0 20px; text-align: center; font-size: 12.5px; color: var(--text-muted); line-height: 1.7; }
+</style>
 </head>
 <body>
-  <div class="bg-blob blob-1"></div>
-  <div class="bg-blob blob-2"></div>
-  <div class="bg-blob blob-3"></div>
+<div class="bg-blob blob-1"></div>
+<div class="bg-blob blob-2"></div>
+<div class="bg-blob blob-3"></div>
 
-  <header class="nav-header">
-    <a href="#" onclick="showGrid()" class="logo">
-      <span class="badge"><i class="fa-solid fa-child-reaching"></i></span>
-      <span>MENTAL HEALTH CYBER-CARE<small>โครงการ อสม. ฮีลใจ • เด็กและวัยรุ่น</small></span>
-    </a>
-    <div class="nav-actions">
-      <a href="assessment.html" class="btn-nav-prev" onclick="showGrid()">
-        <i class="fa-solid fa-arrow-left"></i> ย้อนกลับหน้าหลัก
-      </a>
-      <button class="btn-nav-back" id="navBackBtn" style="display:none;" onclick="showGrid()">
-        <i class="fa-solid fa-grip"></i> เลือกแบบประเมิน
-      </button>
-    </div>
-  </header>
+<header class="nav-header">
+  <a href="index.html" class="logo">
+    <span class="badge"><i class="fa-solid fa-brain"></i></span>
+    <span>MENTAL HEALTH CYBER-CARE<small>โครงการ อสม. ฮีลใจ</small></span>
+  </a>
+  <nav>
+    <a href="index.html" class="nav-cta"><i class="fa-solid fa-arrow-left"></i> ย้อนกลับหน้าหลัก</a>
+  </nav>
+</header>
 
-  <div id="heroWrapper">
-    <header class="hero">
-      <span class="hero-badge"><i class="fa-solid fa-clipboard-check"></i> DEVELOPMENT & BEHAVIOR SCREENING</span>
-      <h1>แบบประเมินพัฒนาการและพฤติกรรมเด็ก</h1>
-      <p>เครื่องมือคัดกรองมาตรฐานสำหรับผู้ปกครอง ครู และ อสม. เพื่อประเมินความเสี่ยงด้านพัฒนาการ พฤติกรรม และสุขภาพจิตเด็กเบื้องต้น</p>
-    </header>
-    <div class="staff-global-alert">
-      <div class="staff-global-box">
-        <i class="fa-solid fa-circle-exclamation"></i>
-        <div>
-          <b>ข้อแนะนำในการใช้งาน:</b> แบบประเมินชุดนี้ออกแบบเพื่อใช้ประเมินพัฒนาการและสังเกตพฤติกรรมเด็กอย่างครอบคลุม หากพบข้อสงสัยหรือพัฒนาการล่าช้า ควรได้รับการตรวจประเมินยืนยันโดยกุมารแพทย์หรือผู้เชี่ยวชาญเพิ่มเติม
-        </div>
-      </div>
-    </div>
-    <div class="feature-strip">
-      <div class="feature-item">
-        <i class="fa-solid fa-phone-volume"></i>
-        <div class="ftitle">สายด่วน 1323</div>
-        <div class="fdesc">ปรึกษาปัญหาสุขภาพจิตและพัฒนาการเด็ก ฟรี 24 ชม.</div>
-      </div>
-      <div class="feature-item">
-        <i class="fa-solid fa-scale-balanced"></i>
-        <div class="ftitle">เกณฑ์มาตรฐาน</div>
-        <div class="fdesc">อิงตามมาตรฐาน DSPM, Denver II, SDQ, SNAP-IV และ M-CHAT</div>
-      </div>
-      <div class="feature-item">
-        <i class="fa-solid fa-user-shield"></i>
-        <div class="ftitle">ปลอดภัยเป็นความลับ</div>
-        <div class="fdesc">ไม่มีการจัดเก็บข้อมูลส่วนบุคคลลงเซิร์ฟเวอร์ใด ๆ</div>
-      </div>
-    </div>
+<header class="hero" id="heroHeader">
+  <div><span class="hero-badge"><i class="fa-solid fa-brain"></i> COGNITIVE & INTELLIGENCE TESTS</span></div>
+  <h1>แบบทดสอบสติปัญญาและความสามารถทางปัญญา</h1>
+  <p>เครื่องมือคัดกรองภาวะสมองเสื่อมและความสามารถทางปัญญาเบื้องต้น สำหรับ อสม./เจ้าหน้าที่สาธารณสุขใช้ประกอบการสัมภาษณ์และสังเกตผู้รับบริการโดยตรง</p>
+</header>
+
+<div class="feature-strip" id="featureStrip">
+  <div class="feature-item">
+    <i class="fa-solid fa-user-doctor"></i>
+    <div class="ftitle">มีแบบสำหรับเจ้าหน้าที่</div>
+    <div class="fdesc">TMSE และ Clock Drawing ควรให้ อสม./เจ้าหน้าที่เป็นผู้ประเมิน</div>
   </div>
+  <div class="feature-item">
+    <i class="fa-solid fa-pen-ruler"></i>
+    <div class="ftitle">วาดภาพได้จริง</div>
+    <div class="fdesc">Clock Drawing Test มีแคนวาสให้วาดนาฬิกาโต้ตอบได้ทันที</div>
+  </div>
+  <div class="feature-item">
+    <i class="fa-solid fa-scale-balanced"></i>
+    <div class="ftitle">เคารพลิขสิทธิ์</div>
+    <div class="fdesc">MMSE/MoCA เป็นข้อมูลอ้างอิง แนะนำ TMSE เป็นทางเลือกใช้งานฟรี</div>
+  </div>
+</div>
 
-  <main>
-    <section id="view-grid" class="grid view-container"></section>
+<main>
+  <section id="view-grid" class="grid view-container"></section>
 
-    <section id="view-quiz" class="panel view-container" style="display:none;">
-      <div class="panel-header-actions">
-        <button class="btn-nav-back" onclick="showGrid()"><i class="fa-solid fa-arrow-left"></i> ย้อนกลับไปหน้าเลือกแบบประเมิน</button>
-      </div>
-      <h2 class="quiz-title" id="quizTitle"></h2>
-      <p class="quiz-sub" id="quizSub"></p>
-      <div id="targetWrap" class="target-select-wrap" style="display:none;">
-        <div id="targetLabel" class="section-label"></div>
-        <div id="targetChips" class="target-chips"></div>
-      </div>
-      <div class="progress-wrap">
-        <div class="progress-fill" id="progressFill"></div>
-      </div>
-      <div id="questionList"></div>
-      <div class="submit-row">
-        <button class="btn-primary" id="submitBtn" disabled onclick="processResults()">
-          <i class="fa-solid fa-paper-plane"></i> ประมวลผลการประเมิน
+  <section id="view-quiz" class="panel view-container" style="display:none;">
+    <button class="btn-ghost" onclick="showGrid()" style="margin-bottom:18px;"><i class="fa-solid fa-grip"></i> เลือกแบบประเมินอื่นในหมวดนี้</button>
+    <h2 class="quiz-title" id="quizTitle"></h2>
+    <p class="quiz-sub" id="quizSub"></p>
+    <div id="quizStaffBanner" class="staff-banner" style="display:none;">
+      <b><i class="fa-solid fa-user-doctor"></i> คำแนะนำผู้ประเมิน:</b> กรุณาให้เจ้าหน้าที่สาธารณสุขหรือ อสม. เป็นผู้สัมภาษณ์และบันทึกคะแนนจากการตอบสนองจริงของผู้รับบริการ
+    </div>
+    <div class="progress-wrap"><div class="progress-fill" id="progressFill"></div></div>
+    <div id="questionList"></div>
+    <div class="submit-row">
+      <button class="btn-primary" id="submitBtn" disabled onclick="submitQuiz()"><i class="fa-solid fa-paper-plane"></i> ดูผลการประเมิน</button>
+      <div class="hint" id="progressHint"></div>
+    </div>
+  </section>
+
+  <section id="view-info" class="panel view-container" style="display:none;">
+    <button class="btn-ghost" onclick="showGrid()" style="margin-bottom:18px;"><i class="fa-solid fa-grip"></i> เลือกแบบประเมินอื่นในหมวดนี้</button>
+    <h2 class="quiz-title" id="infoTitle"></h2>
+    <div class="info-body" id="infoBody"></div>
+  </section>
+
+  <section id="view-clock" class="panel view-container" style="display:none;">
+    <button class="btn-ghost" onclick="showGrid()" style="margin-bottom:18px;"><i class="fa-solid fa-grip"></i> เลือกแบบประเมินอื่นในหมวดนี้</button>
+    <h2 class="quiz-title">Clock Drawing Test — ทดสอบการทำงานของสมอง</h2>
+    <p class="quiz-sub">ผู้ประเมินขอให้ผู้รับบริการ <b>วาดหน้าปัดนาฬิกาให้ครบ 12 ตัวเลข แล้ววาดเข็มนาฬิกาให้ชี้เวลา 11 นาฬิกา 10 นาที</b> ในกรอบด้านล่าง</p>
+   
+    <div class="clock-wrap">
+      <canvas id="clockCanvas" width="300" height="300"></canvas>
+      <button class="btn-ghost" onclick="clearCanvas()"><i class="fa-solid fa-eraser"></i> ล้างภาพวาด</button>
+    </div>
+    <div id="clockChecklist"></div>
+    <div class="submit-row">
+      <button class="btn-primary" onclick="submitClock()"><i class="fa-solid fa-paper-plane"></i> ดูผลการประเมิน</button>
+    </div>
+  </section>
+
+  <section id="view-result" class="panel view-container" style="display:none;">
+    <button class="btn-ghost" onclick="showGrid()" style="margin-bottom:18px;"><i class="fa-solid fa-grip"></i> เลือกแบบประเมินอื่นในหมวดนี้</button>
+    <div class="result-head">
+      <div class="hero-badge" id="resultCode"></div>
+      <h2 class="quiz-title" id="resultTitle" style="margin-top:6px;"></h2>
+    </div>
+    <div class="score-big" id="resultScore"></div>
+    <div class="score-label" id="resultScoreLabel"></div>
+    <div id="resultBadgeWrap" style="text-align:center;"></div>
+    <div class="advice-box" id="resultAdvice"></div>
+
+    <!-- ส่วนกรอกชื่อ + เบอร์ (ชื่อตัวเอง) -->
+    <div class="email-box">
+      <label><i class="fa-solid fa-user-pen"></i> บันทึกชื่อและเบอร์โทรเพื่อส่งผลประเมิน</label>
+      <div class="email-row">
+        <input type="text" id="senderName" placeholder="ชื่อ-นามสกุล (ชื่อตัวเอง)">
+        <input type="tel" id="senderPhone" placeholder="เบอร์โทรศัพท์">
+        <button type="button" class="btn-ghost" id="sendEmailBtn" onclick="sendResultToSheet()" style="align-self: flex-start;">
+          <i class="fa-solid fa-paper-plane"></i> ส่งผลประเมิน
         </button>
-        <div class="hint" id="progressHint"></div>
       </div>
-    </section>
+      <div class="hint" id="emailHint">ระบบจะบันทึกผลประเมินพร้อมชื่อและเบอร์โทรลง Google Sheets</div>
+    </div>
 
-    <section id="view-result" class="panel view-container" style="display:none;">
-      <div class="panel-header-actions">
-        <button class="btn-nav-back" onclick="showGrid()"><i class="fa-solid fa-house"></i> กลับสู่หน้าหลักแบบประเมิน</button>
+    <div class="result-actions">
+      <button class="btn-ghost" onclick="reopenLast()"><i class="fa-solid fa-rotate-left"></i> ทำแบบประเมินนี้อีกครั้ง</button>
+      <button class="btn-primary" onclick="showGrid()" style="width:auto; padding:12px 26px;"><i class="fa-solid fa-grip"></i> เลือกแบบประเมินอื่นในหมวดนี้</button>
+      <a href="index.html" class="btn-ghost" style="text-decoration:none;"><i class="fa-solid fa-house"></i> ไปหน้าหลัก</a>
+    </div>
+  </section>
+</main>
+
+<footer class="note">
+  <i class="fa-solid fa-circle-info"></i> แบบทดสอบเหล่านี้ดัดแปลงเพื่อการคัดกรองเบื้องต้นเท่านั้น ไม่ใช่การวินิจฉัยและไม่ทดแทนการตรวจประเมินโดยแพทย์ผู้เชี่ยวชาญ หากมีข้อสงสัยเกี่ยวกับผลประเมิน โปรดปรึกษา อสม. หรือเจ้าหน้าที่สาธารณสุขใกล้บ้าน
+</footer>
+
+<script>
+// *** URL ของ Google Apps Script Web App (ใช้ตัวเดียวกับ screening.html) ***
+// ถ้า deploy คนละไฟล์ Google Sheet กับ screening.html จริงๆ ให้เปลี่ยน URL นี้ตามของจริง
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzJzM0qxEjxIOkOBjQWOYKXSWoseKKLfOTBpYUADKw5N3X0AOFt4lp_W0uyRiYHNK07vw/exec";
+
+const yesNoScale = (max) => [
+  { label: `ถูกครบ (${max} คะแนน)`, score: max },
+  { label: `ถูกบางส่วน (${Math.ceil(max / 2)} คะแนน)`, score: Math.ceil(max / 2) },
+  ...(max > 1 ? [{ label: 'ถูกเล็กน้อย (1 คะแนน)', score: 1 }] : []),
+  { label: 'ตอบผิด / ทำไม่ได้ (0 คะแนน)', score: 0 }
+];
+const TMSE_ITEMS = [
+  { text: 'บอกวัน เดือน ปี ฤดูกาล และวันในสัปดาห์ปัจจุบันได้ถูกต้อง (Orientation: Time)', max: 6 },
+  { text: 'บอกสถานที่ปัจจุบัน จังหวัด อำเภอ ตำบล และสถานที่ที่อยู่ได้ถูกต้อง (Orientation: Place)', max: 6 },
+  { text: 'พูดตามคำ 3 คำที่บอกได้ทันที (Registration)', max: 3 },
+  { text: 'นับถอยหลังทีละ 7 จาก 100 หรือสะกดคำถอยหลัง (Attention & Calculation)', max: 5 },
+  { text: 'ทวนคำ 3 คำที่จำไว้ก่อนหน้าได้ (Recall)', max: 3 },
+  { text: 'บอกชื่อสิ่งของ 2 ชิ้นที่ชี้ให้ดูได้ถูกต้อง (Naming)', max: 2 },
+  { text: 'ทำตามคำสั่ง 3 ขั้นตอนได้ถูกต้อง (Command)', max: 3 },
+  { text: 'วาดรูปห้าเหลี่ยม 2 รูปซ้อนทับกันตามแบบที่กำหนดได้ (Visuospatial)', max: 2 }
+];
+const IQ_ITEMS = [
+  { text: 'อนุกรมตัวเลข: 2, 4, 6, 8, ? ตัวถัดไปคือเลขอะไร', options: ['9', '10', '11', '12'], answer: 1 },
+  { text: 'อนุกรมตัวอักษร: A, C, E, G, ? ตัวถัดไปคือตัวอะไร', options: ['H', 'I', 'J', 'F'], answer: 1 },
+  { text: 'อุปมาอุปไมย: "นกกับท้องฟ้า" เหมือนกับ "ปลากับ ___"', options: ['น้ำ', 'บก', 'อากาศ', 'ต้นไม้'], answer: 0 },
+  { text: 'ถ้าวันนี้เป็นวันพุธ อีก 10 วันจะเป็นวันอะไร', options: ['ศุกร์', 'เสาร์', 'อาทิตย์', 'จันทร์'], answer: 1 },
+  { text: 'รถวิ่งด้วยความเร็ว 60 กม./ชม. เป็นเวลา 2.5 ชั่วโมง จะวิ่งได้ระยะทางเท่าไร', options: ['120 กม.', '130 กม.', '140 กม.', '150 กม.'], answer: 3 },
+  { text: 'อนุกรมรูปร่าง: วงกลม, สี่เหลี่ยม, วงกลม, สี่เหลี่ยม, วงกลม, ___', options: ['วงกลม', 'สี่เหลี่ยม', 'สามเหลี่ยม', 'ห้าเหลี่ยม'], answer: 1 },
+  { text: 'ข้อใดไม่เข้าพวกกับข้ออื่น', options: ['แอปเปิ้ล', 'กล้วย', 'แครอท', 'ส้ม'], answer: 2 },
+  { text: 'สัตว์เลี้ยงลูกด้วยนมทุกตัวหายใจด้วยปอด ปลาวาฬเป็นสัตว์เลี้ยงลูกด้วยนม ดังนั้น...', options: ['ปลาวาฬหายใจด้วยปอด', 'ปลาวาฬหายใจด้วยเหงือก', 'ไม่แน่นอน', 'ปลาวาฬไม่หายใจ'], answer: 0 },
+  { text: 'อนุกรมตัวเลข: 1, 1, 2, 3, 5, 8, ? ตัวถัดไปคือเลขอะไร', options: ['10', '11', '13', '15'], answer: 2 },
+  { text: 'ถ้าพับกระดาษสี่เหลี่ยมครึ่งหนึ่งสองครั้ง จะได้กระดาษกี่ส่วน', options: ['2', '3', '4', '8'], answer: 2 }
+];
+const CLOCK_CRITERIA = [
+  { id: 0, text: 'วาดวงกลมหรือโครงสร้างหน้าปัดได้สมบูรณ์ใกล้เคียงวงกลม' },
+  { id: 1, text: 'มีตัวเลข 1-12 ครบถ้วนและวางอยู่ในตำแหน่งที่เหมาะสม' },
+  { id: 2, text: 'มีเข็มนาฬิกา 2 เล่ม (สั้นและยาว) จุดศูนย์กลางชัดเจน' },
+  { id: 3, text: 'เข็มชี้บอกเวลา 11 นาฬิกา 10 นาที ได้ถูกต้อง' }
+];
+const ASSESSMENTS = {
+  tmse: {
+    code: 'TMSE', title: 'TMSE', full: 'แบบทดสอบสภาพสมองฉบับย่อ (Thai Mini-Mental State Examination)',
+    sub: 'แบบทดสอบสภาพสมองฉบับย่อภาษาไทย คะแนนเต็ม 30 คะแนน ใช้คัดกรองภาวะสมองเสื่อมเบื้องต้น',
+    type: 'sum', staffOnly: true, items: TMSE_ITEMS,
+    bands: [
+      { min: 0, max: 19, label: 'สงสัยภาวะสมองเสื่อม', color: 'var(--danger)', advice: 'คะแนนต่ำกว่าเกณฑ์ปกติ ควรส่งพบแพทย์เพื่อประเมินภาวะสมองเสื่อมอย่างละเอียดต่อไป' },
+      { min: 20, max: 24, label: 'สงสัยบกพร่องทางปัญญาระดับเล็กน้อย', color: 'var(--warning)', advice: 'คะแนนอยู่ในเกณฑ์ที่ควรติดตาม แนะนำให้ประเมินซ้ำใน 3-6 เดือน' },
+      { min: 25, max: 30, label: 'อยู่ในเกณฑ์ปกติ', color: 'var(--success)', advice: 'คะแนนอยู่ในเกณฑ์ปกติ ควรดูแลสุขภาพสมองต่อเนื่อง' }
+    ]
+  },
+  iq: {
+    code: 'IQ', title: 'แบบทดสอบเหตุผล', full: 'แบบทดสอบการใช้เหตุผลเบื้องต้น',
+    sub: 'แบบทดสอบการคิดเชิงเหตุผลและการแก้ปัญหาเบื้องต้น 10 ข้อ',
+    type: 'iq', staffOnly: false, items: IQ_ITEMS,
+    bands: [
+      { min: 0, max: 4, label: 'ต่ำกว่าค่าเฉลี่ย', color: 'var(--warning)', advice: 'ลองฝึกทำโจทย์ปัญหาเชิงตรรกะเพิ่มเติมเพื่อฝึกทักษะการคิด' },
+      { min: 5, max: 7, label: 'ระดับปานกลาง', color: 'var(--teal-dark)', advice: 'ตอบถูกอยู่ในระดับปานกลาง ถือว่าอยู่ในเกณฑ์ที่ดี' },
+      { min: 8, max: 10, label: 'สูงกว่าค่าเฉลี่ย', color: 'var(--success)', advice: 'แสดงถึงทักษะการคิดเชิงเหตุผลและการแก้ปัญหาที่ดีมาก' }
+    ]
+  },
+  clock: { code: 'CDT', title: 'Clock Drawing', full: 'ทดสอบการทำงานของสมองด้วยภาพวาดนาฬิกา', type: 'clock' },
+  mmse: { code: 'MMSE', title: 'MMSE', full: 'ประเมินภาวะสมองเสื่อมเบื้องต้น (ข้อมูลลิขสิทธิ์)', type: 'info' },
+  moca: { code: 'MoCA', title: 'MoCA', full: 'ประเมินความบกพร่องทางปัญญาระดับเล็กน้อย (ข้อมูลลิขสิทธิ์)', type: 'info' }
+};
+
+let currentId = null;
+let currentAnswers = [];
+let clockAnswers = [null, null, null, null];
+let lastResult = null;
+
+function initGrid() {
+  const grid = document.getElementById('view-grid');
+  grid.innerHTML = '';
+  Object.keys(ASSESSMENTS).forEach(id => {
+    const a = ASSESSMENTS[id];
+    let qcount = '';
+    if (a.type === 'sum' || a.type === 'iq') qcount = a.items.length + ' ข้อ';
+    else if (a.type === 'clock') qcount = 'วาดภาพ + 4 เกณฑ์';
+    else qcount = 'ข้อมูลเครื่องมือ';
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.onclick = () => openAssessment(id);
+    card.innerHTML = `
+      <div class="icon">${a.code}</div>
+      <div class="code">${a.title}</div>
+      <div class="desc">${a.full}</div>
+      <div class="card-footer">
+        <span class="qcount">${qcount}</span>
+        <span class="btn-start-text">${a.type === 'info' ? 'ดูข้อมูล' : 'เริ่มทำ'} <i class="fa-solid fa-chevron-right"></i></span>
       </div>
-      <div class="result-head">
-        <div class="hero-badge" id="resultCode"></div>
-        <h2 class="quiz-title" id="resultTitle" style="margin-top:4px;"></h2>
-      </div>
-      <div class="score-big" id="resultScore"></div>
-      <div class="score-label" id="resultScoreLabel">คะแนนรวมการประเมิน</div>
-      <div id="resultBadgeWrap" style="text-align:center;">
-        <span id="resultBadge" class="level-badge"></span>
-      </div>
-      <div id="resultBreakdown" class="breakdown-box" style="display:none;"></div>
-      <div class="advice-box" id="resultAdvice"></div>
+    `;
+    grid.appendChild(card);
+  });
+}
 
-      <div class="email-box">
-        <label><i class="fa-solid fa-user-pen"></i> บันทึกชื่อและเบอร์โทรเพื่อส่งผลประเมิน</label>
-        <div class="email-row">
-          <input type="text" id="senderName" placeholder="ชื่อ-นามสกุล (ชื่อตัวเอง)">
-          <input type="tel" id="senderPhone" placeholder="เบอร์โทรศัพท์">
-          <!-- แก้ปุ่มตรงนี้: เอา onclick ออก + เพิ่ม type="button" -->
-          <button type="button" class="btn-secondary" id="sendEmailBtn" style="align-self: flex-start;">
-            <i class="fa-solid fa-paper-plane"></i> ส่งผลประเมิน
-          </button>
-        </div>
-        <div class="hint" id="emailHint">ระบบจะบันทึกผลประเมินพร้อมชื่อและเบอร์โทรศัพท์ลงใน Google Sheets</div>
-      </div>
+function triggerAnimation(elementId) {
+  const el = document.getElementById(elementId);
+  el.classList.remove('view-container');
+  void el.offsetWidth;
+  el.classList.add('view-container');
+}
 
-      <div class="result-actions">
-        <button class="btn-secondary" onclick="startAssessment(activeId)"><i class="fa-solid fa-rotate-left"></i> ทำแบบประเมินนี้อีกครั้ง</button>
-        <button class="btn-primary" onclick="showGrid()"><i class="fa-solid fa-grip"></i> เลือกแบบประเมินอื่น</button>
-      </div>
-    </section>
-  </main>
+function showGrid() {
+  hideAllViews();
+  document.getElementById('view-grid').style.display = 'grid';
+  document.getElementById('heroHeader').style.display = 'block';
+  document.getElementById('featureStrip').style.display = 'grid';
+  triggerAnimation('view-grid');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
-  <footer class="note">
-    <i class="fa-solid fa-circle-info"></i> แบบประเมินเหล่านี้เป็นเครื่องมือคัดกรองเบื้องต้นเพื่อส่งเสริมพัฒนาการและเฝ้าระวังพฤติกรรมเด็ก ผลคะแนนไม่ได้เป็นคำวินิจฉัยทางการแพทย์โดยตรง
-  </footer>
+function hideAllViews() {
+  ['view-grid', 'view-quiz', 'view-info', 'view-clock', 'view-result'].forEach(v => {
+    document.getElementById(v).style.display = 'none';
+  });
+}
 
-  <script>
-    // 🔴 ใส่ Web App URL ของ Google Apps Script ที่ Deploy เรียบร้อยแล้วที่นี่
-    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwNH3URhGx5QE_b0aTCgJzBdelwPERyeAr9e0JUTklacLyOaGc5RrwX4d3pfxckBVRuNg/exec';
-
-    const OPT_YN = [
-      {label:'ผ่าน / ใช่', score:1},
-      {label:'ไม่ผ่าน / ไม่ใช่', score:0}
-    ];
-    const OPT_SCALE4 = [
-      {label:'ไม่ค่อยพบ (0-1 ครั้ง/สัปดาห์)', score:0},
-      {label:'บางครั้ง (2-3 ครั้ง/สัปดาห์)', score:1},
-      {label:'บ่อยครั้ง (4-5 ครั้ง/สัปดาห์)', score:2},
-      {label:'ตลอดเวลา (เกือบทุกวัน)', score:3}
-    ];
-    const OPT_SDQ = (rev) => rev
-      ? [{label:'ไม่จริง', score:2}, {label:'ค่อนข้างจริง', score:1}, {label:'จริงแน่นอน', score:0}]
-      : [{label:'ไม่จริง', score:0}, {label:'ค่อนข้างจริง', score:1}, {label:'จริงแน่นอน', score:2}];
-
-    const TOOLS = {
-      dspm: {
-        code: 'DSPM',
-        title: 'DSPM พัฒนาการตามวัย',
-        desc: 'คัดกรองพัฒนาการ 5 ด้านหลักสำหรับเด็กแรกเกิด - 5 ปี',
-        icon: 'fa-child-reaching',
-        targetTitle: 'เลือกช่วงอายุของเด็ก',
-        groups: [
-          { id: '9m', name: '9 เดือน', items: [
-            { text: 'นั่งได้เองมั่นคงโดยไม่ต้องพยุง', domain: 'กล้ามเนื้อมัดใหญ่' },
-            { text: 'หยิบของชิ้นเล็กด้วยนิ้วหัวแม่มือและนิ้วชี้', domain: 'กล้ามเนื้อมัดเล็ก' },
-            { text: 'หันมองตามเสียงเรียกชื่อ', domain: 'การเข้าใจภาษา' },
-            { text: 'ส่งเสียงอ้อแอ้เลียนเสียงพูดซ้ำๆ', domain: 'การใช้ภาษา' },
-            { text: 'เล่นจ๊ะเอ๋หรือโบกมือบ๊ายบายได้', domain: 'สังคมและการช่วยเหลือตนเอง' }
-          ]},
-          { id: '18m', name: '18 เดือน', items: [
-            { text: 'เดินได้เองอย่างมั่นคง', domain: 'กล้ามเนื้อมัดใหญ่' },
-            { text: 'ต่อบล็อกไม้ซ้อนกันได้ 2-3 ชั้น', domain: 'กล้ามเนื้อมัดเล็ก' },
-            { text: 'ทำตามคำสั่งง่ายๆ ที่มีคำชี้บอกได้', domain: 'การเข้าใจภาษา' },
-            { text: 'พูดคำที่มีความหมายได้อย่างน้อย 3-5 คำ', domain: 'การใช้ภาษา' },
-            { text: 'ใช้ช้อนตักอาหารเข้าปากเองได้บ้าง', domain: 'สังคมและการช่วยเหลือตนเอง' }
-          ]},
-          { id: '36m', name: '3 ปี', items: [
-            { text: 'กระโดดสองขาพร้อมกันขึ้นจากพื้นได้', domain: 'กล้ามเนื้อมัดใหญ่' },
-            { text: 'วาดเส้นตรงตามแบบได้', domain: 'กล้ามเนื้อมัดเล็ก' },
-            { text: 'เข้าใจคำสั่ง 2 ขั้นตอนต่อเนื่องกัน', domain: 'การเข้าใจภาษา' },
-            { text: 'พูดเป็นประโยคสั้นๆ 3 คำขึ้นไปได้', domain: 'การใช้ภาษา' },
-            { text: 'บอกเมื่อต้องการขับถ่ายได้ก่อนเปียกชื้น', domain: 'สังคมและการช่วยเหลือตนเอง' }
-          ]}
-        ],
-        options: OPT_YN
-      },
-      denver: {
-        code: 'DENVER-II',
-        title: 'Denver II คัดกรองพัฒนาการ',
-        desc: 'การคัดกรองรายละเอียดด้านร่างกาย ภาษา และสังคม',
-        icon: 'fa-baby',
-        targetTitle: 'เลือกช่วงอายุประเมิน',
-        groups: [
-          { id: '12m', name: '12 เดือน', items: [
-            { text: 'ยืนเกาะทรงตัวได้มั่นคง', domain: 'Personal-Social' },
-            { text: 'ใช้นิ้วหยิบวัตถุชิ้นเล็กแบบ Pincer grasp', domain: 'Fine Motor' },
-            { text: 'ตอบสนองต่อคำสั่งห้ามหรือคำว่า "ไม่"', domain: 'Language' },
-            { text: 'ก้าวเดินโดยมีคนช่วยพยุงจับมือ', domain: 'Gross Motor' }
-          ]},
-          { id: '24m', name: '24 เดือน', items: [
-            { text: 'ถอดเสื้อผ้าชิ้นง่ายๆ ได้เอง', domain: 'Personal-Social' },
-            { text: 'ต่อบล็อกไม้ได้ 4-6 ก้อน', domain: 'Fine Motor' },
-            { text: 'ชี้ส่วนประกอบร่างกายได้ 4 จุด', domain: 'Language' },
-            { text: 'เตะลูกบอลไปข้างหน้าโดยไม่ล้ม', domain: 'Gross Motor' }
-          ]}
-        ],
-        options: OPT_YN
-      },
-      sdq: {
-        code: 'SDQ',
-        title: 'SDQ พฤติกรรมและอารมณ์',
-        desc: 'ประเมินจุดแข็งและจุดอ่อนพฤติกรรม 5 ด้านสำหรับเด็ก 4-16 ปี',
-        icon: 'fa-masks-theater',
-        targetTitle: 'กลุ่มผู้ให้ข้อมูล',
-        groups: [
-          { id: 'parent', name: 'ฉบับผู้ปกครองประเมิน', items: [
-            { text: 'ห่วงใยความรู้สึกของผู้อื่น', domain: 'พฤติกรรมเอื้อสังคม', rev: false },
-            { text: 'อยู่ไม่นิ่ง ซุกซนมาก นั่งนานๆ ไม่ได้', domain: 'สมาธิสั้น/อยู่ไม่นิ่ง', rev: false },
-            { text: 'บ่นปวดหัว ปวดท้อง หรือไม่สบายบ่อยๆ', domain: 'อาการทางอารมณ์', rev: false },
-            { text: 'ชอบแบ่งปันสิ่งของให้เพื่อน', domain: 'พฤติกรรมเอื้อสังคม', rev: false },
-            { text: 'มักโมโห ฉุนเฉียวง่าย', domain: 'ปัญหาความประพฤติ', rev: false },
-            { text: 'ชอบอยู่คนเดียว มักเล่นคนเดียว', domain: 'ปัญหาความสัมพันธ์กับเพื่อน', rev: false },
-            { text: 'เชื่อฟัง มักทำตามที่ผู้ใหญ่ขอ', domain: 'ปัญหาความประพฤติ', rev: true }
-          ]}
-        ]
-      },
-      adhd: {
-        code: 'SNAP-IV',
-        title: 'SNAP-IV คัดกรองสมาธิสั้น',
-        desc: 'แบบคัดกรองอาการขาดสมาธิ ซน ซ่า หุนหันพลันแล่น',
-        icon: 'fa-bolt',
-        targetTitle: 'กลุ่มผู้ประเมิน',
-        groups: [
-          { id: 'standard', name: 'ประเมินพฤติกรรมทั่วไป', items: [
-            { text: 'ไม่ค่อยจดจ่อกับรายละเอียด หรือทำผิดพลาดด้วยความประมาท', domain: 'ด้านขาดสมาธิ' },
-            { text: 'มีปัญหาในการรักษาความสนใจในการทำงานหรือการเล่น', domain: 'ด้านขาดสมาธิ' },
-            { text: 'ดูเหมือนไม่ได้ฟังเมื่อมีคนพูดด้วยโดยตรง', domain: 'ด้านขาดสมาธิ' },
-            { text: 'ขยับมือเท้าไปมา หรือนั่งยุกยิกอยู่บนเก้าอี้', domain: 'ด้านซน/หุนหันพลันแล่น' },
-            { text: 'ลุกออกจากที่นั่งในห้องเรียนหรือสถานการณ์ที่ควรรรนั่ง', domain: 'ด้านซน/หุนหันพลันแล่น' },
-            { text: 'พูดโพล่งคำตอบออกมาก่อนฟังคำถามจบ', domain: 'ด้านซน/หุนหันพลันแล่น' }
-          ]}
-        ],
-        options: OPT_SCALE4
-      },
-      mchat: {
-        code: 'M-CHAT',
-        title: 'M-CHAT-R คัดกรองออทิสติก',
-        desc: 'คัดกรองความเสี่ยงภาวะออทิสติกสเปกตรัม (16-30 เดือน)',
-        icon: 'fa-puzzle-piece',
-        targetTitle: 'ช่วงอายุเด็ก',
-        groups: [
-          { id: 'toddler', name: 'เด็กอายุ 16-30 เดือน', items: [
-            { text: 'เมื่อท่านชี้ไปที่สิ่งของ เด็กมองตามสิ่งที่ชี้หรือไม่', domain: 'การตอบสนองร่วม', riskVal: 0 },
-            { text: 'ท่านเคยสงสัยว่าเด็กมีปัญหาการได้ยินหรือไม่', domain: 'การรับรู้ประสาทสัมผัส', riskVal: 1 },
-            { text: 'เด็กเคยเล่นสมมติหรือไม่ เช่น ชงชา ถูบ้าน', domain: 'จินตนาการและการเล่น', riskVal: 0 },
-            { text: 'เด็กชอบปีนป่ายสิ่งของสูงๆ หรือไม่', domain: 'การเคลื่อนไหว', riskVal: 0 },
-            { text: 'เด็กขยับนิ้วมือแปลกๆ ใกล้ตาตนเองหรือไม่', domain: 'พฤติกรรมซ้ำซาก', riskVal: 1 },
-            { text: 'เด็กชี้นิ้วเพื่อบอกสิ่งที่สนใจให้ท่านดูหรือไม่', domain: 'การสื่อสารทางสังคม', riskVal: 0 }
-          ]}
-        ]
-      }
-    };
-
-    let activeId = null;
-    let activeGroup = null;
-    let userAnswers = [];
-    let lastReport = null;
-
-    function initApp() {
-      const grid = document.getElementById('view-grid');
-      grid.innerHTML = '';
-      Object.keys(TOOLS).forEach(id => {
-        const item = TOOLS[id];
-        const totalQ = item.groups[0].items.length;
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.onclick = () => startAssessment(id);
-        card.innerHTML = `
-          <div class="icon"><i class="fa-solid ${item.icon}"></i></div>
-          <div class="code font-title">${item.code}</div>
-          <div class="desc">${item.desc}</div>
-          <div class="card-footer">
-            <span class="qcount"><i class="fa-regular fa-circle-question"></i> ${totalQ} ข้อประเมิน</span>
-            <span class="btn-start-text">เริ่มประเมิน <i class="fa-solid fa-arrow-right"></i></span>
-          </div>
-        `;
-        grid.appendChild(card);
-      });
-    }
-
-    function showGrid() {
-      document.getElementById('heroWrapper').style.display = 'block';
-      document.getElementById('view-grid').style.display = 'grid';
-      document.getElementById('view-quiz').style.display = 'none';
-      document.getElementById('view-result').style.display = 'none';
-      document.getElementById('navBackBtn').style.display = 'none';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function startAssessment(id) {
-      activeId = id;
-      const data = TOOLS[id];
-      document.getElementById('heroWrapper').style.display = 'none';
-      document.getElementById('quizTitle').textContent = data.title;
-      document.getElementById('quizSub').textContent = data.desc;
-      document.getElementById('targetLabel').textContent = data.targetTitle;
-      document.getElementById('targetWrap').style.display = 'block';
-      document.getElementById('navBackBtn').style.display = 'inline-flex';
-
-      const chipsContainer = document.getElementById('targetChips');
-      chipsContainer.innerHTML = '';
-      data.groups.forEach((g, idx) => {
-        const btn = document.createElement('button');
-        btn.className = `chip-btn ${idx === 0 ? 'selected' : ''}`;
-        btn.textContent = g.name;
-        btn.onclick = () => loadGroupQuestions(g);
-        chipsContainer.appendChild(btn);
-      });
-
-      loadGroupQuestions(data.groups[0]);
-      document.getElementById('view-grid').style.display = 'none';
-      document.getElementById('view-result').style.display = 'none';
-      document.getElementById('view-quiz').style.display = 'block';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function loadGroupQuestions(group) {
-      activeGroup = group;
-      document.querySelectorAll('.chip-btn').forEach(b => {
-        b.classList.toggle('selected', b.textContent === group.name);
-      });
-
-      const tool = TOOLS[activeId];
-      const container = document.getElementById('questionList');
-      container.innerHTML = '';
-      userAnswers = new Array(group.items.length).fill(null);
-
-      group.items.forEach((item, qIdx) => {
-        const qDiv = document.createElement('div');
-        qDiv.className = 'question';
-
-        let options = tool.options;
-        if (activeId === 'sdq') options = OPT_SDQ(item.rev);
-        if (activeId === 'mchat') options = OPT_YN;
-
-        let optsHtml = '';
-        options.forEach((opt, oIdx) => {
-          const val = (activeId === 'mchat')
-            ? (opt.score === item.riskVal ? 1 : 0)
-            : opt.score;
-
-          optsHtml += `
-            <label class="opt" id="opt-lbl-${qIdx}-${oIdx}">
-              <input type="radio" name="q_${qIdx}" value="${val}" onchange="selectAnswer(${qIdx}, ${oIdx}, ${val})">
-              <span>${opt.label}</span>
-            </label>
-          `;
+function openAssessment(id) {
+  currentId = id;
+  const a = ASSESSMENTS[id];
+  document.getElementById('heroHeader').style.display = 'none';
+  document.getElementById('featureStrip').style.display = 'none';
+  if (a.type === 'info') {
+    renderInfo(id);
+    hideAllViews();
+    document.getElementById('view-info').style.display = 'block';
+    triggerAnimation('view-info');
+  } else if (a.type === 'clock') {
+    hideAllViews();
+    document.getElementById('view-clock').style.display = 'block';
+    triggerAnimation('view-clock');
+    initClockCanvas();
+    renderClockChecklist();
+  } else {
+    document.getElementById('quizTitle').textContent = `${a.title} — ${a.full}`;
+    document.getElementById('quizSub').textContent = a.sub;
+    document.getElementById('quizStaffBanner').style.display = a.staffOnly ? 'block' : 'none';
+    const list = document.getElementById('questionList');
+    list.innerHTML = '';
+    currentAnswers = new Array(a.items.length).fill(null);
+    a.items.forEach((it, i) => {
+      const block = document.createElement('div');
+      block.className = 'question';
+      block.style.animationDelay = `${i * 0.04}s`;
+      let optsHtml = '';
+      if (a.type === 'sum') {
+        const opts = yesNoScale(it.max);
+        opts.forEach((opt, j) => {
+          optsHtml += `<label class="opt" id="opt-${i}-${j}"><input type="radio" name="q${i}" value="${opt.score}" onchange="selectOpt(${i},${j},${opt.score})"><span>${opt.label}</span></label>`;
         });
-
-        qDiv.innerHTML = `
-          <div class="qnum">ข้อที่ ${qIdx + 1} • <span style="font-weight:400; color:var(--text-muted);">${item.domain}</span></div>
-          <div class="qtext">${item.text}</div>
-          <div class="options">${optsHtml}</div>
-        `;
-        container.appendChild(qDiv);
-      });
-
-      updateProgress();
-    }
-
-    function selectAnswer(qIdx, oIdx, val) {
-      userAnswers[qIdx] = val;
-
-      const parent = document.querySelectorAll('#questionList .question')[qIdx];
-      if (parent) {
-        parent.querySelectorAll('.opt').forEach(el => el.classList.remove('selected'));
-      }
-
-      const selectedEl = document.getElementById(`opt-lbl-${qIdx}-${oIdx}`);
-      if (selectedEl) selectedEl.classList.add('selected');
-
-      updateProgress();
-    }
-
-    function updateProgress() {
-      const total = userAnswers.length;
-      const answered = userAnswers.filter(v => v !== null).length;
-      const pct = total > 0 ? Math.round((answered / total) * 100) : 0;
-      document.getElementById('progressFill').style.width = pct + '%';
-      document.getElementById('progressHint').textContent = `ทำไปแล้ว ${answered} จาก ${total} ข้อ (${pct}%)`;
-      document.getElementById('submitBtn').disabled = answered < total;
-    }
-
-    function processResults() {
-      const tool = TOOLS[activeId];
-      const totalScore = userAnswers.reduce((a, b) => a + b, 0);
-      const items = activeGroup.items;
-      const domainMap = {};
-
-      items.forEach((it, idx) => {
-        if (!domainMap[it.domain]) domainMap[it.domain] = { score: 0, total: 0 };
-        domainMap[it.domain].score += userAnswers[idx];
-
-        let maxPerItem = 1;
-        if (activeId === 'adhd') maxPerItem = 3;
-        else if (activeId === 'sdq') maxPerItem = 2;
-        domainMap[it.domain].total += maxPerItem;
-      });
-
-      let statusLabel = '';
-      let statusColor = '';
-      let adviceText = '';
-
-      if (activeId === 'dspm' || activeId === 'denver') {
-        const passCount = totalScore;
-        const isAllPass = passCount === items.length;
-        statusLabel = isAllPass ? 'พัฒนาการสมวัย' : 'ควรได้รับการกระตุ้นพัฒนาการ';
-        statusColor = isAllPass ? 'var(--success)' : 'var(--danger)';
-        adviceText = isAllPass
-          ? '<b>ข้อแนะนำ:</b> เด็กมีพัฒนาการสมวัยตามเกณฑ์ที่ประเมิน ควรส่งเสริมกิจกรรมการเรียนรู้ ความคิดสร้างสรรค์ และโภชนาการอย่างต่อเนื่อง'
-          : '<b>ข้อแนะนำ:</b> พบทักษะบางด้านที่ยังไม่ผ่านเกณฑ์ แนะนำให้ผู้ปกครองฝึกทักษะเฉพาะด้านต่อเนื่องอย่างน้อย 1 เดือน และเข้ารับการประเมินซ้ำ';
-      } else if (activeId === 'sdq') {
-        statusLabel = totalScore <= 6 ? 'ปกติ' : (totalScore <= 9 ? 'เสี่ยง / ก้ำกึ่ง' : 'มีปัญหาพฤติกรรม');
-        statusColor = totalScore <= 6 ? 'var(--success)' : (totalScore <= 9 ? 'var(--warning)' : 'var(--danger)');
-        adviceText = `<b>ข้อแนะนำ:</b> คะแนนรวมความยากลำบากจัดอยู่ในเกณฑ์ <b>${statusLabel}</b> ควรเสริมสร้างความสัมพันธ์ในครอบครัวและดูแลสนับสนุนอารมณ์เด็กอย่างอบอุ่น`;
-      } else if (activeId === 'adhd') {
-        statusLabel = totalScore >= 9 ? 'มีความเสี่ยงสมาธิสั้นสูง' : 'ไม่พบความเสี่ยงชัดเจน';
-        statusColor = totalScore >= 9 ? 'var(--danger)' : 'var(--success)';
-        adviceText = totalScore >= 9
-          ? '<b>ข้อแนะนำ:</b> พฤติกรรมเข้าข่ายความเสี่ยงสมาธิสั้น ควรปรึกษากุมารแพทย์ด้านพัฒนาการหรือจิตแพทย์เด็กเพื่อประเมินและวางแผนดูแลอย่างเหมาะสม'
-          : '<b>ข้อแนะนำ:</b> พฤติกรรมและสมาธิของเด็กอยู่ในเกณฑ์ปกติ';
-      } else if (activeId === 'mchat') {
-        statusLabel = totalScore >= 2 ? 'มีความเสี่ยงภาวะออทิสติก' : 'ความเสี่ยงต่ำ';
-        statusColor = totalScore >= 2 ? 'var(--danger)' : 'var(--success)';
-        adviceText = totalScore >= 2
-          ? '<b>ข้อแนะนำ:</b> ผลคัดกรองพบสัญญาณความเสี่ยงภาวะออทิสติก ควรประสานงานส่งต่อเด็กเข้ารับการตรวจวินิจฉัยโดยแพทย์ผู้เชี่ยวชาญอย่างสม่ำเสมอ'
-          : '<b>ข้อแนะนำ:</b> พัฒนาการด้านการสื่อสารและปฏิสัมพันธ์ทางสังคมอยู่ในเกณฑ์ปกติ';
-      }
-
-      document.getElementById('resultCode').textContent = tool.code;
-      document.getElementById('resultTitle').textContent = `${tool.title} (${activeGroup.name})`;
-      document.getElementById('resultScore').textContent = totalScore;
-      document.getElementById('resultScoreLabel').textContent = 'คะแนนรวมการประเมิน';
-
-      const badge = document.getElementById('resultBadge');
-      badge.textContent = statusLabel;
-      badge.style.background = statusColor;
-
-      const bdContainer = document.getElementById('resultBreakdown');
-      bdContainer.innerHTML = '<div class="breakdown-title"><i class="fa-solid fa-list-check"></i> สรุปผลการประเมินแยกรายด้าน</div>';
-      Object.keys(domainMap).forEach(dKey => {
-        const dObj = domainMap[dKey];
-        const row = document.createElement('div');
-        row.className = 'breakdown-item';
-        row.innerHTML = `
-          <span>${dKey}</span>
-          <span class="breakdown-tag">${dObj.score} / ${dObj.total}</span>
-        `;
-        bdContainer.appendChild(row);
-      });
-      bdContainer.style.display = 'block';
-
-      document.getElementById('resultAdvice').innerHTML = adviceText;
-
-      lastReport = {
-        title: `${tool.title} (${activeGroup.name})`,
-        code: tool.code,
-        score: totalScore,
-        status: statusLabel,
-        date: new Date().toLocaleDateString('th-TH')
-      };
-
-      document.getElementById('view-quiz').style.display = 'none';
-      document.getElementById('view-result').style.display = 'block';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    async function sendResultToSheet() {
-      console.log('ปุ่มส่งผลประเมินถูกคลิกแล้ว'); // เช็คว่าคลิกติดไหม
-
-      if (!lastReport) {
-        alert('ยังไม่มีผลประเมิน กรุณาทำแบบประเมินให้เสร็จก่อน');
-        return;
-      }
-
-      const name = document.getElementById('senderName').value.trim();
-      const phone = document.getElementById('senderPhone').value.trim();
-
-      if (!name) {
-        alert('กรุณากรอกชื่อ-นามสกุล');
-        return;
-      }
-      if (!phone) {
-        alert('กรุณากรอกเบอร์โทรศัพท์');
-        return;
-      }
-
-      const btn = document.getElementById('sendEmailBtn');
-      const hint = document.getElementById('emailHint');
-
-      btn.disabled = true;
-      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> กำลังบันทึก...';
-      hint.textContent = 'กำลังส่งข้อมูลไปยัง Google Sheets...';
-
-      const payload = {
-        assessment_type: lastReport.code || '',
-        name: name,
-        phone: phone,
-        code: lastReport.code || '',
-        title: lastReport.title || '',
-        score: lastReport.score || '',
-        status: lastReport.status || '',
-        date: lastReport.date || new Date().toLocaleDateString('th-TH')
-      };
-
-      try {
-        await fetch(GOOGLE_SCRIPT_URL, {
-          method: 'POST',
-          mode: 'no-cors',
-          cache: 'no-cache',
-          headers: {
-            'Content-Type': 'text/plain;charset=utf-8'
-          },
-          body: JSON.stringify(payload)
+        block.innerHTML = `<div class="qnum">ข้อที่ ${i + 1} จาก ${a.items.length} (คะแนนเต็ม ${it.max})</div><div class="qtext">${it.text}</div><div class="options">${optsHtml}</div>`;
+      } else {
+        it.options.forEach((label, j) => {
+          optsHtml += `<label class="opt" id="opt-${i}-${j}"><input type="radio" name="q${i}" value="${j}" onchange="selectOpt(${i},${j},${j})"><span>${label}</span></label>`;
         });
-
-        hint.innerHTML = '<span style="color: var(--success);"><i class="fa-solid fa-circle-check"></i> บันทึกผลประเมินลง Google Sheets เรียบร้อยแล้ว!</span>';
-        btn.innerHTML = '<i class="fa-solid fa-check"></i> บันทึกสำเร็จ';
-
-        document.getElementById('senderName').value = '';
-        document.getElementById('senderPhone').value = '';
-
-        setTimeout(() => {
-          btn.disabled = false;
-          btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> ส่งผลประเมิน';
-        }, 2500);
-
-      } catch (error) {
-        console.error('ส่งไม่สำเร็จ:', error);
-        hint.innerHTML = '<span style="color: var(--danger);"><i class="fa-solid fa-circle-exclamation"></i> เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง</span>';
-        btn.disabled = false;
-        btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> ส่งผลประเมิน';
+        block.innerHTML = `<div class="qnum">ข้อที่ ${i + 1} จาก ${a.items.length}</div><div class="qtext">${it.text}</div><div class="options">${optsHtml}</div>`;
       }
-    }
+      list.appendChild(block);
+    });
+    updateProgress();
+    hideAllViews();
+    document.getElementById('view-quiz').style.display = 'block';
+    triggerAnimation('view-quiz');
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
-    // ===== ผูกปุ่มส่งผลประเมินแบบ addEventListener (แก้ปัญหาคลิกไม่ติด) =====
-    document.addEventListener('DOMContentLoaded', function() {
-      const sendBtn = document.getElementById('sendEmailBtn');
-      if (sendBtn) {
-        sendBtn.addEventListener('click', function(e) {
-          e.preventDefault();
-          e.stopPropagation();
-          sendResultToSheet();
-        });
-      }
+function selectOpt(qIdx, optIdx, val) {
+  currentAnswers[qIdx] = val;
+  const parent = document.querySelectorAll('#questionList .question')[qIdx];
+  parent.querySelectorAll('.opt').forEach((el, idx) => {
+    if (idx === optIdx) el.classList.add('selected');
+    else el.classList.remove('selected');
+  });
+  updateProgress();
+}
+
+function updateProgress() {
+  const filled = currentAnswers.filter(x => x !== null).length;
+  const total = currentAnswers.length;
+  const pct = Math.round((filled / total) * 100);
+  document.getElementById('progressFill').style.width = `${pct}%`;
+  document.getElementById('progressHint').textContent = `ทำไปแล้ว ${filled} จาก ${total} ข้อ (${pct}%)`;
+  document.getElementById('submitBtn').disabled = filled < total;
+}
+
+function submitQuiz() {
+  const a = ASSESSMENTS[currentId];
+  let score = 0;
+  if (a.type === 'sum') {
+    score = currentAnswers.reduce((sum, val) => sum + (val || 0), 0);
+  } else if (a.type === 'iq') {
+    currentAnswers.forEach((ans, i) => {
+      if (ans === a.items[i].answer) score++;
+    });
+  }
+  const band = a.bands.find(b => score >= b.min && score <= b.max) || a.bands[0];
+  showResult(score, a.type === 'sum' ? 30 : 10, band);
+}
+
+function renderInfo(id) {
+  const titleEl = document.getElementById('infoTitle');
+  const bodyEl = document.getElementById('infoBody');
+  if (id === 'mmse') {
+    titleEl.textContent = 'MMSE — Mini-Mental State Examination';
+    bodyEl.innerHTML = `
+      <p>MMSE เป็นแบบทดสอบสภาพสมองเบื้องต้นที่ใช้กันแพร่หลาย ครอบคลุมการประเมินด้านการรับรู้เวลา/สถานที่ ความจำ สมาธิ และภาษา คะแนนเต็ม 30 คะแนน</p>
+      <div class="info-box">
+        <b><i class="fa-solid fa-triangle-exclamation"></i> เงื่อนไขลิขสิทธิ์:</b> MMSE ฉบับเต็มอยู่ภายใต้ลิขสิทธิ์เชิงพาณิชย์ของ Psychological Assessment Resources (PAR) การใช้งานต้องได้รับอนุญาตตามกฎหมาย
+      </div>
+      <p><b>คำแนะนำสำหรับเจ้าหน้าที่:</b> สามารถใช้แบบทดสอบ <b>TMSE (แบบทดสอบสภาพสมองฉบับย่อภาษาไทย)</b> ซึ่งเป็นเครื่องมือทางเลือกสำหรับการคัดกรองในประเทศไทยได้ทันที</p>
+      <div class="submit-row"><button class="btn-primary" onclick="openAssessment('tmse')"><i class="fa-solid fa-pen-to-square"></i> ไปที่แบบทดสอบ TMSE</button></div>
+    `;
+  } else if (id === 'moca') {
+    titleEl.textContent = 'MoCA — Montreal Cognitive Assessment';
+    bodyEl.innerHTML = `
+      <p>MoCA เป็นแบบประเมินความบกพร่องทางปัญญาระดับเล็กน้อย (Mild Cognitive Impairment - MCI) มีความไวสูงในการตรวจจับความบกพร่องระยะเริ่มต้น คะแนนเต็ม 30 คะแนน</p>
+      <div class="info-box">
+        <b><i class="fa-solid fa-graduation-cap"></i> เงื่อนไขลิขสิทธิ์และการใช้งาน:</b> ปัจจุบันผู้ใช้งานต้องผ่านการอบรมและรับใบรับรอง (Certification) จาก MoCA Test Inc. จึงจะสามารถนำแบบประเมินฉบับเต็มไปใช้อย่างเป็นทางการได้
+      </div>
+      <p>เจ้าหน้าที่สามารถศึกษาข้อมูลเพิ่มเติมหรือลงทะเบียนใช้งานอย่างถูกต้องได้ที่เว็บไซต์อย่างเป็นทางการของ MoCA</p>
+    `;
+  }
+}
+
+let canvas, ctx, isDrawing = false;
+function initClockCanvas() {
+  canvas = document.getElementById('clockCanvas');
+  ctx = canvas.getContext('2d');
+  clearCanvas();
+  const getPos = (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    return { x: clientX - rect.left, y: clientY - rect.top };
+  };
+  const startDraw = (e) => { isDrawing = true; const p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); };
+  const draw = (e) => { if (!isDrawing) return; e.preventDefault(); const p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); };
+  const stopDraw = () => { isDrawing = false; };
+  canvas.onmousedown = startDraw; canvas.onmousemove = draw; canvas.onmouseup = stopDraw;
+  canvas.ontouchstart = startDraw; canvas.ontouchmove = draw; canvas.ontouchend = stopDraw;
+}
+
+function clearCanvas() {
+  if (!ctx) return;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.strokeStyle = '#1E293B';
+  ctx.lineWidth = 3;
+  ctx.lineCap = 'round';
+}
+
+function renderClockChecklist() {
+  const container = document.getElementById('clockChecklist');
+  container.innerHTML = '<h3 style="font-size:16px; margin:18px 0 12px; color:var(--brand-dark);">เกณฑ์การประเมินโดยเจ้าหน้าที่:</h3>';
+  clockAnswers = [null, null, null, null];
+  CLOCK_CRITERIA.forEach((c, idx) => {
+    const item = document.createElement('div');
+    item.className = 'checklist-item';
+    item.innerHTML = `
+      <span style="font-size:14.5px;">${idx + 1}. ${c.text}</span>
+      <div class="toggle">
+        <button id="clock-yes-${idx}" onclick="setClockScore(${idx}, 1)">ผ่าน (1)</button>
+        <button id="clock-no-${idx}" onclick="setClockScore(${idx}, 0)">ไม่ผ่าน (0)</button>
+      </div>
+    `;
+    container.appendChild(item);
+  });
+}
+
+function setClockScore(idx, val) {
+  clockAnswers[idx] = val;
+  const btnYes = document.getElementById(`clock-yes-${idx}`);
+  const btnNo = document.getElementById(`clock-no-${idx}`);
+  if (val === 1) {
+    btnYes.className = 'active-yes'; btnNo.className = '';
+  } else {
+    btnYes.className = ''; btnNo.className = 'active-no';
+  }
+}
+
+function submitClock() {
+  if (clockAnswers.includes(null)) {
+    alert('กรุณาทำการประเมินเกณฑ์ให้ครบทั้ง 4 ข้อ');
+    return;
+  }
+  const score = clockAnswers.reduce((a, b) => a + b, 0);
+  let band = { label: 'อยู่ในเกณฑ์ปกติ', color: 'var(--success)', advice: 'ผู้รับบริการสามารถวาดรูปนาฬิกาได้ถูกต้อง สะท้อนการทำงานของสมองในเกณฑ์ปกติ' };
+  if (score <= 2) band = { label: 'บกพร่องชัดเจน', color: 'var(--danger)', advice: 'พบความบกพร่องในการวาดนาฬิกา ควรส่งพบแพทย์เพื่อตรวจประเมินสมองอย่างละเอียด' };
+  else if (score === 3) band = { label: 'บกพร่องเล็กน้อย', color: 'var(--warning)', advice: 'วาดภาพได้สมบูรณ์บางส่วน ควรติดตามผลประเมินเพิ่มเติม' };
+  showResult(score, 4, band);
+}
+
+function showResult(score, maxScore, band) {
+  const a = ASSESSMENTS[currentId];
+  lastResult = { score, maxScore, band, code: a.code, title: a.full };
+  document.getElementById('resultCode').textContent = `RESULT: ${a.code}`;
+  document.getElementById('resultTitle').textContent = a.full;
+  document.getElementById('resultScore').textContent = `${score} / ${maxScore}`;
+  document.getElementById('resultScoreLabel').textContent = `คะแนนที่ได้ (จากคะแนนเต็ม ${maxScore} คะแนน)`;
+  const badgeWrap = document.getElementById('resultBadgeWrap');
+  badgeWrap.innerHTML = `<span class="level-badge" style="background:${band.color}">${band.label}</span>`;
+  document.getElementById('resultAdvice').innerHTML = `<b><i class="fa-solid fa-comment-medical"></i> คำแนะนำ:</b> ${band.advice}`;
+  hideAllViews();
+  document.getElementById('view-result').style.display = 'block';
+  triggerAnimation('view-result');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function reopenLast() {
+  if (currentId) openAssessment(currentId);
+  else showGrid();
+}
+
+async function sendResultToSheet() {
+  if (!lastResult) {
+    alert('ยังไม่มีผลประเมิน กรุณาทำแบบประเมินให้เสร็จก่อน');
+    return;
+  }
+  const name = document.getElementById('senderName').value.trim();
+  const phone = document.getElementById('senderPhone').value.trim();
+
+  if (!name) { alert('กรุณากรอกชื่อ-นามสกุล'); return; }
+  if (!phone) { alert('กรุณากรอกเบอร์โทรศัพท์'); return; }
+
+  const btn = document.getElementById('sendEmailBtn');
+  const hint = document.getElementById('emailHint');
+
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> กำลังบันทึก...';
+  hint.textContent = 'กำลังส่งข้อมูลไปยัง Google Sheets...';
+
+  const payload = {
+    fullName: name,
+    phone: phone,
+    totalScore: `${lastResult.score} / ${lastResult.maxScore}`,
+    resultText: lastResult.band.label,
+    notes: lastResult.band.advice.replace(/<[^>]*>?/gm, ''),
+    assessmentType: `${lastResult.code} - ${lastResult.title}`
+  };
+
+  try {
+    await fetch(WEB_APP_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      cache: 'no-cache',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload)
     });
 
-    initApp();
-  </script>
+    hint.innerHTML = '<span style="color:var(--success); font-weight:600;"><i class="fa-solid fa-circle-check"></i> บันทึกข้อมูลลง Google Sheet เรียบร้อยแล้ว!</span>';
+    btn.innerHTML = '<i class="fa-solid fa-check"></i> บันทึกสำเร็จ';
+
+    document.getElementById('senderName').value = '';
+    document.getElementById('senderPhone').value = '';
+
+    setTimeout(() => {
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> ส่งผลประเมิน';
+    }, 2500);
+  } catch (error) {
+    console.error(error);
+    hint.innerHTML = '<span style="color:var(--danger); font-weight:600;"><i class="fa-solid fa-circle-exclamation"></i> เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง</span>';
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> ส่งผลประเมิน';
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  initGrid();
+  showGrid();
+});
+</script>
 </body>
 </html>
