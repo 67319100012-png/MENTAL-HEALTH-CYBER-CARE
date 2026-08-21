@@ -373,7 +373,7 @@
       <div class="email-row">
         <input type="text" id="senderName" placeholder="ชื่อ-นามสกุล (ชื่อตัวเอง)">
         <input type="tel" id="senderPhone" placeholder="เบอร์โทรศัพท์">
-        <button type="button" class="btn-ghost" id="sendEmailBtn" onclick="sendResultToSheet()" style="align-self: flex-start;">
+        <button type="button" class="btn-ghost" id="sendEmailBtn" onclick="emailResult()" style="align-self: flex-start;">
           <i class="fa-solid fa-paper-plane"></i> ส่งผลประเมิน
         </button>
       </div>
@@ -395,7 +395,7 @@
 <script>
 // *** URL ของ Google Apps Script Web App (ใช้ตัวเดียวกับ screening.html) ***
 // ถ้า deploy คนละไฟล์ Google Sheet กับ screening.html จริงๆ ให้เปลี่ยน URL นี้ตามของจริง
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzH_3yaVkq5VT5GoT5vYH8HQ2FRF5w9tqoOCyLOgzAeXepKe3GLHmT1Z-XNioQ4Xs-XKw/exec";
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzJzM0qxEjxIOkOBjQWOYKXSWoseKKLfOTBpYUADKw5N3X0AOFt4lp_W0uyRiYHNK07vw/exec";
 
 const yesNoScale = (max) => [
   { label: `ถูกครบ (${max} คะแนน)`, score: max },
@@ -705,31 +705,55 @@ function reopenLast() {
   else showGrid();
 }
 
-async function sendResultToSheet() {
+async function emailResult() {
+  const nameInput = document.getElementById('senderName');
+  const phoneInput = document.getElementById('senderPhone');
+  const btn = document.getElementById('sendEmailBtn');
+  const hint = document.getElementById('emailHint');
+  const name = nameInput ? nameInput.value.trim() : '';
+  const phone = phoneInput ? phoneInput.value.trim() : '';
+
+  if (!name || !phone) {
+    alert('กรุณากรอกชื่อ-นามสกุล และเบอร์โทรศัพท์ให้ครบถ้วนก่อนส่งผล');
+    return;
+  }
   if (!lastResult) {
     alert('ยังไม่มีผลประเมิน กรุณาทำแบบประเมินให้เสร็จก่อน');
     return;
   }
-  const name = document.getElementById('senderName').value.trim();
-  const phone = document.getElementById('senderPhone').value.trim();
 
-  if (!name) { alert('กรุณากรอกชื่อ-นามสกุล'); return; }
-  if (!phone) { alert('กรุณากรอกเบอร์โทรศัพท์'); return; }
-
-  const btn = document.getElementById('sendEmailBtn');
-  const hint = document.getElementById('emailHint');
-
-  btn.disabled = true;
-  btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> กำลังบันทึก...';
-  hint.textContent = 'กำลังส่งข้อมูลไปยัง Google Sheets...';
+  if (btn) {
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> กำลังบันทึก...';
+  }
+  if (hint) {
+    hint.style.color = 'var(--text-muted)';
+    hint.textContent = 'กำลังบันทึกข้อมูล...';
+  }
 
   const payload = {
+    assessment_type: lastResult.code || lastResult.title || '',
+    full_name: name,
+    name: name,
     fullName: name,
     phone: phone,
-    totalScore: `${lastResult.score} / ${lastResult.maxScore}`,
-    resultText: lastResult.band.label,
-    notes: lastResult.band.advice.replace(/<[^>]*>?/gm, ''),
-    assessmentType: `${lastResult.code} - ${lastResult.title}`
+    total_score: (lastResult.score != null && lastResult.maxScore != null)
+      ? (lastResult.score + ' / ' + lastResult.maxScore)
+      : (lastResult.score != null ? String(lastResult.score) : ''),
+    totalScore: (lastResult.score != null && lastResult.maxScore != null)
+      ? (lastResult.score + ' / ' + lastResult.maxScore)
+      : (lastResult.score != null ? String(lastResult.score) : ''),
+    score: lastResult.score != null ? lastResult.score : '',
+    result_text: (lastResult.band && lastResult.band.label) ? lastResult.band.label : '',
+    resultText: (lastResult.band && lastResult.band.label) ? lastResult.band.label : '',
+    status: (lastResult.band && lastResult.band.label) ? lastResult.band.label : '',
+    notes: (lastResult.band && lastResult.band.advice)
+      ? String(lastResult.band.advice).replace(/<[^>]*>?/gm, '')
+      : '',
+    assessmentType: (lastResult.code || '') + ' - ' + (lastResult.title || lastResult.full || ''),
+    code: lastResult.code || '',
+    title: lastResult.title || lastResult.full || '',
+    date: new Date().toLocaleDateString('th-TH')
   };
 
   try {
@@ -740,22 +764,30 @@ async function sendResultToSheet() {
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify(payload)
     });
-
-    hint.innerHTML = '<span style="color:var(--success); font-weight:600;"><i class="fa-solid fa-circle-check"></i> บันทึกข้อมูลลง Google Sheet เรียบร้อยแล้ว!</span>';
-    btn.innerHTML = '<i class="fa-solid fa-check"></i> บันทึกสำเร็จ';
-
-    document.getElementById('senderName').value = '';
-    document.getElementById('senderPhone').value = '';
-
-    setTimeout(() => {
+    // no-cors: อ่าน response ไม่ได้ ถือว่าส่งสำเร็จถ้าไม่มี exception
+    if (hint) {
+      hint.style.color = 'var(--success)';
+      hint.innerHTML = '<span style="font-weight:600;"><i class="fa-solid fa-circle-check"></i> บันทึกข้อมูลเข้า Google Sheets เรียบร้อยแล้ว!</span>';
+    }
+    if (nameInput) nameInput.value = '';
+    if (phoneInput) phoneInput.value = '';
+    if (btn) {
+      btn.innerHTML = '<i class="fa-solid fa-check"></i> บันทึกสำเร็จ';
+      setTimeout(function() {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> ส่งผลประเมิน';
+      }, 2500);
+    }
+  } catch (err) {
+    console.error('Error submitting data:', err);
+    if (hint) {
+      hint.style.color = 'var(--danger)';
+      hint.textContent = 'เกิดข้อผิดพลาดในการบันทึกข้อมูล กรุณาลองใหม่อีกครั้ง';
+    }
+    if (btn) {
       btn.disabled = false;
       btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> ส่งผลประเมิน';
-    }, 2500);
-  } catch (error) {
-    console.error(error);
-    hint.innerHTML = '<span style="color:var(--danger); font-weight:600;"><i class="fa-solid fa-circle-exclamation"></i> เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง</span>';
-    btn.disabled = false;
-    btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> ส่งผลประเมิน';
+    }
   }
 }
 document.addEventListener('DOMContentLoaded', () => {
