@@ -585,8 +585,8 @@
 </footer>
 
 <script>
-// URL ของ Google Apps Script Web App
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzZ4JiuiVR8qCmpD5jm4F-gkCl5XiFr8FN0xWJswG7P2Sb5jzwIY_JwCj7izApsR4h5/exec';
+// วาง URL ของ Google Apps Script Web App ที่นี่
+const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL';
 
 const scaleFreq5 = [
   {label:'ไม่เคยเลย', score:0}, {label:'1-2 ครั้ง', score:1}, {label:'รายเดือน', score:2},
@@ -904,6 +904,7 @@ function finishAssist() {
   window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
+// ฟังก์ชันส่งผลเข้า Google Apps Script (ปรับ Key ให้ตรงกับ Apps Script ของคุณแล้ว)
 async function emailResult() {
   if (!lastResult) return;
 
@@ -927,14 +928,14 @@ async function emailResult() {
     extra = assistResults.map(r => `${r.sub}: คะแนน ${r.score}/28 (${r.band.label})${r.injected ? ' [มีประวัติการฉีด]' : ''}`).join('\n');
   }
 
+  // กำหนดชื่อ Key ให้ตรงตามสคริปต์ Google Apps Script (status, notes, assessment_type)
   const payload = {
     name: name,
     phone: phone,
-    assessment: `${code} (${full})`,
-    dateStr: dateStr,
     score: String(score),
-    levelLabel: levelLabel,
-    extra: extra
+    status: levelLabel,                     // ลงคอลัมน์ E (ผลประเมิน)
+    notes: extra,                           // ลงคอลัมน์ F (หมายเหตุ)
+    assessment_type: `${code} (${full})`   // ลงคอลัมน์ G (ประเภทแบบประเมิน)
   };
 
   try {
