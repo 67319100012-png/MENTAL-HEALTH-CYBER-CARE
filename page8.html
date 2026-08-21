@@ -416,8 +416,8 @@
 </footer>
 
 <script>
-// ใส่ Web App URL ที่ได้จาก Google Apps Script ที่นี่
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz9iByb04LsEPz8NehDJjpf-GT0F43pbilTF6BqFImCevj6STmIm5TSsObjX0iabEkEKw/exec';
+// ใส่ Web App URL ที่ได้จาก Google Apps Script
+const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL';
 
 const ASSESSMENTS = {
   epds: {
@@ -462,7 +462,7 @@ const ASSESSMENTS = {
       { text: '5. คุณแม่รู้สึกหวาดกลัวหรือตื่นตกใจโดยไม่มีเหตุผลสมควร', options: [{ label: 'ใช่ ค่อนข้างมาก', score: 3 }, { label: 'ใช่ เป็นบางครั้ง', score: 2 }, { label: 'ไม่ค่อยมี', score: 1 }, { label: 'ไม่เลย', score: 0 }] },
       { text: '6. คุณแม่รู้สึกว่าสิ่งต่าง ๆ รุมเร้าจนจัดการไม่ไหว', options: [{ label: 'ใช่ ส่วนใหญ่จัดการไม่ไหวเลย', score: 3 }, { label: 'ใช่ บางครั้งก็รับมือไม่ไหว', score: 2 }, { label: 'ไม่ ส่วนใหญ่ยังจัดการได้ดี', score: 1 }, { label: 'ไม่ จัดการได้ดีตามปกติ', score: 0 }] },
       { text: '7. คุณแม่รู้สึกไม่เป็นสุขจนนอนไม่หลับ', options: [{ label: 'ใช่ ส่วนใหญ่เป็นแบบนั้น', score: 3 }, { label: 'ใช่ เป็นบางครั้ง', score: 2 }, { label: 'ไม่ค่อยเป็น', score: 1 }, { label: 'ไม่เลย', score: 0 }] },
-      { text: '8. คุณแม่รู้สึกเศร้าหรือเป็นทุกข์', options: [{ label: 'ใช่ ส่วนใหญ่เป็นเช่นนั้น', score: 3 }, { label: 'ใช่ ค่อนข้างบ่อย', score: 2 }, { label: 'ไม่บ่อยนัก', score: 1 }, { label: 'ไม่เลย', score: 0 }] },
+      { text: '8. คุณแม่รู้สึกเศร้าหรือเป็นทุกข์', options: [{ label: 'ใช่ ส่วนใหญ่เป็นเช่นนั้น', score: 3 }, { label: 'ใช่ ค่อนข้างบ่อย', score: 2 }, { label: 'ไม่บ่อยนัก', score: 1 }, { label: 'ไม่เคยเลย', score: 0 }] },
       { text: '9. คุณแม่รู้สึกไม่เป็นสุขจนต้องร้องไห้', options: [{ label: 'ใช่ ส่วนใหญ่เป็นแบบนั้น', score: 3 }, { label: 'ใช่ บ่อยครั้ง', score: 2 }, { label: 'เพียงบางครั้งเท่านั้น', score: 1 }, { label: 'ไม่เคยเลย', score: 0 }] },
       { text: '10. คุณแม่มีความคิดที่จะทำร้ายตนเองผุดขึ้นมาในหัว', options: [{ label: 'ใช่ ค่อนข้างบ่อย', score: 3 }, { label: 'เป็นบางครั้ง', score: 2 }, { label: 'แทบจะไม่เคย', score: 1 }, { label: 'ไม่เคยเลย', score: 0 }] }
     ],
@@ -608,8 +608,10 @@ function submitQuiz(){
 async function emailResult(){
   if(!lastResult) return;
 
-  const name = document.getElementById('senderName').value.trim();
-  const phone = document.getElementById('senderPhone').value.trim();
+  const nameInput = document.getElementById('senderName');
+  const phoneInput = document.getElementById('senderPhone');
+  const name = nameInput.value.trim();
+  const phone = phoneInput.value.trim();
 
   if(!name){ alert('กรุณากรอกชื่อ-นามสกุล'); return; }
   if(!phone){ alert('กรุณากรอกเบอร์โทรศัพท์'); return; }
@@ -624,24 +626,29 @@ async function emailResult(){
   const hint = document.getElementById('emailHint');
 
   btn.disabled = true;
+  nameInput.disabled = true;
+  phoneInput.disabled = true;
+
   btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> กำลังบันทึก...';
   hint.textContent = 'กำลังบันทึกข้อมูลลง Google Sheet...';
 
-  const formData = new FormData();
-  formData.append('name', name);
-  formData.append('phone', phone);
-  formData.append('code', lastResult.code);
-  formData.append('title', lastResult.full);
-  formData.append('score', `${lastResult.score} / 30`);
-  formData.append('result', lastResult.band.label);
-  formData.append('advice', lastResult.band.advice.replace(/<[^>]*>?/gm, ''));
-  formData.append('alert', lastResult.hasSelfHarmRisk ? 'พบความเสี่ยงทำร้ายตนเอง' : 'ปกติ');
+  // จัดรูปแบบ JSON Payload ให้สอดคล้องกับ e.postData.contents ใน Apps Script
+  const payload = {
+    name: name,
+    phone: phone,
+    score: `${lastResult.score} / 30`,
+    status: lastResult.band.label,
+    notes: lastResult.hasSelfHarmRisk ? 'พบความเสี่ยงทำร้ายตนเอง' : 'ปกติ',
+    title: `${lastResult.code} - ${lastResult.title}`
+  };
 
   try {
     await fetch(GOOGLE_SCRIPT_URL, {
       method: 'POST',
-      body: formData,
-      mode: 'no-cors'
+      headers: {
+        'Content-Type': 'text/plain;charset=utf-8'
+      },
+      body: JSON.stringify(payload)
     });
 
     hint.innerHTML = '<span style="color: var(--success);"><i class="fa-solid fa-circle-check"></i> บันทึกข้อมูลลง Google Sheet เรียบร้อยแล้ว!</span>';
@@ -649,6 +656,8 @@ async function emailResult(){
     
     setTimeout(() => {
       btn.disabled = false;
+      nameInput.disabled = false;
+      phoneInput.disabled = false;
       btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> ส่งผลประเมิน';
     }, 3000);
 
@@ -656,6 +665,8 @@ async function emailResult(){
     console.error(error);
     hint.innerHTML = '<span style="color: var(--danger);"><i class="fa-solid fa-circle-exclamation"></i> เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง</span>';
     btn.disabled = false;
+    nameInput.disabled = false;
+    phoneInput.disabled = false;
     btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> ส่งผลประเมิน';
   }
 }
